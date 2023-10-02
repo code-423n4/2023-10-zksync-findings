@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "erebus",
+  "risk": "3",
+  "title": "Operator can mint for himself all the transaction gas by overflowing the refundGas calculation",
+  "issueId": 2,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/2"
+}
