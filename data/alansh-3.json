@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "alansh",
+  "risk": "2",
+  "title": "There's a bug when checking against \"Too many L2->L1 logs\"",
+  "issueId": 3,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/3"
+}
