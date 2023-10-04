@@ -13,3 +13,5 @@ uint256 public difficulty = 2500000000000000;
 // 2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L44-L44
 uint256 public difficulty = 25e14;
 ```
+**Remediation**
+Scientific notation in the form of 25e14 is also supported, where the mantissa can be fractional but the exponent has to be an integer. The literal MeE is equivalent to M * 10**E.
