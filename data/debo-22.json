@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "debo",
+  "risk": "3",
+  "title": "[H-05] Reentrancy in the L2WethBridge contract",
+  "issueId": 22,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/22"
+}
