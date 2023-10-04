@@ -18,3 +18,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/24b4b0c1ea553106a194ef36ad4eb0
 https://github.com/code-423n4/2023-10-zksync/blob/24b4b0c1ea553106a194ef36ad4eb05b3b50275c/code/system-contracts/contracts/SystemContext.sol#L290
 This redundancy can be optimized by eliminating the `_setL2BlockHash` function call within the `_upgradeL2Blocks` function.
 https://github.com/code-423n4/2023-10-zksync/blob/24b4b0c1ea553106a194ef36ad4eb05b3b50275c/code/system-contracts/contracts/SystemContext.sol#L226
+
+### Q5
+The comment concerning the `isETHCall` parameter is currently positioned below the `gasPerPubdata` section. To enhance clarity and avoid confusion, it is advisable to move line 550 to line 549.
+https://github.com/code-423n4/2023-10-zksync/blob/24b4b0c1ea553106a194ef36ad4eb05b3b50275c/code/system-contracts/bootloader/bootloader.yul#L550
