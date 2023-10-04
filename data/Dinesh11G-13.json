@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Dinesh11G",
+  "risk": "2",
+  "title": "Incomplete Initialization of Contracts via `forceDeployOnAddress` Can Cause Fund Loss and Protocol Disruption",
+  "issueId": 13,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/13"
+}
