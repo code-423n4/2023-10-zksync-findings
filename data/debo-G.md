@@ -120,3 +120,13 @@ It is recommended to go through the code logic, and, if possible, modify the str
 // 2023-10-canto/blob/main/canto_ambient/contracts/mixins/LiquidityMining.sol#L192-L192
  if (rewardsToSend >= 1) {
 ```
+**Bad**
+```sol
+// 2023-10-canto/blob/main/canto_ambient/contracts/mixins/LiquidityMining.sol#L285-L285
+if (rewardsToSend > 0) {
+```
+**Fix**
+```sol
+// 2023-10-canto/blob/main/canto_ambient/contracts/mixins/LiquidityMining.sol#L285-L285
+if (rewardsToSend >= 1) {
+```
