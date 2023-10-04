@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "debo",
+  "risk": "3",
+  "title": "Reentrancy within the L2ERC20Bridge contract",
+  "issueId": 15,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/15"
+}
