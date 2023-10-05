@@ -22,3 +22,10 @@ https://github.com/code-423n4/2023-10-zksync/blob/24b4b0c1ea553106a194ef36ad4eb0
 ### Q5
 The comment concerning the `isETHCall` parameter is currently positioned below the `gasPerPubdata` section. To enhance clarity and avoid confusion, it is advisable to move line 550 to line 549.
 https://github.com/code-423n4/2023-10-zksync/blob/24b4b0c1ea553106a194ef36ad4eb05b3b50275c/code/system-contracts/bootloader/bootloader.yul#L550
+
+### Q6
+To be more efficient, the following change is recommended, because the initial value of `ret` is zero.
+```
+ret := overheadForCircuits
+```
+https://github.com/code-423n4/2023-10-zksync/blob/7ed3944429f437a611c32e782a12b320f6a67c17/code/system-contracts/bootloader/bootloader.yul#L1841
