@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "alansh",
+  "risk": "2",
+  "title": "should ensure the length of `_newBatch.systemLogs` is a multiple of `L2_TO_L1_LOG_SERIALIZE_SIZE` in `_processL2Logs`",
+  "issueId": 30,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/30"
+}
