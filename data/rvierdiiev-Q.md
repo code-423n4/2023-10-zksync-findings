@@ -24,3 +24,16 @@ As you can see, [limit can be set many times](https://github.com/code-423n4/2023
 The problem is that when limitation is switched off, then `totalDepositedAmountPerUser` is not changed anymore and nothing is tracked. So when it will be switched on again, then user may already use all his limit, but `totalDepositedAmountPerUser` will not contain that information.
 ## Recommendation
 Increase and decrease `totalDepositedAmountPerUser` even if limitation is switched off. So when it will be switched on again, `totalDepositedAmountPerUser` variable will be up to date for user.
+
+## QA-02. Executor._verifyBatchTimestamp allows timestamp of last l2 block to be in future
+## Description
+`Executor._verifyBatchTimestamp` function [is used](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L52) to check that batch and last l2 block timestamps are both valid.
+
+Currently, function allows l2 last block to be in future.
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L94
+`require(lastL2BlockTimestamp <= block.timestamp + COMMIT_TIMESTAMP_APPROXIMATION_DELTA, "h2");`
+
+This should not happen as l2 block should never have timestamp that is bigger as it creates time games, so l2 time will be bigger than l1. 
+## Recommendation
+I think restriction should like that or even without `=` sign.
+`require(lastL2BlockTimestamp <= block.timestamp, "h2");`
