@@ -22,7 +22,7 @@ require(totalDepositedAmountPerUser[_l1Token][_depositor] + _amount <= limitData
 
 In theory, it is possible that `totalDepositedAmountPerUser[_l1Token][_depositor] + _amount > max u256` so that the function reverts early without carrying the supposed error message "d1", which makes the error harder to understand when devs troubleshoot the failed transaction.
 
-## Recommendation
+### Recommendation
 
 Avoid math overflow by leveraging subtraction.
 
