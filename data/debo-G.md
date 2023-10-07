@@ -13,4 +13,4 @@ vInt += 8 + block.chainid * 2;
 // 2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L97-L97
 vInt += 8 + block.chainid << 2;
 ```
-It is recommended to use left and right shift instead of multiplying and dividing by 2 to save some gas.
+Use << instead of multiplication star and and use >> instead of division forward slash to save gas.
