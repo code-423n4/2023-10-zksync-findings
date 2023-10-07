@@ -1,5 +1,5 @@
 ## A. Overdependency on Timestamp
-[]()
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L74-L95)
 The contract uses timestamps for various checks, such as ensuring that batches are processed in chronological order and verifying the validity of timestamps in L2 blocks. Timestamps are fundamental to these checks, but they can be manipulated in certain situations. For instance, miners can potentially influence timestamps to some extent, leading to inaccuracies in batch processing or verification.
 
 Here is an example of timestamp dependency in the `_verifyBatchTimestamp` function:
