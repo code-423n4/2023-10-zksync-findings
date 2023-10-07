@@ -1,7 +1,6 @@
-## [L-01] LONG NUMBER LITERALS
-Solidity supports multiple rational and integer literals, including decimal fractions and scientific notations. 
-The use of very large numbers with too many digits was detected in the code that could have been optimised using a different notation also supported by Solidity.
-The value 2500000000000000 was detected on line 44.
+## [L-01] Massive number lengths
+The SystemContext contract has a very large number in length.
+The number is 2500000000000000 within line 44.
 **Location**
 **Bad**
 ```sol
@@ -14,4 +13,4 @@ uint256 public difficulty = 2500000000000000;
 uint256 public difficulty = 25e14;
 ```
 **Remediation**
-Scientific notation in the form of 25e14 is also supported, where the mantissa can be fractional but the exponent has to be an integer. The literal MeE is equivalent to M * 10**E.
+Use the scientific notation value of 25e14 instead.
