@@ -1,4 +1,4 @@
-## [G-01] MULTIPLICATION/DIVISION BY TWO SHOULD USE BIT SHIFTING
+## [G-01] Multiplication or division by 2 should use bit shifting
 **Description**
 ```2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L97-L97```
 x * 2 is equal to x << 1 and x / 2 is equal to x >> 1. The MUL and DIV opcodes cost 5 gas, whereas SHL and SHR only cost 3 gas.
