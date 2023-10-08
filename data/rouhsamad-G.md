@@ -1,2 +1,0 @@
-The claimPeriodEnds variable is initialised in the constructor and then never modified and can be changed to immutable to save gas.
-https://github.com/code-423n4/2023-10-ens/blob/main/contracts/ENSToken.sol#L27
