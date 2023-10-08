@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "debo",
+  "risk": "3",
+  "title": "[H-06] The same contract library names in the SystemContractsCaller contract",
+  "issueId": 41,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/41"
+}
