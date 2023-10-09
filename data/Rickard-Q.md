@@ -43,3 +43,25 @@ The lack of specific parameter names and detailed documentation in the `claimFai
 Manual Review
 ## Recommended Mitigation Steps
 To improve the clarity and maintainability of the code, it is strongly recommended to provide specific parameter names and detailed function documentation as shown in the proof of concept above. This will make it easier for developers to understand the function's intent and usage, reducing the likelihood of errors and facilitating smoother code maintenance in the future.
+````solidity
+/// @notice Withdraw funds from the initiated deposit, that failed when finalizing on L2.
+/// @dev Refund is performed by sending an equivalent amount of ETH on L2 to the specified deposit refund recipient address.
+/// @param _depositSender The address of the sender who initiated the deposit.
+/// @param _l1Token The address of the token on Layer 1.
+/// @param _l2TxHash The hash of the transaction on Layer 2.
+/// @param _l2BatchNumber The batch number on Layer 2.
+/// @param _l2MessageIndex The index of the message on Layer 2.
+/// @param _l2TxNumberInBatch The transaction number within the batch on Layer 2.
+/// @param _merkleProof The Merkle proof for the transaction inclusion.
+function claimFailedDeposit(
+    address _depositSender,
+    address _l1Token,
+    bytes32 _l2TxHash,
+    uint256 _l2BatchNumber,
+    uint256 _l2MessageIndex,
+    uint16 _l2TxNumberInBatch,
+    bytes32[] calldata _merkleProof
+) external pure {
+    revert("Method not supported. Failed deposit funds are sent to the L2 refund recipient address.");
+}
+````
