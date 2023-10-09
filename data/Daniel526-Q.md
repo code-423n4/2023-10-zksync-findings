@@ -25,3 +25,43 @@ function _verifyBatchTimestamp(
 Timestamp manipulation or inaccuracies can lead to incorrect batch processing and verification. If timestamps are not properly validated or if in any case they get manipulated by miners, it could potentially allow out-of-order or maliciously crafted batches to disrupt the contract's intended operation.
 ### Mitigation:
 While using `block.number` as a mitigation strategy is a good approach to reduce timestamp-related vulnerabilities, it's important to strike a balance between using timestamps and block numbers based on the specific requirements of the contract. In some cases, a combination of both may be appropriate for comprehensive validation.
+
+## B. Assumption of Non-Zero Address for `_facet` Parameter in `_addOneFunction`
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L206-L229)
+```solidity
+function _addOneFunction(
+    address _facet,
+    bytes4 _selector,
+    bool _isSelectorFreezable
+) private {
+    DiamondStorage storage ds = getDiamondStorage();
+
+    uint16 selectorPosition = (ds.facetToSelectors[_facet].selectors.length).toUint16();
+
+    // If selectorPosition is nonzero, it means it is not a new facet
+    // so the freezability of the first selector must be matched to _isSelectorFreezable
+    // so all the selectors in a facet will have the same freezability
+    if (selectorPosition != 0) {
+        bytes4 selector0 = ds.facetToSelectors[_facet].selectors[0];
+        require(_isSelectorFreezable == ds.selectorToFacet[selector0].isFreezable, "J1");
+    }
+
+    ds.selectorToFacet[_selector] = SelectorToFacet({
+        facetAddress: _facet,
+        selectorPosition: selectorPosition,
+        isFreezable: _isSelectorFreezable
+    });
+    ds.facetToSelectors[_facet].selectors.push(_selector);
+}
+```
+The vulnerability lies in the assumption that `_facet` is a non-zero Ethereum address. The code does not explicitly check whether `_facet` is a valid Ethereum address before proceeding. This assumption can lead to unexpected behavior if `_facet` is, in fact, a zero address.
+### Impact:
+The impact of this vulnerability is that if `_facet` is a zero address when calling `_addOneFunction`, it can result in unexpected behavior, erroneous state changes, or runtime errors in the contract. This could potentially disrupt the intended functionality of the diamond proxy and lead to contract failures.
+### Mitigation:
+To mitigate this vulnerability, it is essential to add a precondition check to ensure that `_facet` is a valid non-zero Ethereum address before calling the `_addOneFunction` function. Here's an example of how this check can be added:
+```solidity
+// Add a precondition check for valid _facet address
+require(_facet != address(0), "Invalid _facet address");
+// Proceed with the _addOneFunction operation
+_addOneFunction(_facet, _selector, _isSelectorFreezable);
+```
