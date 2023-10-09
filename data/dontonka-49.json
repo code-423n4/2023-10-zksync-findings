@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "dontonka",
+  "risk": "3",
+  "title": "Bridging wETH from L2 to L1 will have funds stuck in L1WethBridge",
+  "issueId": 49,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/49"
+}
