@@ -17,3 +17,7 @@ Here the `_isFree` parameter is useless, since the only caller `requestL2Transac
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L310
 
 Here no need to introduce another variable `refundRecipient`, can reuse the existing parameter `_refundRecipient` and omit an assignment when `_refundRecipient != address(0)`
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L84
+
+Here the size of `_factoryDeps` is expected to be 3, should declare it as `bytes[3] calldata _factoryDeps`, this also saves some calldata size. Similar for https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L82
