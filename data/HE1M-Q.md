@@ -29,3 +29,10 @@ To be more efficient, the following change is recommended, because the initial v
 ret := overheadForCircuits
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/7ed3944429f437a611c32e782a12b320f6a67c17/code/system-contracts/bootloader/bootloader.yul#L1841
+
+### Q7
+The comment needs correction. It should be revised to the following:
+```
+However, the default account **cannot** initiate a transaction ...
+```
+https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/system-contracts/contracts/DefaultAccount.sol#L124C52-L124C107
