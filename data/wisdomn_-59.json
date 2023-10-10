@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "wisdomn_",
+  "risk": "3",
+  "title": "Improper input validation of msg.value in function initialize leads to security threats to the bridge  ",
+  "issueId": 59,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/59"
+}
