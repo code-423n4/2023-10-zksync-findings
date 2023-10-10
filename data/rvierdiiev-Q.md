@@ -35,5 +35,18 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/c
 
 This should not happen as l2 block should never have timestamp that is bigger as it creates time games, so l2 time will be bigger than l1. 
 ## Recommendation
-I think restriction should like that or even without `=` sign.
+I think restriction should be like that or even without `=` sign.
 `require(lastL2BlockTimestamp <= block.timestamp, "h2");`
+
+## QA-03. AccountCodeStorage.getCodeHash will return 0 for initialized account
+## Description
+AccountCodeStorage.getCodeHash function is used to return code hash of the address. 
+According to [eip-1052](https://eips.ethereum.org/EIPS/eip-1052#specification):
+> In case the account does not exist or is empty (as defined by EIP-161) 0 is pushed to the stack.
+In case the account does not have code the keccak256 hash of empty data (i.e. c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470) is pushed to the stack.
+
+So in case if account has non 0 balance or it's nonce is bigger than 0, then keccak256 hash of empty data should be returned. But zksync [doesn't check balance](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L89-L112) of account. It [only checks for nonce](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L102-L104). As result in case if someone will transfer funds to address, or eoa will mint value from l1 tx to zksync, then this address will be considered not initialized.
+
+As result, `getCodeHash` works differently on ethereum and zksync. As i haven't found this is somehow used by real contracts, i put this as qa, however it's possible to craft contract that will depend on empty keccak256 in order to check if account is initialized.
+## Recommendation
+I believe that it should work in same way as described in eip1052.
