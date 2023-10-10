@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "HE1M",
+  "risk": "2",
+  "title": "Inconsistent Gas Limit Handling Between L1 and L2 Transactions",
+  "issueId": 66,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/66"
+}
