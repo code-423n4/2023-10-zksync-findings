@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "wisdomn_",
+  "risk": "3",
+  "title": "Unchecked external call in function claimFailedDeposit lead to a loss of the receiver's funds",
+  "issueId": 68,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/68"
+}
