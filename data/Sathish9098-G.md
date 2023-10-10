@@ -1,39 +1,110 @@
-TRUE	Use calldata instead of memory for read only arguments in external functions 																									
+# GAS OPTIMIZATIONS
+																																																																																																																													##
 
-TRUE	State variables only set in the constructor should be declared immutable	Avoids a Gsset (20000 gas) in the constructor, and replaces the first access in each transaction (Gcoldsload - 2100 gas) and each access thereafter (Gwarmacces - 100 gas) with a PUSH32 (3 gas).																								
-																										
-		While strings are not value types, and therefore cannot be immutable/constant if not hard-coded outside of the constructor, the same behavior can be achieved by making the current contract abstract with virtual functions for the string accessors, and having a child contract override the functions with the hard-coded implementation-specific values.																								
-			/// @audit leverageModule (constructor)																							
-			75:           leverageModule = USDOLeverageModule(_leverageModule);																							
-			/// @audit marketModule (constructor)																							
-			76:           marketModule = USDOMarketModule(_marketModule);																							
-			/// @audit optionsModule (constructor)																							
-			77:           optionsModule = USDOOptionsModule(_optionsModule);
+## [G-] State variables should be cached in stack variables rather than re-reading them from storage	The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
+
+##
+
+## [G-] Optimize Gas Usage by Avoiding Variable Declarations Inside Loops
+
+The variables ``action``, ``facet``, ``isFacetFreezable``, and ``selectors`` are all declared inside the loop. This means that a new instance of each variable will be created for each iteration of the loop. Saves 200-300 Gas per iteration
+
+```solidity
+
+for (uint256 i = 0; i < facetCutsLength; i = i.uncheckedInc()) {
+            action = facetCuts[i].action;
+             facet = facetCuts[i].facet;
+            isFacetFreezable = facetCuts[i].isFreezable;
+             selectors = facetCuts[i].selectors;
+
+            require(selectors.length > 0, "B"); // no functions for diamond cut
+
+            if (action == Action.Add) {
+                _addFunctions(facet, selectors, isFacetFreezable);
+            } else if (action == Action.Replace) {
+                _replaceFunctions(facet, selectors, isFacetFreezable);
+            } else if (action == Action.Remove) {
+                _removeFunctions(facet, selectors);
+            } else {
+                revert("C"); // undefined diamond cut action
+            }
+        }
 
 
-TRUE	State variables can be packed into fewer storage slots	
-If variables occupying the same slot are both written the same function or by the constructor, avoids a separate Gsset (20000 gas). Reads of the variables can also be cheaper																								
-			/// @audit Variable ordering with 7 slots instead of the current 8:																							
-			///           mapping(32):operators, uint256(32):totalFees, uint256(32):maxDebtRate, uint256(32):minDebtRate, uint256(32):debtRateAgainstEthMarket, uint256(32):debtStartPoint, user-defined(20):accrueInfo, bool(1):_isEthMarket																							
-			46:       mapping(address => mapping(address => bool)) public operators;																							
-																										
-TRUE	Using storage instead of memory for structs/arrays saves gas	When fetching data from a storage location, assigning the data to a memory variable causes all fields of the struct/array to be read from storage, which incurs a Gcoldsload (2100 gas) for each field of the struct/array. If the fields are read from the new memory variable, they incur an additional MLOAD rather than a cheap stack read. Instead of declearing the variable with the memory keyword, declaring the variable with the storage keyword and caching any fields that need to be re-read in stack variables, will be much cheaper, only incuring the Gcoldsload for the fields actually read. The only time it makes sense to read the whole struct/array into a memory variable, is if the full struct/array is being returned by the function, is being passed to a function that requires memory, or if the array/struct is being read from another memory array/struct																								
-			File: tapioca-bar-audit/contracts/markets/bigBang/BigBang.sol																							
-			513:          IBigBang.AccrueInfo memory _accrueInfo = accrueInfo;																							
-			525:          Rebase memory _totalBorrow = totalBorrow;																							
-																										
-																										
-																										
-																										
-TRUE	State variables should be cached in stack variables rather than re-reading them from storage	The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.																								
-																										
-			/// @audit totalFees on line 446																							
-			447:          feeShares = yieldBox.toShare(assetId, totalFees, false);																							
-			/// @audit totalFees on line 447																							
-			449:          if (totalFees > 0) {																							
-			/// @audit totalFees on line 449																							
-			450:              asset.approve(address(yieldBox), totalFees);	
+```
 
+```diff
+diff --git a/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol b/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
+index 0b1fbdc..2f3cf9e 100644
+--- a/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
++++ b/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
+@@ -97,11 +97,15 @@ library Diamond {
+         address initAddress = _diamondCut.initAddress;
+         bytes memory initCalldata = _diamondCut.initCalldata;
+         uint256 facetCutsLength = facetCuts.length;
++        Action action;
++        address facet;
++      bool isFacetFreezable;
++    bytes4[] memory selectors;
+         for (uint256 i = 0; i < facetCutsLength; i = i.uncheckedInc()) {
+-            Action action = facetCuts[i].action;
++            action = facetCuts[i].action;
+-            address facet = facetCuts[i].facet;
++             facet = facetCuts[i].facet;
+-            bool isFacetFreezable = facetCuts[i].isFreezable;
++            isFacetFreezable = facetCuts[i].isFreezable;
+-            bytes4[] memory selectors = facetCuts[i].selectors;
++            selectors = facetCuts[i].selectors;
+
+
+```	
+
+##
+
+## [G-] Redundant cache 
+
+### Any revert inside the for loop then caching ``initAddress`` ,``initCalldata `` is waste of the computation and gas . Saves ``300 GAS``. Values of ``initAddress`` and ``initCalldata `` is used after the for loop. So caching values before for loop is unecessary.
+
+```diff
+FILE: 
+
+function diamondCut(DiamondCutData memory _diamondCut) internal {
+        FacetCut[] memory facetCuts = _diamondCut.facetCuts;
+-        address initAddress = _diamondCut.initAddress;
+-        bytes memory initCalldata = _diamondCut.initCalldata;
+        uint256 facetCutsLength = facetCuts.length;
+        for (uint256 i = 0; i < facetCutsLength; i = i.uncheckedInc()) {
+            Action action = facetCuts[i].action;
+            address facet = facetCuts[i].facet;
+            bool isFacetFreezable = facetCuts[i].isFreezable;
+            bytes4[] memory selectors = facetCuts[i].selectors;
+
+            require(selectors.length > 0, "B"); // no functions for diamond cut
+
+            if (action == Action.Add) {
+                _addFunctions(facet, selectors, isFacetFreezable);
+            } else if (action == Action.Replace) {
+                _replaceFunctions(facet, selectors, isFacetFreezable);
+            } else if (action == Action.Remove) {
+                _removeFunctions(facet, selectors);
+            } else {
+                revert("C"); // undefined diamond cut action
+            }
+        }
++        address initAddress = _diamondCut.initAddress;
++        bytes memory initCalldata = _diamondCut.initCalldata;
+
+        _initializeDiamondCut(initAddress, initCalldata);
+        emit DiamondCut(facetCuts, initAddress, initCalldata);
+    }
+
+
+
+
+```
+
+																							
+			
 
 TRUE	Structs can be packed into fewer storage slots	Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct. Subsequent reads as well as writes have smaller gas savings																								
 																										
