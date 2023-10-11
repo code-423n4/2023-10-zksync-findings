@@ -1,4 +1,4 @@
-## isssue N°1 :
+## issue N°1 :
 in this line https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L187C7-L200C6
 we have this 
 ```solidity
@@ -32,3 +32,10 @@ as an example let's say :
 - As a result:
     - Transaction 2 would fail to complete successfully due to exceeding the block gas limit.
     - Transaction 1 completed successfully or could be pending, but Transaction 2's gas consumption disrupts the normal contract operation.
+
+## issue °2 :
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/interfaces/ILegacyGetters.sol#L5C1-L5C41
+
+-this  imports  PriorityQueue.sol from the libraries directory this import is not used , that is the  issue.
+ the unused file will be included in the deployed contract, increasing the deployment cost in terms of gas fees.
+-remove any unused imports before deploying the contract
