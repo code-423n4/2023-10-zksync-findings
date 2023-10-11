@@ -1,4 +1,4 @@
-## [L-01] bridigng token from L2 to L1 may cause funds/value to be stuck on L1 bridge if L1 receviver is addr(0) as many L1 erc20's prevent transfers to addr(0). 
+## [L-01] - bridigng token from L2 to L1 may cause funds/value to be stuck on L1 bridge if L1 receviver is addr(0) as many L1 erc20's prevent transfers to addr(0). 
 
 when using the `withdraw()` fcn in `L2ERC20Bridge.sol`, the `_l1Receiver` receiver can be set to address(0) and l2 standard tokens will get burned as usual and the l2 message will be sent to the L1 bridge. 
 ```
