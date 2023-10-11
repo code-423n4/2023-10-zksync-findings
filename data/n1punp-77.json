@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "n1punp",
+  "risk": "3",
+  "title": "L1WethBridge won't be able to receive any ETH from WETH contract (tx will revert due to insufficient gas -- from an extra delegate call to the implementation v.s. 2300 `transfer` gas stipend )",
+  "issueId": 77,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/77"
+}
