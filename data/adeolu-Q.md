@@ -19,7 +19,7 @@ when using the `withdraw()` fcn in `L2ERC20Bridge.sol`, the `_l1Receiver` receiv
     }
 ```
 
-when message gets to L1 bridge, `finaliseWithdrawal()` is called and it will validate the message and then try to send the token to the `_l1Receiver` which is address(0). As most tokens (especially tokens that implement the openzeppelin erc20 token contract, see [here](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/793d92a3331538d126033cbacb1ee5b8a7d95adc/contracts/token/ERC20/ERC20.sol#L171) ) prevent transfers to address(0), this will mean that the function will revert and there will be a value discrepancy between both bridges. Value will be burnt on L2 but not redeemable/stuck on L1 bridge. 
+when message gets to L1 bridge, `finaliseWithdrawal()` is called and it will validate the message and then try to send the token to the `_l1Receiver` which is address(0). As most tokens (especially tokens that implement the openzeppelin erc20 token contract, see [here](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/793d92a3331538d126033cbacb1ee5b8a7d95adc/contracts/token/ERC20/ERC20.sol#L175) ) prevent transfers to address(0), this will mean that the function will revert and there will be a value discrepancy between both bridges. Value will be burnt on L2 but not redeemable/stuck on L1 bridge. 
 ```
     function finalizeWithdrawal(
         uint256 _l2BatchNumber,
