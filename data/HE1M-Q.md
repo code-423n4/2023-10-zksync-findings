@@ -36,3 +36,11 @@ The comment needs correction. It should be revised to the following:
 However, the default account **cannot** initiate a transaction ...
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/system-contracts/contracts/DefaultAccount.sol#L124C52-L124C107
+
+### Q8
+The comment requires an update. It should be corrected to the following format, as the comment currently suggests that the length of the compressed data is stored in 2 bytes, whereas the code implementation actually uses 3 bytes.
+```
+**2** bytes total len of compressed
+```
+https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/system-contracts/contracts/L1Messenger.sol#L281C37-L281C68
+https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/system-contracts/contracts/L1Messenger.sol#L291
