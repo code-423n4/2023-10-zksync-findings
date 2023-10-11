@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "shirochan",
+  "risk": "3",
+  "title": "Anyone can call the initialize function multiple times",
+  "issueId": 74,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/74"
+}
