@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ustas",
+  "risk": "2",
+  "title": "Compilation of string literals longer than 32 bytes in `Bootloader` succeeds without error",
+  "issueId": 72,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/72"
+}
