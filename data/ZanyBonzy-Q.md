@@ -1,3 +1,5 @@
+**PS:** Some of these issues contains automated findings that weren't referenced in the bot report.
+
 1. Check for overflow before using [UncheckedMath library](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/libraries/UncheckedMath.sol), as the `unchecked` keyword can set the default overflow and underflow checks to off. This might optimize gas but can cause silent over/underflow.
 
 ***
