@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Cryptor",
+  "risk": "2",
+  "title": "The circuit system will panic in some situations due to improper check on Capacity_Bits ",
+  "issueId": 99,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/99"
+}
