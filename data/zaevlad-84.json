@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zaevlad",
+  "risk": "2",
+  "title": "L1ERC20Bridge and L1WethBridge will not be able to update an allowList",
+  "issueId": 84,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/84"
+}
