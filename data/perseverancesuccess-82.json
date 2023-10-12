@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "perseverancesuccess",
+  "risk": "3",
+  "title": "Attackers with EOA address that is equal to system contracts address on L2 can initiate malicious transactions on L2 using mailbox requestL2Transaction from L1 to mint Ether or transfer Ether of others to his controlled address to steal billion of dollars and other transactions that are intended only for the system contracts.",
+  "issueId": 82,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/82"
+}
