@@ -131,7 +131,9 @@ In the function `_removeOneFunction` , `ds.facetToSelectors[_facet].selectors.le
 1. `_facet` is ZERO address
 2. `_facet` is NON-ZERO address, but it does not exist in mapping `ds.facetToSelectors`
 
-In both scenarios, `ds.facetToSelectors[_facet].selectors.length == 0`.
+In both scenarios, `ds.facetToSelectors[_facet].selectors.length == 0`, leading to error “Reason: Arithmetic over/underflow”.
+
+Although in the current codebase, callers of `_removeOneFunction` has ensured above scenarios will not occur, it would be better to avoid underflow risk from the root.
 
 ```solidity
 /// @dev Remove one associated function with facet
