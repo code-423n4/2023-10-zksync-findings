@@ -63,3 +63,8 @@ function revertBatches(uint256 _newLastBatch) external nonReentrant onlyValidato
 ```
 
 Please look into `//@audit changed here` comment in above comment .
+
+## 3 . Constant name should be capitalized SNAKE_CASE
+
+code snippet :-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L22
