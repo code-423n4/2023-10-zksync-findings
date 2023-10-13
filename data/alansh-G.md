@@ -17,3 +17,7 @@ Here the `_isFree` parameter is useless, since the only caller `requestL2Transac
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L310
 
 Here no need to introduce another variable `refundRecipient`, can reuse the existing parameter `_refundRecipient` and omit an assignment when `_refundRecipient != address(0)`
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/era-zk_evm/src/vm_state/cycle.rs#L73
+
+Here the assignment to `new_previous_code_memory_page` is redundant, it's already assigned here: https://github.com/code-423n4/2023-10-zksync/blob/main/code/era-zk_evm/src/vm_state/cycle.rs#L49
