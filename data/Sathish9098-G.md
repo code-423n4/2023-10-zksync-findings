@@ -98,11 +98,86 @@ function diamondCut(DiamondCutData memory _diamondCut) internal {
         emit DiamondCut(facetCuts, initAddress, initCalldata);
     }
 
-
-
-
 ```
 
+##
+
+## [G-] Bytes constants are more efficient than string constants
+
+bytes constants are more gas efficient than string constants when the string length is fixed. This is because the Ethereum Virtual Machine (EVM) stores bytes constants in a more compact way than string constants.
+
+As per remix [gas tests](https://gist.github.com/sathishpic22/244dd5b1a18d1dd3aab64bf6304c1cd4) saves ``31630 GAS`` per instance
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
+- 22: string public constant override getName = "ExecutorFacet";
++ 22: bytes32 public constant override getName = "ExecutorFacet";
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L22
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
+
+- 41:  string public constant override getName = "MailboxFacet";
++ 41:  bytes32 public constant override getName = "MailboxFacet";
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L41
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Getters.sol
+
+- 19: string public constant override getName = "GettersFacet";
++ 19: bytes32 public constant override getName = "GettersFacet";
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L19
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
+
+- 24:  string public constant override getName = "ValidatorTimelock";
++ 24:  bytes32 public constant override getName = "ValidatorTimelock";
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L24
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Admin.sol
+
+- 15: string public constant override getName = "AdminFacet";
++ 15: bytes32 public constant override getName = "AdminFacet";
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L15
+
+##
+
+## [G-] Use uint256(1)/uint256(2) instead of true/false to save gas for changes
+
+#### Note this instances are not found by bot 
+
+Avoids a Gsset (20000 gas) when changing from false to true, after having been true in the past. Since most of the bools aren't changed twice in one transaction, I've counted the amount of gas as half of the full amount, for each variable.
+
+Also these variables are used very after so i reported that . This saves so much gas 
+
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
+
+32:  bool approvedBySecurityCouncil;
+ 
+49: bool isService;
+
+87: mapping(address => bool) validators;
+
+116: bool zkPorterIsAvailable;
+
+127: mapping(uint256 => mapping(uint256 => bool)) isEthWithdrawalFinalized;
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L87
 																							
 			
 
