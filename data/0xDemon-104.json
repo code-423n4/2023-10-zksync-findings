@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xDemon",
+  "risk": "2",
+  "title": "Using an older version of the solidity compiler in the codebase (`solc 0.8.17`) is potentially subject to the known bug, `MissingSideEffectsOnSelectorAccess`",
+  "issueId": 104,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/104"
+}
