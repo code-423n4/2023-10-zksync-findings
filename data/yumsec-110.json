@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "yumsec",
+  "risk": "2",
+  "title": "`Mailbox.sol` mapping `totalDepositedAmountPerUser` increases in `deposit` while not decrease in `finalizeWithdrawal` that could block further deposit given the depositCap",
+  "issueId": 110,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/110"
+}
