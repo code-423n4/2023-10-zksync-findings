@@ -116,3 +116,44 @@ Avoid math overflow by leveraging subtraction.
 ```
 require(limitData.depositCap - s.totalDepositedAmountPerUser[_depositor] >= _amount, "d2");
 ```
+
+# `Diamond.sol` function `_removeOneFunction` has integer underflow risk
+
+## Lines of code
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L238
+
+## Vulnerability details
+
+### Impact
+
+In the function `_removeOneFunction` , `ds.facetToSelectors[_facet].selectors.length - 1` will get underflow error in 2 cases:
+1. `_facet` is ZERO address
+2. `_facet` is NON-ZERO address, but it does not exist in mapping `ds.facetToSelectors`
+
+In both scenarios, `ds.facetToSelectors[_facet].selectors.length == 0`.
+
+```solidity
+/// @dev Remove one associated function with facet
+/// NOTE: It is expected but NOT enforced that `_facet` is NON-ZERO address
+function _removeOneFunction(address _facet, bytes4 _selector) private {
+    DiamondStorage storage ds = getDiamondStorage();
+
+    // Get index of `FacetToSelectors.selectors` of the selector and last element of array
+    uint256 selectorPosition = ds.selectorToFacet[_selector].selectorPosition;
+    uint256 lastSelectorPosition = ds.facetToSelectors[_facet].selectors.length - 1;
+    ....
+}
+```
+
+### Tools Used
+
+Manual analysis.
+
+### Recommended Mitigation Steps
+Add length check before calculating `lastSelectorPosition`.
+
+```
+require(ds.facetToSelectors[_facet].selectors.length > 0, "invalid facet");
+uint256 lastSelectorPosition = ds.facetToSelectors[_facet].selectors.length - 1;
+```
