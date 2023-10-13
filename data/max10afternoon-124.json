@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "max10afternoon",
+  "risk": "2",
+  "title": "L1ERC20Bridge: claimFailedDeposit will fail if a deposit limit is added after the deposited has been processed ",
+  "issueId": 124,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/124"
+}
