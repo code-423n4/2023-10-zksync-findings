@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "2 identical transactions to l2 may cost different price for senders, because tx.gasprice is used instead of block.baseFee",
+  "issueId": 116,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/116"
+}
