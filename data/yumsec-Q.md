@@ -1,4 +1,4 @@
-# `Admin.sol` function `setPendingAdmin` emits the wrong event `NewPendingGovernor`
+# [QA-01] `Admin.sol` function `setPendingAdmin` emits the wrong event `NewPendingGovernor`
 
 ## Lines of code
 
@@ -26,7 +26,7 @@ The method should `emit NewPendingAdmin(oldPendingAdmin, _newPendingAdmin)`.
 
 
 
-# `L1ERC20Bridge.sol` function `_verifyDepositLimit` integer overflow hides the expected error message “d1”
+# [QA-02] `L1ERC20Bridge.sol` function `_verifyDepositLimit` integer overflow hides the expected error message “d1”
 
 ## Lines of code
 
@@ -74,7 +74,7 @@ require(limitData.depositCap - totalDepositedAmountPerUser[_l1Token][_depositor]
 ```
 
 
-# `Mailbox.sol` function `_verifyDepositLimit` integer overflow hides the expected error message “d2”
+# [QA-03] `Mailbox.sol` function `_verifyDepositLimit` integer overflow hides the expected error message “d2”
 
 ## Lines of code
 
@@ -117,7 +117,7 @@ Avoid math overflow by leveraging subtraction.
 require(limitData.depositCap - s.totalDepositedAmountPerUser[_depositor] >= _amount, "d2");
 ```
 
-# `Diamond.sol` function `_removeOneFunction` has integer underflow risk
+# [QA-04] `Diamond.sol` function `_removeOneFunction` has integer underflow risk
 
 ## Lines of code
 
@@ -158,4 +158,40 @@ Add length check before calculating `lastSelectorPosition`.
 ```
 require(ds.facetToSelectors[_facet].selectors.length > 0, "invalid facet");
 uint256 lastSelectorPosition = ds.facetToSelectors[_facet].selectors.length - 1;
+```
+
+# [QA-05] `Diamond.sol` function `_removeOneFunction` should validate parameters
+
+## Lines of code
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L244
+
+## Vulnerability details
+
+### Impact
+
+function `_removeOneFunction` has two parameter: `_facet` and `_selector`. It has an assumption that the `_selector` belongs to the `_facet`, which is not validated in the function.
+
+If caller function passes in a `_selector` that doesn’t belong to the `_facet`, line 244 will get messed up since `ds.facetToSelectors[_facet].selectors[selectorPosition]` is not `_selector`.
+
+```solidity
+
+ds.facetToSelectors[_facet].selectors[selectorPosition] = lastSelector;
+```
+
+### Tools Used
+
+Manual analysis.
+
+### Recommended Mitigation Steps
+
+Verify the `_selector` belongs to the `_facet`.
+
+```
+function _removeOneFunction(address _facet, bytes4 _selector) private {
+    DiamondStorage storage ds = getDiamondStorage();
+    require(ds.selectorToFacet[_selector].facetAddress == _facet, “selector does not belong to facet”)
+    ...
+}
+
 ```
