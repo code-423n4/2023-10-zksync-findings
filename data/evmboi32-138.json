@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "evmboi32",
+  "risk": "2",
+  "title": "Confusing implementation and comments lead users to believe that all transactions are always expired.",
+  "issueId": 138,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/138"
+}
