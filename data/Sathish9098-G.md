@@ -1,6 +1,16 @@
 # GAS OPTIMIZATIONS
 																																																																																																																													##
 
+TRUE	Structs can be packed into fewer storage slots	Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct. Subsequent reads as well as writes have smaller gas savings																								
+																										
+			/// @audit Variable ordering with 2 slots instead of the current 3:																							
+			///           bytes(32):bytecode, address(20):toft, bool(1):revertOnFailure																							
+			27        struct ExecutionCall {																							
+			28            address toft;																							
+			29            bytes bytecode;																							
+			30            bool revertOnFailure;																							
+			31:       }
+
 ## [G-] State variables should be cached in stack variables rather than re-reading them from storage	The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
 
 ##
@@ -57,9 +67,33 @@ index 0b1fbdc..2f3cf9e 100644
 +            selectors = facetCuts[i].selectors;
 
 
-```	
+```
+
 
 ##
+
+## [G-] Remove or replace unused state variables
+
+Saves a storage slot. If the variable is assigned a non-zero value, saves Gsset (20000 gas). If it's assigned a zero value, saves Gsreset (2900 gas). If the variable remains unassigned, there is no gas savings unless the variable is public, in which case the compiler-generated non-payable getter deployment cost is saved. If the state variable is overriding an interface's public function, mark the variable as constant or immutable so that it does not use a storage slot.
+
+```solidity
+FILE: 
+
+54: mapping(address => uint256) public __DEPRECATED_lastWithdrawalLimitReset;
+
+57: mapping(address => uint256) public __DEPRECATED_withdrawnAmountInWindow;
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L54-L57	
+
+##
+
+## [G-] Code optimization for reduced gas consumption
+
+
+
+ 
+
 
 ## [G-] Redundant cache 
 
@@ -179,37 +213,10 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L87
 																							
-			
+																												
+																						State variables only set in their definitions should be declared `constant`	
 
-TRUE	Structs can be packed into fewer storage slots	Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct. Subsequent reads as well as writes have smaller gas savings																								
-																										
-			/// @audit Variable ordering with 2 slots instead of the current 3:																							
-			///           bytes(32):bytecode, address(20):toft, bool(1):revertOnFailure																							
-			27        struct ExecutionCall {																							
-			28            address toft;																							
-			29            bytes bytecode;																							
-			30            bool revertOnFailure;																							
-			31:       }
-
-TRUE	Multiple accesses of a mapping/array should use a local variable cache	The instances below point to the second+ access of a value inside a mapping/array, within a function. Caching a mapping's value in a local storage or calldata variable when the value is accessed [multiple times](https://gist.github.com/IllIllI000/ec23a57daa30a8f8ca8b9681c8ccefb0), saves ~42 gas per access due to not having to recalculate the key's keccak256 hash (Gkeccak256 - 30 gas) and that calculation's associated stack operations. Caching an array's struct avoids recalculating the array offsets into memory/calldata																								
-																										
-			/// @audit activeSingularities[_singularity] on line 180																							
-			187:          activeSingularities[_singularity].totalDeposited += _amount;																							
-			/// @audit activeSingularities[_singularity] on line 221																							
-			247:          activeSingularities[_singularity].totalDeposited -= lockPosition.amount;																							
-			/// @audit activeSingularities[singularity] on line 264																							
-			267:          activeSingularities[singularity].poolWeight = weight;																							
-			/// @audit activeSingularities[singularity] on line 283																							
-			287:          activeSingularities[singularity].sglAssetID = assetID;																							
-			/// @audit activeSingularities[singularity] on line 287																							
-			288:          activeSingularities[singularity].poolWeight = weight > 0 ? weight : 1;																							
-
-TRUE	Use uint256(1)/uint256(2) instead of true/false to save gas for changes	Avoids a Gsset (20000 gas) when changing from false to true, after having been true in the past																								
-																										
-	23:      bool public paused = false;	
-
-
-TRUE	State variables only set in their definitions should be declared `constant`	Avoids a Gsset (**20000 gas**) at deployment, and replaces the first access in each transaction (Gcoldsload - **2100 gas**) and each access thereafter (Gwarmacces - **100 gas**) with a `PUSH32` (**3 gas**).																								
+Avoids a Gsset (**20000 gas**) at deployment, and replaces the first access in each transaction (Gcoldsload - **2100 gas**) and each access thereafter (Gwarmacces - **100 gas**) with a `PUSH32` (**3 gas**).																								
 																										
 	39:      uint256 public blockGasLimit = type(uint32).max;																									
 	43:      address public coinbase = BOOTLOADER_FORMAL_ADDRESS;																									
