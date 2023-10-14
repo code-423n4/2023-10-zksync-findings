@@ -37,6 +37,8 @@ The contract L2ERC20Bridge was found to be missing these events on the function 
 ## [L-04] Event based reentrancy
 **Description**
 When Event-based Re-entrancy happens, events get printed in the event of an external call which leads to other legitimate event calls not being printed or emitted.  This makes it difficult or impossible to track these transactions off-chain.
+**Mitigation**
+Add reentrancy guard.
 **Vulnerable functions to event-based re-entrancy are**
 ```sol
 // zksync/contracts/bridge/L2ERC20Bridge.sol#L63-L88
