@@ -213,18 +213,9 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L87
 																							
-																												
-																						State variables only set in their definitions should be declared `constant`	
+##																																																																																																																																																## [G-] Using private rather than public for constants, saves gas	
 
-Avoids a Gsset (**20000 gas**) at deployment, and replaces the first access in each transaction (Gcoldsload - **2100 gas**) and each access thereafter (Gwarmacces - **100 gas**) with a `PUSH32` (**3 gas**).																								
-																										
-	39:      uint256 public blockGasLimit = type(uint32).max;																									
-	43:      address public coinbase = BOOTLOADER_FORMAL_ADDRESS;																									
-	46:      uint256 public difficulty = 2500000000000000;
-
-																																																																																														
-
-FALSE	Using private rather than public for constants, saves gas	If needed, the values can be read from the verified contract source code, or if there are multiple values there can be a single getter function that returns a [tuple of the values](https://github.com/code-423n4/2022-08-frax/blob/90f55a9ce4e25bceed3a74290b854341d8de6afa/src/contracts/FraxlendPair.sol#L156-L178) of all currently-public constants. Saves 3406-3606 gas in deployment gas due to the compiler not having to create non-payable getter functions for deployment calldata, not having to store the bytes of the value outside of where it's used, and not adding another entry to the method ID table																								
+If needed, the values can be read from the verified contract source code, or if there are multiple values there can be a single getter function that returns a [tuple of the values](https://github.com/code-423n4/2022-08-frax/blob/90f55a9ce4e25bceed3a74290b854341d8de6afa/src/contracts/FraxlendPair.sol#L156-L178) of all currently-public constants. Saves 3406-3606 gas in deployment gas due to the compiler not having to create non-payable getter functions for deployment calldata, not having to store the bytes of the value outside of where it's used, and not adding another entry to the method ID table																								
 																										
 			File: tapioca-bar-audit/contracts/Penrose.sol																							
 			45:       uint256 public immutable tapAssetId;																							
@@ -256,59 +247,12 @@ FALSE	Multiple if-statements with mutually-exclusive conditions should be change
 			276           }	
 
 
-FALSE	Empty blocks should be removed or emit something	The code should be refactored such that they no longer exist, or the block should do something useful, such as emitting an event or reverting. If the contract is meant to be extended, the contract should be abstract and the function signatures be added without any default implementation. If the block is an empty if-statement block to avoid doing subsequent checks in the else-if/else conditions, the else-if/else conditions should be nested under the negation of the if-statement, because they involve different classes of checks, which may lead to the introduction of errors when the code is later modified (if (x) {...} else if (y) {...} else {...} => if (!x) { if (y) {...} else {...} }). Empty receive()/fallback() payable functions that are not used, can be removed to save deployment gas.																								
-			267:                  {} catch Error(string memory reason) {																							
-			282:                  {} catch Error(string memory reason) {																							
-			298:                  {} catch Error(string memory reason) {																							
-																										
-FALSE	Superfluous event fields	block.timestamp and block.number are added to event information by default so adding them manually wastes gas																								
-			138:      event ProtocolWithdrawal(IMarket[] markets, uint256 timestamp);																							
 
-FALSE	Inverting the condition of an if-else-statement wastes gas	Flipping the true and false blocks instead saves [3 gas](https://gist.github.com/IllIllI000/44da6fbe9d12b9ab21af82f14add56b9)																								
-			190           if (!_linked) {																							
-			191               TapiocaOFT toft = TapiocaOFT(																							
-			192                   payable(																							
-			193                       Create2.deploy(																							
-			194                           0,																							
-			195                           keccak256(																							
-			196                               abi.encodePacked(																							
-			197                                   keccak256(_bytecode),																							
-			198                                   address(this),																							
-			199                                   _erc20,																							
-			200                                   _salt																							
-			201                               )																							
-			202                           ),																							
-			203                           _bytecode																							
-			204                       )																							
-			205                   )																							
-			206               );																							
-			207               oft = address(toft);																							
-			208           } else {																							
-			209               mTapiocaOFT toft = mTapiocaOFT(																							
-			210                   payable(																							
-			211                       Create2.deploy(																							
-			212                           0,																							
-			213                           keccak256(																							
-			214                               abi.encodePacked(																							
-			215                                   keccak256(_bytecode),																							
-			216                                   address(this),																							
-			217                                   _erc20,																							
-			218                                   _salt																							
-			219                               )																							
-			220                           ),																							
-			221                           _bytecode																							
-			222                       )																							
-			223                   )																							
-			224               );																							
-			225               oft = address(toft);																							
-			226:          }	
 
-FALSE	Consider using bytes32 rather than a string	Using the bytes types for fixed-length strings is more efficient than having the EVM have to incur the overhead of string processing. Consider whether the value needs to be a string. A good reason to keep it as a string would be if the variable is defined in an interface that this project does not own.																								
-																										
-			8:       string public _name;																							
-			9:       string public _symbol;																							
-																										
-FALSE	The result of function calls should be cached rather than re-calling the function	The instances below point to the second+ call of the function within a single function																								
+																								
+																																																											FALSE	The result of function calls should be cached rather than re-calling the function	
+
+The instances below point to the second+ call of the function within a single function																								
 																										
 																										
 			/// @audit market.oracle() on line 918																							
