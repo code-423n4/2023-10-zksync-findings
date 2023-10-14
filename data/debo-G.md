@@ -38,4 +38,24 @@ function getDeploymentNonce(address _address) external view returns (uint256 dep
         (deploymentNonce, ) = _splitRawNonce(rawNonces[addressAsKey]);
     }
 ```
-## [G-03] 
+## [G-03] Use bytes constants instead of strings as they use less gas
+```txt
+ethereum/contracts/zksync/ValidatorTimelock.sol#L24-L24
+The getName string constant should instead utilise bytes32 constant to save gas.
+```
+```txt
+ethereum/contracts/zksync/facets/Mailbox.sol#L41-L41
+The getName string constant should instead utilise bytes32 constant to save gas.
+```
+```txt
+ethereum/contracts/zksync/facets/Admin.sol#L15-L15
+The getName string constant should instead utilise bytes32 constant to save gas.
+```
+```txt
+ethereum/contracts/zksync/facets/Getters.sol#L19-L19
+The getName string constant should instead utilise bytes32 constant to save gas.
+```
+```txt
+ethereum/contracts/zksync/facets/Executor.sol#L22-L22
+The getName string constant should instead utilise bytes32 constant to save gas.
+```
