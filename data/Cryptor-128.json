@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Cryptor",
+  "risk": "2",
+  "title": "No check for 0 limbs in near_call.rs can result in invalid proofs",
+  "issueId": 128,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/128"
+}
