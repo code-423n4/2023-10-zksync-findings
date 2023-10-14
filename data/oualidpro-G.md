@@ -19,8 +19,8 @@
 | [GAS-13](#GAS-13-1696083995) | `abi.encode()` is less efficient than `abi.encodepacked()` | 24 | 1464 |
 | [GAS-14](#GAS-14-1693313317) | Can make the variable outside the loop to save gas | 48 | - |
 | [GAS-15](#GAS-15-1693313355) | Consider activating via-ir for deploying | 1 | 250 |
-| [GAS-16](#GAS-15-1693313356) | Use the result of the function call directly to save gas | 1 | 10 |
-| [GAS-16](#GAS-15-1693313357) | The result of a mathematique operation is only used once | 2 | 116 |
+| [GAS-16](#GAS-16-1693313356) | Use the result of the function call directly to save gas | 1 | 10 |
+| [GAS-17](#GAS-17-1693313357) | The result of a mathematique operation is only used once | 2 | 116 |
 
 Total: 215 instances over 15 issues with ** 6284 gas ** saved
 
@@ -1186,7 +1186,7 @@ File: hardhat.config.ts
 
 </details>
 
-### <a name="GAS-15-1693313356"></a>[GAS-16] Use the result of the function call directly to save gas
+### <a name="GAS-16-1693313356"></a>[GAS-16] Use the result of the function call directly to save gas
 As the result of the function call is used only once, then you can use the function result directly to save gas rather than caching its result. this way you can save **10 gas**
 
 *Instances (1)*:
@@ -1211,7 +1211,7 @@ File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 </details>
 
-### <a name="GAS-16-1693313357"></a>[GAS-17] The result of a mathematique operation is only used once
+### <a name="GAS-17-1693313357"></a>[GAS-17] The result of a mathematique operation is only used once
 As the result of the mathematique operation is used only once, then you can combine both operation in one to save gas rather than caching its result. this way you can save **116 gas**
 
 *Instances (2)*:
