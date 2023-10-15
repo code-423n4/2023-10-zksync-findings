@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "BARW",
+  "risk": "2",
+  "title": "In `L1Massanger::sendtoL1` there is to much gas burned for calculating the merkle root",
+  "issueId": 149,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/149"
+}
