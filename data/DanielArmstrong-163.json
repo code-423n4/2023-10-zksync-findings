@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DanielArmstrong",
+  "risk": "3",
+  "title": "If the deposit limitation is not set, `L1ERC20Bridge` does not track the state variable `totalDepositedAmountPerUser`.",
+  "issueId": 163,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/163"
+}
