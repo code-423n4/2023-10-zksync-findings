@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "There should be a minimum time in Governance.sol to ensure that the owner cannot schedule an upgrade and execute it right away ",
+  "issueId": 150,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/150"
+}
