@@ -17,7 +17,7 @@ Mitigation:
 
 QA2. When the argument ``_refundRecipient = address(0)``, _requestL2Transaction()._requestL2Transaction() will use ``_sender`` as the refundRecipient. The problem is that _requestL2Transaction() might apply AddressAliasHelper.AddressAliasHelperapplyL1ToL2Alias(_sender) again even though _sender is already the result of AddressAliasHelper.AddressAliasHelperapplyL1ToL2Alias(msg.sender) (see L249). 
 
-The mitigation is that to check whether ``_refundRecipient = address(0)`` and avoid unnecessary L1ToL2Alisas translation when this should not happen.
+The mitigation is that we do not need to apply L1ToL2Alisas translation when _refundRecipient == _sender.
 
 ```diff
 
