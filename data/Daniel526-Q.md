@@ -72,3 +72,25 @@ In the `BaseZkSyncUpgrade` contract, the `_setVerifier` function is responsible 
 The impact of this issue is primarily operational and related to the clarity and perceived significance of protocol upgrades. Allowing such a change effectively results in a "no-op" upgrade, where no meaningful changes are introduced to the protocol. This can lead to confusion among users and stakeholders regarding the purpose and significance of upgrades. It may impact the trust and perception of upgrade processes.
 ## Mitigation:
 Consider revising the upgrade process to explicitly prevent such "no-op" changes, if they are not deemed meaningful or significant for the protocol.
+## D. Ineffectual Parameter Changes in zkSync Protocol Upgrades
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L127-L139)
+In the `BaseZkSyncUpgrade` contract, the `_setVerifierParams` function is responsible for updating verifier parameters during upgrades. However, the code does not explicitly prevent setting the new verifier parameters to match the old parameters, as shown in the following code snippet:
+```solidity
+function _setVerifierParams(VerifierParams calldata _newVerifierParams) private {
+    if (
+        _newVerifierParams.recursionNodeLevelVkHash == bytes32(0) ||
+        _newVerifierParams.recursionLeafLevelVkHash == bytes32(0) ||
+        _newVerifierParams.recursionCircuitsSetVksHash == bytes32(0)
+    ) {
+        return;
+    }
+
+    VerifierParams memory oldVerifierParams = s.verifierParams;
+    s.verifierParams = _newVerifierParams;
+    emit NewVerifierParams(oldVerifierParams, _newVerifierParams);
+}
+```
+## Impact:
+It may affect governance processes, as non-substantive upgrades could be perceived as a lack of meaningful change, impacting governance confidence.
+## Mitigation:
+Establish clear governance procedures that require upgrades to bring meaningful changes and document the rationale for parameter modifications.
