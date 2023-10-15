@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "invitedtea",
+  "risk": "2",
+  "title": "The `executeBatches` function does not properly check that the batches were committed at least X time ago",
+  "issueId": 164,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/164"
+}
