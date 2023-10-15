@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "Wrong `compressedStateDiffSize` is extracted in `L1Massanger:: publishPubdataAndClearState",
+  "issueId": 156,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/156"
+}
