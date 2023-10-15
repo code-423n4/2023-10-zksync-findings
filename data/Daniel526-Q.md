@@ -65,3 +65,10 @@ require(_facet != address(0), "Invalid _facet address");
 // Proceed with the _addOneFunction operation
 _addOneFunction(_facet, _selector, _isSelectorFreezable);
 ```
+## C. Allowing Same Old Verifier Address as New Verifier Address in zkSync Protocol Upgrades
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L111-L123)
+In the `BaseZkSyncUpgrade` contract, the `_setVerifier` function is responsible for changing the address of the verifier smart contract. The function does not explicitly prevent setting the new verifier address to the same value as the old verifier address. This allows for the possibility of accidentally or intentionally setting the old verifier address as the new verifier address.
+## Impact:
+The impact of this issue is primarily operational and related to the clarity and perceived significance of protocol upgrades. Allowing such a change effectively results in a "no-op" upgrade, where no meaningful changes are introduced to the protocol. This can lead to confusion among users and stakeholders regarding the purpose and significance of upgrades. It may impact the trust and perception of upgrade processes.
+## Mitigation:
+Consider revising the upgrade process to explicitly prevent such "no-op" changes, if they are not deemed meaningful or significant for the protocol.
