@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "invitedtea",
+  "risk": "3",
+  "title": "The validateL1ToL2Transaction function does not check that the transaction's from field is valid.",
+  "issueId": 185,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/185"
+}
