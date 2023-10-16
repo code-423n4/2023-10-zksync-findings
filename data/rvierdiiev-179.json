@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "rvierdiiev",
+  "risk": "2",
+  "title": "Incorrect validation of totalGasLimit for tx that should be run on l1",
+  "issueId": 179,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/179"
+}
