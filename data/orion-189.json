@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "orion",
+  "risk": "3",
+  "title": "DefaultAccount assets can be stolen via unchecked prepareForPaymaster calls",
+  "issueId": 189,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/189"
+}
