@@ -1,4 +1,33 @@
-FALSE	Excess funds sent via msg.value not refunded	The code below allows the caller to provide Ether, but does not refund the amount in excess of what's required, leaving funds stranded in the contract. The condition should be changed to check for equality, or the code should refund the excess.	if (msg.value <= _amount) revert FeeAmountNotSet();	
+##
+
+## [L-]  ``require(_l2ToL1message.length == 76, "kk")`` Attackers Can Bypass L2 to L1 Message Validation Checks
+
+### Impact
+The check ```require(_l2ToL1message.length == 76, "kk")`` is a simple way to validate the length of an L2 to L1 message. However, it is not a ``perfect way`` to validate messages, and ``attackers`` can ``bypass`` it.
+
+Attacker bypass the check is to send a message with a ``valid length``, but with the ``addresses`` of the ``sender`` and ``receiver`` reversed. This would result in the Ether being sent to the wrong address.
+
+A more comprehensive check would also check the contents of the message to ensure that it is a valid ``function signature``, followed by the address of the ``sender``, the address of the ``receiver``, and the amount of ``Ether`` being sent.
+
+### POC
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
+
+329: require(_l2ToL1message.length == 76, "kk");
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L329
+
+### Recommended Mitigation
+Could use a library to check the function signature, the sender address, the receiver address, and the amount of Ether being sent
+
+ 
+
+## [L-] Excess funds sent via msg.value not refunded	
+
+The code below allows the caller to provide Ether, but does not refund the amount in excess of what's required, leaving funds stranded in the contract. The condition should be changed to check for equality, or the code should refund the excess.	
+
+if (msg.value <= _amount) revert FeeAmountNotSet();	
 
 FALSE	Unsafe use of transfer()/transferFrom() with IERC20	Some tokens do not implement the ERC20 standard properly but are still accepted by most code that accepts ERC20 tokens. For example Tether (USDT)'s transfer() and transferFrom() functions on L1 do not return booleans as the specification requires, and instead have no return value. When these sorts of tokens are cast to IERC20, their [function signatures](https://medium.com/coinmonks/missing-return-value-bug-at-least-130-tokens-affected-d67bf08521ca) do not match and therefore the calls made, revert (see this [link](https://gist.github.com/IllIllI000/2b00a32e8f0559e8f386ea4f1800abc5) for a test case). Use OpenZeppelin’s SafeERC20's safeTransfer()/safeTransferFrom() instead	_paymentToken.transferFrom(, paymentToken.transfer(																							
 
@@ -8,7 +37,12 @@ FALSE	_safeMint() should be used rather than _mint() wherever possible	_mint() i
 																										
 FALSE	Contracts are vulnerable to rebasing accounting-related issues	Rebasing tokens are tokens that have each holder's balanceof() increase over time. Aave aTokens are an example of such tokens. If rebasing tokens are used, rewards accrue to the contract holding the tokens, and cannot be withdrawn by the original depositor. To address the issue, track 'shares' deposited on a pro-rata basis, and let shares be redeemed for their proportion of the current balance at the time of the withdrawal.																																														
 
+Revert on Transfer to the Zero Address
+Some tokens (e.g. openzeppelin) revert when attempting to transfer to address(0).
 
+This may break systems that expect to be able to burn tokens by transferring them to address(0).
+
+example: RevertToZero.sol
 
 
 FALSE	Some tokens may revert when  zero value transfers are made	In spite of the fact that EIP-20 [states](https://github.com/ethereum/EIPs/blob/46b9b698815abbfa628cd1097311deee77dd45c5/EIPS/eip-20.md?plain=1#L116) that zero-valued transfers must be accepted, some tokens, such as LEND will revert if this is attempted, which may cause transactions that involve other tokens (such as batch operations) to fully revert. Consider skipping the transfer if the amount is zero, which will also save gas.	IERC20(erc20).safeTransferFrom(_fromAddress, address(this), _amount); , IERC20(erc20).safeTransfer(msg.sender, _amount);	
