@@ -15,6 +15,23 @@ TRUE	Structs can be packed into fewer storage slots	Each slot saved can avoid an
 
 ##
 
+## [G-] The result of function calls should be cached rather than re-calling the function	
+
+The instances below point to the second+ call of the function within a single function																								
+																										
+																										
+			/// @audit market.oracle() on line 918																							
+			930:          (, info.oracleExchangeRate) = IOracle(market.oracle()).peek(																							
+			/// @audit market.oracleData() on line 919																							
+			931:              market.oracleData()																							
+			/// @audit market.oracle() on line 918																							
+			933:          info.spotExchangeRate = IOracle(market.oracle()).peekSpot(																							
+			/// @audit market.oracleData() on line 919																							
+			934:              market.oracleData()																							
+									
+
+##
+
 ## [G-] Optimize Gas Usage by Avoiding Variable Declarations Inside Loops
 
 The variables ``action``, ``facet``, ``isFacetFreezable``, and ``selectors`` are all declared inside the loop. This means that a new instance of each variable will be created for each iteration of the loop. Saves 200-300 Gas per iteration
@@ -66,7 +83,6 @@ index 0b1fbdc..2f3cf9e 100644
 -            bytes4[] memory selectors = facetCuts[i].selectors;
 +            selectors = facetCuts[i].selectors;
 
-
 ```
 
 
@@ -95,12 +111,14 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
  
 
 
-## [G-] Redundant cache 
+## [G-] Optimize code to avoid extra GAS
 
-### Any revert inside the for loop then caching ``initAddress`` ,``initCalldata `` is waste of the computation and gas . Saves ``300 GAS``. Values of ``initAddress`` and ``initCalldata `` is used after the for loop. So caching values before for loop is unecessary.
+### Any revert inside the for loop then caching ``initAddress`` ,``initCalldata `` is waste of the computation and gas . Saves ``300 GAS``. Values of ``initAddress`` and ``initCalldata `` is used after the for loop. So caching values before for loop is unnecessary.
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L97-L98
 
 ```diff
-FILE: 
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
 
 function diamondCut(DiamondCutData memory _diamondCut) internal {
         FacetCut[] memory facetCuts = _diamondCut.facetCuts;
@@ -130,6 +148,41 @@ function diamondCut(DiamondCutData memory _diamondCut) internal {
 
         _initializeDiamondCut(initAddress, initCalldata);
         emit DiamondCut(facetCuts, initAddress, initCalldata);
+    }
+
+```
+
+
+### Any revert in  ``block.timestamp - COMMIT_TIMESTAMP_NOT_OLDER <= batchTimestamp`` check then caching lastL2BlockTimestamp value unnecessary and waste of gas 
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L87
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
+  function _verifyBatchTimestamp(
+        uint256 _packedBatchAndL2BlockTimestamp,
+        uint256 _expectedBatchTimestamp,
+        uint256 _previousBatchTimestamp
+    ) internal view {
+        // Check that the timestamp that came from the system context is expected
+        uint256 batchTimestamp = _packedBatchAndL2BlockTimestamp >> 128;
+        require(batchTimestamp == _expectedBatchTimestamp, "tb");
+
+        // While the fact that _previousBatchTimestamp < batchTimestamp is already checked on L2,
+        // we double check it here for clarity
+        require(_previousBatchTimestamp < batchTimestamp, "h3");
+
+-        uint256 lastL2BlockTimestamp = _packedBatchAndL2BlockTimestamp & PACKED_L2_BLOCK_TIMESTAMP_MASK;
+
+        // All L2 blocks have timestamps within the range of [batchTimestamp, lastL2BatchTimestamp].
+        // So here we need to only double check that:
+        // - The timestamp of the batch is not too small.
+        // - The timestamp of the last L2 block is not too big.
+        require(block.timestamp - COMMIT_TIMESTAMP_NOT_OLDER <= batchTimestamp, "h1"); // New batch timestamp is too small
++        uint256 lastL2BlockTimestamp = _packedBatchAndL2BlockTimestamp & PACKED_L2_BLOCK_TIMESTAMP_MASK;
+        require(lastL2BlockTimestamp <= block.timestamp + COMMIT_TIMESTAMP_APPROXIMATION_DELTA, "h2"); // The last L2 block timestamp is too big
     }
 
 ```
@@ -186,6 +239,28 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Admin.sol
 
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L15
+
+##
+
+## [G-] Don't cache variable once used once 
+
+If the variable is only accessed once, it's cheaper to use the state variable directly that one time, and save the 3 gas the extra stack assignment would spend
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
+-  uint256 lastL2BlockTimestamp = _packedBatchAndL2BlockTimestamp & PACKED_L2_BLOCK_TIMESTAMP_MASK;
+
+        // All L2 blocks have timestamps within the range of [batchTimestamp, lastL2BatchTimestamp].
+        // So here we need to only double check that:
+        // - The timestamp of the batch is not too small.
+        // - The timestamp of the last L2 block is not too big.
+        require(block.timestamp - COMMIT_TIMESTAMP_NOT_OLDER <= batchTimestamp, "h1"); // New batch timestamp is too small
+-        require(lastL2BlockTimestamp <= block.timestamp + COMMIT_TIMESTAMP_APPROXIMATION_DELTA, "h2"); // The last L2 block timestamp is too big
++        require(_packedBatchAndL2BlockTimestamp & PACKED_L2_BLOCK_TIMESTAMP_MASK <= block.timestamp + COMMIT_TIMESTAMP_APPROXIMATION_DELTA, "h2"); // The last L2 block timestamp is too big
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L87-L94
 
 ##
 
@@ -250,20 +325,7 @@ FALSE	Multiple if-statements with mutually-exclusive conditions should be change
 
 
 																								
-																																																											FALSE	The result of function calls should be cached rather than re-calling the function	
-
-The instances below point to the second+ call of the function within a single function																								
-																										
-																										
-			/// @audit market.oracle() on line 918																							
-			930:          (, info.oracleExchangeRate) = IOracle(market.oracle()).peek(																							
-			/// @audit market.oracleData() on line 919																							
-			931:              market.oracleData()																							
-			/// @audit market.oracle() on line 918																							
-			933:          info.spotExchangeRate = IOracle(market.oracle()).peekSpot(																							
-			/// @audit market.oracleData() on line 919																							
-			934:              market.oracleData()																							
-																										
+																																																																												
 																										
 FALSE	Not using the named return variables anywhere in the function is confusing	Consider changing the variable to be an unnamed one, since the variable is never assigned, nor is it returned by name. If the optimizer is not turned on, leaving the code as it is will also waste gas for the stack variable.																								
 																										
