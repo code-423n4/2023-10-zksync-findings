@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "tapir",
+  "risk": "2",
+  "title": "Users can bridge any amount of ETH bypassing the ETH deposit limit by using ERC20/WETH bridges",
+  "issueId": 181,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/181"
+}
