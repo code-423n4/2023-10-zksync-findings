@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DanielArmstrong",
+  "risk": "3",
+  "title": "Wrong use of `modifier reentrancyGuardInitializer()` causes unexpected behaviors in some contracts.",
+  "issueId": 172,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/172"
+}
