@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "In `Governance.sol` the process of transferring the ownership should be subject to `minDelay`",
+  "issueId": 166,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/166"
+}
