@@ -94,3 +94,29 @@ function _setVerifierParams(VerifierParams calldata _newVerifierParams) private 
 It may affect governance processes, as non-substantive upgrades could be perceived as a lack of meaningful change, impacting governance confidence.
 ## Mitigation:
 Establish clear governance procedures that require upgrades to bring meaningful changes and document the rationale for parameter modifications.
+## E. Gas Exhaustion in Batch Operations
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/AllowList.sol#L58-L75)
+When batch operations are performed on large arrays in the `AllowList` contract, the gas cost for processing these operations can exceed the gas limit per Ethereum block. This can result in the transaction being reverted, leaving the contract in an inconsistent state. Below is an example of a batch operation that can be vulnerable to gas exhaustion:
+```solidity
+function setBatchPermissionToCall(
+    address[] calldata _callers,
+    address[] calldata _targets,
+    bytes4[] calldata _functionSigs,
+    bool[] calldata _enables
+) external onlyOwner {
+    uint256 callersLength = _callers.length;
+
+    require(callersLength == _targets.length, "yw");
+    require(callersLength == _functionSigs.length, "yx");
+    require(callersLength == _enables.length, "yy");
+
+    for (uint256 i = 0; i < callersLength; i = i.uncheckedInc()) {
+        _setPermissionToCall(_callers[i], _targets[i], _functionSigs[i], _enables[i]);
+    }
+}
+```
+In this function, the contract iterates through arrays of `_callers`, `_targets`, `_functionSigs`, and `_enables` to set permissions. If the arrays are large, the gas cost of this operation can be significant.
+## Impact:
+The impact of this vulnerability is that a large batch operation could cause a transaction to exceed the gas limit, leading to a revert. As a result, changes made in the batch operation may not take effect, and the contract's state may remain inconsistent.
+## Mitigation:
+Limit Batch Sizes: Implement a mechanism to limit the size of batch operations, preventing them from becoming too large and consuming excessive gas.
