@@ -72,3 +72,38 @@ The mitigation is that we do not need to apply L1ToL2Alisas translation when _re
         canonicalTxHash = _writePriorityOp(params, _calldata, _factoryDeps);
     }
 ```
+
+Q3. Mailbox._proveL2LogInclusion() fails to ensure that ``_batchNumber < s.totalBatchesExecuted``. This is important since the largest ``_batchNumber`` that can be verified is ``s.totalBatchesExecuted - 1``. 
+
+Mitiation: 
+
+```diff
+function _proveL2LogInclusion(
+        uint256 _batchNumber,
+        uint256 _index,
+        L2Log memory _log,
+        bytes32[] calldata _proof
+    ) internal view returns (bool) {
+        console2.log("\n _proveL2LogInclusion() started....");
+
+-        require(_batchNumber <= s.totalBatchesExecuted, "xx");
++        require(_batchNumber < s.totalBatchesExecuted, "xx");
+
+        bytes32 hashedLog = keccak256(
+            abi.encodePacked(_log.l2ShardId, _log.isService, _log.txNumberInBatch, _log.sender, _log.key, _log.value)
+        );
+        // Check that hashed log is not the default one,
+        // otherwise it means that the value is out of range of sent L2 -> L1 logs
+        require(hashedLog != L2_L1_LOGS_TREE_DEFAULT_LEAF_HASH, "tw");
+
+        // It is ok to not check length of `_proof` array, as length
+        // of leaf preimage (which is `L2_TO_L1_LOG_SERIALIZE_SIZE`) is not
+        // equal to the length of other nodes preimages (which are `2 * 32`)
+
+        bytes32 calculatedRootHash = Merkle.calculateRoot(_proof, _index, hashedLog);
+        bytes32 actualRootHash = s.l2LogsRootHashes[_batchNumber];
+
+        console2.log("\n completed with %d", actualRootHash == calculatedRootHash");
+        return actualRootHash == calculatedRootHash;
+    }
+```
