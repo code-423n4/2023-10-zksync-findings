@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "HE1M",
+  "risk": "2",
+  "title": "Delegatecall Behavioral Inconsistency with SHA256 Precompile",
+  "issueId": 174,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/174"
+}
