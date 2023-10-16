@@ -65,3 +65,90 @@ function claimFailedDeposit(
     revert("Method not supported. Failed deposit funds are sent to the L2 refund recipient address.");
 }
 ````
+# [L-03] Removal of deprecated functions
+## Lines of code
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L212-L216](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L212-L216)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L218-L222](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L218-L222)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L224-L228](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L224-L228)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L230-L236](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L230-L236)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L238-L246](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L238-L246)
+## Impact
+These functions have been deprecated and replaced with updated ones:
+- `getTotalBlocksCommitted` -> `getTotalBatchesCommitted`
+- `getTotalBlocksVerified` -> `getTotalBatchesVerified`
+- `getTotalBlocksExecuted` -> `getTotalBatchesExecuted`
+- `storedBlockHash` -> `storedBatchHash`
+- `getL2SystemContractsUpgradeBlockNumber` -> `getL2SystemContractsUpgradeBatchNumber`
+
+
+However, the mentioned methods are public in in `Getters.sol` and no longer provide accurate outputs, this may potentially confuse users.
+## Proof of Concept
+````solidity
+212        /// @return The total number of batches that were committed
+213:       /// @dev It is a *deprecated* method, please use `getTotalBatchesCommitted` instead
+214        function getTotalBlocksCommitted() external view returns (uint256) {
+215            return s.totalBatchesCommitted;
+216        }
+217    
+218        /// @return The total number of batches that were committed & verified
+219:       /// @dev It is a *deprecated* method, please use `getTotalBatchesVerified` instead.
+220        function getTotalBlocksVerified() external view returns (uint256) {
+221            return s.totalBatchesVerified;
+222        }
+223    
+224        /// @return The total number of batches that were committed & verified & executed
+225:       /// @dev It is a *deprecated* method, please use `getTotalBatchesExecuted` instead.
+226        function getTotalBlocksExecuted() external view returns (uint256) {
+227            return s.totalBatchesExecuted;
+228        }
+229    
+230        /// @notice For unfinalized (non executed) batches may change
+231:       /// @dev It is a *deprecated* method, please use `storedBatchHash` instead.
+232        /// @dev returns zero for non-committed batches
+233        /// @return The hash of committed L2 batch.
+234        function storedBlockHash(uint256 _batchNumber) external view returns (bytes32) {
+235            return s.storedBatchHashes[_batchNumber];
+236        }
+237    
+238        /// @return The L2 batch number in which the upgrade transaction was processed.
+239:       /// @dev It is a *deprecated* method, please use `getL2SystemContractsUpgradeBatchNumber` instead.
+240        /// @dev It is equal to 0 in the following two cases:
+241        /// - No upgrade transaction has ever been processed.
+242        /// - The upgrade transaction has been processed and the batch with such transaction has been
+243        /// executed (i.e. finalized).
+244        function getL2SystemContractsUpgradeBlockNumber() external view returns (uint256) {
+245            return s.l2SystemContractsUpgradeBatchNumber;
+246        }
+````
+## Tools Used
+Manual Review
+## Recommended Mitigation Steps
+Consider removing the functions to prevent accidental misuse.
+# [L-04] Redundant `if()` Conditional check
+## Lines of code
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L354-L368](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L354-L368)
+## Impact
+This code contains a redundant conditional check that does not affect the behaviour of the program. The same verification operation is executed in both branches of the conditional, making the `if()` statement superfluous. 
+## Proof of Concept
+````solidity
+354:        if (_proof.serializedProof.length > 0) {
+355:            bool successVerifyProof = s.verifier.verify(
+356:                proofPublicInput,
+357:                _proof.serializedProof,
+358:                _proof.recursiveAggregationInput
+359:            );
+360:            require(successVerifyProof, "p"); // Proof verification fail
+361:        }
+362:        // #else
+363:        bool successVerifyProof = s.verifier.verify(
+364:            proofPublicInput,
+365:            _proof.serializedProof,
+366:            _proof.recursiveAggregationInput
+367:        );
+368:        require(successVerifyProof, "p"); // Proof verification fail
+````
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L354-L368](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L354-L368)
+## Tools Used
+Manual Review
+## Recommended Mitigation Steps
+Consider removing the `if()` statement.
