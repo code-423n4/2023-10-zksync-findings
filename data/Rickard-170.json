@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Rickard",
+  "risk": "2",
+  "title": "`uint32(block.timestamp)` will cause a future Overflow in `commitBatches`",
+  "issueId": 170,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/170"
+}
