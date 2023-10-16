@@ -104,14 +104,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-] Code optimization for reduced gas consumption
-
-
-
- 
-
-
-## [G-] Optimize code to avoid extra GAS
+## [G-] Optimize code to avoid to spend unnecessary GAS
 
 ### Any revert inside the for loop then caching ``initAddress`` ,``initCalldata `` is waste of the computation and gas . Saves ``300 GAS``. Values of ``initAddress`` and ``initCalldata `` is used after the for loop. So caching values before for loop is unnecessary.
 
@@ -185,7 +178,67 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
         require(lastL2BlockTimestamp <= block.timestamp + COMMIT_TIMESTAMP_APPROXIMATION_DELTA, "h2"); // The last L2 block timestamp is too big
     }
 
+
+
+123:  for (uint256 i = 0; i < emittedL2Logs.length; i = i.uncheckedAdd(L2_TO_L1_LOG_SERIALIZE_SIZE)) {
+            // Extract the values to be compared to/used such as the log sender, key, and value
+-            (address logSender, ) = UnsafeBytes.readAddress(emittedL2Logs, i + L2_LOG_ADDRESS_OFFSET);
+            (uint256 logKey, ) = UnsafeBytes.readUint256(emittedL2Logs, i + L2_LOG_KEY_OFFSET);
+-            (bytes32 logValue, ) = UnsafeBytes.readBytes32(emittedL2Logs, i + L2_LOG_VALUE_OFFSET);
+
+            // Ensure that the log hasn't been processed already
+            require(!_checkBit(processedLogs, uint8(logKey)), "kp");
+            processedLogs = _setBit(processedLogs, uint8(logKey));
++            (address logSender, ) = UnsafeBytes.readAddress(emittedL2Logs, i + L2_LOG_ADDRESS_OFFSET);
++            (bytes32 logValue, ) = UnsafeBytes.readBytes32(emittedL2Logs, i + L2_LOG_VALUE_OFFSET);
+
 ```
+
+### ``_newBatchesData.length > 0`` parameter should be checked before ``s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData)`` before state variable with function calling . Saves ``500 GAS``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
++ 185:        require(_newBatchesData.length > 0, "No batches to commit");
+183: // Check that we commit batches after last committed batch
+184:        require(s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData), "i"); // incorrect previous batch data
+- 185:        require(_newBatchesData.length > 0, "No batches to commit");
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
+
+##
+
+## [G-] Not initializing variables to their default values incurs extra gas, So leaving them with their default values is more gas-efficient
+
+This is because the default value of 0 is already assigned to value automatically. By not initializing it, we avoid the cost of the unnecessary assignment.
+
+```solidity
+FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
+123: for (uint256 i = 0; i < emittedL2Logs.length; i = i.uncheckedAdd(L2_TO_L1_LOG_SERIALIZE_SIZE)) {
+
+209: for (uint256 i = 0; i < _newBatchesData.length; i = i.uncheckedInc()) {
+
+241:  for (uint256 i = 0; i < _newBatchesData.length; i = i.uncheckedInc()) {
+
+263: for (uint256 i = 0; i < _nPriorityOps; i = i.uncheckedInc()) {
+
+293: for (uint256 i = 0; i < nBatches; i = i.uncheckedInc()) {
+
+330: for (uint256 i = 0; i < committedBatchesLength; i = i.uncheckedInc()) {
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L123
+
+
+
+
+
+
+
 
 ##
 
@@ -244,7 +297,22 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ## [G-] Don't cache variable once used once 
 
-If the variable is only accessed once, it's cheaper to use the state variable directly that one time, and save the 3 gas the extra stack assignment would spend
+If the variable is only accessed once, it's cheaper to use the state variable directly that one time, and save the 3 gas the extra stack assignment would spend.
+
+### Using a local variable to cache the result of ``s.priorityQueue.popFront()`` is redundant and costs ``250 GAS`` per iteration. Instead, use the result of the function call directly.
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L263-L266
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
+263: for (uint256 i = 0; i < _nPriorityOps; i = i.uncheckedInc()) {
+- 264:            PriorityOperation memory priorityOp = s.priorityQueue.popFront();
+- 265:            concatHash = keccak256(abi.encode(concatHash, priorityOp.canonicalTxHash));
++ 265:            concatHash = keccak256(abi.encode(concatHash, s.priorityQueue.popFront().canonicalTxHash));
+266:        }
+
+```
 
 ```diff
 FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
