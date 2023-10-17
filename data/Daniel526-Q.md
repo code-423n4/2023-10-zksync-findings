@@ -120,3 +120,10 @@ In this function, the contract iterates through arrays of `_callers`, `_targets`
 The impact of this vulnerability is that a large batch operation could cause a transaction to exceed the gas limit, leading to a revert. As a result, changes made in the batch operation may not take effect, and the contract's state may remain inconsistent.
 ## Mitigation:
 Limit Batch Sizes: Implement a mechanism to limit the size of batch operations, preventing them from becoming too large and consuming excessive gas.
+## F. Absence of a Check for `_l2BlockNumber` Greater Than Zero in `_setNewL2BlockData`
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L285-L294)
+The `_setNewL2BlockData` function within the `SystemContext` contract lacks a crucial check to ensure that `_l2BlockNumber` is greater than zero. This omission is based on an implicit "expectation" that `_l2BlockNumber` should be non-zero, which can introduce security risks.
+## Impact:
+The impact of this issue is that the contract does not explicitly verify that `_l2BlockNumber` is a valid and positive number. If `_l2BlockNumber` were to unexpectedly be zero or negative due to a bug or external manipulation, it could lead to uninitialized or incorrect values being used, potentially causing unintended behavior. This may open the door to security risks, including unexpected contract behavior and potential exploits by malicious actors.
+## Mitigation:
+It is advisable to include an explicit check at the beginning of the `_setNewL2BlockData` function to verify that `_l2BlockNumber` is greater than zero. 
