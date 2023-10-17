@@ -6,3 +6,5 @@ Security Issues Pertaining to Floating Pragma:
 Shifting to an older compiler version
 Using a very recent compiler version
 Use of multiple pragma versions across different files
+
+It is recommended to pin to a concrete compiler version.
