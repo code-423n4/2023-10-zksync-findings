@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "System logs assumed in order; reordering allows security bypass.",
+  "issueId": 235,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/235"
+}
