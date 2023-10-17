@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Adding new log types requires updating bitmask bounds for validation.",
+  "issueId": 234,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/234"
+}
