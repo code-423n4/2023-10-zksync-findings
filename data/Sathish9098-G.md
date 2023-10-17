@@ -1,17 +1,185 @@
 # GAS OPTIMIZATIONS
 																																																																																																																													##
 
-TRUE	Structs can be packed into fewer storage slots	Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct. Subsequent reads as well as writes have smaller gas savings																								
-																										
-			/// @audit Variable ordering with 2 slots instead of the current 3:																							
-			///           bytes(32):bytecode, address(20):toft, bool(1):revertOnFailure																							
-			27        struct ExecutionCall {																							
-			28            address toft;																							
-			29            bytes bytecode;																							
-			30            bool revertOnFailure;																							
-			31:       }
+## [G-] Structs can be packed into fewer storage slots	
 
-## [G-] State variables should be cached in stack variables rather than re-reading them from storage	The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
+Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct. Subsequent reads as well as writes have smaller gas savings.
+
+### ``protocolVersion`` can be ``uint96`` instead of ``uint256`` : Saves ``2000 GAS`` , ``1 SLOT``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L136
+
+The ``protocolVersion`` value is increased in a sequential way, meaning that the next version number is always one greater than the current version number. This means that the ``protocolVersion`` value cannot exceed the maximum range of ``uint96`` unless the protocol is upgraded more than ``2^96 times``.
+
+``2^96`` is a very large number, and it is unlikely that any protocol would ever need to be upgraded more than this many times. For example, the ``Ethereum protocol`` has only been upgraded a ``handful of times`` since it was launched in 2015.
+
+Therefore, it is safe to change the ``protocolVersion`` variable to ``uint96`` without worrying about the value overflowing. This will save ``2000 gas`` and ``1 slot``, which can be significant for contracts that are frequently upgraded.
+
+
+```diff
+FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
+
+
+struct AppStorage {
+    /// @dev Storage of variables needed for deprecated diamond cut facet
+    uint256[7] __DEPRECATED_diamondCutStorage;
+    /// @notice Address which will exercise critical changes to the Diamond Proxy (upgrades, freezing & unfreezing)
+    address governor;
+    /// @notice Address that the governor proposed as one that will replace it
+    address pendingGovernor;
+    /// @notice List of permitted validators
+    mapping(address => bool) validators;
+    /// @dev Verifier contract. Used to verify aggregated proof for batches
+    IVerifier verifier;
+    /// @notice Total number of executed batches i.e. batches[totalBatchesExecuted] points at the latest executed batch
+    /// (batch 0 is genesis)
+    uint256 totalBatchesExecuted;
+    /// @notice Total number of proved batches i.e. batches[totalBatchesProved] points at the latest proved batch
+    uint256 totalBatchesVerified;
+    /// @notice Total number of committed batches i.e. batches[totalBatchesCommitted] points at the latest committed
+    /// batch
+    uint256 totalBatchesCommitted;
+    /// @dev Stored hashed StoredBatch for batch number
+    mapping(uint256 => bytes32) storedBatchHashes;
+    /// @dev Stored root hashes of L2 -> L1 logs
+    mapping(uint256 => bytes32) l2LogsRootHashes;
+    /// @dev Container that stores transactions requested from L1
+    PriorityQueue.Queue priorityQueue;
+    /// @dev The smart contract that manages the list with permission to call contract functions
+    IAllowList allowList;
+    /// @notice Part of the configuration parameters of ZKP circuits. Used as an input for the verifier smart contract
+    VerifierParams verifierParams;
+    /// @notice Bytecode hash of bootloader program.
+    /// @dev Used as an input to zkp-circuit.
+    bytes32 l2BootloaderBytecodeHash;
+    /// @notice Bytecode hash of default account (bytecode for EOA).
+    /// @dev Used as an input to zkp-circuit.
+    bytes32 l2DefaultAccountBytecodeHash;
+    /// @dev Indicates that the porter may be touched on L2 transactions.
+    /// @dev Used as an input to zkp-circuit.
+    bool zkPorterIsAvailable;
+    /// @dev The maximum number of the L2 gas that a user can request for L1 -> L2 transactions
+    /// @dev This is the maximum number of L2 gas that is available for the "body" of the transaction, i.e.
+    /// without overhead for proving the batch.
+    uint256 priorityTxMaxGasLimit;
+    /// @dev Storage of variables needed for upgrade facet
+    UpgradeStorage __DEPRECATED_upgrades;
+    /// @dev A mapping L2 batch number => message number => flag.
+    /// @dev The L2 -> L1 log is sent for every withdrawal, so this mapping is serving as
+    /// a flag to indicate that the message was already processed.
+    /// @dev Used to indicate that eth withdrawal was already processed
+    mapping(uint256 => mapping(uint256 => bool)) isEthWithdrawalFinalized;
+    /// @dev The most recent withdrawal time and amount reset
+    uint256 __DEPRECATED_lastWithdrawalLimitReset;
+    /// @dev The accumulated withdrawn amount during the withdrawal limit window
+    uint256 __DEPRECATED_withdrawnAmountInWindow;
+    /// @dev A mapping user address => the total deposited amount by the user
+    mapping(address => uint256) totalDepositedAmountPerUser;
+    /// @dev Stores the protocol version. Note, that the protocol version may not only encompass changes to the
+    /// smart contracts, but also to the node behavior.
+-    uint256 protocolVersion;
+    /// @dev Hash of the system contract upgrade transaction. If 0, then no upgrade transaction needs to be done.
+    bytes32 l2SystemContractsUpgradeTxHash;
+    /// @dev Batch number where the upgrade transaction has happened. If 0, then no upgrade transaction has happened
+    /// yet.
+    uint256 l2SystemContractsUpgradeBatchNumber;
+    /// @dev Address which will exercise non-critical changes to the Diamond Proxy (changing validator set & unfreezing)
+    address admin;
+    /// @notice Address that the governor or admin proposed as one that will replace admin role
+    address pendingAdmin;
++    uint96 protocolVersion;
+}
+
+```
+
+### ``newProtocolVersion`` can be ``uint96`` instead of ``uint256`` : Saves ``2000 GAS`` , ``1 SLOT``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L31-L43
+
+The ``newprotocolVersion`` value is increased in a sequential way, meaning that the next version number is always one greater than the current version number. This means that the ``newprotocolVersion`` value cannot exceed the maximum range of ``uint96`` unless the protocol is upgraded more than ``2^96 times``.
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
+
+struct ProposedUpgrade {
+        IMailbox.L2CanonicalTransaction l2ProtocolUpgradeTx;
+        bytes[] factoryDeps;
+        bytes32 bootloaderHash;
+        bytes32 defaultAccountHash;
+        address verifier;
++         uint96 newProtocolVersion;
+        VerifierParams verifierParams;
+        bytes l1ContractsUpgradeCalldata;
+        bytes postUpgradeCalldata;
+        uint256 upgradeTimestamp;
+-         uint256 newProtocolVersion;
+        address newAllowList;
+    }
+
+```
+
+### ``txType`` and ``nonce`` can be uint128 instead of uint256 : Saves ``2000 GAS`` , ``1 SLOT``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/interfaces/IMailbox.sol#L35-L62
+
+The change to ``uint128`` for ``txType`` and ``nonce`` is safe because the maximum values of these fields are within the range of uint128.
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/interfaces/IMailbox.sol
+
+ struct L2CanonicalTransaction {
+-        uint256 txType;
++        uint128 txType;
++        uint128 nonce;
+        uint256 from;
+        uint256 to;
+        uint256 gasLimit;
+        uint256 gasPerPubdataByteLimit;
+        uint256 maxFeePerGas;
+        uint256 maxPriorityFeePerGas;
+        uint256 paymaster;
+-        uint256 nonce;
+        uint256 value;
+        // In the future, we might want to add some
+        // new fields to the struct. The `txData` struct
+        // is to be passed to account and any changes to its structure
+        // would mean a breaking change to these accounts. To prevent this,
+        // we should keep some fields as "reserved".
+        // It is also recommended that their length is fixed, since
+        // it would allow easier proof integration (in case we will need
+        // some special circuit for preprocessing transactions).
+        uint256[4] reserved;
+        bytes data;
+        bytes signature;
+        uint256[] factoryDeps;
+        bytes paymasterInput;
+        // Reserved dynamic type for the future use-case. Using it should be avoided,
+        // But it is still here, just in case we want to enable some additional functionality.
+        bytes reservedDynamic;
+    }
+
+```
+##
+## [G-] Using calldata instead of memory for read-only arguments in external functions saves gas
+
+When a function with a memory array is called externally, the abi.decode() step has to copy read each index of the calldata to memory. Each copy costs at least 60 gas (i.e. 60 * <mem_array>.length). Using calldata directly, obviates the need for copies of words of the struct/array not being read. Note that even if an interface defines a function as having memory arguments, it's still valid for implementation contracts to use calldata arguments instead.
+
+If the array is passed to an internal function which passes the array to another internal function where the array is modified and therefore memory is used in the external call, it's still more gass-efficient to use calldata when the external function uses modifiers, since the modifiers may prevent the internal functions from being called. Structs have the same overhead as an array of length one
+
+Note that I've also flagged instances where the function is public but can be marked as external since it's not called by the contract, and cases where a constructor is involved.
+
+##
+
+## [G-] Multiple address/ID mappings can be combined into a single mapping of an address/ID to a struct, where appropriate
+
+Saves a storage slot for the mapping. Depending on the circumstances and sizes of types, can avoid a Gsset (20000 gas) per mapping combined. Reads and subsequent writes can also be cheaper when a function requires both values and they both fit in the same storage slot. Finally, if both fields are accessed in the same function, can save ~42 gas per access due to not having to recalculate the key's keccak256 hash (Gkeccak256 - 30 gas) and that calculation's associated stack operations.
+
+
+
+
+
+																																												## [G-] State variables should be cached in stack variables rather than re-reading them from storage	The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
 
 ##
 
@@ -92,15 +260,7 @@ index 0b1fbdc..2f3cf9e 100644
 
 Saves a storage slot. If the variable is assigned a non-zero value, saves Gsset (20000 gas). If it's assigned a zero value, saves Gsreset (2900 gas). If the variable remains unassigned, there is no gas savings unless the variable is public, in which case the compiler-generated non-payable getter deployment cost is saved. If the state variable is overriding an interface's public function, mark the variable as constant or immutable so that it does not use a storage slot.
 
-```solidity
-FILE: 
 
-54: mapping(address => uint256) public __DEPRECATED_lastWithdrawalLimitReset;
-
-57: mapping(address => uint256) public __DEPRECATED_withdrawnAmountInWindow;
-
-```
-https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L54-L57	
 
 ##
 
@@ -295,9 +455,27 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-] Don't cache variable once used once 
+## [G-] Don't cache variable only used once 
 
 If the variable is only accessed once, it's cheaper to use the state variable directly that one time, and save the 3 gas the extra stack assignment would spend.
+
+### ``hasSpecialAccessToCall[_caller][_target][_functionSig]`` can be used directly instead of local cache
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/AllowList.sol#L117
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/common/AllowList.sol
+
+- 117: bool currentPermission = hasSpecialAccessToCall[_caller][_target][_functionSig];
+
+-        if (currentPermission != _enable) {
++        if (hasSpecialAccessToCall[_caller][_target][_functionSig] != _enable) {
+            hasSpecialAccessToCall[_caller][_target][_functionSig] = _enable;
+            emit UpdateCallPermission(_caller, _target, _functionSig, _enable);
+        }
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/AllowList.sol#L117
 
 ### Using a local variable to cache the result of ``s.priorityQueue.popFront()`` is redundant and costs ``250 GAS`` per iteration. Instead, use the result of the function call directly.
 
@@ -338,8 +516,6 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 Avoids a Gsset (20000 gas) when changing from false to true, after having been true in the past. Since most of the bools aren't changed twice in one transaction, I've counted the amount of gas as half of the full amount, for each variable.
 
-Also these variables are used very after so i reported that . This saves so much gas 
-
 ```solidity
 FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
 
@@ -355,6 +531,18 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
 
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L87
+
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
+
+32: bool isFreezable;
+
+53: bool isFrozen;
+
+64: bool isFreezable;
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L32
 																							
 ##																																																																																																																																																## [G-] Using private rather than public for constants, saves gas	
 
