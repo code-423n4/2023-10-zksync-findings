@@ -127,3 +127,20 @@ The `_setNewL2BlockData` function within the `SystemContext` contract lacks a cr
 The impact of this issue is that the contract does not explicitly verify that `_l2BlockNumber` is a valid and positive number. If `_l2BlockNumber` were to unexpectedly be zero or negative due to a bug or external manipulation, it could lead to uninitialized or incorrect values being used, potentially causing unintended behavior. This may open the door to security risks, including unexpected contract behavior and potential exploits by malicious actors.
 ## Mitigation:
 It is advisable to include an explicit check at the beginning of the `_setNewL2BlockData` function to verify that `_l2BlockNumber` is greater than zero. 
+## G. Lack of Enforcement for Message Marker Parameter
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L119)
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L29)
+The code includes a comment that describes the use of a "marker" in the context of sending variable-length messages from Layer 2 to Layer 1. The comment suggests that a "marker" parameter should be set to `true` to indicate a specific type of message. However, the code does not include any logic or variable to enforce or handle this "marker" parameter.
+```solidity
+/// @dev To send a variable length message we use this trick:
+/// - This system contract accepts an arbitrary length message and sends a fixed length message with
+/// parameters `senderAddress == this`, `marker == true`, `key == msg.sender`, `value == keccak256(message)`.
+function sendToL1(bytes calldata _message) external override returns (bytes32 hash) {
+    // ...
+}
+```
+The comment suggests that the "marker" should be set to `true`, but there is no code that explicitly sets or enforces the "marker" parameter. This lack of implementation might lead to ambiguity in how messages are processed and categorized.
+## Impact:
+The lack of enforcement for the "marker" parameter could potentially affect the protocol's intended functionality, especially if the "marker" is intended to categorize or differentiate messages. It may lead to misunderstandings in message processing and could impact interoperability with other parts of the protocol that expect the presence of a "marker."
+## Mitigation:
+Implement and enforce the "marker" parameter.
