@@ -144,3 +144,21 @@ The comment suggests that the "marker" should be set to `true`, but there is no 
 The lack of enforcement for the "marker" parameter could potentially affect the protocol's intended functionality, especially if the "marker" is intended to categorize or differentiate messages. It may lead to misunderstandings in message processing and could impact interoperability with other parts of the protocol that expect the presence of a "marker."
 ## Mitigation:
 Implement and enforce the "marker" parameter.
+## H Lack of Reset Mechanisms for State Variables in L1Messenger Contract
+[Link](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L36)
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L40)
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L44)
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L49) 
+The L1Messenger contract has comments that suggest certain state variables should be reset at the end of a block. However, the contract code does not include the necessary logic to perform these resets. Let's examine each affected variable:
+
+1. `chainedLogsHash` : This variable is meant to store a sequential hash of logs sent in the current block. The comment implies that it should be reset to zero at the end of each block. The code does not contain a mechanism to reset this variable, which means it will retain its value across multiple blocks.
+
+2. `numberOfLogsToProcess` : This variable is used to keep track of the number of logs sent in the current block. Similar to `chainedLogsHash`, the comment indicates that it should be reset at the end of each block. However, there is no code in the contract to perform this reset.
+
+3. `chainedMessagesHash` : This variable is used to store a sequential hash of hashes of messages sent in the current block. The comment suggests it should be reset at the end of a block, but there is no corresponding reset mechanism in the contract code.
+
+4. `chainedL1BytecodesRevealDataHash` : This variable is meant to store a sequential hash of bytecode hashes that need to be published according to the current block's execution invariant. The comment indicates that it should be reset at the end of the block, but the contract does not include a reset mechanism.
+## Impact:
+The lack of reset mechanisms for these state variables can lead to unintended behavior in the contract. It may affect the proper functioning of the contract, especially in scenarios where these variables need to be reset at the end of each block. This issue could also impact the accuracy and reliability of the data being tracked by these variables.
+## Mitigation:
+Include a mechanism to reset the mentioned state variables at the end of each block, as per the comments in the code.
