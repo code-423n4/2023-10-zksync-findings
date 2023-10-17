@@ -73,7 +73,7 @@ The mitigation is that we do not need to apply L1ToL2Alisas translation when _re
     }
 ```
 
-Q3. Mailbox._proveL2LogInclusion() fails to ensure that ``_batchNumber < s.totalBatchesExecuted``. This is important since the largest ``_batchNumber`` that can be verified is ``s.totalBatchesExecuted - 1``. 
+QA3. Mailbox._proveL2LogInclusion() fails to ensure that ``_batchNumber < s.totalBatchesExecuted``. This is important since the largest ``_batchNumber`` that can be verified is ``s.totalBatchesExecuted - 1``. 
 
 Mitiation: 
 
@@ -108,8 +108,9 @@ function _proveL2LogInclusion(
     }
 ```
 
-Q4. _proveL2LogInclusion() calls Merkle.calculateRoot() to prove that a specific L2 log was sent in a specific L2 batch number. However, it fails to check and make sure that the length of the proof is equal to the height of the Merkle tree of ``_batchNumber``. As a result, shorter/longer paths attack might be possible. 
+QA4. _proveL2LogInclusion() calls Merkle.calculateRoot() to prove that a specific L2 log was sent in a specific L2 batch number. However, it fails to check and make sure that the length of the proof is equal to the height of the Merkle tree of ``_batchNumber``. As a result, shorter/longer paths attack might be possible. 
 
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L142](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L142)
 
+QA5.  
 
