@@ -49,3 +49,58 @@ G3. exchanging L87 and L93 can save gas due to short-circuiting since lastL2Bloc
     }
 
 ```
+
+G4.  _commitBatchesWithSystemContractsUpgrade() requires the upgrade transaction must only be included in the first batch. As a result, the for loop always check to see whether it is the first batch. This is a waste of gas. We should separate this case out of the for loop to save gas.
+
+```diff
+ function _commitBatchesWithSystemContractsUpgrade(
+        StoredBatchInfo memory _lastCommittedBatchData,
+        CommitBatchInfo[] calldata _newBatchesData,
+        bytes32 _systemContractUpgradeTxHash
+    ) internal {
+        // The system contract upgrade is designed to be executed atomically with the new bootloader, a default account,
+        // ZKP verifier, and other system parameters. Hence, we ensure that the upgrade transaction is
+        // carried out within the first batch committed after the upgrade.
+
+        // While the logic of the contract ensures that the s.l2SystemContractsUpgradeBatchNumber is 0 when this function is called,
+        // this check is added just in case. Since it is a hot read, it does not encure noticable gas cost.
+        require(s.l2SystemContractsUpgradeBatchNumber == 0, "ik");
+
+        // Save the batch number where the upgrade transaction was executed.
+        s.l2SystemContractsUpgradeBatchNumber = _newBatchesData[0].batchNumber;
++       _lastCommittedBatchData = _commitOneBatch(
++                _lastCommittedBatchData,
++                _newBatchesData[i],
++                _systemContractUpgradeTxHash
++            );
++           s.storedBatchHashes[_lastCommittedBatchData.batchNumber] =              _hashStoredBatchInfo(_lastCommittedBatchData);
++       emit BlockCommit(
++                _lastCommittedBatchData.batchNumber,
++                _lastCommittedBatchData.batchHash,
++                _lastCommittedBatchData.commitment
++            );
+
+-        for (uint256 i = 0; i < _newBatchesData.length; i = i.uncheckedInc()) {
++        for (uint256 i = 1; i < _newBatchesData.length; i = i.uncheckedInc()) {
+
+            // The upgrade transaction must only be included in the first batch.
+-            bytes32 expectedUpgradeTxHash = i == 0 ? _systemContractUpgradeTxHash : bytes32(0);
+            _lastCommittedBatchData = _commitOneBatch(
+                _lastCommittedBatchData,
+                _newBatchesData[i],
+-                expectedUpgradeTxHash
++                bytes32(0)
+            );
+
+            s.storedBatchHashes[_lastCommittedBatchData.batchNumber] = _hashStoredBatchInfo(_lastCommittedBatchData);
+            emit BlockCommit(
+                _lastCommittedBatchData.batchNumber,
+                _lastCommittedBatchData.batchHash,
+                _lastCommittedBatchData.commitment
+            );
+        }
+    }
+
+    /// @dev Pop
+
+```
