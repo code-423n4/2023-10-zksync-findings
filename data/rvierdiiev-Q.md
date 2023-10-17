@@ -42,11 +42,33 @@ I think restriction should be like that or even without `=` sign.
 ## Description
 AccountCodeStorage.getCodeHash function is used to return code hash of the address. 
 According to [eip-1052](https://eips.ethereum.org/EIPS/eip-1052#specification):
-> In case the account does not exist or is empty (as defined by EIP-161) 0 is pushed to the stack.
-In case the account does not have code the keccak256 hash of empty data (i.e. c5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470) is pushed to the stack.
+> In case ount does not have code the keccak256 hash of empty data (i.e. c5d2460186f7233cthe account does not exist or is empty (as defined by EIP-161) 0 is pushed to the stack.
+In case the acc927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470) is pushed to the stack.
 
 So in case if account has non 0 balance or it's nonce is bigger than 0, then keccak256 hash of empty data should be returned. But zksync [doesn't check balance](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L89-L112) of account. It [only checks for nonce](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L102-L104). As result in case if someone will transfer funds to address, or eoa will mint value from l1 tx to zksync, then this address will be considered not initialized.
 
 As result, `getCodeHash` works differently on ethereum and zksync. As i haven't found this is somehow used by real contracts, i put this as qa, however it's possible to craft contract that will depend on empty keccak256 in order to check if account is initialized.
 ## Recommendation
 I believe that it should work in same way as described in eip1052.
+
+## QA-04. L1Messenger.publishPubdataAndClearState checks that `numberOfL2ToL1Logs <= numberOfL2ToL1Logs`
+## Description
+`L1Messenger.publishPubdataAndClearState` function [receives `numberOfL2ToL1Logs`](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L205) and then it should check that provided amount is not big enough.
+
+Because `l2ToL1LogsTreeArray` has [L2_TO_L1_LOGS_MERKLE_TREE_LEAVES size](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L209), that means that there can be no more than L2_TO_L1_LOGS_MERKLE_TREE_LEAVES leaves to construct tree root.
+
+So `publishPubdataAndClearState` should change that `numberOfL2ToL1Logs <= L2_TO_L1_LOGS_MERKLE_TREE_LEAVES`, but currently it do check in another way: `numberOfL2ToL1Logs <= numberOfL2ToL1Logs`, which is incorrect.
+
+As i can see, there is no real impact here, as even if operator will provide more logs than `L2_TO_L1_LOGS_MERKLE_TREE_LEAVES` then whole batch will just revert.
+## Recommendation
+Use this check: `numberOfL2ToL1Logs <= L2_TO_L1_LOGS_MERKLE_TREE_LEAVES`
+
+## QA-05. Inconsistency in different l1->l2 messages
+## Description
+When user requests l1->l2 message, then he can call ContractDeployer in order to create new contract. Or he can do request without new contract creation.
+
+When tx will be executed by bootloader on l2, then in case if it is not creating new contract, then user's nonce will not be changed anyhow as there is no any communication with user's account. But when new contract will be created, then [user's nonce will be increased](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L168).
+
+As result in case if user didn't do any tx on l2 yet, then [his account is considered not active](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L102C33-L102C86). Then if he triggers usual tx from l1, then his account is still not active. But if he deploys contract, then his account becomes active, so hashcode and code size is shown for it.
+## Recommendation
+I am not sure if this is needed to be fixed, just wanted to show differences.
