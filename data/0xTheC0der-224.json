@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xTheC0der",
+  "risk": "2",
+  "title": "EIP-1559 transactions can be invoked from kernel space accounts due to missing assertion in bootloader",
+  "issueId": 224,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/224"
+}
