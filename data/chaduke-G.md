@@ -70,7 +70,7 @@ G4.  _commitBatchesWithSystemContractsUpgrade() requires the upgrade transaction
         s.l2SystemContractsUpgradeBatchNumber = _newBatchesData[0].batchNumber;
 +       _lastCommittedBatchData = _commitOneBatch(
 +                _lastCommittedBatchData,
-+                _newBatchesData[i],
++                _newBatchesData[0],
 +                _systemContractUpgradeTxHash
 +            );
 +           s.storedBatchHashes[_lastCommittedBatchData.batchNumber] =              _hashStoredBatchInfo(_lastCommittedBatchData);
