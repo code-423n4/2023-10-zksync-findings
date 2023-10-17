@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "chaduke",
+  "risk": "2",
+  "title": "L1WethBridge.deposit() calculates l2TxCalldata with msg.sender instead of AddressAliasHelper.applyL1ToL2Alias(msg.sender) when msg.sender is a smart contract.",
+  "issueId": 222,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/222"
+}
