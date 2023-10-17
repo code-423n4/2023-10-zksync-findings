@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "`proveL1ToL2TransactionStatus` trusts `bootloader` sender, allowing for fake logs.",
+  "issueId": 228,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/228"
+}
