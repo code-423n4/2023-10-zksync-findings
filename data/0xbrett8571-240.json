@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Insecure allowance management during deposits can unexpectedly lock user funds.",
+  "issueId": 240,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/240"
+}
