@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "System logs lack proper validation, enabling data manipulation by the sequencer.",
+  "issueId": 233,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/233"
+}
