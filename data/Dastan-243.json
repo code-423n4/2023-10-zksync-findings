@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Dastan",
+  "risk": "3",
+  "title": "Security Concerns with ERC20 Operations in the WETH9 Contract's Withdraw Function",
+  "issueId": 243,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/243"
+}
