@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "wangxx2026",
+  "risk": "2",
+  "title": "Test code unsafeOverrideBatch is not removed",
+  "issueId": 199,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/199"
+}
