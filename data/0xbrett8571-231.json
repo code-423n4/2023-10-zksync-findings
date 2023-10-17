@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Not updating the root hashes on rollback fundamentally undermines the integrity of the system by allowing illegitimate withdrawals.",
+  "issueId": 231,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/231"
+}
