@@ -1,5 +1,6 @@
 # GAS OPTIMIZATIONS
-																																																																																																																													##
+
+Check batch id thing as sivanesh told 																																																																																																																													##
 
 ## [G-] Structs can be packed into fewer storage slots	
 
