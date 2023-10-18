@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DanielArmstrong",
+  "risk": "2",
+  "title": "Wrong use of onlySelf modifier makes the Governance contract cannot update minDelay and securityCouncil.",
+  "issueId": 263,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/263"
+}
