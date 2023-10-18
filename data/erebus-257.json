@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "`L1ERC20Bridge` does not work with rebasing tokens",
+  "issueId": 257,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/257"
+}
