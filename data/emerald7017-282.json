@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "emerald7017",
+  "risk": "2",
+  "title": "`l2TransactionBaseCost` assumption could break if `REQUIRED_CONSTANT` value changes.",
+  "issueId": 282,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/282"
+}
