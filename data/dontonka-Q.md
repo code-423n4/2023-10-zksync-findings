@@ -29,7 +29,6 @@ index be77edc..5e34254 100644
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L3717
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L3727-L3731
 
-
 **[[2]]** 
 The require should be numberOfL2ToL1Logs <= `L2_TO_L1_LOGS_MERKLE_TREE_LEAVES`. 
 ```solidity
@@ -161,3 +160,14 @@ There is a typo in the comment, it should mention `The type id of EIP2930 transa
 		uint8 constant EIP_2930_TX_TYPE = 0x01;
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L19-L20
+
+
+**[[12]]** 
+Copy&paste error, it should mention `proved_batch`. This means this assert is missing from the current bootloader production binary, and would allow a malicious operator to simulate transaction `from` to be any system contract, which can lead to all sort of unexpected results.
+```solidity
+               <!-- @if BOOTLOADER_TYPE=='proved_block' -->
+               assertEq(gt(getFrom(innerTxDataOffset), MAX_SYSTEM_CONTRACT_ADDR()), 1, "from in kernel space")
+               <!-- @endif -->
+```
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L2903-L2905
