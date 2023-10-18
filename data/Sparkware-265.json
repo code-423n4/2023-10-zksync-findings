@@ -1,8 +1,0 @@
-{
-  "contest": 292,
-  "handle": "Sparkware",
-  "risk": "2",
-  "title": "FinalizeWithdraw on L1ERC20Bridge.sol does not reduce the deposit limit",
-  "issueId": 265,
-  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/265"
-}
