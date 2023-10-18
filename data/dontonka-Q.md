@@ -152,7 +152,12 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/con
 **[[10]]** 
 A bunch of contracts have been upgraded to compiler `^0.8.13` in this new upgrade of zkSync protocol, but almost half remains to previous version `^0.8.0` which is not ideal, `they should at least be aligned`.
 
-
-
-
-
+**[[11]]** 
+There is a typo in the comment, it should mention `The type id of EIP2930 transactions.` for `EIP_2930_TX_TYPE`.
+```solidity
+		/// @dev The type id of legacy transactions.
+		uint8 constant LEGACY_TX_TYPE = 0x0;
+		/// @dev The type id of legacy transactions.
+		uint8 constant EIP_2930_TX_TYPE = 0x01;
+```
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L19-L20
