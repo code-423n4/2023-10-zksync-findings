@@ -149,6 +149,10 @@ The constant `MAX_MSG_VALUE` is now unused, please remove.
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Constants.sol#L72-L73
 
 
+**[[10]]** 
+A bunch of contracts have been upgraded to compiler `^0.8.13` in this new upgrade of zkSync protocol, but almost half remains to previous version `^0.8.0` which is not ideal, `they should at least be aligned`.
+
+
 
 
 
