@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "foxb868",
+  "risk": "2",
+  "title": "Denial of service by depositing refunds to victims, causing fund lock.",
+  "issueId": 297,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/297"
+}
