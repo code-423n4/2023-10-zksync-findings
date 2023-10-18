@@ -26,6 +26,8 @@ index be77edc..5e34254 100644
 
                  let txDataOffset := mload(add(txPtr, 32))
 ```
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L3717
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L3727-L3731
 
 
 **[[2]]** 
