@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "Governance logic may enter a deadlock and become useless forever",
+  "issueId": 260,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/260"
+}
