@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "Using legacy deposits in any of the two bridges or calling `requestL2Transaction` in `Mailbox` with `_refundRecipient == address(0)` may lead to losing the gas refund or the whole bridged ETH if the caller is a contract/multisig",
+  "issueId": 261,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/261"
+}
