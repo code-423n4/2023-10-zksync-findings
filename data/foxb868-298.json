@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "foxb868",
+  "risk": "2",
+  "title": "Logic issue allows double refunds in deposit refund functionality.",
+  "issueId": 298,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/298"
+}
