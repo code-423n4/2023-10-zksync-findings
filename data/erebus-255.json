@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "Operator can steal all gas provided by ANY user for L1 → L2 transactions",
+  "issueId": 255,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/255"
+}
