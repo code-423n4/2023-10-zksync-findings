@@ -1,10 +1,31 @@
 ##
 
-## [L-] Return values of assembly call function not checked 
+## [L-] ``block.timestamp >= _proposedUpgrade.upgradeTimestamp`` in this check malicious miners can manipulate ``block timestamp`` to trigger ``unauthorized upgrades``
 
-## Initializers could be front run 
+### Impact
+It is not safe to base upgrades on block timestamp because it can be manipulated by miners. A malicious miner could mine a block with a future timestamp and then upgrade the contract to their advantage.
 
-## Assembly call return value not checked 
+The ``upgrade()`` function checks if the current block timestamp is greater than or equal to the proposed upgrade timestamp. If it is, then the upgrade is allowed to proceed. However, a malicious miner could mine a block with a future timestamp and then call the ``upgrade()`` function before the upgrade timestamp has actually been reached. This would allow them to upgrade the contract to their advantage.
+
+### POC
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
+
+ /// @notice The main function that will be provided by the upgrade proxy
+    function upgrade(ProposedUpgrade calldata _proposedUpgrade) public virtual returns (bytes32) {
+        // Note that due to commitment delay, the timestamp of the L2 upgrade batch may be earlier than the timestamp
+        // of the L1 block at which the upgrade occured. This means that using timestamp as a signifier of "upgraded"
+        // on the L2 side would be inaccurate. The effects of this "back-dating" of L2 upgrade batches will be reduced
+        // as the permitted delay window is reduced in the future.
+        require(block.timestamp >= _proposedUpgrade.upgradeTimestamp, "Upgrade is not ready yet");
+    }
+
+```
+
+### Recommended Mitigation
+ - Use a decentralized oracle to verify the current time
+ - Use a timelock. A timelock is a period of time that must pass before an upgrade can be triggered. This gives users time to react to any malicious upgrades that are proposed 
+
 
 ## [L-]  ``require(_l2ToL1message.length == 76, "kk")`` Attackers Can Bypass L2 to L1 Message Validation Checks
 
@@ -91,51 +112,65 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 ### Recommended Mitigation
 Add the ``address(0)`` and amount > 0 check 
 
-FALSE	Array lengths not checked	
-If the length of the arrays are not required to be of the same length, user operations may not be fully executed due to a mismatch in the number of items iterated over, versus the number of items provided in the second array	310           address[] calldata users, 311           uint256[] calldata maxBorrowParts,
+##
 
-FALSE	Draft imports may break in new minor versions	While OpenZeppelin draft contracts are safe to use and have been audited, their 'draft' status means that the EIPs they're based on are not finalized, and thus there may be breaking changes in even [minor releases](https://docs.openzeppelin.com/contracts/3.x/api/drafts). If a bug is found in this version of OpenZeppelin, and the version that you're forced to upgrade to has breaking changes in the new version, you'll encounter unnecessary delays in porting and testing replacement contracts. Ensure that you have extensive test coverage of this area so that differences can be automatically detected, and have a plan in place for how you would fully test a new version of these contracts if they do indeed change unexpectedly. Consider creating a forked version of the file rather than importing it from the package, and manually patch your fork as changes are made.	5:    import {IERC20Permit} from "@openzeppelin/contracts/token/ERC20/extensions/draft-ERC20Permit.sol";																							
-																										
-FALSE	Functions calling contracts/addresses with transfer hooks are missing reentrancy guards	
+## [L-] Use expiry pattern in Verify signature processes
 
-Even if the function follows the best practice of check-effects-interaction, not using a reentrancy guard when there may be transfer hooks will open the users of this protocol up to [read-only reentrancies](https://chainsecurity.com/curve-lp-oracle-manipulation-post-mortem/) with no way to protect against it, except by block-listing the whole protocol.	/// @audit `extractUnderlying()` 148:             IERC20(erc20).safeTransfer(msg.sender, _amount);																							
-																										
-																							
-																										
-FALSE	Signature use at deadlines should be allowed	
+Including this check helps prevent replay attacks and ensures that the signature is only valid for a limited time period, making your function more secure.
 
-According to [EIP-2612](https://github.com/ethereum/EIPs/blob/71dc97318013bf2ac572ab63fab530ac9ef419ca/EIPS/eip-2612.md?plain=1#L58), signatures used on exactly the deadline timestamp are supposed to be allowed. While the signature may or may not be used for the exact EIP-2612 use case (transfer approvals), for consistency's sake, all deadlines should follow this semantic. If the timestamp is an expiration rather than a deadline, consider whether it makes more sense to include the expiration timestamp as a valid timestamp, as is done for deadlines.	159:         if (participant.expiry < block.timestamp) { ,  require(aoTapOption.expiry > block.timestamp, "adb: Option expired");																							
-																										
+### POC
+```solidity
+FILE: 2023-10-zksync/code/system-contracts/contracts/DefaultAccount.sol
+
+102: if (_isValidSignature(txHash, _transaction.signature)) {
+
+161: function _isValidSignature(bytes32 _hash, bytes memory _signature) internal view returns (bool) {
+        require(_signature.length == 65, "Signature length is incorrect");
+        uint8 v;
+        bytes32 r;
+        bytes32 s;
+        // Signature loading code
+        // we jump 32 (0x20) as the first slot of bytes contains the length
+        // we jump 65 (0x41) per signature
+        // for v we load 32 bytes ending with v (the first 31 come from s) then apply a mask
+        assembly {
+            r := mload(add(_signature, 0x20))
+            s := mload(add(_signature, 0x40))
+            v := and(mload(add(_signature, 0x41)), 0xff)
+        }
+        require(v == 27 || v == 28, "v is neither 27 nor 28");
+
+        // EIP-2 still allows signature malleability for ecrecover(). Remove this possibility and make the signature
+        // unique. Appendix F in the Ethereum Yellow paper (https://ethereum.github.io/yellowpaper/paper.pdf), defines
+        // the valid range for s in (301): 0 < s < secp256k1n ÷ 2 + 1, and for v in (302): v ∈ {27, 28}. Most
+        // signatures from current libraries generate a unique signature with an s-value in the lower half order.
+        //
+        // If your library generates malleable signatures, such as s-values in the upper range, calculate a new s-value
+        // with 0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141 - s1 and flip v from 27 to 28 or
+        // vice versa. If your library also generates signatures with 0/1 for v instead 27/28, add 27 to v to accept
+        // these malleable signatures as well.
+        require(uint256(s) <= 0x7FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF5D576E7357A4501DDFE92F46681B20A0, "Invalid s");
+
+        address recoveredAddress = ecrecover(_hash, v, r, s);
+
+        return recoveredAddress == address(this) && recoveredAddress != address(0);
+    }
+
+```
+
+### Recommended Mitigation
+Consider add expiry time for ``_isValidSignature() ``
+
+																																																																						
 																						
+																										FALSE	Missing checks for ecrecover() signature malleability	ecrecover() accepts as valid, two versions of signatures, meaning an attacker can use the same signature twice, or an attacker may be able to front-run the original signer with the altered version of the signature, causing the signer's transaction to revert due to nonce reuse. Consider adding checks for signature malleability, or using OpenZeppelin's ECDSA library to perform the extra checks necessary in order to prevent malleability.	206:             if (signer == ecrecover(digest, v, r, s)) {																							
 																										
-FALSE	decimals() is not a part of the ERC-20 standard	The decimals() function is not a part of the [ERC-20 standard](https://eips.ethereum.org/EIPS/eip-20), and was added later as an [optional extension](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/token/ERC20/extensions/IERC20Metadata.sol). As such, some valid ERC20 tokens do not support this interface, so it is unsafe to blindly cast all tokens to this interface, and then call this function.	_paymentToken.decimals() , _paymentToken.decimals()																							
-																										
-																						
-																										
-FALSE	Open TODOs	Code architecture, incentives, and error handling/reporting questions/issues should be resolved before deployment	//    (TODO: Word better?) ,// TODO: Make whole function unchecked																							
-																										
-FALSE	Calls to _get() will revert when totalSupply() returns zero	totalSupply() being zero will result in a division by zero, causing the transaction to fail. The function should instead special-case this scenario, and avoid reverting.	uint256 lpPrice = (SG_POOL.totalLiquidity() * 51:              uint256(UNDERLYING.latestAnswer())) / SG_POOL.totalSupply();																							
-																										
-FALSE	latestAnswer() is deprecated	Use latestRoundData() instead so that you can tell whether the answer is stale or not. The latestAnswer() function returns zero if it is unable to fetch data, which may be the case if ChainLink stops supporting this API. The API and its deprecation message no longer even appear on the ChainLink website, so it is dangerous to continue using it.	uint256 _btcPrice = uint256(BTC_FEED.latestAnswer()) * 1e10;
-
-FALSE	Missing checks for ecrecover() signature malleability	ecrecover() accepts as valid, two versions of signatures, meaning an attacker can use the same signature twice, or an attacker may be able to front-run the original signer with the altered version of the signature, causing the signer's transaction to revert due to nonce reuse. Consider adding checks for signature malleability, or using OpenZeppelin's ECDSA library to perform the extra checks necessary in order to prevent malleability.	206:             if (signer == ecrecover(digest, v, r, s)) {																							
-																										
-FALSE	Code does not follow the best practice of check-effects-interaction	Code should follow the best-practice of [check-effects-interaction](https://blockchain-academy.hs-mittweida.de/courses/solidity-coding-beginners-to-intermediate/lessons/solidity-11-coding-patterns/topic/checks-effects-interactions/), where state variables are updated before any external calls are made. Doing so prevents a large class of reentrancy bugs.
-
-FALSE	addStrategyToken() does note remove old entries before adding new ones																									
-																										
-FALSE	name() is not a part of the ERC-20 standard																									
-																										
-FALSE	symbol() is not a part of the ERC-20 standard																									
-																										
-FALSE	SafeTransferLib does not ensure that the token contract exists																									
-																										
-FALSE	Tokens may be minted to address(0x0)
+																																																																																											FALSE	Tokens may be minted to address(0x0)
 
 
 FALSE	Consider disabling renounceOwnership()	If the plan for your project does not include eventually giving up all ownership control, consider overwriting OpenZeppelin's Ownable's renounceOwnership() function in order to disable it.	abstract contract Market is MarketERC20, BoringOwnable { , 	
 
-FALSE	Use OpenZeppelin's or Solady's Ownable, rather than re-inventing the wheel	Both implementations have been optimized and are usage-hardened, so writing your own is unnecessary	4:   import "@boringcrypto/boring-solidity/contracts/BoringOwnable.sol";																							
+																						
 																										
 FALSE	Array is push()ed but not pop()ed	Array entries are added but are never removed. Consider whether this should be the case, or whether there should be a maximum, or whether old entries should be removed. Cases where there are specific potential problems will be flagged separately under a different issue.	329:         singularityMasterContracts.push(mc); , 351:         bigbangMasterContracts.push(mc);																							
 
@@ -144,7 +179,8 @@ FALSE	Mixed usage of int/uint with int256/uint256	int256/uint256 are the preferr
 FALSE	Unsafe conversion from unsigned to signed values	Solidity follows [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement) rules for its integers, meaning that the most significant bit for signed integers is used to denote the sign, and converting between the two requires inverting all of the bits and adding one. Because of this, casting an unsigned integer to a signed one may result in a change of the sign and or magnitude of the value. For example, int8(type(uint8).max) is not equal to type(int8).max, but is equal to -1. type(uint8).max in binary is 11111111, which if cast to a signed value, means the first binary 1 indicates a negative value, and the binary 1s, invert to all zeroes, and when one is added, it becomes one, but negative, and therefore the decimal value of binary 11111111 is -1.	456:          int256 diff = int256(minLiquidatorReward) - int256(maxLiquidatorReward); , 459:              int256(maxLiquidatorReward);																																													
 
 
-FALSE	Return values of approve() not checked	Not all IERC20 implementations revert() when there's a failure in approve(). The function signature has a boolean return value and they indicate errors that way instead. By not checking the return value, operations that should have marked as failed, may potentially go through without actually approving anything	217:          IERC20(swapData.tokenOut).approve(externalData.tOft, amountOut); , 215:          IERC20(erc20).approve(externalData.swapper, amount);	
+FALSE	Return values of approve() not checked	
+Not all IERC20 implementations revert() when there's a failure in approve(). The function signature has a boolean return value and they indicate errors that way instead. By not checking the return value, operations that should have marked as failed, may potentially go through without actually approving anything	217:          IERC20(swapData.tokenOut).approve(externalData.tOft, amountOut); , 215:          IERC20(erc20).approve(externalData.swapper, amount);	
 
 FALSE	Cast is more restrictive than the type of the variable being assigned	If address foo is being used in an expression such as IERC20 token = FooToken(foo), then the more specific cast to FooToken is a waste because the only thing the compiler will check for is that FooToken extends IERC20 - it won't check any of the function signatures. Therefore, it makes more sense to do IERC20 token = IERC20(token) or better yet FooToken token = FooToken(foo). The former may allow the file in which it's used to remove the import for FooToken	108                   emptyStrategies[address(tapToken_)], , 566:                  clonesOfLength = clonesOfCount(mcLocation);	
 
