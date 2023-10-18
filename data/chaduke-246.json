@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "Mailbox.requestL2Transaction() checks the deposit limit of msg.sender (L1WethBridge) instead of the real depositor of weth from L1, as a result, after certain time, nobody will be able to deposit weth anymore from L1. ",
+  "issueId": 246,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/246"
+}
