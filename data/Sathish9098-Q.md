@@ -1,5 +1,7 @@
 ##
 
+	Add salt to protect from _hashDomain replay attacks
+
 ## [L-] ``block.timestamp >= _proposedUpgrade.upgradeTimestamp`` in this check malicious miners can manipulate ``block timestamp`` to trigger ``unauthorized upgrades``
 
 ### Impact
