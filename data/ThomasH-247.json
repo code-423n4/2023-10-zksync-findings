@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ThomasH",
+  "risk": "2",
+  "title": "[M-03] No Validation of _l2Receiver on L2ERC20Bridge.sol",
+  "issueId": 247,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/247"
+}
