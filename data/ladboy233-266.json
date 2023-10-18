@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "User transaction fee in the form of native ETH is not properly validated in mailbox",
+  "issueId": 266,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/266"
+}
