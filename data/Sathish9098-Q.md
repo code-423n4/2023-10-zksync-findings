@@ -1,5 +1,11 @@
 ##
 
+## [L-] Return values of assembly call function not checked 
+
+## Initializers could be front run 
+
+## Assembly call return value not checked 
+
 ## [L-]  ``require(_l2ToL1message.length == 76, "kk")`` Attackers Can Bypass L2 to L1 Message Validation Checks
 
 ### Impact
