@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "L1ERC20Bridge.sol#deposit always waste gas and call ERC20 token name, decimal and symbol when generating payload ",
+  "issueId": 274,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/274"
+}
