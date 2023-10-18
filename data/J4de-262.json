@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "J4de",
+  "risk": "2",
+  "title": "`Governance.updateSecurityCouncil` can be exploited to escalate privileges from `owner` to `SecurityCouncil`",
+  "issueId": 262,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/262"
+}
