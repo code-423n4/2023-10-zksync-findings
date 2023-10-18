@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "saneryee",
+  "risk": "3",
+  "title": "Lack of Zero Address Check for `_initalizeData.allowlist` in `DiamondInit.sol` Contract",
+  "issueId": 251,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/251"
+}
