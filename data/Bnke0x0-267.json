@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Bnke0x0",
+  "risk": "2",
+  "title": "Lack of __gap Variable",
+  "issueId": 267,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/267"
+}
