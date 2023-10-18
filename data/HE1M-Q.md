@@ -60,3 +60,21 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 Unused variable `logIdInMerkleTree` better to be deleted:
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L112
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L88C9-L88C27
+
+### Q12
+
+When requesting an L2 transaction, if `msg.sender != tx.origin`, then `sender = aliased(msg.sender)`. 
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L249
+
+If `_refundRecipient == address(0)`, then `_refundRecipient == sender`.
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L310
+
+In this case, it is **not necessary** to recheck that `_refundRecipient` (which is equal to `sender`) is a contract or not because it is highly improbable that `sender` is a contract since it has already been aliased (its probability is on the order of having a hash collision).
+
+It's better to revise the code as follows:
+
+```solidity
+if (refundRecipient != sender && refundRecipient.code.length > 0) {
+    refundRecipient = AddressAliasHelper.applyL1ToL2Alias(refundRecipient);
+}
+```
