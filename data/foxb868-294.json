@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "foxb868",
+  "risk": "2",
+  "title": "No check on L2 request outcome; event misleading if failure.",
+  "issueId": 294,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/294"
+}
