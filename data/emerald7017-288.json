@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "emerald7017",
+  "risk": "2",
+  "title": "Failure to verify `previousBatchHash` could create a false commit history",
+  "issueId": 288,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/288"
+}
