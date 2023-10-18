@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Daniel526",
+  "risk": "2",
+  "title": "Lack of Enforcement for Preventing Duplicate Deployments to the Same Address",
+  "issueId": 253,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/253"
+}
