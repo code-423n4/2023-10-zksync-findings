@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "debo",
+  "risk": "2",
+  "title": "[M-14]  The arithmetic operator can underflow in the L2EthToken contract",
+  "issueId": 306,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/306"
+}
