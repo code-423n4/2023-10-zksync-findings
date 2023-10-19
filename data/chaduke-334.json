@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "chaduke",
+  "risk": "2",
+  "title": "L1ERC20Bridge.deposit() fails to ensure that _l1Token != l1Weth, as a result, a user can use L1ERC20Bridge.deposit() along to deposit more WETH than allowed limit.",
+  "issueId": 334,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/334"
+}
