@@ -163,7 +163,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/con
 
 
 **[[12]]** 
-Copy&Paste error, it should mention `proved_batch`. This means this assert is missing from the current bootloader production binary, and would allow a malicious operator to simulate transaction `from` to be any system contract, which can lead to all sort of unexpected results. As stated in the [documentation](https://github.com/code-423n4/2023-10-zksync/blob/main/docs/Smart%20contract%20Section/System%20contracts%20bootloader%20description.md#transaction-types--their-validation) `upgrade transaction` (254) "This is the only type of transaction allowed to start a transaction out of the name of the contracts in kernel space."
+Renaming error, it should mention `proved_batch`. This means this assert is missing from the current bootloader production binary, and would allow a malicious operator to simulate transaction `from` to be any system contract, which can lead to all sort of unexpected results. As stated in the [documentation](https://github.com/code-423n4/2023-10-zksync/blob/main/docs/Smart%20contract%20Section/System%20contracts%20bootloader%20description.md#transaction-types--their-validation) `upgrade transaction` (254) "This is the only type of transaction allowed to start a transaction out of the name of the contracts in kernel space."
 ```solidity
                <!-- @if BOOTLOADER_TYPE=='proved_block' -->
                assertEq(gt(getFrom(innerTxDataOffset), MAX_SYSTEM_CONTRACT_ADDR()), 1, "from in kernel space")
