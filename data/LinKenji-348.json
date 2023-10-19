@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "LinKenji",
+  "risk": "2",
+  "title": "Fixed 40 gas/round deviates from step-dependent Yellow Paper specification.",
+  "issueId": 348,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/348"
+}
