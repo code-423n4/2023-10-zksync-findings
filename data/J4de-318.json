@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "J4de",
+  "risk": "3",
+  "title": "`L1ERC20Bridge.finalizeWithdrawal` function does not update deposit limit",
+  "issueId": 318,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/318"
+}
