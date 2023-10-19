@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "wangxx2026",
+  "risk": "3",
+  "title": "Nonce overflow will cause the account to become unavailable",
+  "issueId": 315,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/315"
+}
