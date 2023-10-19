@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "chaduke",
+  "risk": "2",
+  "title": "DOS attack to Mailbox.requestL2Transaction() is possible.",
+  "issueId": 329,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/329"
+}
