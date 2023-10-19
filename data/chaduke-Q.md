@@ -125,3 +125,5 @@ Meanwhile, Mailbox.requestL2Transaction() will call _verifyDepositLimit(msg.send
 In summary, there is no code to check the deposit limit for WETH/ETH when calling L1ERC20Bridge.deposit(). As a result, a user might call L1ERC20Bridge.deposit() and bypass the check and thus deposit more ETH than they are allowed. 
 
 
+
+
