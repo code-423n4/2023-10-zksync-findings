@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "LinKenji",
+  "risk": "2",
+  "title": "Lacks emergency pause functionality, posing risk during critical vulnerabilities or exploits.",
+  "issueId": 341,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/341"
+}
