@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "debo",
+  "risk": "2",
+  "title": "[M-15] Multiple calls are executed in the same transaction within the NonceHolder contract",
+  "issueId": 326,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/326"
+}
