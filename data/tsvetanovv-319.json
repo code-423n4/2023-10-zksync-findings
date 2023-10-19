@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "tsvetanovv",
+  "risk": "2",
+  "title": "In `L1ERC20Bridge.sol` it is possible that the `totalDepositedAmountPerUser` mapping is not correct and therefore a user cannot use the `deposit()` function",
+  "issueId": 319,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/319"
+}
