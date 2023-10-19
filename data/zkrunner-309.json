@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zkrunner",
+  "risk": "2",
+  "title": "Operators May Drain All User Gas Without Providing Tx Execution",
+  "issueId": 309,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/309"
+}
