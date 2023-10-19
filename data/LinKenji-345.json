@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "LinKenji",
+  "risk": "2",
+  "title": "Immediate verifier change disrupts pending batches, causing failed verification.",
+  "issueId": 345,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/345"
+}
