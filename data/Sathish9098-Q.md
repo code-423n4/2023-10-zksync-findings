@@ -329,6 +329,56 @@ FILE: 2023-10-zksync/code/system-contracts/contracts/DefaultAccount.sol
 ### Recommended Mitigation
 Consider add expiry time for ``_isValidSignature() ``
 
+##
+
+## [L-] _verifyDepositLimit() function name conflict with implementations 
+
+The function name ``_verifyDepositLimit()`` does indeed suggest that the function only performs verification, but the implementation also updates the user deposit amount.
+
+This is a potential source of confusion, and it is generally a good practice to avoid using function names that are misleading or inaccurate.
+
+### POC
+
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
+
+/// @dev Verify the deposit limit is reached to its cap or not
+    function _verifyDepositLimit(address _l1Token, address _depositor, uint256 _amount, bool _claiming) internal {
+        IAllowList.Deposit memory limitData = IAllowList(allowList).getTokenDepositLimitData(_l1Token);
+        if (!limitData.depositLimitation) return; // no deposit limitation is placed for this token
+
+        if (_claiming) {
+            totalDepositedAmountPerUser[_l1Token][_depositor] -= _amount;
+        } else {
+            require(totalDepositedAmountPerUser[_l1Token][_depositor] + _amount <= limitData.depositCap, "d1");
+            totalDepositedAmountPerUser[_l1Token][_depositor] += _amount;
+        }
+    }
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L339-L350
+
+### Recommended Mitigation
+
+Add more descriptive and accurate function name
+
+```diff
+
+/// @dev Verify the deposit limit is reached to its cap or not
+-     function _verifyDepositLimit(address _l1Token, address _depositor, uint256 _amount, bool _claiming) internal {
++     function _verifyAndUpdateUserDepositLimit(address _l1Token, address _depositor, uint256 _amount, bool _claiming) internal {
+        IAllowList.Deposit memory limitData = IAllowList(allowList).getTokenDepositLimitData(_l1Token);
+        if (!limitData.depositLimitation) return; // no deposit limitation is placed for this token
+
+        if (_claiming) {
+            totalDepositedAmountPerUser[_l1Token][_depositor] -= _amount;
+        } else {
+            require(totalDepositedAmountPerUser[_l1Token][_depositor] + _amount <= limitData.depositCap, "d1");
+            totalDepositedAmountPerUser[_l1Token][_depositor] += _amount;
+        }
+    }
+
+```
 																																																																						
 																						
 																										FALSE	Missing checks for ecrecover() signature malleability	ecrecover() accepts as valid, two versions of signatures, meaning an attacker can use the same signature twice, or an attacker may be able to front-run the original signer with the altered version of the signature, causing the signer's transaction to revert due to nonce reuse. Consider adding checks for signature malleability, or using OpenZeppelin's ECDSA library to perform the extra checks necessary in order to prevent malleability.	206:             if (signer == ecrecover(digest, v, r, s)) {																							
