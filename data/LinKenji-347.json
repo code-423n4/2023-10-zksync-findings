@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "LinKenji",
+  "risk": "3",
+  "title": "Shifted uint32 values can overflow, leading to incorrect precompile parameters.",
+  "issueId": 347,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/347"
+}
