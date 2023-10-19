@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "tsvetanovv",
+  "risk": "2",
+  "title": "In `L2EthToken` it is possible for a malicious user to inflate `totalSupply` and block the `mint()` function",
+  "issueId": 321,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/321"
+}
