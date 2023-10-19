@@ -71,6 +71,32 @@ Consider adding time limits or change acceptable patterns
 
 ##
 
+## [L-] _parseL2WithdrawalMessage(_message) function may reverts some cases instead of returning values 
+
+The _parseL2WithdrawalMessage(_message) function may revert in some cases instead of returning values.
+
+Some of the cases where the _parseL2WithdrawalMessage(_message) function may revert
+
+  - The _message input is not long enough.
+  - The function signature in the _message input does not match the expected value.
+  - The l1 receiver address in the _message input is not valid.
+  - The _message input is malformed or contains invalid data.
+
+### POC
+
+```solidity
+FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
+
+207: (address _l1WithdrawReceiver, uint256 _amount) = _parseL2WithdrawalMessage(_message);
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L207
+
+
+
+
+##
+
 ## [L-] Compromised Governor and Admin Keys Can Lead to Unrecoverable Protocol Damage
 
 ### Impact
