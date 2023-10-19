@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "LinKenji",
+  "risk": "2",
+  "title": "Unused gas fees are not refunded, causing overpayment for computations.",
+  "issueId": 349,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/349"
+}
