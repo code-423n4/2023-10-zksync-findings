@@ -1,6 +1,8 @@
 # GAS OPTIMIZATIONS
 
-Check batch id thing as sivanesh told 																																																																																																																													##
+In structs can be used structs for saving gas for same type variables 
+
+																																																																																																																												##
 
 ## [G-] Structs can be packed into fewer storage slots	
 
@@ -161,14 +163,6 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/interfaces/IMailbo
     }
 
 ```
-##
-## [G-] Using calldata instead of memory for read-only arguments in external functions saves gas
-
-When a function with a memory array is called externally, the abi.decode() step has to copy read each index of the calldata to memory. Each copy costs at least 60 gas (i.e. 60 * <mem_array>.length). Using calldata directly, obviates the need for copies of words of the struct/array not being read. Note that even if an interface defines a function as having memory arguments, it's still valid for implementation contracts to use calldata arguments instead.
-
-If the array is passed to an internal function which passes the array to another internal function where the array is modified and therefore memory is used in the external call, it's still more gass-efficient to use calldata when the external function uses modifiers, since the modifiers may prevent the internal functions from being called. Structs have the same overhead as an array of length one
-
-Note that I've also flagged instances where the function is public but can be marked as external since it's not called by the contract, and cases where a constructor is involved.
 
 ##
 
@@ -176,27 +170,80 @@ Note that I've also flagged instances where the function is public but can be ma
 
 Saves a storage slot for the mapping. Depending on the circumstances and sizes of types, can avoid a Gsset (20000 gas) per mapping combined. Reads and subsequent writes can also be cheaper when a function requires both values and they both fit in the same storage slot. Finally, if both fields are accessed in the same function, can save ~42 gas per access due to not having to recalculate the key's keccak256 hash (Gkeccak256 - 30 gas) and that calculation's associated stack operations.
 
+```solidity
+FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
+
+ /// @dev Stored hashed StoredBatch for batch number
+99:  mapping(uint256 => bytes32) storedBatchHashes;
+100:    /// @dev Stored root hashes of L2 -> L1 logs
+101: mapping(uint256 => bytes32) l2LogsRootHashes;
 
 
+87:  mapping(address => bool) validators;
+133: mapping(address => uint256) totalDepositedAmountPerUser;
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L99-L101
+
+##
+																																												## [G-] State variables should be cached in stack variables rather than re-reading them from storage	
+
+The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
+
+### ``totalDepositedAmountPerUser[_l1Token][_depositor]`` should be cached : Saves ``100 GAS`` , ``1 SLOD``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L346-L348
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
+
+346: } else {
++    uint256 totalDepositedAmountPerUserL1TokenDepositor = totalDepositedAmountPerUser[_l1Token][_depositor] ;
+- 347:            require(totalDepositedAmountPerUser[_l1Token][_depositor] + _amount <= limitData.depositCap, "d1");
++ 347:            require(totalDepositedAmountPerUserL1TokenDepositor + _amount <= limitData.depositCap, "d1");
+- 348:            totalDepositedAmountPerUser[_l1Token][_depositor] += _amount;
++ 348:            totalDepositedAmountPerUser[_l1Token][_depositor] = totalDepositedAmountPerUserL1TokenDepositor + _amount;
+349:        }
 
 
-																																												## [G-] State variables should be cached in stack variables rather than re-reading them from storage	The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
+```
+
+##
+
+## [G-] Combine events to save Glogtopic (375 gas)
+
+We can combine the events into one singular event to save two Glogtopic (375 gas) that would otherwise be paid for the additional events.
+
+### 
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets
+/Admin.sol
+
+- 37: emit NewPendingGovernor(pendingGovernor, address(0));
+- 38: emit NewGovernor(previousGovernor, pendingGovernor);
+
++ PendingAndNewGovernor(pendingGovernor, address(0),previousGovernor,pendingGovernor);
+
+
+- 61: emit NewPendingAdmin(pendingAdmin, address(0));
+- 62: emit NewAdmin(previousAdmin, pendingAdmin);
+
++ PendingAndNewAdmin(pendingAdmin, address(0),previousAdmin,pendingAdmin);
+
+```
+
 
 ##
 
 ## [G-] The result of function calls should be cached rather than re-calling the function	
 
-The instances below point to the second+ call of the function within a single function																								
-																										
-																										
-			/// @audit market.oracle() on line 918																							
-			930:          (, info.oracleExchangeRate) = IOracle(market.oracle()).peek(																							
-			/// @audit market.oracleData() on line 919																							
-			931:              market.oracleData()																							
-			/// @audit market.oracle() on line 918																							
-			933:          info.spotExchangeRate = IOracle(market.oracle()).peekSpot(																							
-			/// @audit market.oracleData() on line 919																							
-			934:              market.oracleData()																							
+The instances below point to the second+ call of the function within a single function
+
+																								
+
+																																																																							
 									
 
 ##
@@ -254,12 +301,118 @@ index 0b1fbdc..2f3cf9e 100644
 
 ```
 
-
 ##
 
-## [G-] Remove or replace unused state variables
+## [G-] Place ``require() and ``if()`` checks in top of the functions to avoid unnecessary gas 
 
-Saves a storage slot. If the variable is assigned a non-zero value, saves Gsset (20000 gas). If it's assigned a zero value, saves Gsreset (2900 gas). If the variable remains unassigned, there is no gas savings unless the variable is public, in which case the compiler-generated non-payable getter deployment cost is saved. If the state variable is overriding an interface's public function, mark the variable as constant or immutable so that it does not use a storage slot.
+> FAIL CHEEPLY INSTEAD OF COSTLY
+
+Checks that involve constants should come before checks that involve state variables, function calls, and calculations. By doing these checks first, the function is able to revert before wasting a Gcoldsload (2100 gas*) in a function that may ultimately revert in the unhappy case.
+
+### First check the ``amount`` then call ``zkSync.proveL1ToL2TransactionStatus()`` costly external call : Saves ``2100 GAS``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L255-L275
+
+Can save gas by first checking the ``amount`` before calling the ``zkSync.proveL1ToL2TransactionStatus()`` function. This is because the ``zkSync.proveL1ToL2TransactionStatus()`` function is a costly external call, and it is only necessary to make the call if the ``amount`` is greater than zero.
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
+
+ function claimFailedDeposit(
+        address _depositSender,
+        address _l1Token,
+        bytes32 _l2TxHash,
+        uint256 _l2BatchNumber,
+        uint256 _l2MessageIndex,
+        uint16 _l2TxNumberInBatch,
+        bytes32[] calldata _merkleProof
+    ) external nonReentrant senderCanCallFunction(allowList) {
+
++        uint256 amount = depositAmount[_depositSender][_l1Token][_l2TxHash];
++        require(amount > 0, "y1");
+
+        bool proofValid = zkSync.proveL1ToL2TransactionStatus(
+            _l2TxHash,
+            _l2BatchNumber,
+            _l2MessageIndex,
+            _l2TxNumberInBatch,
+           _merkleProof,
+            TxStatus.Failure
+       );
+        require(proofValid, "yn");
+
+-        uint256 amount = depositAmount[_depositSender][_l1Token][_l2TxHash];
+-        require(amount > 0, "y1");
+
+
+```
+
+### Caching ``diamondStorage`` before ``msg.data.length >= 4 || msg.data.length == 0`` check wastes the gas if any reverts in require check : Saves ``2100 GAS``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L20-L25 
+
+```diff
+FILE : 2023-10-zksync/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
+
+  fallback() external payable {
++        require(msg.data.length >= 4 || msg.data.length == 0, "Ut");
+        Diamond.DiamondStorage storage diamondStorage = Diamond.getDiamondStorage();
+        // Check whether the data contains a "full" selector or it is empty.
+        // Required because Diamond proxy finds a facet by function signature,
+        // which is not defined for data length in range [1, 3].
+-        require(msg.data.length >= 4 || msg.data.length == 0, "Ut");
+
+```
+
+### ``_newBatchesData.length > 0`` parameter should be checked before ``s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData)`` before state variable with function calling . Saves ``500 GAS``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
++ 185:        require(_newBatchesData.length > 0, "No batches to commit");
+183: // Check that we commit batches after last committed batch
+184:        require(s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData), "i"); // incorrect previous batch data
+- 185:        require(_newBatchesData.length > 0, "No batches to commit");
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
+
+### Check ``_l2GasPerPubdataByteLimit``  parameter before any other operations : Saves ``200 GAS``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L257
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
+
+ function requestL2Transaction(
+        address _contractL2,
+        uint256 _l2Value,
+        bytes calldata _calldata,
+        uint256 _l2GasLimit,
+        uint256 _l2GasPerPubdataByteLimit,
+        bytes[] calldata _factoryDeps,
+        address _refundRecipient
+    ) external payable nonReentrant senderCanCallFunction(s.allowList) returns (bytes32 canonicalTxHash) {
+        // Change the sender address if it is a smart contract to prevent address collision between L1 and L2.
++        require(_l2GasPerPubdataByteLimit == REQUIRED_L2_GAS_PRICE_PER_PUBDATA, "qp");
+        // Please note, currently zkSync address derivation is different from Ethereum one, but it may be changed in the future.
+        address sender = msg.sender;
+        if (sender != tx.origin) {
+            sender = AddressAliasHelper.applyL1ToL2Alias(msg.sender);
+        }
+
+        // Enforcing that `_l2GasPerPubdataByteLimit` equals to a certain constant number. This is needed
+        // to ensure that users do not get used to using "exotic" numbers for _l2GasPerPubdataByteLimit, e.g. 1-2, etc.
+        // VERY IMPORTANT: nobody should rely on this constant to be fixed and every contract should give their users the ability to provide the
+        // ability to provide `_l2GasPerPubdataByteLimit` for each independent transaction.
+        // CHANGING THIS CONSTANT SHOULD BE A CLIENT-SIDE CHANGE.
+-        require(_l2GasPerPubdataByteLimit == REQUIRED_L2_GAS_PRICE_PER_PUBDATA, "qp");
+
+```
 
 
 
@@ -355,20 +508,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
 
 ```
 
-### ``_newBatchesData.length > 0`` parameter should be checked before ``s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData)`` before state variable with function calling . Saves ``500 GAS``
 
-https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
-
-```diff
-FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
-
-+ 185:        require(_newBatchesData.length > 0, "No batches to commit");
-183: // Check that we commit batches after last committed batch
-184:        require(s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData), "i"); // incorrect previous batch data
-- 185:        require(_newBatchesData.length > 0, "No batches to commit");
-
-```
-https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
 
 ##
 
@@ -394,12 +534,25 @@ FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L123
 
+##
 
+## [G-] Don't cache immutable variable incurs extra Gas
 
+ 
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
+ function _propagateToZkSync() internal {
+-        address contractAddress = zkSyncContract;
+        assembly {
+            // Copy function signature and arguments from calldata at zero position into memory at pointer position
+            calldatacopy(0, 0, calldatasize())
+            // Call method of the zkSync contract returns 0 on error
+-            let result := call(gas(), contractAddress, 0, 0, calldatasize(), 0, 0)
++            let result := call(gas(), zkSyncContract, 0, 0, calldatasize(), 0, 0)
 
-
-
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L133
 
 ##
 
@@ -509,6 +662,15 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L87-L94
 
+###
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
+
+
+```
+
 ##
 
 ## [G-] Use uint256(1)/uint256(2) instead of true/false to save gas for changes
@@ -584,41 +746,14 @@ FALSE	Multiple if-statements with mutually-exclusive conditions should be change
 																								
 																																																																												
 																										
-FALSE	Not using the named return variables anywhere in the function is confusing	Consider changing the variable to be an unnamed one, since the variable is never assigned, nor is it returned by name. If the optimizer is not turned on, leaving the code as it is will also waste gas for the stack variable.																								
-																										
-			/// @audit amount																							
-			76        function getCollateralAmountForShare(																							
-			77            IMarket market,																							
-			78            uint256 share																							
-			79:       ) public view returns (uint256 amount) {																							
-			/// @audit collateralShares																							
-			89        function getCollateralSharesForBorrowPart(																							
-			90            IMarket market,																							
-			91            uint256 borrowPart,																							
-			92            uint256 liquidationMultiplierPrecision,																							
-			93            uint256 exchangeRatePrecision																							
-			94:       ) public view returns (uint256 collateralShares) {	
+	
 
-FALSE	String literals passed to abi.encode()/abi.encodePacked() should not be split by commas	String literals can be split into multiple parts and still be considered as a single string literal. Adding commas between each chunk makes it no longer a single string, and instead multiple strings. EACH new comma costs [21 gas](https://gist.github.com/IllIllI000/837d1b36c16c9bfe1010f9f775a09bbf) due to stack operations and separate MSTOREs																								
-																										
-			61:                   return string(abi.encodePacked("ERC1155", " (", asset.strategy.name(), ")"));																							
-	https://github.com/code-423n4/2023-09-centrifuge/blob/main/bot-report.md																									
 
-FALSE	Don't use _msgSender() if not supporting EIP-2771	Use msg.sender if the code does not implement [EIP-2771 trusted forwarder](https://eips.ethereum.org/EIPS/eip-2771) support	
+																							
 
-FALSE	Use += for mappings	Using += for mappings saves [40 gas](https://gist.github.com/IllIllI000/4fc5f83a9edc6ed16677258bf58f32a5) due to not having to recalculate the mapping's value's hash																								
-																										
-	165:             balanceOf[to] = balanceOf[to] + value; // note: we don't need an overflow check here b/c balanceOf[to] <= totalSupply and there is an overflow check below	
 
-Avoid emitting constants
-
-A log topic (declared with indexed) has a gas cost of Glogtopic (375 gas). The Stake and Withdraw events’ second indexed parameter is a constant for a majority of events emitted (with the exception of the events emitted in the _stakeLP() and _withdrawLP() functions) and is unecessary to emit since the value will never change. Alternatively, you can avoid incurring the Glogtopic (375 gas) per call to any function that emits Stake/Withdraw (with the exception of _stakeLP() and _withdrawLP()) by creating separate events for each staking/withdraw function and opt out of using the current indexed asset topic in each event. This way you can still query the different staking/withdraw events and will save 375 gas for each staking/withdraw function (with the exception of _stakeLP() and _withdrawLP()).
-
-Note that the events emitted in the _stakeLP() and withdrawLP() functions are not considered for this issue since the second indexed parameter is for the LP storage variable, which can be changed via the configureLP() function.
 
 Is this possible to cache any external function calls inside the loop
-
-Is this any possible to refatore the code and save gas ?
 
 Is this possible to avoid internal functions?
 
@@ -627,7 +762,7 @@ if any return functions functions first return less gas value lastly return most
 Only cache memory or storage inside the condition checks if possible 
 
 
-
+struct names can be aligned with order same like chainlink findings to target alex 
 
 
 																																																																					
