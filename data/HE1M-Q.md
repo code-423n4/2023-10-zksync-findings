@@ -78,3 +78,7 @@ if (refundRecipient != sender && refundRecipient.code.length > 0) {
     refundRecipient = AddressAliasHelper.applyL1ToL2Alias(refundRecipient);
 }
 ```
+
+### Q13
+Wrong comment. It should be `4 + 20 + 32 + 20 + _additionalData.length >= 76 (bytes)`
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L418
