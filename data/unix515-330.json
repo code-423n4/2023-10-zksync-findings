@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unix515",
+  "risk": "3",
+  "title": "L2Weth.withdraw has no any access control and any amount check",
+  "issueId": 330,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/330"
+}
