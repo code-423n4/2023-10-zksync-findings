@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xTheC0der",
+  "risk": "2",
+  "title": "EIP-712 transactions via custom accounts do not comply with EIP-3607 and could therefore fail",
+  "issueId": 322,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/322"
+}
