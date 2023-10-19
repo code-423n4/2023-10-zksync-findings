@@ -112,5 +112,16 @@ QA4. _proveL2LogInclusion() calls Merkle.calculateRoot() to prove that a specifi
 
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L142](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L142)
 
-QA5.  
+QA5.  A user might use L1ERC20Bridge.deposit() to send more eth than he is supposed to. Note that a user usually will use L1WethBridge.deposit() to deposit ETH on a recipient on L2. However, L1ERC20Bridge.deposit() also allows to send ETH as well to a refundrecipient on L2 when depositing a particular tokens on L2.  
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L144-L152](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L144-L152)
+
+The problem is that L1ERC20Bridge.deposit() will check the limit for that particular token using function  ``_verifyDepositLimit(_l1Token, msg.sender, _amount, false);`` but it does not verify for the limit for WETH.
+
+Meanwhile, Mailbox.requestL2Transaction() will call _verifyDepositLimit(msg.sender, msg.value) to verify the deposit limit; unfortunately, the msg.sender is L1ERC20Bridge in this case, not the end user. 
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L236-L273](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L236-L273)
+
+In summary, there is no code to check the deposit limit for WETH/ETH when calling L1ERC20Bridge.deposit(). As a result, a user might call L1ERC20Bridge.deposit() and bypass the check and thus deposit more ETH than they are allowed. 
+
 
