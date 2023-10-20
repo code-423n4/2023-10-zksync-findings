@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "teddav",
+  "risk": "2",
+  "title": "String in Yul is longer than 32 characters",
+  "issueId": 432,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/432"
+}
