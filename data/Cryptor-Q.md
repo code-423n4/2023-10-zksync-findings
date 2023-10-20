@@ -36,6 +36,14 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/docs/Circuits%20Section/C
 
 
 
+L-05 No check on empty queue can cause the circuit to not run as efficiently as it could 
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/keccak256_round_function/mod.rs#L135
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/sha256_round_function/mod.rs#L124
+
+Both the she 256 and the keccak 256 circuits check whether the queue is empty. However, no other circuit makes the same check. This can cause the entire circuit system to run as efficiently as it could 
+
+
+
 
 
 
