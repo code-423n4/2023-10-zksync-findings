@@ -143,3 +143,9 @@ function finalizeDeposit(
     }
 ```
 
+QA6. Diamond._replaceFunctions() does not check whether the old facet is the same as the new facet for a function that needs to be replaced. So it is not  EIP-2535 compliant. 
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L149-L169](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L149-L169)
+
+Mitigation: 
+check whether the old facet is the same as the new facet for a function that needs to be replaced.
