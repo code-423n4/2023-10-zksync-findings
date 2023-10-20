@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "attacker can bypass token deposit cap in L1ERC20Bridge and Mailbox by using multiple account",
+  "issueId": 373,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/373"
+}
