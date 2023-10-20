@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "aariiif",
+  "risk": "2",
+  "title": "Missing `_operation` validation allows state diff corruption on decompression.",
+  "issueId": 386,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/386"
+}
