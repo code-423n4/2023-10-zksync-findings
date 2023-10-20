@@ -1102,5 +1102,346 @@ This Solidity interface is for interacting with an Wrapped Ether (WETH) contract
 
 Overall, this is a standard interface for interacting with a WETH contract. It adheres to the WETH9 standard and provides the necessary functions for depositing and withdrawing Ether. It will be crucial for any contract that aims to facilitate Wrapped Ether transactions.
 
+#### Governance
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol
+### Contextual Comments
+
+This Solidity contract is for managing operations and governance tasks. It allows for operations to be scheduled, executed, and canceled with appropriate permissions and delays. The contract is designed for coordinating upgrades and changes in all zkSync Era governed contracts. The contract design is inspired by OpenZeppelin's TimelockController and Matter Labs' in-house Diamond Proxy upgrade mechanism.
+
+### Code Quality and Architecture
+
+1. **Imports**: The contract imports two external contracts - `Ownable2Step` and `IGovernance`. These are likely used for access control and for implementing the governance interface.
+
+2. **Modifiers**: The contract defines custom modifiers such as `onlySelf`, `onlySecurityCouncil`, and `onlyOwnerOrSecurityCouncil` to control access to certain functions based on the sender's address.
+
+3. **Storage Variables**:
+   - `securityCouncil`: This variable holds the address of the security council, which is supposed to be a multisig contract.
+   - `timestamps`: A mapping to store timestamps for when each operation will be ready for execution.
+   - `minDelay`: The minimum delay in seconds for operations to be ready for execution.
+
+4. **Events**: The contract emits several events to provide information about various state changes, including when operations are scheduled, executed, and canceled.
+
+5. **Constructor**: The constructor initializes the contract with the admin address, security council address, and minimum delay.
+
+6. **Operation Getters**: The contract provides functions like `isOperation`, `isOperationPending`, `isOperationReady`, and `isOperationDone` to query the state of operations.
+
+7. **Scheduling Calls**: The contract allows for scheduling both transparent and shadow upgrades. Transparent upgrades provide upgrade data on-chain, while shadow upgrades do not publish upgrade data on-chain before execution.
+
+8. **Canceling Calls**: The contract provides a function to cancel scheduled operations. Both the owner and security council may cancel an operation.
+
+9. **Executing Calls**: The contract provides functions for executing scheduled operations. Operations can be executed after a specified delay, and both the owner and security council have the authority to execute them.
+
+10. **Helpers**: The contract includes helper functions like `_schedule`, `_execute`, and `_checkPredecessorDone` to assist in various tasks.
+
+11. **Self Upgrades**: There are functions for updating the minimum timelock duration and for updating the address of the security council. These functions can only be called by the contract itself.
+
+### Recommendations
+
+1. **Verify External Contracts**: Ensure that the imported contracts (`Ownable2Step` and `IGovernance`) are properly verified and secure.
+
+2. **Testing**: Thoroughly test the contract to ensure that all functionalities work as intended, especially the scheduling, execution, and cancelation of operations.
+
+3. **Security Council Multisig**: Ensure that the `securityCouncil` variable is set to a valid and secure multisig contract address.
+
+4. **Documentation**: Provide detailed documentation explaining how to interact with the contract, especially for scheduling, canceling, and executing operations.
+
+5. **Security Review**: Consider conducting a security audit to identify and mitigate potential vulnerabilities.
+
+Overall, this contract is designed to facilitate governance and upgrade operations within the zkSync ecosystem. It provides a robust framework for managing and coordinating upgrades, ensuring that they are executed with appropriate permissions and delays.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/IGovernance.sol
+## Analysis
+
+### Contextual Comments
+
+This Solidity interface, `IGovernance`, defines a set of functions and data structures for governance operations. It allows for the scheduling, execution, and cancelation of operations with specific permissions and delays. This interface is designed to be implemented by contracts that need governance functionalities, such as zkSync Era governed contracts.
+
+### Code Quality and Architecture
+
+1. **Enum `OperationState`**: This enumeration defines the states an operation can be in. It includes `Unset`, `Waiting`, `Ready`, and `Done`.
+
+2. **Struct `Call`**: Represents a call to be made during an operation. It includes `target` (address to call), `value` (amount of Ether to send), and `data` (calldata to execute).
+
+3. **Struct `Operation`**: Defines the structure of an operation with an array of `Call` structs, a `predecessor` operation, and a `salt` value.
+
+4. **Function Definitions**:
+   - Various functions like `isOperation`, `isOperationPending`, `isOperationReady`, etc., provide information about the state of operations.
+
+   - Functions like `scheduleTransparent`, `scheduleShadow`, `cancel`, `execute`, `executeInstant`, etc., handle the scheduling, cancelation, and execution of operations.
+
+   - The `updateDelay` and `updateSecurityCouncil` functions allow for modifying the delay and security council address, respectively.
+
+   - `hashOperation` is a pure function to compute the identifier of an operation.
+
+5. **Events**:
+   - The interface emits events to provide information about various state changes, such as when operations are scheduled, executed, canceled, or when governance parameters are updated.
+
+6. **Modifiers**: The interface does not define any custom modifiers.
+
+### Recommendations
+
+1. **Implementation Required**: This is an interface and needs to be implemented by a contract to provide the actual logic for governance operations.
+
+2. **Implementation Considerations**: When implementing this interface, ensure that the functions handle operations correctly and securely. Pay attention to access control and state changes.
+
+3. **Testing**: Thoroughly test the implementation to ensure it functions as expected and handles edge cases properly.
+
+4. **Documentation**: Provide detailed documentation for users on how to interact with the implemented contract and how governance operations are managed.
+
+5. **Security Review**: Consider conducting a security audit to identify and mitigate potential vulnerabilities.
+
+Overall, this interface provides a solid foundation for implementing governance functionalities in contracts. It defines the necessary structures and functions to handle the scheduling, execution, and cancelation of operations.
+
+#### UPGRADE
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
+## Analysis
+
+This Solidity contract, `BaseZkSyncUpgrade`, serves as an abstract base for upgrade implementations within the zkSync system. It provides a framework for handling upgrades by defining events, structures, and functions for changing various components of the system.
+
+### Key Components
+
+1. **Events**:
+   - `NewProtocolVersion`: Indicates a change in the protocol version.
+   - `NewL2BootloaderBytecodeHash`: Indicates a change in the bytecode hash used as the bootloader on Layer 2.
+   - `NewL2DefaultAccountBytecodeHash`: Indicates a change in the bytecode hash used as the default account on Layer 2.
+   - `NewVerifier`: Indicates a change in the address of the verifier smart contract.
+   - `NewVerifierParams`: Indicates a change in the verifier parameters.
+   - `UpgradeComplete`: Indicates that an upgrade has been completed.
+
+2. **Modifiers**:
+   - No custom modifiers are defined in this contract.
+
+3. **Struct `ProposedUpgrade`**:
+   - Contains parameters that define an upgrade proposal, including a system upgrade transaction, various hashes, addresses, and other data relevant to the upgrade.
+
+4. **Functions**:
+   - `upgrade`: An abstract function that must be implemented in derived contracts. It handles the execution of an upgrade based on the proposed upgrade parameters.
+
+   - `_setL2DefaultAccountBytecodeHash` and `_setL2BootloaderBytecodeHash`: Internal functions to change the bytecode hashes used as the default account and bootloader on Layer 2, respectively.
+
+   - `_setVerifier` and `_setVerifierParams`: Internal functions to change the verifier and its parameters.
+
+   - `_upgradeVerifier`: A function to upgrade the verifier address and parameters.
+
+   - `_setBaseSystemContracts`: An internal function to change the bootloader and default account bytecode hashes.
+
+   - `_setL2SystemContractUpgrade`: A function to set the hash of the Layer 2 system contract upgrade transaction.
+
+   - `_setNewProtocolVersion`: An internal function to change the protocol version.
+
+   - `_setAllowList`: An internal function to change the address of the allowlist smart contract.
+
+### Recommendations
+
+1. **Implementation Required**: This contract is intended to be used as a base for specific upgrade implementations. A derived contract should be created to implement the `upgrade` function and define specific upgrade logic.
+
+2. **Access Control**: Ensure that access control mechanisms are properly implemented in the derived contracts, especially for functions that can modify critical components like the verifier, bytecode hashes, and protocol version.
+
+3. **Testing**: Thoroughly test the derived contracts to ensure they handle upgrades correctly and securely.
+
+4. **Documentation**: Provide clear documentation for users on how to interact with the upgrade contract and how upgrades are managed within the zkSync system.
+
+5. **Security Review**: Consider conducting a security audit to identify and mitigate potential vulnerabilities.
+
+6. **Upgrade Precautions**: Ensure that upgrades are handled carefully, especially when changing the verifier, bytecode hashes, or protocol version, to avoid disrupting the functionality of the system.
+
+7. **Compliance with zkSync System Logic**: When implementing specific upgrades, ensure that they comply with the broader logic and architecture of the zkSync system.
+
+Overall, this contract provides a foundation for handling upgrades within the zkSync system, but the specific upgrade logic must be implemented in derived contracts.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol
+## Analysis
+
+This Solidity contract `DefaultUpgrade` extends the `BaseZkSyncUpgrade` contract and provides a default implementation for upgrading the zkSync system. It defines specific functions for handling various aspects of the upgrade process.
+
+### Key Components
+
+1. **Functions**:
+
+   - `_upgradeL1Contract`: A virtual function that serves as a placeholder for custom logic related to upgrading Layer 1 contracts. It is intended to be overridden in derived contracts to implement specific upgrade logic for Layer 1 contracts.
+
+   - `_postUpgrade`: A virtual function that serves as a placeholder for custom post-upgrade logic. It is intended to be overridden in derived contracts to implement specific post-upgrade logic.
+
+   - `upgrade`: Overrides the `upgrade` function from `BaseZkSyncUpgrade`. This function coordinates the entire upgrade process by calling various internal functions and emitting events.
+
+### Recommendations
+
+1. **Custom Logic for Upgrade**: The `_upgradeL1Contract` and `_postUpgrade` functions are placeholders for custom logic related to upgrading Layer 1 contracts and for executing post-upgrade steps. Developers should implement specific logic in derived contracts to handle these aspects of the upgrade.
+
+2. **Testing**: Thoroughly test the derived contract to ensure that the upgrade process functions as expected and that any custom logic is executed correctly.
+
+3. **Security Review**: Consider conducting a security audit to identify and mitigate potential vulnerabilities, especially if the upgrade process involves critical components of the system.
+
+4. **Documentation**: Provide clear documentation for users on how to interact with the upgrade contract and what to expect during the upgrade process.
+
+5. **Upgrade Precautions**: When implementing custom logic for upgrades, ensure that it aligns with the broader logic and architecture of the zkSync system.
+
+6. **Access Control**: Implement access control mechanisms to restrict who can trigger upgrades and perform custom upgrade logic.
+
+Overall, this contract serves as a flexible framework for handling upgrades within the zkSync system, allowing for customization of the upgrade process through derived contracts.
+
+#### OTHER
+
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowList.sol
+## Analysis
+
+This Solidity contract `AllowList` is responsible for managing permissions to call functions on different contracts within the zkSync system. It provides a flexible system for controlling access to contracts based on different access modes:
+
+1. **Closed Mode**: In this mode, the contract cannot be called by anyone.
+
+2. **SpecialAccessOnly Mode**: Only specific addresses that have been granted permission can call specific functions on the target contract.
+
+3. **Public Mode**: In this mode, any caller can call any function from the target contract.
+
+### Key Components
+
+1. **Access Modes**:
+
+   - `mapping(address => AccessMode) public getAccessMode`: Maps target contract addresses to their corresponding access modes.
+
+   - `mapping(address => mapping(address => mapping(bytes4 => bool))) public hasSpecialAccessToCall`: Stores permissions to call functions on target addresses for specific callers.
+
+2. **Functions**:
+
+   - `canCall`: Checks if the caller has access to call a specific function on a target contract based on the access mode.
+
+   - `setAccessMode`: Sets the access mode for a target contract.
+
+   - `setBatchAccessMode`: Sets access modes for multiple target contracts.
+
+   - `setPermissionToCall`: Grants or revokes permission for a specific caller to call a function on a target contract.
+
+   - `setBatchPermissionToCall`: Grants or revokes permission for multiple callers to call functions on multiple target contracts.
+
+   - `setDepositLimit`: Sets deposit limit data for a token.
+
+   - `getTokenDepositLimitData`: Retrieves deposit limit data for a token.
+
+3. **Constructor**:
+
+   - `constructor(address _initialOwner)`: Initializes the contract with an initial owner.
+
+### Recommendations
+
+1. **Access Control**: The contract uses an `Ownable2Step` contract, which means that the owner has the ability to manage access permissions. Ensure that the owner is a trusted entity and that proper access control mechanisms are in place.
+
+2. **Testing**: Thoroughly test the contract to ensure that access modes and permissions are set and checked correctly.
+
+3. **Security Review**: Consider conducting a security audit to identify and mitigate potential vulnerabilities, especially since this contract deals with access control.
+
+4. **Documentation**: Provide clear documentation for users on how to interact with the `AllowList` contract and how access permissions work.
+
+5. **Deposit Limitation**: Review the functionality related to deposit limitation to ensure that it functions as intended.
+
+6. **Event Emitters**: Events are emitted when access modes and permissions are changed. Ensure that these events are properly logged for transparency and monitoring purposes.
+
+Overall, this contract provides a crucial component for controlling access to functions within the zkSync system. It allows for flexibility in managing permissions and access modes for different contracts.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol
+The `IAllowList` interface provides a blueprint of the functions and events that the `AllowList` contract implements. Let's break down the key elements:
+
+### Events:
+
+1. `UpdateAccessMode`:
+   - Params:
+     - `address indexed target`: The target contract address for which the access mode has changed.
+     - `AccessMode previousMode`: The previous access mode.
+     - `AccessMode newMode`: The new access mode.
+
+2. `UpdateCallPermission`:
+   - Params:
+     - `address indexed caller`: The address of the caller.
+     - `address indexed target`: The target contract address.
+     - `bytes4 indexed functionSig`: The function signature (selector).
+     - `bool status`: The new status of the permission.
+
+### Enums:
+
+1. `AccessMode`:
+   - Values:
+     - `Closed`: No one has access to the contract.
+     - `SpecialAccessOnly`: Any address with granted special access can interact with a contract.
+     - `Public`: Everyone can interact with a contract.
+
+### Structs:
+
+1. `Deposit`:
+   - Properties:
+     - `bool depositLimitation`: Whether any deposit limitation is placed or not.
+     - `uint256 depositCap`: The maximum amount that can be deposited.
+
+### Functions:
+
+1. Getters:
+   - `getAccessMode`: Returns the access mode of a target contract.
+   - `hasSpecialAccessToCall`: Checks if a caller has special access to call a function on a target contract.
+   - `canCall`: Checks if a caller can call a specific function on a target contract.
+   - `getTokenDepositLimitData`: Retrieves deposit limit data for a token.
+
+2. Allow List Logic:
+   - `setBatchAccessMode`: Sets access modes for multiple target contracts.
+   - `setAccessMode`: Sets the access mode for a target contract.
+   - `setBatchPermissionToCall`: Grants or revokes permission for multiple callers to call functions on multiple target contracts.
+   - `setPermissionToCall`: Grants or revokes permission for a specific caller to call a function on a target contract.
+
+3. Deposit Limit Logic:
+   - `setDepositLimit`: Sets deposit limit data for a token.
+
+This interface defines the structure and behavior expected from a contract that manages permissions and access modes. It's important for any contract that interacts with the `AllowList` contract to follow this interface to ensure compatibility.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/libraries/L2ContractHelper.sol
+The `L2ContractHelper` library provides functions for working with Layer 2 (L2) contracts on Layer 1 (L1). Let's go over the key components:
+
+### Constants:
+
+1. `CREATE2_PREFIX`: A constant representing the prefix used to create CREATE2 addresses.
+
+### Functions:
+
+1. `hashL2Bytecode`:
+   - Purpose: Validates the bytecode format and calculates its hash.
+   - Parameters:
+     - `_bytecode`: The bytecode to hash.
+   - Returns:
+     - `hashedBytecode`: The 32-byte hash of the bytecode.
+   - Details:
+     - Checks that the bytecode length is a multiple of 32 bytes.
+     - Ensures that the bytecode length is less than 2^16 words.
+     - Verifies that the bytecode length in words is odd.
+     - Computes the SHA256 hash of the bytecode and applies a bitwise mask.
+     - Sets the version and length information in the hash.
+
+2. `validateBytecodeHash`:
+   - Purpose: Validates the format of a given bytecode hash.
+   - Parameters:
+     - `_bytecodeHash`: The hash of the bytecode to validate.
+   - Details:
+     - Checks that the first byte represents the correct version (1) and the second byte is zero.
+     - Verifies that the bytecode length in words is odd.
+
+3. `_bytecodeLen`:
+   - Purpose: Returns the length of the bytecode associated with the given hash.
+   - Parameters:
+     - `_bytecodeHash`: The hash of the bytecode.
+   - Returns:
+     - `codeLengthInWords`: The length of the bytecode in words.
+
+4. `computeCreate2Address`:
+   - Purpose: Computes the create2 address for an L2 contract.
+   - Parameters:
+     - `_sender`: The address of the sender.
+     - `_salt`: The salt value to use in the create2 address computation.
+     - `_bytecodeHash`: The contract bytecode hash.
+     - `_constructorInputHash`: The hash of the constructor input data.
+   - Returns:
+     - The create2 address of the contract.
+
+These functions provide utility for handling L2 contracts, including hashing bytecode, validating bytecode hashes, and computing create2 addresses. This library is designed to assist in the interaction between L1 and L2 contracts.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/ReentrancyGuard.sol
+
 ### Time spent:
 96 hours
