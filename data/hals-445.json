@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hals",
+  "risk": "2",
+  "title": "`NonceHolder.increaseMinNonce` function will cause nonces collision when it overflows",
+  "issueId": 445,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/445"
+}
