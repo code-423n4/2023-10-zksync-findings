@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "re orgs can cause user to claim failed deposit twice on L1 bridge.",
+  "issueId": 427,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/427"
+}
