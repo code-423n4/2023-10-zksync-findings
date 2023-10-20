@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Attacker can make L1ERC20Bridge and L1WethBridge broken when there is limit for ETH deposits ",
+  "issueId": 378,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/378"
+}
