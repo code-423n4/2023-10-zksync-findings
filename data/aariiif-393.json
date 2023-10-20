@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "aariiif",
+  "risk": "2",
+  "title": "Unlimited gas stipend in `bridgeBurn` can disrupt functionality and waste resources.",
+  "issueId": 393,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/393"
+}
