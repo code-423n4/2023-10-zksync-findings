@@ -43,7 +43,11 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 Both the she 256 and the keccak 256 circuits check whether the queue is empty. However, no other circuit makes the same check. This can cause the entire circuit system to run as efficiently as it could 
 
 
+L-06 #[cfg(test)] should be removed from storage validity circuit 
 
+https://github.com/matter-labs/era-zkevm_circuits/blob/4fba537ccecc238e2da9c80844dc8c185e42466f/src/storage_validity_by_grand_product/mod.rs#L4
+
+#[cfg(test)] is used to conditionally include code only when you're running tests. It's a way to tell the Rust compiler to compile and include the annotated code only during test runs and not in the final binary. However it serves no purpose in this specific instance 
 
 
 
