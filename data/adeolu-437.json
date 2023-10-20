@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "in mailbox requestL2Transaction(), if L2 deposit finalization transaction fails, s.totalDepositedAmountPerUser is not reduced after the user is refunded. ",
+  "issueId": 437,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/437"
+}
