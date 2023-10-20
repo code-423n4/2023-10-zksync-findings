@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "permanent lock of ETH L2-balance for \"aliased-address of L1-contracts\" in L2",
+  "issueId": 457,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/457"
+}
