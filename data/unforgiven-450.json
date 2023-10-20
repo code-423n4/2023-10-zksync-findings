@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "Contracts may lose funds if they interact with MailBox.requestL2Transaction() in their constructor()",
+  "issueId": 450,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/450"
+}
