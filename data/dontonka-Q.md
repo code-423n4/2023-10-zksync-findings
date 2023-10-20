@@ -1,6 +1,6 @@
 **[[1]]** 
 ## Description
-Bootloader is essentially the system contract that is processing transactions in L2 and forging L2 blocks. So for every L2 block (aka batch), it does process all the L2 transactions (also L1 --> L2 txs), bundle them into an L2 block, and publish the result to L1.
+Bootloader is essentially the system contract that is processing transactions in L2 and creating L2 blocks and the result is published on L1. 
 
 The problem is that it is expected that all transactions are in a [continious array](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L3728-L3729), but if such assumption is ever broken somehow, the code will `break` the loop and move on with was processed. Which means if this happen in real life and there were some transactions after this empty pointer, they will be `lost` forever and not added to the L2 block.
 
@@ -160,14 +160,3 @@ There is a typo in the comment, it should mention `The type id of EIP2930 transa
 		uint8 constant EIP_2930_TX_TYPE = 0x01;
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L19-L20
-
-
-**[[12]]** 
-Renaming error, it should mention `proved_batch`. This means this assert is missing from the current bootloader production binary, and would allow a malicious operator to simulate transaction `from` to be any system contract, which can lead to all sort of unexpected results. As stated in the [documentation](https://github.com/code-423n4/2023-10-zksync/blob/main/docs/Smart%20contract%20Section/System%20contracts%20bootloader%20description.md#transaction-types--their-validation) `upgrade transaction` (254) "This is the only type of transaction allowed to start a transaction out of the name of the contracts in kernel space."
-```solidity
-               <!-- @if BOOTLOADER_TYPE=='proved_block' -->
-               assertEq(gt(getFrom(innerTxDataOffset), MAX_SYSTEM_CONTRACT_ADDR()), 1, "from in kernel space")
-               <!-- @endif -->
-```
-
-https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L2903-L2905
