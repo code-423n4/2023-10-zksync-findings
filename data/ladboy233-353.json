@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "address aliasing does not apply to tx.origin when requesting l2 transaction via mailbox",
+  "issueId": 353,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/353"
+}
