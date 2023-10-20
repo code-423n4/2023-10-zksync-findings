@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Cryptor",
+  "risk": "2",
+  "title": "No check for assert_eq!(lhs.len(), rhs.len()); in Storage sorter can result in incorrect proofs",
+  "issueId": 458,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/458"
+}
