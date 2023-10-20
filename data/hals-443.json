@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hals",
+  "risk": "2",
+  "title": "Users are not refunded the remaining L1 → L2 transaction fees when bridging tokens from L1 to L2",
+  "issueId": 443,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/443"
+}
