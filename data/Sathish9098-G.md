@@ -216,7 +216,6 @@ We can combine the events into one singular event to save two Glogtopic (375 gas
 
 ### 
 
-
 ```diff
 FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets
 /Admin.sol
@@ -233,20 +232,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets
 + PendingAndNewAdmin(pendingAdmin, address(0),previousAdmin,pendingAdmin);
 
 ```
-
-
-##
-
-## [G-] The result of function calls should be cached rather than re-calling the function	
-
-The instances below point to the second+ call of the function within a single function
-
-																								
-
-																																																																							
-									
-
-##
+																																																																																										##
 
 ## [G-] Optimize Gas Usage by Avoiding Variable Declarations Inside Loops
 
@@ -300,6 +286,13 @@ index 0b1fbdc..2f3cf9e 100644
 +            selectors = facetCuts[i].selectors;
 
 ```
+
+###
+
+
+
+
+
 
 ##
 
