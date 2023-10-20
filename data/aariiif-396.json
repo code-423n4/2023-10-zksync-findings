@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "aariiif",
+  "risk": "3",
+  "title": "No validation for Ether deposits allows trapping funds in the contract.",
+  "issueId": 396,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/396"
+}
