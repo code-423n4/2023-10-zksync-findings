@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "digitizeworx",
+  "risk": "2",
+  "title": "Assuming balance without validation in `_burnMsgValue` risks reversion on withdrawal.",
+  "issueId": 406,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/406"
+}
