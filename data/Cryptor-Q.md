@@ -27,3 +27,15 @@ L-03 No check for limit <= U32 MAX in main vm circuit
 In each circuit, there is a check to make sure that the limit is U32 MAX. However, there is no check in the main VM circuit. This can potentially introduce unexpected behavior 
 
 
+
+
+L-04 Misleading statement regarding the place of the sha256 round function circuit 
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/keccak256_round_function/mod.rs#L131
+According to the diagram, the sha256 round function is not first in the queue 
+https://github.com/code-423n4/2023-10-zksync/blob/main/docs/Circuits%20Section/Circuits/flowchart.png
+
+
+
+
+
+
