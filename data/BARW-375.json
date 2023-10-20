@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "BARW",
+  "risk": "3",
+  "title": "The value of `MAX_L2_TO_L1_LOGS_COMMITMENT_BYTES` is to small ",
+  "issueId": 375,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/375"
+}
