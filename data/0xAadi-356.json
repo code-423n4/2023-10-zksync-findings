@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xAadi",
+  "risk": "2",
+  "title": "The current implementation allows the existing `Admin` to potentially delay or overrule the governor's decision to change the current admin.",
+  "issueId": 356,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/356"
+}
