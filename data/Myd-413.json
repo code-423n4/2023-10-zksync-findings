@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Myd",
+  "risk": "2",
+  "title": "Unverified operator-provided base fee in the playground batch can be manipulated.",
+  "issueId": 413,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/413"
+}
