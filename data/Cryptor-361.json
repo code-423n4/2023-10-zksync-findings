@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Cryptor",
+  "risk": "2",
+  "title": "Unnecessary empty queue check in keccak round function circuits could cause the circuit to end prematurely in some scenarios",
+  "issueId": 361,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/361"
+}
