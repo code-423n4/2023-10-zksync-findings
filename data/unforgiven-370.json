@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Fund stuck because Failed ERC20 deposits in L1ERC20Bridge will stuck when admin add new limit ",
+  "issueId": 370,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/370"
+}
