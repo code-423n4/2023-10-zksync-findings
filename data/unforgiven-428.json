@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "bridged tokens may lost in L1ERC20Bridge and L1WethBridge when L2 bridge deployment transaction fails",
+  "issueId": 428,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/428"
+}
