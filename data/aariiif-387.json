@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "aariiif",
+  "risk": "3",
+  "title": "`_calldataSlice` length check missing in `_sliceToUint256` to avoid overflow.",
+  "issueId": 387,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/387"
+}
