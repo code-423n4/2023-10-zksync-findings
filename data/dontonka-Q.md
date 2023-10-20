@@ -1,6 +1,6 @@
 **[[1]]** 
 ## Description
-Bootloader is essentially the zkEra VM that is processing transactions in L2. So for every L2 block (aka batch), it does process all the L2 transactions (also L1 --> L2 txs), bundle them into an L2 block, and publish the result to L1.
+Bootloader is essentially the systen contract that is processing transactions in L2 and forging L2 blocks. So for every L2 block (aka batch), it does process all the L2 transactions (also L1 --> L2 txs), bundle them into an L2 block, and publish the result to L1.
 
 The problem is that it is expected that all transactions are in a [continious array](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L3728-L3729), but if such assumption is ever broken somehow, the code will `break` the loop and move on with was processed. Which means if this happen in real life and there were some transactions after this empty pointer, they will be `lost` forever and not added to the L2 block.
 
