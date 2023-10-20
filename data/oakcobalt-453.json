@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "Executor.sol is vulnerable to front-run attacks or accidental reverts when working with multiple validators",
+  "issueId": 453,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/453"
+}
