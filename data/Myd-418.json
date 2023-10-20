@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Myd",
+  "risk": "2",
+  "title": "No limits on `bridgeMint/bridgeBurn` amounts allow manipulation of total supply.",
+  "issueId": 418,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/418"
+}
