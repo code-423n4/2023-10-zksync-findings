@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hals",
+  "risk": "3",
+  "title": "Double aliasing of the `refundRecipient` address by `Mailbox.requestL2Transaction` function",
+  "issueId": 442,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/442"
+}
