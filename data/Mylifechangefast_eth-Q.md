@@ -128,7 +128,7 @@ Manual Review
 ***A critical parameter in initialize(...) is not set safely:***
 `s.governor` should be set to `msg.sender`, because a wrong governor address will result in loss of access to all other parts, and later changing the governor to the correct address.
 ### Impact
-***Address will result in loss of access to all other parts, and later changing the governor to the correct address.***
+***Address will result in loss of access to all other parts, and later changing the governor to the correct address [DiamondInit.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L62).***
 
 ##### Recommendation
 >`s.governor` should be set to `msg.sender`,
