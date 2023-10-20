@@ -1442,6 +1442,249 @@ The `L2ContractHelper` library provides functions for working with Layer 2 (L2) 
 These functions provide utility for handling L2 contracts, including hashing bytecode, validating bytecode hashes, and computing create2 addresses. This library is designed to assist in the interaction between L1 and L2 contracts.
 
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/ReentrancyGuard.sol
+This is a Solidity contract named `ReentrancyGuard` which provides functionality to prevent reentrant calls to a function. Reentrancy is a vulnerability in smart contracts where a contract can call itself, directly or indirectly, before completing its execution. This can lead to unexpected and potentially malicious behavior.
+
+Here's an overview of the contract:
+
+1. **SPDX-License-Identifier:** MIT License is used.
+
+2. **Solidity Version:** The contract is written for Solidity version ^0.8.13, which means it's compatible with version 0.8.13 and higher.
+
+3. **Security Contact:** The contract specifies a security contact email address at `security@matterlabs.dev` for reporting security vulnerabilities.
+
+4. **Contract Description:**
+   - This is an abstract contract, meaning it cannot be deployed on its own but needs to be inherited by other contracts.
+   - It provides functionality to prevent reentrant calls to functions.
+
+5. **Lock Flag Address:**
+   - A constant `LOCK_FLAG_ADDRESS` is defined with a specific value (calculated using keccak256).
+   - This value is used as a unique identifier for the lock flag in storage.
+
+6. **Lock Status Constants:**
+   - Two constants `_NOT_ENTERED` and `_ENTERED` are defined with values 1 and 2 respectively. These are used to track the reentrancy status.
+
+7. **Modifier: reentrancyGuardInitializer()**
+   - This is an initializer function (a modifier with no name) that is used to set up the reentrancy guard.
+   - It initializes the lock slot and ensures that it's empty to avoid conflicts.
+
+8. **Function: _initializeReentrancyGuard()**
+   - This is a private function used by the initializer.
+   - It initializes the lock slot to `_NOT_ENTERED`.
+
+9. **Modifier: nonReentrant()**
+   - This modifier is used to prevent reentrant calls to functions.
+   - It checks the status of the reentrancy guard and ensures that the function is not being called reentrantly.
+   - If it's the first call, it sets the status to `_ENTERED`, allowing the function to proceed.
+   - After the function execution, it resets the status to `_NOT_ENTERED`.
+
+**Important Note:** This contract is designed to prevent reentrancy, which is an important security feature in Ethereum smart contracts. It uses low-level assembly code to manipulate storage slots and ensure that the reentrancy status is properly tracked. However, it's important to use this contract carefully and understand how reentrancy vulnerabilities work in order to use it effectively.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/libraries/UnsafeBytes.sol
+This is a Solidity library named `UnsafeBytes` that provides a set of functions for reading data from an `abi.encodePacked` byte array. Here's an overview of the library:
+
+1. **SPDX-License-Identifier:** MIT License is used.
+
+2. **Solidity Version:** The library is written for Solidity version ^0.8.13, which means it's compatible with version 0.8.13 and higher.
+
+3. **Author:** The library is authored by Matter Labs.
+
+4. **Security Contact:** The library specifies a security contact email address at `security@matterlabs.dev` for reporting security vulnerabilities.
+
+5. **Library Description:**
+   - The library provides functions that help read data from a `bytes memory` array created using `abi.encodePacked`.
+   - Each function accepts a `bytes memory` parameter and an offset indicating where the data should be read from.
+   - The functions return values of specific types (`uint32`, `address`, `uint256`, and `bytes32`).
+
+6. **Warnings:**
+   - The library provides two warnings:
+     - Functions do not check the length of the bytes array, so it's possible to read out of bounds. Users of the library must ensure the bytes array is of the expected length before using any functions.
+     - Read variables are not cleaned up, which can lead to unexpected behavior when using data in inline assembly. This is a potential source of bugs and vulnerabilities.
+
+**Important Notes:**
+- This library provides low-level operations for reading data from byte arrays. It assumes that the input `bytes memory` is properly formatted and the offsets are correct.
+- Users of this library should exercise caution and ensure that they pass valid inputs to these functions.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/interfaces/IL2ContractDeployer.sol
+This is a Solidity interface named `IL2ContractDeployer` which defines a set of functions that a smart contract must implement. Here's an overview of the interface:
+
+1. **SPDX-License-Identifier:** MIT License is used.
+
+2. **Solidity Version:** The interface is written for Solidity version ^0.8.0, which means it's compatible with version 0.8.0 and higher.
+
+3. **Author:** The interface is authored by Matter Labs.
+
+4. **Contract Description:**
+   - This interface represents a system smart contract that is responsible for deploying other smart contracts on zkSync.
+
+5. **Struct: ForceDeployment**
+   - This is a nested struct within the interface.
+   - It describes the parameters needed for a forced deployment on an address. The parameters include:
+     - `bytecodeHash`: The hash of the bytecode to be deployed.
+     - `newAddress`: The address on which the bytecode will be deployed.
+     - `callConstructor`: A boolean indicating whether to execute the constructor during the force deployment.
+     - `value`: The `msg.value` to be used for initializing the contract.
+     - `input`: The calldata for the constructor.
+
+6. **Function: forceDeployOnAddresses**
+   - This function is used during an upgrade to set bytecodes on specific addresses. It takes an array of `ForceDeployment` structs as input.
+   - It does not return any value.
+
+7. **Function: create2**
+   - This function is used to deploy a contract with similar address derivation rules to the EVM's `CREATE2` opcode.
+   - It takes the following parameters:
+     - `_salt`: The create2 salt.
+     - `_bytecodeHash`: The correctly formatted hash of the bytecode.
+     - `_input`: The constructor calldata.
+   - It does not return any value.
+
+**Important Notes:**
+- This interface outlines the functions that a contract must implement in order to act as a system smart contract responsible for deploying other contracts on zkSync.
+- The functions and structs defined in this interface provide specific instructions and data needed for the deployment of contracts.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/libraries/UncheckedMath.sol
+This is a Solidity library named `UncheckedMath` which provides functions for performing unchecked mathematical operations. Here's an overview of the library:
+
+1. **SPDX-License-Identifier:** MIT License is used.
+
+2. **Solidity Version:** The library is written for Solidity version ^0.8.13, which means it's compatible with version 0.8.13 and higher.
+
+3. **Author:** The library is authored by Matter Labs.
+
+4. **Security Contact:** The library specifies a security contact email address at `security@matterlabs.dev` for reporting security vulnerabilities.
+
+5. **Library Description:**
+   - This library is intended for performing mathematical operations without explicitly checking for overflow or underflow.
+   - It provides two functions: `uncheckedInc` and `uncheckedAdd`.
+
+6. **Function: uncheckedInc**
+   - This function takes an input `_number` of type `uint256`.
+   - It uses the `unchecked` block to perform an unchecked addition of 1 to `_number`.
+   - It returns the result of the addition.
+
+7. **Function: uncheckedAdd**
+   - This function takes two inputs: `_lhs` and `_rhs`, both of type `uint256`.
+   - It uses the `unchecked` block to perform an unchecked addition of `_lhs` and `_rhs`.
+   - It returns the result of the addition.
+
+**Important Notes:**
+- The functions provided by this library do not perform overflow or underflow checks. This means that if the result of an operation exceeds the maximum or goes below the minimum value that can be represented by a `uint256`, the result will wrap around and may not be the correct mathematical result.
+- This library is used when it is known that the inputs will not cause overflow or underflow, and it is used to optimize gas costs.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowListed.sol
+This is a Solidity abstract contract named `AllowListed` that provides a modifier named `senderCanCallFunction`. Here's an overview of the contract:
+
+1. **SPDX-License-Identifier:** MIT License is used.
+
+2. **Solidity Version:** The contract is written for Solidity version ^0.8.13, which means it's compatible with version 0.8.13 and higher.
+
+3. **Author:** The contract is authored by Matter Labs.
+
+4. **Security Contact:** The contract specifies a security contact email address at `security@matterlabs.dev` for reporting security vulnerabilities.
+
+5. **Import Statement:**
+   - This contract imports an interface named `IAllowList` from a file named `IAllowList.sol`. This indicates that `IAllowList` is a dependency for this contract.
+
+6. **Contract Description:**
+   - This is an abstract contract, meaning it cannot be deployed on its own but needs to be inherited by other contracts.
+
+7. **Modifier: senderCanCallFunction**
+   - This modifier takes an argument of type `IAllowList` named `_allowList`. This argument is expected to be an instance of a contract that implements the `IAllowList` interface.
+   - Within the modifier, there is a block wrapped in curly braces. This is used to prevent the "stack too deep" error, which can occur when too many local variables are defined in a single function.
+   - Inside the block, it calls a function `canCall` on the `_allowList` contract, passing three arguments: `msg.sender`, `address(this)`, and `msg.sig`. The purpose of this call is to determine whether the sender has permission to call the function.
+   - If the condition in the `require` statement is not met, it will revert the transaction with the error message "nr".
+   - If the condition is met, it continues with the execution of the modified function.
+
+**Important Note:**
+- This contract provides a modifier that can be used to restrict access to functions based on permissions defined in an `IAllowList` contract. The `IAllowList` contract is expected to define a function `canCall` which takes the same arguments as used in this modifier.
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/L2ContractAddresses.sol
+This contract appears to be a collection of constant addresses. These addresses likely represent various contracts or components within a larger smart contract system. The comments provide additional information about each constant. Here's an overview:
+
+1. `L2_DEPLOYER_SYSTEM_CONTRACT_ADDR`
+   - Represents the Ethereum address of the L2 deployer system contract.
+
+2. `L2_FORCE_DEPLOYER_ADDR`
+   - Represents a special reserved L2 address. It is located in the system contracts space but does not have deployed bytecode. It is used in conjunction with the L2 deployer system contract to allow changing bytecodes on any address.
+
+3. `L2_TO_L1_MESSENGER_SYSTEM_CONTRACT_ADDR`
+   - Represents the Ethereum address of a special smart contract that can send arbitrary length messages as an L2 log.
+
+4. `L2_BOOTLOADER_ADDRESS`
+   - Represents the formal address of the initial program of the system, referred to as the bootloader.
+
+5. `L2_ETH_TOKEN_SYSTEM_CONTRACT_ADDR`
+   - Represents the Ethereum address of the eth token system contract.
+
+6. `L2_KNOWN_CODE_STORAGE_SYSTEM_CONTRACT_ADDR`
+   - Represents the Ethereum address of the known code storage system contract.
+
+7. `L2_SYSTEM_CONTEXT_SYSTEM_CONTRACT_ADDR`
+   - Represents the Ethereum address of the context system contract.
+
+8. `L2_BYTECODE_COMPRESSOR_SYSTEM_CONTRACT_ADDR`
+   - Represents the Ethereum address of the bytecode compressor system contract.
+
+
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol
+**Summary:**
+The provided Solidity code is a library named `AddressAliasHelper` that provides two functions for converting addresses between the L1 and L2 layers. It uses a constant offset value for this conversion.
+
+**Analysis:**
+
+1. **Library Purpose**:
+   - The `AddressAliasHelper` library serves as a utility to convert addresses between the L1 and L2 layers. It allows for mapping an address from the L1 layer to its equivalent on the L2 layer and vice versa.
+
+2. **License and Copyright Information**:
+   - The code is provided under the Apache License, Version 2.0. This license is permissive and allows for the code's use, modification, and distribution, subject to certain conditions.
+
+3. **Version Compatibility**:
+   - The code is written for Solidity version ^0.8.0, indicating compatibility with version 0.8.0 and higher.
+
+4. **Offset Constant**:
+   - The `offset` constant is defined as `uint160(0x1111000000000000000000000000000000001111)`. This is likely used for address conversion.
+
+5. **Function: applyL1ToL2Alias**:
+   - This function takes an `l1Address` (an Ethereum address in L1) and returns the equivalent address in L2.
+   - It uses unchecked arithmetic to add the `offset` to the `l1Address` and cast the result back to an address.
+   - This function assumes that the input `l1Address` is a valid Ethereum address.
+
+6. **Function: undoL1ToL2Alias**:
+   - This function takes an `l2Address` (an Ethereum address in L2) and returns the equivalent address in L1.
+   - It uses unchecked arithmetic to subtract the `offset` from the `l2Address` and cast the result back to an address.
+   - Similar to `applyL1ToL2Alias`, it assumes that the input `l2Address` is a valid Ethereum address.
+
+7. **Safety Considerations**:
+   - The functions use unchecked arithmetic, which means that it does not perform overflow or underflow checks. Therefore, it assumes that the inputs are valid addresses.
+
+8. **Gas Considerations**:
+   - The use of unchecked arithmetic operations generally reduces gas costs compared to checked operations, but it also means that incorrect inputs can lead to unexpected behavior.
+
+**Recommendations and Comments:**
+
+1. **Unit Tests**:
+   - It's important to thoroughly test this library with various inputs to ensure it functions correctly.
+
+2. **Input Validation**:
+   - Consider adding additional checks to ensure that the input addresses are valid Ethereum addresses.
+
+3. **Error Handling**:
+   - Consider adding error handling in case of unexpected inputs, like non-standard addresses.
+
+4. **Documentation**:
+   - It's good practice to add comments explaining the purpose and usage of the library and its functions.
+
+5. **Codebase Quality**:
+   - The codebase is concise and well-structured. It uses the `unchecked` block appropriately for arithmetic operations.
+
+6. **Centralization Risks**:
+   - There are no centralization risks evident in this library. It appears to be a utility for address conversion.
+
+7. **Systemic Risks**:
+   - The code doesn't exhibit any systemic risks on its own. However, its usage within a broader system should be carefully considered.
+
+8. **Mechanism Review**:
+   - The mechanism for address conversion appears sound, but it should be rigorously tested in different scenarios.
+
 
 ### Time spent:
 96 hours
