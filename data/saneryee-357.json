@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "saneryee",
+  "risk": "2",
+  "title": "Concentration of Permissions When `_admin` and `_securityCouncil` Are The Same Address",
+  "issueId": 357,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/357"
+}
