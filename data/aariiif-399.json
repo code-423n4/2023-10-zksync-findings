@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "aariiif",
+  "risk": "2",
+  "title": "Redundant address mapping functions for hardcoded WETH addresses, increasing complexity.",
+  "issueId": 399,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/399"
+}
