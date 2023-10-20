@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "ValidatorTimeLock allows a validator to execute batches bypassing the mandatory delay",
+  "issueId": 433,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/433"
+}
