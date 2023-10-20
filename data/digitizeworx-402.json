@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "digitizeworx",
+  "risk": "2",
+  "title": "Fallback function exposes to malformed inputs and reentrancy risks.",
+  "issueId": 402,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/402"
+}
