@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Myd",
+  "risk": "3",
+  "title": "The contract can't update if L1 token interface changes, risking desync.",
+  "issueId": 419,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/419"
+}
