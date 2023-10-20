@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hals",
+  "risk": "3",
+  "title": "`DefaultUpgrade.upgrade` function: zkSystem can be upgraded by anyone at any time",
+  "issueId": 435,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/435"
+}
