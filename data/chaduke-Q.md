@@ -112,6 +112,34 @@ QA4. _proveL2LogInclusion() calls Merkle.calculateRoot() to prove that a specifi
 
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L142](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L142)
 
+QA5. L2WethBridge.finalizeDeposit() fails to apply AddressAliasHelper.undoL1ToL2Alias to ``_l1Token`` before comparing to ``l1WethAddress``. As a result, the require condition will always fail and the transaction might always revert. 
 
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L88-L107
 
+Mitigation:
+
+```diff
+function finalizeDeposit(
+        address _l1Sender,
+        address _l2Receiver,
+        address _l1Token,
+        uint256 _amount,
+        bytes calldata // _data
+    ) external payable override {
+        require(
+            AddressAliasHelper.undoL1ToL2Alias(msg.sender) == l1Bridge,
+            "Only L1 WETH bridge can call this function"
+        );
+
+-        require(_l1Token == l1WethAddress, "Only WETH can be deposited");
++        require(AddressAliasHelper.undoL1ToL2Alias(_l1Token) == l1WethAddress, "Only WETH can be deposited");
+
+        require(msg.value == _amount, "Amount mismatch");
+
+        // Deposit WETH to L2 receiver.
+        IL2Weth(l2WethAddress).depositTo{value: msg.value}(_l2Receiver);
+
+        emit FinalizeDeposit(_l1Sender, _l2Receiver, l2WethAddress, _amount);
+    }
+```
 
