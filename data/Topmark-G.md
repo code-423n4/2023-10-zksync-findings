@@ -25,7 +25,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/con
 
 +++        SystemContractHelper.burnGas(Utils.safeCastToU32(160));
 ```
-The code above shows how keccakGasCost(...) function is called to calculate "gasToPay" both calls are also using constant values, "L2_TO_L1_LOG_SERIALIZE_SIZE = 88" from [Config.sol contract](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Config.sol#L11) and "64" for the second call, this shows the expected output can be accurately calculated and the value used without the need to call the function over and over again using gas.
+The code above shows how keccakGasCost(...) function is called to calculate "gasToPay" both calls are also using constant values, "L2_TO_L1_LOG_SERIALIZE_SIZE = 88" from [IL1Messenger Interface](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IL1Messenger.sol#L25) and "64" for the second call, this shows the expected output can be accurately calculated and the value used without the need to call the function over and over again using gas.
 The value of uint256 gasTopay would equal 40 + 3 * 40 = 160.
 160 can be easily used directly as corrected in the code above.
 Note: A detailed comment description should be provided instead to show how "gasToPay" was calculated as 160.
