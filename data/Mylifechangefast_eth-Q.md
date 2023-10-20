@@ -13,10 +13,10 @@
 # Revert messages are not informative enough
 
 #### Summary
-***For instance, instead of "*pm*" and "*dm*," you could use messages like "Permission Denied" and "Data Mismatch" to provide more context. This not only enhances the user experience but also assists developers in quickly identifying and resolving issues.***
+***For instance, instead of *[pm](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L421)* you could use messages like "Permission Denied" to provide more context. This not only enhances the user experience but also assists developers in quickly identifying and resolving issues.***
 
 ### Impact 
-***This poor practice affects all the contracts in the scope of zksync if not all but most contracts. I wish I could still get to know why the revert message is that short, an auditor can have a hard time understanding what the revert messages are for different contracts***
+***This poor practice affects all the contracts in the scope of zksync if not all but most contracts see in https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L421. I wish I could still get to know why the revert message is that short, an auditor can have a hard time understanding what the revert messages are for different contracts***
 
 ##### Recommendation
 >Since you want your revert functions to be short or optimized why not use a custom error to solve that? Consider using informative error messages or custom errors throughout the contracts.
@@ -41,12 +41,11 @@
 ***[deposit()](https://github.com/code-423n4/2023-10-zksync/blame/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L144) and [deposit()](https://github.com/code-423n4/2023-10-zksync/blame/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L176): This difference in visibility might not be a problem per se, but it's worth noting that the external function acts as a "wrapper" that then calls the public function. This design may introduce some complexity without clear benefits.***
 
 ##### Recommendation
->*Remove The External Function:*
-***If the external function serves no specific function other than forwarding the call to the public function, consider removing it. Directly calling the public function can simplify the code.***
-*Combine functionality:*
-***Since there are legitimate use cases for both the external and public functions, consider consolidating their functionality into a single function with optional parameters. This can make the code more concise and easier to understand.
-Here is an example of how you can consolidate the functionality into a single transaction with optional parameters:***
-
+>***Remove The External Function:***
+If the external function serves no specific function other than forwarding the call to the public function, consider removing it. Directly calling the public function can simplify the code.
+***Combine functionality:***
+Since there are legitimate use cases for both the external and public functions, consider consolidating their functionality into a single function with optional parameters. This can make the code more concise and easier to understand.
+Here is an example of how you can consolidate the functionality into a single transaction with optional parameters:
 ```
 function deposit(
     address _l2Receiver,
@@ -86,16 +85,6 @@ function deposit(
     emit DepositInitiated(l2TxHash, msg.sender, _l2Receiver, _l1Token, amount);
 }
 ```
-
-# Eth Tokens at Risk Dues to lack of address(0) Chech in deposit()
-### Summary
-***The `deposit` function does not check if the L2Reciever is address(0). For some tokens like USDC and USDT, it does check if the sender and receiver are not address(0) and revert it( so it is not necessary for the function to check it), but ETH token does not check for that, and will not revert to 0 address.
-
-# Vulnerability Details
-Since the dev described that the ETH token would be present in the contract somewhat the _deposit should check if any of the L2 receivers are address(0).
-
-
-
 # Unessecary Function in L2WETHBridge
 
 ## Summary
@@ -108,13 +97,38 @@ Since the dev described that the ETH token would be present in the contract some
 Manual Review
 
 ##### Recommendation
-
->***One function should be used since you want to check if the return value is valid proof you can use the [proveL2MessageInclusion](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L49C14-L49C37).***
-
+>One function should be used since you want to check if the return value is valid proof you can use the [proveL2MessageInclusion](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L49C14-L49C37).
 
 
+# Efficiency Concern in Metadata Information
+### Summary
+***The (_getERC20Getters)[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L240] function retrieves the metadata of the ERC-20 token every time it is called. This metadata includes the name, symbol, and decimals of the token. The information is encoded and included in the transaction call data sent to L2 for each deposit.***
 
+#### Recommendation
+>To improve efficiency and reduce gas consumption, one could consider caching metadata information for each ERC-20 token. Storing this information in the smart contract variables or using a cache mechanism to avoid repeatedly fetching the same metadata, would typically involve storing the metadata structure that maps ERC-20 token addresses to their corresponding metadata.
 
+# Unnecessary Modifiers in L1WETHBridge
+### Summary
+***Removing the `senderCanCallFunction` modifier from the [deposit](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L176) function would primarily affect the readability and maintainability of the code. From a functional perspective, it won't change how the code behaves, as the modifier is already being applied in the called function (requestL2Transaction).***
 
+#### Recommendation 
+>***Remove the Redundant Modifier:*** To streamline the code and enhance readability, you can remove the `senderCanCallFunction` modifier from the deposit function in both the [L1ERC20Bridge](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L176) and [L1ETHBridge](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L159) contracts. Since the modifier is already applied in the requestL2Transaction function, its removal from the deposit function doesn't impact the security or functionality of the system.
+***Code Documentation:*** After making this change, consider updating the code documentation to reflect the modification for the benefit of developers and auditors who may review the code in the future
 
+# Missing Commented-out Code
 
+### Summary
+***The code contains a block of commented-out code for "overheadForPublicData" which is not used. It seems to be an incomplete calculation and should either be removed or completed if it serves a purpose. Here! https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/TransactionValidator.sol#L155 in [getOverheadForTransaction](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/TransactionValidator.sol#L133). There must have been a miscalculation because it supposes to be the calculation not this [uint256 overheadForGas]https://github.com/code-423n4/2023-10-(zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/TransactionValidator.sol#L160)***
+
+##### Recommendation
+>Additionally, consider removing the commented-out code if it's not intended for use in the current implementation.
+
+# The initialization of key parameter in the initialize function lacks safety measures.
+### Summary
+***A critical parameter in initialize(...) is not set safely:***
+`s.governor` should be set to `msg.sender`, because a wrong governor address will result in loss of access to all other parts, and later changing the governor to the correct address.
+### Impact
+***Address will result in loss of access to all other parts, and later changing the governor to the correct address.***
+
+##### Recommendation
+>`s.governor` should be set to `msg.sender`,
