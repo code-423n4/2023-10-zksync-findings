@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Contracts may lose their funds if they bridge their WETH through L1WethBridge because there is no claimFailedDeposit() functionality",
+  "issueId": 434,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/434"
+}
