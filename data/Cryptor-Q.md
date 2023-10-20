@@ -19,3 +19,11 @@ can not have src0/dst0 in memory, but use sponges (UMA, near_call, far call, ret
 However, looking at the code the dst0 write restriction is also applied to log.rs
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/main_vm/opcodes/log.rs#L453
+
+
+
+L-03 No check for limit <= U32 MAX in main vm circuit 
+
+In each circuit, there is a check to make sure that the limit is U32 MAX. However, there is no check in the main VM circuit. This can potentially introduce unexpected behavior 
+
+
