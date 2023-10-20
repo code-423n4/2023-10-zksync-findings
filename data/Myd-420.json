@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Myd",
+  "risk": "2",
+  "title": "`onlyBridge` modifier lets l2Bridge access all contract functions, risking abuse.",
+  "issueId": 420,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/420"
+}
