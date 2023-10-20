@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "total Governance loss because Governance contract may be broken by an operation (permanent loss of zkSync Upgradability and DimonCut upgradability)",
+  "issueId": 465,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/465"
+}
