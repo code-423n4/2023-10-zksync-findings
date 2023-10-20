@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hals",
+  "risk": "2",
+  "title": "`Governance.cancel` function can cancel any operation that is a predecessor of another operation that's going to be executed in the future which leads to blocking these operations",
+  "issueId": 438,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/438"
+}
