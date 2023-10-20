@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hals",
+  "risk": "2",
+  "title": "A vulnunrability in `L1ERC20Bridge._verifyDepositLimit` function can prevent users from claiming their failed deposits",
+  "issueId": 440,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/440"
+}
