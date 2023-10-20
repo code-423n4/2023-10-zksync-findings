@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Time-sensitive contracts deployed on zkSync would make them fail",
+  "issueId": 452,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/452"
+}
