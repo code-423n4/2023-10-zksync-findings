@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xkazim",
+  "risk": "2",
+  "title": "unsafe down casting may led to unintended cases",
+  "issueId": 461,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/461"
+}
