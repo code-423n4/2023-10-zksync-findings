@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Myd",
+  "risk": "3",
+  "title": "High `FAIR_L2_GAS_PRICE` overcharges users for L2 transactions, impacting cost.",
+  "issueId": 411,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/411"
+}
