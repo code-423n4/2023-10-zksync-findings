@@ -87,8 +87,3 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/c
 Event name should be revised from `Block` to `Batch`.
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IExecutor.sol#L94-L106
 
-### Q15
-The top 4 bytes are cleared when retrieving the proof's public input. As for the 'verifier,' it falls outside the scope of the contest, so this unusual operation is not delved into further.
-https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L391
-Additionally, in the verifier, it is subjected to a bitwise 'and' operation with `FR_MASK`, which is `0x1fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff`. As a result, bytes 253 to 256 are always zero, regardless of the `FR_MASK` value. So, it is redundant to subject `FR_MASK` to a bitwise `and` operation with `publicInput`. 
-https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Verifier.sol#L523
