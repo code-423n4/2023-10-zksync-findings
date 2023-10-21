@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Cryptor",
+  "risk": "2",
+  "title": "No check on the empty queue could result in unexpected behavior and inefficient performance in the ecrecover circuit ",
+  "issueId": 528,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/528"
+}
