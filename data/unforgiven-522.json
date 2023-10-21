@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "User may lose ETH when creating L1->L2 transaction because of L1 gas price changes and user can't specify maxL1GasPrice for his transaction",
+  "issueId": 522,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/522"
+}
