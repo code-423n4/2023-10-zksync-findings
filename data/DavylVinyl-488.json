@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "payToTheBootloader function sends an amount of ETH to the BOOTLOADER_FORMAL_ADDRESS without any checks on the validity of the address or the amount",
+  "issueId": 488,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/488"
+}
