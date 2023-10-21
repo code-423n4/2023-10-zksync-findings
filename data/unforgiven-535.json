@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "L1->L2 priority queue and L2SystemContract upgrade transactions would revert in L2 because transactions don't get the required gas (that user specified and paid for it) for their execution by bootloader",
+  "issueId": 535,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/535"
+}
