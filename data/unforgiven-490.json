@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "validator or attacker can front-run execution of Shadow scheduled operation and commit malicious batches",
+  "issueId": 490,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/490"
+}
