@@ -160,3 +160,12 @@ There is a typo in the comment, it should mention `The type id of EIP2930 transa
 		uint8 constant EIP_2930_TX_TYPE = 0x01;
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L19-L20
+
+**[[12]]** 
+An important assert is missing in the bootloader because of an error in preprocessor value. `proved_batch` should be used instead of `proved_block`. This has the potential to be an Medium-High issue, but I was not able to get any proof of the negative impact this can bring, so only submitting as part of QA.
+```solidity
+        <!-- @if BOOTLOADER_TYPE=='proved_block' -->
+        assertEq(gt(getFrom(innerTxDataOffset), MAX_SYSTEM_CONTRACT_ADDR()), 1, "from in kernel space")
+        <!-- @endif -->
+```
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L2903-L2905
