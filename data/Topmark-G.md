@@ -101,3 +101,30 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/con
     }
 ```
 Note: The repetition should be removed only in _upgradeL2Blocks(...) as it has only one use case in the library while _setNewL2BlockData(...) has two use cases in the library
+###  Report 4:
+Assigning well defined and predictable expected results to constant variables will use excess gas each time this variable is called.
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Config.sol#L14
+```solidity
+ uint256 constant L2_TO_L1_LOG_SERIALIZE_SIZE = 88;
+
+/// @dev The maximum length of the bytes array with L2 -> L1 logs
+--- uint256 constant MAX_L2_TO_L1_LOGS_COMMITMENT_BYTES = 4 + L2_TO_L1_LOG_SERIALIZE_SIZE * 512;
++++ uint256 constant MAX_L2_TO_L1_LOGS_COMMITMENT_BYTES =45060;
+```
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Config.sol#L26
+```solidity
+uint256 constant INITIAL_STORAGE_CHANGE_SERIALIZE_SIZE = 64;
+
+/// @dev The maximum length of the bytes array with initial storage changes
+--- uint256 constant MAX_INITIAL_STORAGE_CHANGES_COMMITMENT_BYTES = 4 + INITIAL_STORAGE_CHANGE_SERIALIZE_SIZE * 4765;
++++ uint256 constant MAX_INITIAL_STORAGE_CHANGES_COMMITMENT_BYTES = 304964;
+```
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Config.sol#L33
+```solidity
+uint256 constant REPEATED_STORAGE_CHANGE_SERIALIZE_SIZE = 40;
+
+/// @dev The maximum length of the bytes array with repeated storage changes
+--- uint256 constant MAX_REPEATED_STORAGE_CHANGES_COMMITMENT_BYTES = 4 + REPEATED_STORAGE_CHANGE_SERIALIZE_SIZE * 7564;
++++ uint256 constant MAX_REPEATED_STORAGE_CHANGES_COMMITMENT_BYTES = 302564;
+```
+Note: comment description can be added to show how this variables are derived while saving gas
