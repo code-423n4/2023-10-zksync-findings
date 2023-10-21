@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "twcctop",
+  "risk": "2",
+  "title": "In  `L2Weth`, It’s possible for the totalSupply to not actually be the total number of L2Weth tokens in existence",
+  "issueId": 491,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/491"
+}
