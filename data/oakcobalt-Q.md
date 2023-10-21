@@ -383,19 +383,136 @@ Two `require` statements conflict with each other in allowing msg.data to pass t
 Recommendations:
 Either disallow ETH transfer and always only require `msg.data.length==4`. Or add an early return when `msg.data.length==0` to allow for ETH transfer.
 
-### Low 10 - Unused Interface Functions
+### Low 10 - Unused Interface Functions (Note: Instances listed here not found in automated reports)
 
-**Instances(1)**
+**Instances(5)**
 
 Interface functions are declared but never implemented in deriving contracts. This is unnecessary code.
 There are multiple instances of this issue in different contracts:
 
 (1):
 ```solidity
+// code/contracts/ethereum/contracts/zksync/interfaces/IBase.sol
+interface IBase {
+// @audit this getter function is not implemented anywhere in deriving contracts.
+// @audit getName is currently implemented as a public constant variable for every facet contract. 
+    function getName() external view returns (string memory);
+}
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/interfaces/IBase.sol#L4-L6)
+
+(2):
+```solidity
+// code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol
+
+// @audit this getter function is not implemented anywhere in deriving contracts.
+// @audit getAccessMode is currently implemented as a public variable. 
+function getAccessMode(address _target) external view returns (AccessMode);
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol#L38C5-L38C80)
+
+(3):
+```solidity
+// code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol
+
+// @audit this hasSpecialAccessToCall function is not implemented anywhere in deriving contracts.
+    function hasSpecialAccessToCall(
+        address _caller,
+        address _target,
+        bytes4 _functionSig
+    ) external view returns (bool);
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol#L40-L44)
+
+(4):
+```solidity
+// code/contracts/ethereum/contracts/bridge/interfaces/IL1Bridge.sol
+
+// @audit this isWithdrawalFinalized function is not implemented anywhere in deriving contracts.
+function isWithdrawalFinalized(uint256 _l2BatchNumber, uint256 _l2MessageIndex) external view returns (bool);
+
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/interfaces/IL1Bridge.sol#L19)
+
+(5):
+```solidity
+// code/contracts/ethereum/contracts/bridge/interfaces/IL1Bridge.sol
+
+// @audit this l2Bridge function is not implemented anywhere in deriving contracts.
+    function l2Bridge() external view returns (address);
+
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/interfaces/IL1Bridge.sol#L50)
+
+Recommendations:
+Implement unused interface functions above the deriving contracts.
+
+### Low 11 - Missing getter functions for key internal `AppStorage` state variables. Some important state accounting cannot be queried directly.
+
+**Instances(4)**
+
+`AppStorage` is declared as an internal struct variable in Base.sol and its important struct member values need to be queried from Getters.sol.  
+
+In Storage.sol, there are a few key `Appstorage` struct members that do not have any getter functions to query their states in Getters.sol or other facet contracts. This makes their values not accessible directly. 
+
+Except for the (4) instances below, all other non-deprecated private variables have getter functions. For example, `governor` and `pending governor` have their getter functions but `admin` and `pending admin` do not have any getters. And user accounting like `totalDepositedAmountPerUser` needs to have a getter otherwise, since there is no event emitted for this variable value change either, as a result, the important accounting info cannot be queried.
+
+(1):
+```solidity
+// code/contracts/ethereum/contracts/zksync/Storage.sol
+
+    /// @dev A mapping user address => the total deposited amount by the user
+    //@audit not implemented in Getters.sol
+    mapping(address => uint256) totalDepositedAmountPerUser;
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L133)
+
+(2):
+```solidity
+// code/contracts/ethereum/contracts/zksync/Storage.sol
+    /// @dev Address which will exercise non-critical changes to the Diamond Proxy (changing validator set & unfreezing)
+    //@audit not implemented in Getters.sol
+    address admin;
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L143)
+
+(3):
+```solidity
+// code/contracts/ethereum/contracts/zksync/Storage.sol
+    /// @notice Address that the governor or admin proposed as one that will replace admin role
+    //@audit not implemented in Getters.sol
+    address pendingAdmin;
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L145)
+
+(4):
+```solidity
+// code/contracts/ethereum/contracts/zksync/Storage.sol
+    /// @dev Indicates that the porter may be touched on L2 transactions.
+    /// @dev Used as an input to zkp-circuit.
+    //@audit not implemented in Getters.sol
+    bool zkPorterIsAvailable;
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L116)
+
+Recommendations: 
+Add corresponding getter functions in Getters.sol for the instances above.
+
+### Low 12 - Merkle.sol library cannot handle an edge case of a large Merkle tree and will revert.
+
+**Instances(1)**
+
+Although in the context of L1Messenger.sol, only fixed-size merkle tree will be used in this context. However, as a general library contract, Merkle.sol has a flawed `require` statement, which might prevent it from being used in other contexts or in future implementations. 
+
+In Merkle.sol - `calculateRoot()`, `uint256 _index` representing leaf index in a tree is passed and the proof `_path` length is passed as a dynamic `bytes32` array. Since `_index` allows maximum total 2^256 number of leaves/nodes, the maximum tree height would be 256, which means the maximum array size is 256 not 255. 
+
+We see that in the `require` statements `_path` length is checked to be within (0,256), where it should be (0,256]. This will cause reverts when a Merkle tree is 256 in height, which requires 256 elements of `_path` array to be passed. 
+
+```solidity
+// code/contracts/ethereum/contracts/zksync/libraries/Merkle.sol
 
 
 ```
-
 
 
 
