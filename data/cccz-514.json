@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "cccz",
+  "risk": "3",
+  "title": "ForceDeployUpgrader: Anyone can call forceDeploy() to call DEPLOYER_SYSTEM_CONTRACT.forceDeployOnAddresses()",
+  "issueId": 514,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/514"
+}
