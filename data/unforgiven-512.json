@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "Users Account can be broken because isSystem flag logic is different in bootloader and defaultAccount and bootloader allows for calling any method of ContractDeployer with isSystem",
+  "issueId": 512,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/512"
+}
