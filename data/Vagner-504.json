@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Vagner",
+  "risk": "2",
+  "title": "`_isValidSignature` in `DefaultAccount.sol` is not compliant to EIP1271 as stated in the documentation ",
+  "issueId": 504,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/504"
+}
