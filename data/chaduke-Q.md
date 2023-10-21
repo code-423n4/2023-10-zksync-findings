@@ -149,3 +149,34 @@ QA6. Diamond._replaceFunctions() does not check whether the old facet is the sam
 
 Mitigation: 
 check whether the old facet is the same as the new facet for a function that needs to be replaced.
+
+QA7. Unlike other functions, ``SystemContractHelper.eventInitialize()`` does not clean input param ``_address``  as it is NOT cleaned by Solidity by default. As a result, this input might be dirty and might lead to unexpected result. 
+
+[https://github.com/code-423n4/2023-03-zksync/blob/21d9a364a4a75adfa6f1e038232d8c0f39858a64/contracts/libraries/EfficientCall.sol#L186-L205](https://github.com/code-423n4/2023-03-zksync/blob/21d9a364a4a75adfa6f1e038232d8c0f39858a64/contracts/libraries/EfficientCall.sol#L186-L2050
+
+Mitigation:
+
+```diff
+function rawMimicCall(
+        uint256 _gas,
+        address _address,
+        bytes calldata _data,
+        address _whoToMimic,
+        bool _isConstructor,
+        bool _isSystem
+    ) internal returns (bool success) {
+        _loadFarCallABIIntoActivePtr(_gas, _data, _isConstructor, _isSystem);
+
+        address callAddr = MIMIC_CALL_BY_REF_CALL_ADDRESS;
+        uint256 cleanupMask = ADDRESS_MASK;
+        assembly {
+            // Clearing values before usage in assembly, since Solidity
+            // doesn't do it by default
+            _whoToMimic := and(_whoToMimic, cleanupMask)
+
++           _address := and(_address, cleanupMask)
+            success := call(_address, callAddr, 0, 0, _whoToMimic, 0, 0)
+        }
+    }
+
+```
