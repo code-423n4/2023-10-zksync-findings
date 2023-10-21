@@ -150,9 +150,9 @@ QA6. Diamond._replaceFunctions() does not check whether the old facet is the sam
 Mitigation: 
 check whether the old facet is the same as the new facet for a function that needs to be replaced.
 
-QA7. Unlike other functions, ``SystemContractHelper.eventInitialize()`` does not clean input param ``_address``  as it is NOT cleaned by Solidity by default. As a result, this input might be dirty and might lead to unexpected result. 
+QA7. Unlike other functions, ``Efficientcall.rawMimicCall()`` does not clean input param ``_address``  as it is NOT cleaned by Solidity by default. As a result, this input might be dirty and might lead to unexpected result. 
 
-[https://github.com/code-423n4/2023-03-zksync/blob/21d9a364a4a75adfa6f1e038232d8c0f39858a64/contracts/libraries/EfficientCall.sol#L186-L205](https://github.com/code-423n4/2023-03-zksync/blob/21d9a364a4a75adfa6f1e038232d8c0f39858a64/contracts/libraries/EfficientCall.sol#L186-L2050
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/EfficientCall.sol#L191-L210](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/EfficientCall.sol#L191-L210)
 
 Mitigation:
 
@@ -178,5 +178,46 @@ function rawMimicCall(
             success := call(_address, callAddr, 0, 0, _whoToMimic, 0, 0)
         }
     }
+```
 
+QA8.  Unlike other functions, ``Efficientcall.rawcall()`` does not clean input param ``_address``  as it is NOT cleaned by Solidity by default. As a result, this input might be dirty and might lead to unexpected result.
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/EfficientCall.sol#L124C14-L152](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/EfficientCall.sol#L124C14-L152)
+
+Mitigation:
+
+```diff
+ function rawCall(
+        uint256 _gas,
+        address _address,
+        uint256 _value,
+        bytes calldata _data,
+        bool _isSystem
+    ) internal returns (bool success) {
++       uint256 cleanupMask = ADDRESS_MASK;
+        if (_value == 0) {
+            _loadFarCallABIIntoActivePtr(_gas, _data, false, _isSystem);
+
+            address callAddr = RAW_FAR_CALL_BY_REF_CALL_ADDRESS;
+            assembly {
++               _address := and(_address, cleanupMask)
+                success := call(_address, callAddr, 0, 0, 0xFFFF, 0, 0)
+            }
+        } else {
+            _loadFarCallABIIntoActivePtr(_gas, _data, false, true);
+
+            // If there is provided `msg.value` call the `MsgValueSimulator` to forward ether.
+            address msgValueSimulator = MSG_VALUE_SYSTEM_CONTRACT;
+            address callAddr = SYSTEM_CALL_BY_REF_CALL_ADDRESS;
+            // We need to supply the mask to the MsgValueSimulator to denote
+            // that the call should be a system one.
+            uint256 forwardMask = _isSystem ? MSG_VALUE_SIMULATOR_IS_SYSTEM_BIT : 0;
+
+            assembly {
++               _address := and(_address, cleanupMask)
+
+                success := call(msgValueSimulator, callAddr, _value, _address, 0xFFFF, forwardMask, 0)
+            }
+        }
+    }
 ```
