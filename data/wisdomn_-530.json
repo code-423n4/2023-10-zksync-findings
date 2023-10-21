@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "wisdomn_",
+  "risk": "3",
+  "title": "function transferFromTo is vulnerable to zero transfer attack which can lead to a loss of funds.",
+  "issueId": 530,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/530"
+}
