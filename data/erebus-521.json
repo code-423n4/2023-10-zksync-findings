@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "erebus",
+  "risk": "2",
+  "title": "Calling `getCodeHash` for *touched* accounts will return 0 instead of EMPTY_STRING_KECCAK",
+  "issueId": 521,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/521"
+}
