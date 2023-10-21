@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "it's not possible to create L2SystemUpgrade transaction that has msg.value > 0 while the L2 contract may require this type of update transaction",
+  "issueId": 499,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/499"
+}
