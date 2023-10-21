@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "Lack of Range Checks for Input Data",
+  "issueId": 492,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/492"
+}
