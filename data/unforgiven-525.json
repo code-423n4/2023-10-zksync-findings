@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "attacker can perform DOS against L1->L2 bridge with very low cost",
+  "issueId": 525,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/525"
+}
