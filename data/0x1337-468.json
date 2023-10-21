@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0x1337",
+  "risk": "3",
+  "title": "Incorrect Assert Statement Causes All Batches Commitment Verification to Fail",
+  "issueId": 468,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/468"
+}
