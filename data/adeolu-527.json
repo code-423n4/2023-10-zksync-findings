@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "if a batch with systemUpgrageTx is reverted via revertBatches(),  new batches with no system contract upgrades will be committed as batches with system contract upgrades. ",
+  "issueId": 527,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/527"
+}
