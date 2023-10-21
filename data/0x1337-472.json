@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0x1337",
+  "risk": "2",
+  "title": "CURRENT_MAX_PRECOMPILE_ADDRESS Is Not Updated And Causes getCodeHash() and getCodeSize() Functions to Deviate From Intended EVM Behavior under Certain Situations",
+  "issueId": 472,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/472"
+}
