@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "wrong require condition in L1Messenger.publishPubdataAndClearState() which is always true and doesn't check numberOfL2ToL1Logs",
+  "issueId": 474,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/474"
+}
