@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "The `fallback` function in the Default lacks `payable` modifier.",
+  "issueId": 517,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/517"
+}
