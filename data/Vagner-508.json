@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Vagner",
+  "risk": "3",
+  "title": "`ForceDeployUpgrader` contract that is used as an implementation of the `ComplexUpgrader` contract, does not have a payable function which would make upgrading impossible if `msg.value` > 0 ",
+  "issueId": 508,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/508"
+}
