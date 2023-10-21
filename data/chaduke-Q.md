@@ -182,6 +182,9 @@ function rawMimicCall(
 
 QA8.  Unlike other functions, ``Efficientcall.rawcall()`` does not clean input param ``_address``  as it is NOT cleaned by Solidity by default. As a result, this input might be dirty and might lead to unexpected result.
 
+same issue for: ``Efficientcall.rawDelegateCall()``, ``Efficientcall.rawStaticCall()``, ``rawCall()``.
+
+
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/EfficientCall.sol#L124C14-L152](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/EfficientCall.sol#L124C14-L152)
 
 Mitigation:
