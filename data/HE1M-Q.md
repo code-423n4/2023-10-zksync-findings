@@ -87,3 +87,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/c
 Event name should be revised from `Block` to `Batch`.
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IExecutor.sol#L94-L106
 
+### Q15
+Missing interface `extendedAccountVersion` in `IContractDeployer`:
+https://github.com/matter-labs/era-system-contracts/blob/main/contracts/ContractDeployer.sol#L39
+
