@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "cergyk",
+  "risk": "3",
+  "title": "Lack of non-zero check for product during permutation argument reduces scheme security, malicious prover can introduce arbitrary storage writes",
+  "issueId": 529,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/529"
+}
