@@ -91,4 +91,31 @@ As can also be confirmed from the code above inside the _processL2Logs(...) func
 Manual Review
 ## Recommended Mitigation Steps
 Necessary validation should be done for l2LogsTreeRoot to ensure it is as expected from the log value before commitment.
-
+### Report 3:
+Repetition of validation as against comment Description
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L352-L369
+```solidity
+       // We allow skipping the zkp verification for the test(net) environment
+        // If the proof is not empty, verify it, otherwise, skip the verification
+        if (_proof.serializedProof.length > 0) {
+            bool successVerifyProof = s.verifier.verify(
+                proofPublicInput,
+                _proof.serializedProof,
+                _proof.recursiveAggregationInput
+            );
+            require(successVerifyProof, "p"); // Proof verification fail
+        }
+        // #else
+---      bool successVerifyProof = s.verifier.verify(
+---         proofPublicInput,
+---         _proof.serializedProof,
+---         _proof.recursiveAggregationInput
+---     );
+---     require(successVerifyProof, "p"); // Proof verification fail
+        // #endif
+```
+The comment in the code above clearly state that "If the proof is not empty, verify it, otherwise, skip the verification", but verify(..) was called again outside the if condition, this will cause
+ 1. Overlapping declaration of bool successVerifyProof when the if condition holds true
+ 2. Excess usage of gas due to double function call
+ 3. Unnecessary verification when what is to be verified is empty i.e when _proof.serializedProof.length == 0.
+The bool successVerifyProof outside the if condition should be removed.
