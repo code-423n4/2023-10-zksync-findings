@@ -1,14 +1,11 @@
 # GAS OPTIMIZATIONS
+																																																																																																																						##
 
-In structs can be used structs for saving gas for same type variables 
-
-																																																																																																																												##
-
-## [G-] Structs can be packed into fewer storage slots	
+## [G-] Improving storage efficiency through ``Struct Packing``	
 
 Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct. Subsequent reads as well as writes have smaller gas savings.
 
-### ``protocolVersion`` can be ``uint96`` instead of ``uint256`` : Saves ``2000 GAS`` , ``1 SLOT``
+### ``protocolVersion`` and ``l2SystemContractsUpgradeBatchNumber`` can be ``uint96`` instead of ``uint256`` : Saves ``4000 GAS`` , ``2 SLOT``
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L136
 
@@ -17,6 +14,8 @@ The ``protocolVersion`` value is increased in a sequential way, meaning that the
 ``2^96`` is a very large number, and it is unlikely that any protocol would ever need to be upgraded more than this many times. For example, the ``Ethereum protocol`` has only been upgraded a ``handful of times`` since it was launched in 2015.
 
 Therefore, it is safe to change the ``protocolVersion`` variable to ``uint96`` without worrying about the value overflowing. This will save ``2000 gas`` and ``1 slot``, which can be significant for contracts that are frequently upgraded.
+
+This variable, ``l2SystemContractsUpgradeBatchNumber``, represents the batch number of the latest upgrade transaction. If its value is 0, it signifies that no upgrade transactions have occurred. The use of ``uint96 `` is more than adequate for this context.
 
 
 ```diff
@@ -85,7 +84,8 @@ struct AppStorage {
     bytes32 l2SystemContractsUpgradeTxHash;
     /// @dev Batch number where the upgrade transaction has happened. If 0, then no upgrade transaction has happened
     /// yet.
-    uint256 l2SystemContractsUpgradeBatchNumber;
+-    uint256 l2SystemContractsUpgradeBatchNumber;
++    uint96 l2SystemContractsUpgradeBatchNumber;
     /// @dev Address which will exercise non-critical changes to the Diamond Proxy (changing validator set & unfreezing)
     address admin;
     /// @notice Address that the governor or admin proposed as one that will replace admin role
@@ -166,6 +166,36 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/interfaces/IMailbo
 
 ##
 
+## [G-] Replacing booleans with ``uint256(1)``/``uint256(2)`` for gas optimization
+
+### Saves ``100000 GAS`` from ``5 Instances``
+
+Avoids a Gsset (20000 gas) when changing from false to true, after having been true in the past. Since most of the bools aren't changed twice in one transaction, I've counted the amount of gas as half of the full amount, for each variable.
+
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
+
+87: mapping(address => bool) validators;
+
+116: bool zkPorterIsAvailable;
+
+127: mapping(uint256 => mapping(uint256 => bool)) isEthWithdrawalFinalized;
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L87
+
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
+
+32: bool isFreezable;
+
+53: bool isFrozen;
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L32
+
+##
+
 ## [G-] Multiple address/ID mappings can be combined into a single mapping of an address/ID to a struct, where appropriate
 
 Saves a storage slot for the mapping. Depending on the circumstances and sizes of types, can avoid a Gsset (20000 gas) per mapping combined. Reads and subsequent writes can also be cheaper when a function requires both values and they both fit in the same storage slot. Finally, if both fields are accessed in the same function, can save ~42 gas per access due to not having to recalculate the key's keccak256 hash (Gkeccak256 - 30 gas) and that calculation's associated stack operations.
@@ -178,15 +208,11 @@ FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage
 100:    /// @dev Stored root hashes of L2 -> L1 logs
 101: mapping(uint256 => bytes32) l2LogsRootHashes;
 
-
-87:  mapping(address => bool) validators;
-133: mapping(address => uint256) totalDepositedAmountPerUser;
-
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L99-L101
 
 ##
-																																												## [G-] State variables should be cached in stack variables rather than re-reading them from storage	
+																																												## [G-] ``totalDepositedAmountPerUser[_l1Token][_depositor]`` should be cached
 
 The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
 
@@ -210,15 +236,13 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 ##
 
-## [G-] Combine events to save Glogtopic (375 gas)
+## [G-] Efficient event consolidation for ``Glogtopic`` Gas Savings
 
-We can combine the events into one singular event to save two Glogtopic (375 gas) that would otherwise be paid for the additional events.
+We can combine the events into one singular event to save two Glogtopic ``(375 gas)`` that would otherwise be paid for the additional events. Saves ``750 GAS``
 
-### 
 
 ```diff
-FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets
-/Admin.sol
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Admin.sol
 
 - 37: emit NewPendingGovernor(pendingGovernor, address(0));
 - 38: emit NewGovernor(previousGovernor, pendingGovernor);
@@ -232,11 +256,12 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets
 + PendingAndNewAdmin(pendingAdmin, address(0),previousAdmin,pendingAdmin);
 
 ```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L37-L38
 																																																																																										##
 
-## [G-] Optimize Gas Usage by Avoiding Variable Declarations Inside Loops
+## [G-] Optimize gas usage by avoiding variable declarations inside loops
 
-The variables ``action``, ``facet``, ``isFacetFreezable``, and ``selectors`` are all declared inside the loop. This means that a new instance of each variable will be created for each iteration of the loop. Saves 200-300 Gas per iteration
+The variables ``action``, ``facet``, ``isFacetFreezable``, and ``selectors`` are all declared inside the loop. This means that a new instance of each variable will be created for each iteration of the loop. Saves ``200-300 Gas`` per iteration
 
 ```solidity
 
@@ -287,27 +312,80 @@ index 0b1fbdc..2f3cf9e 100644
 
 ```
 
-###
+### Saves 13 GAS
 
+```diff
+FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
++    bytes32 hashedBytecode ;
+ for (uint256 i = 0; i < factoryDepsLen; i = i.uncheckedInc()) {
+-            bytes32 hashedBytecode = L2ContractHelper.hashL2Bytecode(_factoryDeps[i]);
++            hashedBytecode = L2ContractHelper.hashL2Bytecode(_factoryDeps[i]);
 
+            // Store the resulting hash sequentially in bytes.
+            assembly {
+                mstore(add(hashedFactoryDeps, mul(add(i, 1), 32)), hashedBytecode)
+            }
 
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L396-L401
 
+```diff
+FILE: 
+
+```
 
 ##
 
-## [G-] Place ``require() and ``if()`` checks in top of the functions to avoid unnecessary gas 
+## [G-] Use dot notation method for struct assignment 
 
-> FAIL CHEEPLY INSTEAD OF COSTLY
+We have a few methods we can use when assigning values to struct
 
-Checks that involve constants should come before checks that involve state variables, function calls, and calculations. By doing these checks first, the function is able to revert before wasting a Gcoldsload (2100 gas*) in a function that may ultimately revert in the unhappy case.
+ - Type({field1: value1, field2: value2});
+ - Type(value1,value2);
+ - dot notation(structObject.field = value1);
 
-### First check the ``amount`` then call ``zkSync.proveL1ToL2TransactionStatus()`` costly external call : Saves ``2100 GAS``
+### Saves ``135 GAS``
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L223-L227
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
+
+- ds.selectorToFacet[_selector] = SelectorToFacet({
+-            facetAddress: _facet,
+-            selectorPosition: selectorPosition,
+-            isFreezable: _isSelectorFreezable
+-        });
+
++ ds.selectorToFacet[_selector].facetAddress = _facet ;
++ ds.selectorToFacet[_selector].selectorPosition = selectorPosition ;
++ ds.selectorToFacet[_selector].isFreezable= _isSelectorFreezable ;
+
+```
+
+##
+
+## [G-] ``!_checkBit(processedLogs, uint8(logKey)`` this check is redundant when ``processedLogs`` is 0
+
+The bitwise AND operator (&) returns a 1 only if both operands have a 1 in the same position. In this case, processedLogs is 0, which means that all of its bits are 0. Therefore, the result of the AND operation will always be 0, regardless of the value of ``logKey`` . If its first iteration in for loop then ``processedLogs`` comes with default value 0 .
+
+```solidity
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.sol
+
+130: require(!_checkBit(processedLogs, uint8(logKey)), "kp");
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L130
+
+##
+
+## [G-] The ``claimFailedDeposit()`` function can be refactored for greater gas efficiency 
+
+Gas savings can be achieved by initially verifying the ``amount`` before invoking the ``zkSync.proveL1ToL2TransactionStatus()`` function. This optimization is due to the costly nature of the ``zkSync.proveL1ToL2TransactionStatus()`` function, which should only be called when the ``amount`` is greater than zero
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L255-L275
-
-Can save gas by first checking the ``amount`` before calling the ``zkSync.proveL1ToL2TransactionStatus()`` function. This is because the ``zkSync.proveL1ToL2TransactionStatus()`` function is a costly external call, and it is only necessary to make the call if the ``amount`` is greater than zero.
-
 
 ```diff
 FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
@@ -341,7 +419,11 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 ```
 
-### Caching ``diamondStorage`` before ``msg.data.length >= 4 || msg.data.length == 0`` check wastes the gas if any reverts in require check : Saves ``2100 GAS``
+##
+
+## [G-] Optimize the ``fallback()`` function for better gas efficiency 
+
+### Caching ``diamondStorage`` before the ``msg.data.length >= 4 || msg.data.length == 0`` check can result in gas savings unless there's a revert in the require check, saving ``2100 GAS``
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L20-L25 
 
@@ -358,7 +440,12 @@ FILE : 2023-10-zksync/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
 
 ```
 
-### ``_newBatchesData.length > 0`` parameter should be checked before ``s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData)`` before state variable with function calling . Saves ``500 GAS``
+##
+
+## [G-] Optimize the ``commitBatches()`` function for better gas efficiency 
+
+
+The parameter ``_newBatchesData.length > 0`` should be checked before evaluating ``s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData)`` when dealing with state variables in a function call. This optimization can lead to a savings of ``500 GAS``
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
 
@@ -373,7 +460,11 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L183-L185
 
-### Check ``_l2GasPerPubdataByteLimit``  parameter before any other operations : Saves ``200 GAS``
+##
+
+## [G-]  Optimize the ``requestL2Transaction()`` function for better gas efficiency 
+
+Prioritize the check of the ``_l2GasPerPubdataByteLimit`` parameter before performing any other operations, resulting in a savings of ``200 GAS``
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L257
 
@@ -406,8 +497,6 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 -        require(_l2GasPerPubdataByteLimit == REQUIRED_L2_GAS_PRICE_PER_PUBDATA, "qp");
 
 ```
-
-
 
 ##
 
@@ -531,8 +620,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ## [G-] Don't cache immutable variable incurs extra Gas
 
- 
-```diff
+ ```diff
 FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
  function _propagateToZkSync() internal {
@@ -655,98 +743,12 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L87-L94
 
-###
 
-
-```diff
-FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
-
-
-```
-
-##
-
-## [G-] Use uint256(1)/uint256(2) instead of true/false to save gas for changes
-
-#### Note this instances are not found by bot 
-
-Avoids a Gsset (20000 gas) when changing from false to true, after having been true in the past. Since most of the bools aren't changed twice in one transaction, I've counted the amount of gas as half of the full amount, for each variable.
-
-```solidity
-FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage.sol
-
-32:  bool approvedBySecurityCouncil;
- 
-49: bool isService;
-
-87: mapping(address => bool) validators;
-
-116: bool zkPorterIsAvailable;
-
-127: mapping(uint256 => mapping(uint256 => bool)) isEthWithdrawalFinalized;
-
-```
-https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L87
-
-```solidity
-FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
-
-32: bool isFreezable;
-
-53: bool isFrozen;
-
-64: bool isFreezable;
-
-```
-https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L32
 																							
-##																																																																																																																																																## [G-] Using private rather than public for constants, saves gas	
-
-If needed, the values can be read from the verified contract source code, or if there are multiple values there can be a single getter function that returns a [tuple of the values](https://github.com/code-423n4/2022-08-frax/blob/90f55a9ce4e25bceed3a74290b854341d8de6afa/src/contracts/FraxlendPair.sol#L156-L178) of all currently-public constants. Saves 3406-3606 gas in deployment gas due to the compiler not having to create non-payable getter functions for deployment calldata, not having to store the bytes of the value outside of where it's used, and not adding another entry to the method ID table																								
-																										
-			File: tapioca-bar-audit/contracts/Penrose.sol																							
-			45:       uint256 public immutable tapAssetId;																							
-			53:       uint256 public immutable wethAssetId;																							
-																										
-																										
-			41:       uint256 public constant INITIAL_SUPPLY = 46_686_595 * 1e18; // Everything minus DSO																							
-			49:       uint256 public constant WEEK = 604800;																							
-			53:       uint256 public immutable emissionsStartTime;	
-
-
-FALSE	Don't compare boolean expressions to boolean literals	if (<x> == true) => if (<x>), if (<x> == false) => if (!<x>)																								
-			175:              isSingularityMasterContractRegistered[mc] == true,																							
-			183:              isBigBangMasterContractRegistered[mc] == true,																							
-			322:              isSingularityMasterContractRegistered[mcAddress] == false,																							
-			344:              isBigBangMasterContractRegistered[mcAddress] == false,																							
-																										
-FALSE	Multiple if-statements with mutually-exclusive conditions should be changed to if-else statements	If two conditions are the same, their blocks should be combined																								
-			264           if (borrowPartDecimals > 18) {																							
-			265               borrowPartScaled = borrowPart / (10 ** (borrowPartDecimals - 18));																							
-			266           }																							
-			267           if (borrowPartDecimals < 18) {																							
-			268               borrowPartScaled = borrowPart * (10 ** (18 - borrowPartDecimals));																							
-			269:          }																							
-			272           if (collateralPartDecimals > 18) {																							
-			273               collateralPartInAssetScaled =																							
-			274                   collateralPartInAsset /																							
-			275                   (10 ** (collateralPartDecimals - 18));																							
-			276           }	
-
-
-
 
 																								
-																																																																												
-																										
-	
-
-
-																							
-
-
-
-Is this possible to cache any external function calls inside the loop
+																																																																																																				
+																						Is this possible to cache any external function calls inside the loop
 
 Is this possible to avoid internal functions?
 
@@ -755,8 +757,7 @@ if any return functions functions first return less gas value lastly return most
 Only cache memory or storage inside the condition checks if possible 
 
 
-struct names can be aligned with order same like chainlink findings to target alex 
 
-
+Is there any calculations used repeatedly ?
 																																																																					
 																																																																																																																			
