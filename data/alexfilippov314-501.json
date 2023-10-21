@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "alexfilippov314",
+  "risk": "2",
+  "title": "Lack of explicit checks of the `gasLimit` and the `gasPerPubdataByteLimit` during validation of the l1 to l2 transactions",
+  "issueId": 501,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/501"
+}
