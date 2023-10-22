@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Sathish9098",
+  "risk": "2",
+  "title": "Risk of Potential Denial of Service (DOS) on Pending Deposits in Case of Sudden Deposit Cap Decrease by OnlyOwner",
+  "issueId": 635,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/635"
+}
