@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "Vulnerability that  allows the attacker to underpay the deployment fees due to lack of  checks that deployBridgeImplementationFee + deployBridgeProxyFee equals msg.value.",
+  "issueId": 649,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/649"
+}
