@@ -26,4 +26,4 @@ In [Mailbox, function _verifyDepositLimit](https://github.com/code-423n4/2023-10
     }
 ```
 
-Consider removing the whole function as it "will" (see my QA `L-02`) return without changing the state of the contract. That way you save gas on both execution and deployment, as the bytecode size is smaller.
+Consider removing the whole function as it "will" (see my QA `L-02`) return without changing the state of the contract (tautology). That way you save gas on both execution and deployment, as the bytecode size is smaller.
