@@ -109,4 +109,4 @@ when message gets to L1, `finaliseWithdrawal()` is called and it will validate t
 ```
 
 ## Recommended mitigation
-change the design and implement a mechanism for claiming failed withdrawals when doing L2 to L1 token bridging. 
+change the design and implement a mechanism for claiming failed withdrawals when doing L2 to L1 token bridging or ban tokens with blocklists from the bridge 
