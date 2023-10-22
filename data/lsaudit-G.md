@@ -1,6 +1,6 @@
 As stated in the scope - the Gas Report had been prepared for L1 contracts only.
 
-# [G-01] Pre-calculate keccak256 for constant variables in `ethereum/contracts/common/libraries/L2ContractHelper.sol`
+# [G-01] Pre-calculate keccak256 for constant variables in `L2ContractHelper.sol`
 
 
 
@@ -11,7 +11,7 @@ bytes32 constant CREATE2_PREFIX = keccak256("zksyncCreate2");
 ```
 
 
-# [G-02] Length of `_bytecode` is calculated twice in `ethereum/contracts/common/libraries/L2ContractHelper.sol`
+# [G-02] Length of `_bytecode` is calculated twice in `L2ContractHelper.sol`
 
 Calculating length of bytes every time costs gas. The better solution would be to calculate the length once and save it in a local variable:
 
@@ -31,7 +31,7 @@ can be changed to:
         uint256 bytecodeLenInWords = _bytecodeLength / 32;
 ```
 
-# [G-03] `require` in `hashL2Bytecode` in `ethereum/contracts/common/libraries/L2ContractHelper.sol` can be moved on top
+# [G-03] `require` in `hashL2Bytecode` in `L2ContractHelper.sol` can be moved on top
 
 [File: ethereum/contracts/common/libraries/L2ContractHelper.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/libraries/L2ContractHelper.sol#L23-L26)
 ```
@@ -68,7 +68,7 @@ Moreover, please keep in mind, to cache `_bytecode.length` into local variable -
         uint256 bytecodeLenInWords = _bytecodeLength / 32;
 ```
 
-# [G-04] Unnecessary variables in `ethereum/contracts/common/libraries/L2ContractHelper.sol`
+# [G-04] Unnecessary variables in `L2ContractHelper.sol`
 
 * Function `validateBytecodeHash`
 
@@ -110,7 +110,7 @@ to:
         return address(uint160(uint256(keccak256(bytes.concat(CREATE2_PREFIX, bytes32(uint256(uint160(_sender))), _salt, _bytecodeHash, _constructorInputHash)))));
 ```
 
-# [G-05] Unnecessary variable in `ethereum/contracts/common/AllowList.sol`
+# [G-05] Unnecessary variable in `AllowList.sol`
 
 * Function `_setPermissionToCall`
 
@@ -132,7 +132,7 @@ to:
 ```
 
 
-# [G-06] Length of `_factoryDeps` is calculated multiple of times in `_verifyFactoryDeps` in `ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol`.
+# [G-06] Length of `_factoryDeps` is calculated multiple of times in `_verifyFactoryDeps` in `BaseZkSyncUpgrade.sol`.
 
 Calculating length of array cost gas. Instead of doing it every time, calculate it once and assign that value to local variable.
 
@@ -150,7 +150,7 @@ Calculating length of array cost gas. Instead of doing it every time, calculate 
 ```
 
 
-# [G-07] Unnecessary variable in `ethereum/contracts/bridge/libraries/BridgeInitializationHelper.sol`
+# [G-07] Unnecessary variable in `BridgeInitializationHelper.sol`
 
 * Function `requestDeployTransaction`
 Variable `deployCalldata` is used only once, which means it doesn't need to be declared at all.
@@ -193,7 +193,7 @@ to:
 
 
 
-# [G-08] Unnecessary variables in `ethereum/contracts/bridge/L1WethBridge.sol`
+# [G-08] Unnecessary variables in `L1WethBridge.sol`
 
 * Function `initialize`
 Variables `l2WethBridgeImplementationBytecodeHash` and `l2WethBridgeProxyBytecodeHash` are used only once, which means they don't need to be declared at all.
@@ -282,7 +282,7 @@ to:
             }), _merkleProof), "vq");
 ```
 
-# [G-09] Check if `amount` is greater than zero before performing `safeTransfer` in `ethereum/contracts/bridge/L1WethBridge.sol`
+# [G-09] Check if `amount` is greater than zero before performing `safeTransfer` in `L1WethBridge.sol`
 
 [File: ethereum/contracts/bridge/L1WethBridge.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L263)
 ```
@@ -293,7 +293,7 @@ to:
 To save gas, check if `amount` is greater than 0, before calling `safeTransfer`.
 
 
-# [G-10] Do not assign `offset` in the last call of `UnsafeBytes.readAddress` in `ethereum/contracts/bridge/L1WethBridge.sol`
+# [G-10] Do not assign `offset` in the last call of `UnsafeBytes.readAddress` in `L1WethBridge.sol`
 
 A simple test in Remix IDE has been created, to compare gas usage of assigning more than one value from function call:
 
@@ -325,7 +325,7 @@ In the last call of `UnsafeBytes.readAddress(_message, offset)` (line 298):
 ```
 we won't need `offset` anymore, thus we can change line 298 to: `(l1WethReceiver, ) = UnsafeBytes.readAddress(_message, offset)`.
 
-# [G-11] Unnecessary variables in `ethereum/contracts/bridge/L1ERC20Bridge.sol`
+# [G-11] Unnecessary variables in `L1ERC20Bridge.sol`
 
 * Function `initialize`
 
@@ -468,7 +468,7 @@ to:
         return L2ContractHelper.computeCreate2Address(l2Bridge, bytes32(uint256(uint160(_l1Token))), l2TokenProxyBytecodeHash, keccak256(abi.encode(address(l2TokenBeacon), "")));
 ```
 
-# [G-12] Calculation which won't underflow can be unchecked in `ethereum/contracts/bridge/L1ERC20Bridge.sol`
+# [G-12] Calculation which won't underflow can be unchecked in `L1ERC20Bridge.sol`
 [File: ethereum/contracts/bridge/L1ERC20Bridge.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L221)
 ```
 return balanceAfter - balanceBefore;
@@ -476,7 +476,7 @@ return balanceAfter - balanceBefore;
 Since `balanceAfter` contains token's balance after the transfer, and `balanceBefore` contains token's balance before the transfer, we know, that `balanceAfter >= balanceBefore`, thus `balanceAfter - balanceBefore` will never underflow and can be unchecked.
 
 
-# [G-13] Check if `amount` is greater than zero before performing `safeTransfer` in `ethereum/contracts/bridge/L1ERC20Bridge.sol`
+# [G-13] Check if `amount` is greater than zero before performing `safeTransfer` in `L1ERC20Bridge.sol`
 
 [File: ethereum/contracts/bridge/L1ERC20Bridge.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L317)
 ```
@@ -487,7 +487,7 @@ Since `balanceAfter` contains token's balance after the transfer, and `balanceBe
 To save gas, check if `amount` is greater than 0, before calling `safeTransfer`.
 
 
-# [G-14] Do not assign `offset` in the last call of `UnsafeBytes.readUint256` in `ethereum/contracts/bridge/L1ERC20Bridge.sol`
+# [G-14] Do not assign `offset` in the last call of `UnsafeBytes.readUint256` in `L1ERC20Bridge.sol`
 
 A simple test in Remix IDE has been created, to compare gas usage of assigning more than one value from function call:
 
@@ -520,7 +520,7 @@ In the last call of `UnsafeBytes.readUint256(_l2ToL1message, offset)` (line 336)
 we won't need `offset` anymore, thus we can change line 336 to: `(amount, ) = UnsafeBytes.readUint256(_l2ToL1message, offset);`.
 
 
-# [G-15] One + operation is redundant in `_verifyDepositLimit` in `ethereum/contracts/bridge/L1ERC20Bridge.sol`
+# [G-15] One + operation is redundant in `_verifyDepositLimit` in `L1ERC20Bridge.sol`
 
 [File: ethereum/contracts/bridge/L1ERC20Bridge.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L346-L349)
 ```
@@ -565,7 +565,7 @@ function afterFix(uint _amount) public {
 Function `current()` uses 5895 gas, while function `afterFix()` uses 5707, which implies, that proposed fix is better optimalized for a gas usage.
 
 
-# [G-16] Unnecessary variables in `ethereum/contracts/zksync/libraries/LibMap.sol`
+# [G-16] Unnecessary variables in `LibMap.sol`
 
 * Function `get`
 
@@ -616,7 +616,7 @@ to:
 ```
 
 
-# [G-17] Division by powers of two should use bit shifting in `ethereum/contracts/zksync/libraries/Merkle.sol`
+# [G-17] Division by powers of two should use bit shifting in `Merkle.sol`
 While bot race reported every division by powers of two in a form: `A / 2`, it misses an instance, which looks like: `A /= 2`.
 
 [File: ethereum/contracts/zksync/libraries/Merkle.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Merkle.sol#L33)
@@ -627,7 +627,7 @@ _index /= 2;
 It should be changed to: `_index = _index >> 1;`
 
 
-# [G-18] Precalculate constants in `ethereum/contracts/zksync/Config.sol`.
+# [G-18] Precalculate constants in `Config.sol`.
 While constants have known value, to save more gas, calculate their values before compile-time.
 
 [File: ethereum/contracts/zksync/Config.sol](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Config.sol)
@@ -639,7 +639,7 @@ uint256 constant MAX_REPEATED_STORAGE_CHANGES_COMMITMENT_BYTES = 4 + REPEATED_ST
 ```
 
 
-# [G-19] Function `pushBack` in `ethereum/contracts/zksync/libraries/PriorityQueue.sol` can be optimized
+# [G-19] Function `pushBack` in `PriorityQueue.sol` can be optimized
 
 [File: ethereum/contracts/zksync/libraries/PriorityQueue.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/PriorityQueue.sol#L55-L61)
 ```
@@ -663,7 +663,7 @@ Above function can be optimized by utilizing post-incrementing feature. It will 
 ```
 
 
-# [G-20] Remove local-testing related code in `ethereum/contracts/zksync/DiamondInit.sol`
+# [G-20] Remove local-testing related code in `DiamondInit.sol`
 
 [File: ethereum/contracts/zksync/DiamondInit.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L85-L87)
 ```
@@ -676,7 +676,7 @@ According to above code, `assert(L2_TO_L1_LOG_SERIALIZE_SIZE != 2 * 32);` is red
 This can be confirmed in file `ethereum/contracts/zksync/Config.sol`, where constant `L2_TO_L1_LOG_SERIALIZE_SIZE` is defined as `88`. Since this is a constant value, its value will never change, thus this `assert` is unnecessary and can be removed.
 
 
-# [G-21] Length of `_encoded` is calculated twice in `validateL1ToL2Transaction` in `ethereum/contracts/zksync/libraries/TransactionValidator.sol`.
+# [G-21] Length of `_encoded` is calculated twice in `validateL1ToL2Transaction` in `TransactionValidator.sol`.
 Calculating length is gas-costly operation. It's better to calculate it once and store it in local variable.
 
 [File: ethereum/contracts/zksync/libraries/TransactionValidator.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/TransactionValidator.sol#L23-L43)
@@ -701,7 +701,7 @@ Calculating length is gas-costly operation. It's better to calculate it once and
 `_encoded.length` is being calculated twice - in line 26 and line 38.
 
 
-# [G-22] Use constants instead of `type(uintX).max` in `ethereum/contracts/zksync/libraries/TransactionValidator.so`
+# [G-22] Use constants instead of `type(uintX).max` in `TransactionValidator.sol`
 
 When you use type(uintX).max - it may result in higher gas costs because it involves a runtime operation to calculate the `type(uintX).max` at runtime. This calculation is performed every time the expression is evaluated.
 
@@ -717,7 +717,7 @@ To save gas, it is recommended to use constants to represent the maximum value. 
         require(_transaction.reserved[1] <= type(uint160).max, "uf");
 ```
 
-# [G-23] Multiple adding operations can be reduced in `getMinimalPriorityTransactionGasLimit` in `ethereum/contracts/zksync/libraries/TransactionValidator.sol`
+# [G-23] Multiple adding operations can be reduced in `getMinimalPriorityTransactionGasLimit` in `TransactionValidator.sol`
 
 [File: ethereum/contracts/zksync/libraries/TransactionValidator.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/TransactionValidator.sol#L69-L102)
 ```
@@ -753,7 +753,7 @@ The whole function can be rewritten to:
     }
 ```
 
-# [G-24] Unnecessary variables in `ethereum/contracts/zksync/libraries/TransactionValidator.sol`
+# [G-24] Unnecessary variables in `TransactionValidator.sol`
 
 * Function `getOverheadForTransaction`
 
@@ -791,7 +791,7 @@ batchOverheadForTransaction = Math.max(batchOverheadForTransaction, Math.ceilDiv
 overheadForGas = (batchOverheadGas * _totalGasLimit + L2_TX_MAX_GAS_LIMIT - 1) / (L2_TX_MAX_GAS_LIMIT + batchOverheadGa);
 ```
 
-# [G-25] Unnecessary variables in `ethereum/contracts/zksync/facets/Getters.sol`
+# [G-25] Unnecessary variables in `Getters.sol`
 
 * Function `isFacetFreezable`
 Variables `selectorsArrayLen` and `selector0` are used only once, which means they don't need to be declared at all.
@@ -814,7 +814,7 @@ to:
 
 
 
-# [G-26] Unnecessary variables in `ethereum/contracts/zksync/libraries/Diamond.sol`
+# [G-26] Unnecessary variables in `Diamond.sol`
 
 * Function `diamondCut`
 
@@ -891,7 +891,7 @@ to:
 ```
 
 
-# [G-27] Function `diamondCut` from `ethereum/contracts/zksync/libraries/Diamond.sol` can be redesigned to revert earlier
+# [G-27] Function `diamondCut()` from `Diamond.sol` can be redesigned to revert earlier
 
 [File: ethereum/contracts/zksync/libraries/Diamond.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L101-L106)
 ```
@@ -915,7 +915,7 @@ bool isFacetFreezable = facetCuts[i].isFreezable;
 ```
 
 
-# [G-28] In `ethereum/contracts/zksync/libraries/Diamond.sol`, move some `require` on top of function
+# [G-28] In `Diamond.sol`, move some `require` on top of function
 
 Functions: `_addFunctions`, `_replaceFunctions`, `removeFunctions`, firstly gets the pointer to the diamond storage: `DiamondStorage storage ds = getDiamondStorage();` and then, they perform a check, if user passed a proper `_facet` address. Those lines can, however, be swapped.
 If user provides incorrect `_facet` w then function should immediately revert. Afterwards, it should get the pointer to the diamond storage.
@@ -954,7 +954,7 @@ DiamondStorage storage ds = getDiamondStorage();
 ```
 
 
-# [G-29]  In `ethereum/contracts/zksync/libraries/Diamond.sol` in `_initializeDiamondCut`, order of `require` can be changed
+# [G-29]  In `Diamond.sol` in `_initializeDiamondCut()`, order of `require` can be changed
 
 [File: ethereum/contracts/zksync/libraries/Diamond.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L302-L303)
 ```
@@ -974,7 +974,7 @@ It will save some gas in multiple of scenario:
 
 
 
-# [G-30] Unnecessary variables in `ethereum/contracts/zksync/facets/Mailbox.sol`
+# [G-30] Unnecessary variables in `Mailbox.sol`
 
 * Function `_proveL2LogInclusion`
 
@@ -1076,7 +1076,7 @@ params.valueToMint = msg.value;
 params.refundRecipient = refundRecipient;
 ```
 
-# [G-31] Reduce number of additions and readings of `s.totalDepositedAmountPerUser[_depositor]` in `_verifyDepositLimit()` in `ethereum/contracts/zksync/facets/Mailbox.sol`
+# [G-31] Reduce number of additions and readings of `s.totalDepositedAmountPerUser[_depositor]` in `_verifyDepositLimit()` in `Mailbox.sol`
 
 [File: ethereum/contracts/zksync/facets/Mailbox.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L279-L280)
 ```
@@ -1092,11 +1092,11 @@ require(totalDepositedAmountPerUserAndAmount <= limitData.depositCap, "d2");
 ```
 we've cached `s.totalDepositedAmountPerUser[_depositor] + _amount`, and then later checked if it does not exceed limit. If it does, function will revert.
 
-# [G-32] Operations which won't overflow in `ethereum/contracts/zksync/facets/Mailbox.sol` can be unchecked
+# [G-32] Operations which won't overflow in `Mailbox.sol` can be unchecked
 If, for any reason recommendation for G-31 won't be implemented, another gas optimization would be insert line 280: `s.totalDepositedAmountPerUser[_depositor] += _amount;` into unchecked block.
 Since `require(s.totalDepositedAmountPerUser[_depositor] + _amount <= limitData.depositCap, "d2");` guarantees, that  `s.totalDepositedAmountPerUser[_depositor] + _amount` won't overflow, we can perform 2nd addition as unchecked: `unchecked {s.totalDepositedAmountPerUser[_depositor] += _amount;}`
 
-# [G-33] Addition in `_requestL2Transaction` in `ethereum/contracts/zksync/facets/Mailbox.sol` can be either removed or unchecked.
+# [G-33] Addition in `_requestL2Transaction` in `Mailbox.sol` can be either removed or unchecked.
 
 [File: ethereum/contracts/zksync/facets/Mailbox.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L295)
 ```
@@ -1113,7 +1113,7 @@ uint256 constant PRIORITY_EXPIRATION = 0 days;
 This addition is then redundant (since we're adding 0). However, if for further reference you want to keep this code as it is (e.g. new contract will be deployed with different Alpha release period), make this operation `unchecked` at least. Since `PRIORITY_EXPIRATION` is a constant value, known during compiling time, and `block.timestamp` is impossible to overflow, it's safe to assume, that `block.timestamp + PRIORITY_EXPIRATION` will never overflow. The max value of `uint64` converted into timestamp is `Sun Jul 21 2554`. It's almost impossible that `block.timestamp + PRIORITY_EXPIRATION` will ever exceed that number (assuming that `PRIORITY_EXPIRATION` will be set to some reasonable value).
 
 
-# [G-34] Do not assign `offset` in the last call of `UnsafeBytes.readUint256()` in `ethereum/contracts/zksync/facets/Mailbox.sol`
+# [G-34] Do not assign `offset` in the last call of `UnsafeBytes.readUint256()` in `Mailbox.sol`
 
 A simple test in Remix IDE has been created, to compare gas usage of assigning more than one value from function call:
 
@@ -1146,7 +1146,7 @@ In the last call of `UnsafeBytes.readUint256(_message, offset)` (line 427):
 we won't need `offset` anymore, thus we can change line 427 to: `(amount, ) = UnsafeBytes.readUint256(_message, offset);`.
 
 
-# [G-35] Loop in `_commitBatchesWithSystemContractsUpgrade()` in `ethereum/contracts/zksync/facets/Executor.sol` can be optimized
+# [G-35] Loop in `_commitBatchesWithSystemContractsUpgrade()` in `Executor.sol` can be optimized
 
 [File: ethereum/contracts/zksync/facets/Executor.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L241-L243)
 ```
@@ -1199,7 +1199,7 @@ _lastCommittedBatchData = _commitOneBatch(
             );
 ```
 
-# [G-36] Calculations which won't underflow/overflow in `ethereum/contracts/zksync/facets/Executor.sol` can be unchecked
+# [G-36] Calculations which won't underflow/overflow in `Executor.sol` can be unchecked
 
 [File: ethereum/contracts/zksync/facets/Executor.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L93-L94)
 ```
@@ -1211,7 +1211,7 @@ Since `COMMIT_TIMESTAMP_NOT_OLDER` and `COMMIT_TIMESTAMP_APPROXIMATION_DELTA` ar
 * `block.timestamp + COMMIT_TIMESTAMP_APPROXIMATION_DELTA` won't overflow.
 If that's the case - those two lines can be unchecked.
 
-# [G-37] Move some `require` checks on top of function in `ethereum/contracts/zksync/facets/Executor.sol`
+# [G-37] Move some `require` checks on top of function in `Executor.sol`
 
 [File: ethereum/contracts/zksync/facets/Executor.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L317-L327)
 ```
@@ -1345,3 +1345,67 @@ There are two additional places in `ethereum/contracts/zksync/facets/Executor.so
 In line 123, `i = i + L2_TO_L1_LOG_SERIALIZE_SIZE` should also be unchecked.
 In line 331, it should be: `unchecked {++currentTotalBatchesVerified;}`
 
+
+# [G-39] Redundant `if` condition in `Executor.sol`
+
+[File: ethereum/contracts/zksync/facets/Executor.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L354-L367)
+```
+ if (_proof.serializedProof.length > 0) {
+            bool successVerifyProof = s.verifier.verify(
+                proofPublicInput,
+                _proof.serializedProof,
+                _proof.recursiveAggregationInput
+            );
+            require(successVerifyProof, "p"); // Proof verification fail
+        }
+        // #else
+        bool successVerifyProof = s.verifier.verify(
+            proofPublicInput,
+            _proof.serializedProof,
+            _proof.recursiveAggregationInput
+        );
+       require(successVerifyProof, "p"); // Proof verification fail
+```
+
+In above code section, we're performing zkp verification twice.
+For the first time - when `if (_proof.serializedProof.length > 0)`.
+And then, for the second time - in line 363.
+
+This is redundant. Remove the whole `if (_proof.serializedProof.length > 0)` block, because we're repeating `s.verifier.verify()` call after that block for the second time.
+
+
+
+# [G-40] Event in `Executor.sol` can be optimized
+
+[File: ethereum/contracts/zksync/facets/Executor.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L405C49-L405C49-L413)
+```
+ s.totalBatchesCommitted = _newLastBatch;
+
+        // Reset the batch number of the executed system contracts upgrade transaction if the batch
+        // where the system contracts upgrade was committed is among the reverted batches.
+        if (s.l2SystemContractsUpgradeBatchNumber > _newLastBatch) {
+            delete s.l2SystemContractsUpgradeBatchNumber;
+        }
+
+        emit BlocksRevert(s.totalBatchesCommitted, s.totalBatchesVerified, s.totalBatchesExecuted);
+```
+
+Since ` s.totalBatchesCommitted = _newLastBatch`, we can change event to:
+
+```
+ emit BlocksRevert(_newLastBatch, s.totalBatchesVerified, s.totalBatchesExecuted);
+```
+
+
+# [G-41] Save one negation by rewritting the statement in `DiamonProxy.sol`
+
+[File: ethereum/contracts/zksync/DiamondProxy.sol](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L31)
+```
+require(!diamondStorage.isFrozen || !facet.isFreezable, "q1");
+```
+
+`!A || !B <=> !(A & B)` which means, it can be rewritten to:
+
+```
+require(!(diamondStorage.isFrozen && facet.isFreezable)), "q1");
+```
