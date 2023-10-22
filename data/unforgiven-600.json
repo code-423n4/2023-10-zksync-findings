@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "malicious operator can fast forward zkSync blockchain's timestamp to 1 year later because of wrong default value for COMMIT_TIMESTAMP_APPROXIMATION_DELTA",
+  "issueId": 600,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/600"
+}
