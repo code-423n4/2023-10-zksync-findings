@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "2",
+  "title": "diamondCut() are allowing unchecked delegatecall to arbitrary address",
+  "issueId": 653,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/653"
+}
