@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "J4de",
+  "risk": "2",
+  "title": "The `getTransactionBodyGasLimit` function should use slot length instand of byte length",
+  "issueId": 609,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/609"
+}
