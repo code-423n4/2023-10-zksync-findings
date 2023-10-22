@@ -357,3 +357,13 @@ QA13. AccountCodeStorage.getCodeHash() and  AccountCodeStorage.getCodeSize() use
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/AccountCodeStorage.sol#L89-L138](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/AccountCodeStorage.sol#L89-L138)
 
 Mitigation: changes uint256 _input to address _input.
+
+QA13. Should be eliminate ``=``, needs to be strictly greater than here:
+
+```javascript
+            _block > currentVirtualBlockUpgradeInfo.virtualBlockFinishL2Block &&
+            currentVirtualBlockUpgradeInfo.virtualBlockFinishL2Block > 0
+        ) {
+``
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L122](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L122)
