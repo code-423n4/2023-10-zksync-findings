@@ -334,4 +334,14 @@ describe('ImmutableSimulator tests', function () {
 
 ```
 
+QA11.  KnownCodesStorage._validateBytecode() fails to validate that the length of the bytecode in words is less then 2**16. 
+
+Mitigation: Add sth like this 
+
+`` javasript
+require(bytecodeLenInWords < 2 ** 16, "pp"); // bytecode length must be less than 2^16 words
+``
+
+
+
 
