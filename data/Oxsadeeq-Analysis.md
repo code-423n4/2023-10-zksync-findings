@@ -188,5 +188,7 @@ JUDGING RECOMMENDATIONS
 
 It is widely acknowledged that a significant portion of auditors prioritize the smart contract segment. Hence, it is advisable for the judge to allocate additional attention to the smart contract section. ￼	
 
+
+
 ### Time spent:
-30 hours
+60 hours
