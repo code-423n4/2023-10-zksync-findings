@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xmuxyz",
+  "risk": "2",
+  "title": "Lack of input validation for a given address of the security council, which lead to increasing a centralization risk for the governance design of zkSync",
+  "issueId": 561,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/561"
+}
