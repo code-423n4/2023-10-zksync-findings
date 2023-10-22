@@ -342,6 +342,12 @@ Mitigation: Add sth like this
 require(bytecodeLenInWords < 2 ** 16, "pp"); // bytecode length must be less than 2^16 words
 ``
 
+QA12. when _callConstructor = false, _constructContract() fails to  call _storeConstructingByteCodeHashOnAddress first before calling  
+ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.markAccountCodeHashAsConstructed(_newAddress). Instead, it calls 
+ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(_newAddress, _bytecodeHash) directly. The problem is that it might due to _bytecodeHash is not in the state of ConstructedCodeHash. 
 
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/ContractDeployer.sol#L353](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/ContractDeployer.sol#L353)
 
-
+Mitigation: when _callConstructor = false, 
+ call _storeConstructingByteCodeHashOnAddress first before calling  
+ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.markAccountCodeHashAsConstructed(_newAddress). 
