@@ -66,3 +66,8 @@ so we think that if we can compress & publish it then we don't really need the r
 manual review
 ## Recommended Mitigation Steps
 reduce code complexity and remove the raw bytecode publishing option
+
+# L-03 No deposit Limit for Weth , like other ERC20s
+
+L1 ERC20 Bridge contract has [deposit](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L340) limit for all ERC20 tokens which can be enforced by zkSync team, but there is no deposit limit on WETH which is also an ERC20. This limit is enforced as a risk measure as protocol is new right now. 
+We recommend to add a similar limit on WETH bridging also until the team is satisfied of the protocol's robustness in terms of security.
