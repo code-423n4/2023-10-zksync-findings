@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ktg",
+  "risk": "2",
+  "title": "ContractDeployer's updateNonceOrdering restriction might be violated",
+  "issueId": 551,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/551"
+}
