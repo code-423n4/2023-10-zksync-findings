@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zzebra83",
+  "risk": "2",
+  "title": "publishPubdataAndClearState - Discrepancy in length of the compressed state diffs.",
+  "issueId": 581,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/581"
+}
