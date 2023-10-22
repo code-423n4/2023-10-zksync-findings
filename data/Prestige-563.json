@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Prestige",
+  "risk": "3",
+  "title": "Vulnerability in claimFailedDeposit function allows for fund theft in L1ERC20Bridge Contract",
+  "issueId": 563,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/563"
+}
