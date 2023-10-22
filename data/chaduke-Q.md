@@ -230,5 +230,108 @@ QA9. Make the components that are imported explicit rather than implicit:
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/BootloaderUtilities.sol#L5-L8](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/BootloaderUtilities.sol#L5-L8)
 
 QA10. ImmutableSimulator.setImmutables() fails to 1) whether it overwrites an existing value for a particular index; 2) check wether the input immutables have duplicate index that point to different values.
+As a result, an immutable entry is not actually immutable, the entry can be revised. Two values can be entered into the same entry for the same contract with the second replacing the value of the first. 
 
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/ImmutableSimulator.sol#L34-L45](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/ImmutableSimulator.sol#L34-L45)
+
+The following POC confirms my finding: it shows duplicate entries are fine (two index entries with index 23); existing entry (index 21) can be replaced. 
+
+```javascript
+import { expect } from 'chai';
+import { ImmutableSimulator } from '../typechain-types';
+import { DEPLOYER_SYSTEM_CONTRACT_ADDRESS } from './shared/constants';
+import { Wallet } from 'zksync-web3';
+import { getWallets, deployContract } from './shared/utils';
+import { network, ethers } from 'hardhat';
+
+describe('ImmutableSimulator tests', function () {
+    let wallet: Wallet;
+    let immutableSimulator: ImmutableSimulator;
+
+    const RANDOM_ADDRESS = '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef';
+    const IMMUTABLES_DATA = [
+        {
+            index: 0,
+            value: '0xdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeefdeadbeef'
+        },
+        {
+            index: 23,
+            value: '0x0000000000000000000000000000000000000000000000000000000000000111'
+        },
+
+        {
+            index: 21,
+            value: '0x0000000000000000000000000000000000000000000000000000000000000123'
+        },
+
+        {
+            index: 23,
+            value: '0x0000000000000000000000000000000000000000000000000000000000000123'
+        }
+    ];
+
+    const IMMUTABLES_DATA2 = [
+        {
+            index: 21,
+            value: '0x0000000000000000000000000000000000000000000000000000000000000444'
+        }
+    ];
+
+    before(async () => {
+        wallet = getWallets()[0];
+        immutableSimulator = (await deployContract('ImmutableSimulator')) as ImmutableSimulator;
+    });
+
+    describe('setImmutables', function () {
+        it('non-deployer failed to call', async () => {
+            await expect(immutableSimulator.setImmutables(RANDOM_ADDRESS, IMMUTABLES_DATA)).to.be.revertedWith(
+                'Callable only by the deployer system contract'
+            );
+        });
+
+       
+        it('Duplicate set', async () => {
+            await network.provider.request({
+                method: 'hardhat_impersonateAccount',
+                params: [DEPLOYER_SYSTEM_CONTRACT_ADDRESS]
+            });
+
+            const deployer_account = await ethers.getSigner(DEPLOYER_SYSTEM_CONTRACT_ADDRESS);
+
+            await immutableSimulator.connect(deployer_account).setImmutables(RANDOM_ADDRESS, IMMUTABLES_DATA);
+
+            await network.provider.request({
+                method: 'hardhat_stopImpersonatingAccount',
+                params: [DEPLOYER_SYSTEM_CONTRACT_ADDRESS]
+            });
+
+            expect(await immutableSimulator.getImmutable(RANDOM_ADDRESS, 23)).to.be.eq(
+                    '0x0000000000000000000000000000000000000000000000000000000000000123'
+            );
+        });
+        it('Existing entries', async () => {
+            await network.provider.request({
+                method: 'hardhat_impersonateAccount',
+                params: [DEPLOYER_SYSTEM_CONTRACT_ADDRESS]
+            });
+
+            const deployer_account = await ethers.getSigner(DEPLOYER_SYSTEM_CONTRACT_ADDRESS);
+
+            await immutableSimulator.connect(deployer_account).setImmutables(RANDOM_ADDRESS, IMMUTABLES_DATA);
+            await immutableSimulator.connect(deployer_account).setImmutables(RANDOM_ADDRESS, IMMUTABLES_DATA2);  // fail to detect exiting entries
+
+            await network.provider.request({
+                method: 'hardhat_stopImpersonatingAccount',
+                params: [DEPLOYER_SYSTEM_CONTRACT_ADDRESS]
+            });
+
+            expect(await immutableSimulator.getImmutable(RANDOM_ADDRESS, 21)).to.be.eq(
+                    '0x0000000000000000000000000000000000000000000000000000000000000444'
+            );
+        });
+    });
+});
+
+```
+
+
