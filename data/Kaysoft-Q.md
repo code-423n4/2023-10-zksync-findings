@@ -18,3 +18,12 @@ The payable publishCompressedBytecode(...) functon does not have any ETH transfe
 
 FILE: https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L54-L57
 
+## [L-5] The local variable `bytecodeLenInWords` of Utils.sol#hashL2Bytecode() functions shadows the Utils.sol#bytecodeLenInWords(...) function name.
+File: 
+- `bytecodeLenInWords` local variable:  https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/Utils.sol#L86
+- `bytecodeLenInWords(...)` function: https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/libraries/Utils.sol#L44
+
+Consider renaming either the local variable or the function.
+
+
+
