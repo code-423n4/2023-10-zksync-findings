@@ -13,12 +13,14 @@
 | [GAS-5](#GAS-5) | Use assembly for shift operation | 4 |
 | [GAS-6](#GAS-6) | cache length of array if used in a for loop | 5 |
 | [GAS-7](#GAS-7) | Use named returns to save gas instead of unnamed returns | 56 |
-| [GAS-8](#GAS-8) | Use assembly and shift operations for typecasting operations | 30 |
+| [GAS-8](#GAS-8) | Use assembly and shift operations for typecasting operations | 5 |
 | [GAS-9](#GAS-9) | When comparing address typecast to the uint type first | 2 |
 | [GAS-10](#GAS-10) | Use uint256 instead of bytes32 constant when the location is storage | 5 |
 | [GAS-11](#GAS-11) | use solady instead of openzeppelin | 4 |
 | [GAS-12](#GAS-12) | when the array is not mutated we should store it in the calladata instead of memory | 1 |
-| [GAS-13](#GAS-13) | division or multiplication that involves the second digit as a power of two should be done either shift left or right | 4 |
+| [GAS-13](#GAS-13) | division or multiplication that involves the second digit as a power of two should be done either shift left or right | 5 |
+| [GAS-14](#GAS-14) | possible offchain computation shoulf be computed offchain before being brought on chain | 1 |
+| [GAS-15](#GAS-15) | when incrementing by one simply do a pre-increment | 1 |
 
 ### [GAS-1] Use uint256 constant instead for strings less than the length of 33
 typecast strings that are less than the length of 33 to bytes32 then we then typecast this bytes32 to uint256 before storing them, this would be done offchain then when we simply want to use them, we can simply typecast it back to string using assembly or if possible it should be done offchain
@@ -483,25 +485,30 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 ### [GAS-8] | Use assembly and shift for typecasting operations
 when we use assembly and shift operations for typecasting operations we tend to save 3+ in runtime gas than instead of using typecasting where we use 6+ in runtime gas per typecasting, we can simply do shift operation and arrive at our destination since all data types in solidity are bytes under the hood in solidity
 
-NOTE: THIS IS ONLY USED WHEN GOING FROM HIGHER TYPES TO LOWER TYPES e.g bytes32 to uint8
 
-*Instances (2)*:
+
+*Instances (5)*:
 ```solidity
-File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
-22: string public constant override getName = "ExecutorFacet";
-
 File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
-41: string public constant override getName = "MailboxFacet";
+22: require(bytes4(functionSignature) == this.finalizeEthWithdrawal.selector, "is");
+106: value: bytes32(uint256(_status))
+346:  reserved: [_priorityOpParams.valueToMint, uint256(uint160(_priorityOpParams.refundRecipient)), 0, 0],
+336: from: uint256(uint160(_priorityOpParams.sender)),
+337: to: uint256(uint160(_priorityOpParams.contractAddressL2)),
+       
 ```
 
 GITHUB INSTANCES:
-https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L22C4-L22C63
-https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L41
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L337C13-L337C71
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L336
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L346
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L424
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L106
 
 [GAS-9] When comparing address types typecast to the uint160 type first 
 when comparing data types in solidity e.g `address(0) == address(0)` it's more gas saving to typecast to there uint256 type first
 
-*Instances (2)*:
+*Instances (5)*:
 ```solidity
 File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
@@ -511,9 +518,17 @@ File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 File: code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol
 284: if (_init == address(0)) {
+
+File: code/contracts/ethereum/contracts/zksync/DiamondInit.sol
+56: require(address(_initalizeData.verifier) != address(0), "vt");
+57: require(_initalizeData.governor != address(0), "vy");
+58: require(_initalizeData.admin != address(0), "hc");
 ```
 
 GITHUB INSTANCES:
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L58
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L57C9-L57C62
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L56
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L284
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L248
 
@@ -590,7 +605,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 ### [GAS-13] division or multiplication that involves the second digit as a power of two should be done either shift left or right 
 the div and the mul opcode both cost 5 gas each, while the shl and shr opcode both cost 3 each when the second digit in a multiplication or division is a power of two we can simply or shr and shl hereby saving 2 in runtime gas fees
 
-*Instances (4)*:
+*Instances (5)*:
 ```solidity
 File: code/contracts/ethereum/contracts/zksync/libraries/LibMap.sol
 
@@ -599,10 +614,43 @@ File: code/contracts/ethereum/contracts/zksync/libraries/LibMap.sol
 45: uint256 mapIndex = _index / 8;
 50: uint256 bitOffset = (_index & 7) * 32;
 
+File: code/contracts/ethereum/contracts/zksync/DiamondInit.sol
+87: assert(L2_TO_L1_LOG_SERIALIZE_SIZE != 2 * 32);
+
 GITHUB INSTANCES:
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L87
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/LibMap.sol#L50
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/LibMap.sol#L45
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/LibMap.sol#L21
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/LibMap.sol#L25C13-L25C51
 ```
 
+### [GAS-14]  possible offchain computation shoulf be computed offchain before being brought on chain
+all possible offchain should be done offchain and not be brought onchain for computation
+*Instances (1)*:
+```solidity
+File: code/contracts/ethereum/contracts/zksync/libraries/LibMap.sol
+
+File: code/contracts/ethereum/contracts/zksync/DiamondInit.sol
+87: assert(L2_TO_L1_LOG_SERIALIZE_SIZE != 2 * 32);
+
+GITHUB INSTANCES:
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L87
+```
+
+### [GAS-15] when incrementing by 1 simply do a pre-incremnt `++i`
+A pre-increment is the cheapest form of increment it only cost 3 gas lass than all other type of increment
+*Instances (2)*:
+```solidity
+
+
+File: code/contracts/ethereum/contracts/zksync/libraries/PriorityQueue.sol
+80: _queue.head = head + 1
+60: _queue.tail = tail + 1;
+
+GITHUB INSTANCES:
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/PriorityQueue.sol#L80
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/PriorityQueue.sol#L60C9-L60C32
+```
