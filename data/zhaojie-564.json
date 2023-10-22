@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zhaojie",
+  "risk": "2",
+  "title": "When an asset is transferred from l2 to l1, execution may fail on l1, but the asset cannot be retrieved on l2.",
+  "issueId": 564,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/564"
+}
