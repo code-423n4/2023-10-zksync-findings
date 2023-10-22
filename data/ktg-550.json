@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ktg",
+  "risk": "2",
+  "title": "Users's funds might get stuck in Mailbox after initiating L2 withdrawal.",
+  "issueId": 550,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/550"
+}
