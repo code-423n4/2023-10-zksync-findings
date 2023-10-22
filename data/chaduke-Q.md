@@ -351,3 +351,9 @@ ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(_newAddress
 Mitigation: when _callConstructor = false, 
  call _storeConstructingByteCodeHashOnAddress first before calling  
 ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.markAccountCodeHashAsConstructed(_newAddress). 
+
+QA13. AccountCodeStorage.getCodeHash() and  AccountCodeStorage.getCodeSize() use uint256 _input as address. The problem is that many uint256 input will be mapped to the same address. 
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/AccountCodeStorage.sol#L89-L138](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/AccountCodeStorage.sol#L89-L138)
+
+Mitigation: changes uint256 _input to address _input.
