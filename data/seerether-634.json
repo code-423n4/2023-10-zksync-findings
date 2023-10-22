@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "Logic around deleting the system contract upgrade state is vulnerable to manipulation. An attacker could prevent it from being deleted by reverting batches later. ",
+  "issueId": 634,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/634"
+}
