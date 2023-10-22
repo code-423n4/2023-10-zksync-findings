@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "Allowing the baseFee to be 0 can enable spam transactions in the system",
+  "issueId": 644,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/644"
+}
