@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0x1337",
+  "risk": "3",
+  "title": "Incorrect \"numberOfL2ToL1Logs\" Check Could Resut in Some Logs Being Missed ",
+  "issueId": 568,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/568"
+}
