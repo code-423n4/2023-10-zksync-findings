@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "L2 transactions would revert because bootloader spends gasLimitForTx inside near_calls",
+  "issueId": 570,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/570"
+}
