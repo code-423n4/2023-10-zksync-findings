@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Matin",
+  "risk": "2",
+  "title": "More pubdata than its maximum can be passed to function `validateL1ToL2Transaction` because of a division precision loss",
+  "issueId": 658,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/658"
+}
