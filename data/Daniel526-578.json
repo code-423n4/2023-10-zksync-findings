@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Daniel526",
+  "risk": "2",
+  "title": "lack of proper access control in the `BaseZkSyncUpgrade` contract",
+  "issueId": 578,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/578"
+}
