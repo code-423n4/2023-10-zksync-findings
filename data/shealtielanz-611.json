@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "shealtielanz",
+  "risk": "2",
+  "title": "No Mechanism to re-mint tokens to users on L2 if the message to finalize withdrawals  on L1 fails.",
+  "issueId": 611,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/611"
+}
