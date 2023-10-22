@@ -104,3 +104,13 @@ G4.  _commitBatchesWithSystemContractsUpgrade() requires the upgrade transaction
     /// @dev Pop
 
 ```
+
+G5. Define ~IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK with a constant NEG_IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK so that we don't have to calculate ~ explicitly each time. 
+
+```diff
+  function constructedBytecodeHash(bytes32 _bytecodeHash) internal pure returns (bytes32) {
+-        return _bytecodeHash & IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK;
++        return _bytecodeHash & NEG_IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK;
+
+    }
+```
