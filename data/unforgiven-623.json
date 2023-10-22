@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "attacker can DOS the priority queue and grief the validator with low to minimal cost because of the wrong check in validateL1ToL2Transaction()",
+  "issueId": 623,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/623"
+}
