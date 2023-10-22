@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zzzitron",
+  "risk": "3",
+  "title": "`L1ERC20Bridge.claimFailedDeposit` may fail if the deposit limit is updated, which may lead to loss of funds",
+  "issueId": 591,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/591"
+}
