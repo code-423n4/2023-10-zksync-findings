@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "call with ETH(MsgValueSimulator) in zkSync doesn't follow the same pattern as Ethereum, can cause OOG for L1 and L2 transactions",
+  "issueId": 583,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/583"
+}
