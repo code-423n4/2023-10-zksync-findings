@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "unforgiven",
+  "risk": "3",
+  "title": "L1->L2 transactions would revert in L2 because bootloader doesn't consider 63/64 rule in far_call",
+  "issueId": 565,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/565"
+}
