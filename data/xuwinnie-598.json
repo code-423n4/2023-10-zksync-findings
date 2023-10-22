@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "xuwinnie",
+  "risk": "3",
+  "title": "Mul/div relation should not be enforced when divisor is zero",
+  "issueId": 598,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/598"
+}
