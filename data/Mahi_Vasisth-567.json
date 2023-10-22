@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Mahi_Vasisth",
+  "risk": "2",
+  "title": "User could deposit more ETH then allowed.",
+  "issueId": 567,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/567"
+}
