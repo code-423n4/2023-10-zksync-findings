@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "shealtielanz",
+  "risk": "2",
+  "title": "`_processL2Logs()` doesn't check the length of the `emittedL2Logs` - With an arbitrary length, can lead to unprovable blocks and log inclusion.",
+  "issueId": 604,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/604"
+}
