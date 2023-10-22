@@ -1,11 +1,35 @@
 # GAS OPTIMIZATIONS
-																																																																																																																						##
+																																																																																																																						## Issues
 
-## [G-] Improving storage efficiency through ``Struct Packing``	
+- [G-1] [Improving storage efficiency through ``Struct Packing``](https://gist.github.com/#g-1-improving-storage-efficiency-through-struct-packing)
+  - [G-1.1] [``protocolVersion`` and ``l2SystemContractsUpgradeBatchNumber`` can be ``uint96`` instead of ``uint256`` : Saves ``4000 GAS`` , ``2 SLOT``](https://gist.github.com/#g-11-protocolversion-and-l2systemcontractsupgradebatchnumber-can-be-uint96-instead-of-uint256--saves-4000-gas--2-slot)
+  - [G-1.2] [ ``newProtocolVersion`` can be ``uint96`` instead of ``uint256`` : Saves ``2000 GAS`` , ``1 SLOT``](https://gist.github.com/#g-12--newprotocolversion-can-be-uint96-instead-of-uint256--saves-2000-gas--1-slot)
+  - [G-1.3]  [``txType`` and ``nonce`` can be uint128 instead of uint256 : Saves ``2000 GAS`` , ``1 SLOT``](https://gist.github.com/#g-13--txtype-and-nonce-can-be-uint128-instead-of-uint256--saves-2000-gas--1-slot)
+- [G-2] [Replacing booleans with ``uint256(1)``/``uint256(2)`` for gas optimization](https://gist.github.com/#g-2-replacing-booleans-with-uint2561uint2562-for-gas-optimization)
+- [G-3] [Multiple address/ID mappings can be combined into a single mapping of an address/ID to a struct, where appropriate](https://gist.github.com/#g-3-multiple-addressid-mappings-can-be-combined-into-a-single-mapping-of-an-addressid-to-a-struct-where-appropriate)
+- [G-4] [``totalDepositedAmountPerUser[_l1Token][_depositor]`` should be cached](https://gist.github.com/#g-4-totaldepositedamountperuser_l1token_depositor-should-be-cached)
+- [G-5] [Efficient event consolidation for ``Glogtopic`` Gas Savings](https://gist.github.com/#g-5-efficient-event-consolidation-for-glogtopic-gas-savings)
+- [G-6] [Optimize gas usage by avoiding variable declarations inside loops](https://gist.github.com/#g-6-optimize-gas-usage-by-avoiding-variable-declarations-inside-loops)
+- [G-7] [Use dot notation method for struct assignment](https://gist.github.com/#g-7-use-dot-notation-method-for-struct-assignment)
+- [G-8] [``!_checkBit(processedLogs, uint8(logKey)`` this check is redundant when ``processedLogs`` is 0](https://gist.github.com/#g-8-_checkbitprocessedlogs-uint8logkey-this-check-is-redundant-when-processedlogs-is-0)
+- [G-9] [The ``claimFailedDeposit()`` function can be refactored for greater gas efficiency](https://gist.github.com/#g-9-the-claimfaileddeposit-function-can-be-refactored-for-greater-gas-efficiency)
+- [G-10] [Optimize the ``fallback()`` function for better gas efficiency](https://gist.github.com/#g-10-optimize-the-fallback-function-for-better-gas-efficiency)
+- [G-11] [Optimize the ``commitBatches()`` function for better gas efficiency](https://gist.github.com/#g-11-optimize-the-commitbatches-function-for-better-gas-efficiency)
+- [G-12] [Optimize the ``requestL2Transaction()`` function for better gas efficiency](https://gist.github.com/#g-12--optimize-the-requestl2transaction-function-for-better-gas-efficiency)
+- [G-13] [Optimize code to avoid to spend ``unnecessary GAS``](https://gist.github.com/#g-13-optimize-code-to-avoid-to-spend-unnecessary-gas)
+- [G-14] [Not initializing variables to their default values incurs extra gas, So leaving them with their default values is more gas-efficient](https://gist.github.com/#g-14-not-initializing-variables-to-their-default-values-incurs-extra-gas-so-leaving-them-with-their-default-values-is-more-gas-efficient)
+- [G-15] [Don't cache ``immutable`` variable incurs extra Gas](https://gist.github.com/#g-15-dont-cache-immutable-variable-incurs-extra-gas)
+- [G-16] [``Bytes`` constants are more efficient than ``string`` constants](https://gist.github.com/#g-16-bytes-constants-are-more-efficient-than-string-constants)
+- [G-17] [Don't ``cache variable`` only ``used once``](https://gist.github.com/#g-17-dont-cache-variable-only-used-once)
+
+
+#
+
+## [G-1] Improving storage efficiency through ``Struct Packing``	
 
 Each slot saved can avoid an extra Gsset (20000 gas) for the first setting of the struct. Subsequent reads as well as writes have smaller gas savings.
 
-### ``protocolVersion`` and ``l2SystemContractsUpgradeBatchNumber`` can be ``uint96`` instead of ``uint256`` : Saves ``4000 GAS`` , ``2 SLOT``
+### [G-1.1] ``protocolVersion`` and ``l2SystemContractsUpgradeBatchNumber`` can be ``uint96`` instead of ``uint256`` : Saves ``4000 GAS`` , ``2 SLOT``
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L136
 
@@ -95,7 +119,7 @@ struct AppStorage {
 
 ```
 
-### ``newProtocolVersion`` can be ``uint96`` instead of ``uint256`` : Saves ``2000 GAS`` , ``1 SLOT``
+### [G-1.2]  ``newProtocolVersion`` can be ``uint96`` instead of ``uint256`` : Saves ``2000 GAS`` , ``1 SLOT``
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L31-L43
 
@@ -122,7 +146,7 @@ struct ProposedUpgrade {
 
 ```
 
-### ``txType`` and ``nonce`` can be uint128 instead of uint256 : Saves ``2000 GAS`` , ``1 SLOT``
+### [G-1.3]  ``txType`` and ``nonce`` can be uint128 instead of uint256 : Saves ``2000 GAS`` , ``1 SLOT``
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/interfaces/IMailbox.sol#L35-L62
 
@@ -166,7 +190,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/interfaces/IMailbo
 
 ##
 
-## [G-] Replacing booleans with ``uint256(1)``/``uint256(2)`` for gas optimization
+## [G-2] Replacing booleans with ``uint256(1)``/``uint256(2)`` for gas optimization
 
 ### Saves ``100000 GAS`` from ``5 Instances``
 
@@ -196,7 +220,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-] Multiple address/ID mappings can be combined into a single mapping of an address/ID to a struct, where appropriate
+## [G-3] Multiple address/ID mappings can be combined into a single mapping of an address/ID to a struct, where appropriate
 
 Saves a storage slot for the mapping. Depending on the circumstances and sizes of types, can avoid a Gsset (20000 gas) per mapping combined. Reads and subsequent writes can also be cheaper when a function requires both values and they both fit in the same storage slot. Finally, if both fields are accessed in the same function, can save ~42 gas per access due to not having to recalculate the key's keccak256 hash (Gkeccak256 - 30 gas) and that calculation's associated stack operations.
 
@@ -212,7 +236,7 @@ FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/Storage
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/Storage.sol#L99-L101
 
 ##
-																																												## [G-] ``totalDepositedAmountPerUser[_l1Token][_depositor]`` should be cached
+																																											## [G-4] ``totalDepositedAmountPerUser[_l1Token][_depositor]`` should be cached
 
 The instances below point to the second+ access of a state variable within a function. Caching of a state variable replaces each Gwarmaccess (100 gas) with a much cheaper stack read. Other less obvious fixes/optimizations include having local memory caches of state variable structs, or having local caches of state variable contracts/addresses.
 
@@ -236,7 +260,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 ##
 
-## [G-] Efficient event consolidation for ``Glogtopic`` Gas Savings
+## [G-5] Efficient event consolidation for ``Glogtopic`` Gas Savings
 
 We can combine the events into one singular event to save two Glogtopic ``(375 gas)`` that would otherwise be paid for the additional events. Saves ``750 GAS``
 
@@ -259,7 +283,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Admin.sol
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L37-L38
 																																																																																										##
 
-## [G-] Optimize gas usage by avoiding variable declarations inside loops
+## [G-6] Optimize gas usage by avoiding variable declarations inside loops
 
 The variables ``action``, ``facet``, ``isFacetFreezable``, and ``selectors`` are all declared inside the loop. This means that a new instance of each variable will be created for each iteration of the loop. Saves ``200-300 Gas`` per iteration
 
@@ -330,14 +354,10 @@ FILE: Breadcrumbs2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L396-L401
 
-```diff
-FILE: 
-
-```
 
 ##
 
-## [G-] Use dot notation method for struct assignment 
+## [G-7] Use dot notation method for struct assignment 
 
 We have a few methods we can use when assigning values to struct
 
@@ -367,7 +387,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/libraries/Diamond.
 
 ##
 
-## [G-] ``!_checkBit(processedLogs, uint8(logKey)`` this check is redundant when ``processedLogs`` is 0
+## [G-8] ``!_checkBit(processedLogs, uint8(logKey)`` this check is redundant when ``processedLogs`` is 0
 
 The bitwise AND operator (&) returns a 1 only if both operands have a 1 in the same position. In this case, processedLogs is 0, which means that all of its bits are 0. Therefore, the result of the AND operation will always be 0, regardless of the value of ``logKey`` . If its first iteration in for loop then ``processedLogs`` comes with default value 0 .
 
@@ -381,7 +401,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-] The ``claimFailedDeposit()`` function can be refactored for greater gas efficiency 
+## [G-9] The ``claimFailedDeposit()`` function can be refactored for greater gas efficiency 
 
 Gas savings can be achieved by initially verifying the ``amount`` before invoking the ``zkSync.proveL1ToL2TransactionStatus()`` function. This optimization is due to the costly nature of the ``zkSync.proveL1ToL2TransactionStatus()`` function, which should only be called when the ``amount`` is greater than zero
 
@@ -421,7 +441,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 ##
 
-## [G-] Optimize the ``fallback()`` function for better gas efficiency 
+## [G-10] Optimize the ``fallback()`` function for better gas efficiency 
 
 ### Caching ``diamondStorage`` before the ``msg.data.length >= 4 || msg.data.length == 0`` check can result in gas savings unless there's a revert in the require check, saving ``2100 GAS``
 
@@ -442,7 +462,7 @@ FILE : 2023-10-zksync/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
 
 ##
 
-## [G-] Optimize the ``commitBatches()`` function for better gas efficiency 
+## [G-11] Optimize the ``commitBatches()`` function for better gas efficiency 
 
 
 The parameter ``_newBatchesData.length > 0`` should be checked before evaluating ``s.storedBatchHashes[s.totalBatchesCommitted] == _hashStoredBatchInfo(_lastCommittedBatchData)`` when dealing with state variables in a function call. This optimization can lead to a savings of ``500 GAS``
@@ -462,7 +482,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-]  Optimize the ``requestL2Transaction()`` function for better gas efficiency 
+## [G-12]  Optimize the ``requestL2Transaction()`` function for better gas efficiency 
 
 Prioritize the check of the ``_l2GasPerPubdataByteLimit`` parameter before performing any other operations, resulting in a savings of ``200 GAS``
 
@@ -500,9 +520,9 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 ##
 
-## [G-] Optimize code to avoid to spend unnecessary GAS
+## [G-13] Optimize code to avoid to spend unnecessary GAS
 
-### Any revert inside the for loop then caching ``initAddress`` ,``initCalldata `` is waste of the computation and gas . Saves ``300 GAS``. Values of ``initAddress`` and ``initCalldata `` is used after the for loop. So caching values before for loop is unnecessary.
+### [G-13.1]  Any revert inside the for loop then caching ``initAddress`` ,``initCalldata `` is waste of the computation and gas . Saves ``300 GAS``. Values of ``initAddress`` and ``initCalldata `` is used after the for loop. So caching values before for loop is unnecessary.
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Diamond.sol#L97-L98
 
@@ -541,8 +561,7 @@ function diamondCut(DiamondCutData memory _diamondCut) internal {
 
 ```
 
-
-### Any revert in  ``block.timestamp - COMMIT_TIMESTAMP_NOT_OLDER <= batchTimestamp`` check then caching lastL2BlockTimestamp value unnecessary and waste of gas 
+### [G-13.2] Any revert in  ``block.timestamp - COMMIT_TIMESTAMP_NOT_OLDER <= batchTimestamp`` check then caching lastL2BlockTimestamp value unnecessary and waste of gas 
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L87
 
@@ -589,12 +608,9 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
 +            (bytes32 logValue, ) = UnsafeBytes.readBytes32(emittedL2Logs, i + L2_LOG_VALUE_OFFSET);
 
 ```
-
-
-
 ##
 
-## [G-] Not initializing variables to their default values incurs extra gas, So leaving them with their default values is more gas-efficient
+## [G-14] Not initializing variables to their default values incurs extra gas, So leaving them with their default values is more gas-efficient
 
 This is because the default value of 0 is already assigned to value automatically. By not initializing it, we avoid the cost of the unnecessary assignment.
 
@@ -618,7 +634,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-] Don't cache immutable variable incurs extra Gas
+## [G-15] Don't cache immutable variable incurs extra Gas
 
  ```diff
 FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
@@ -637,7 +653,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-] Bytes constants are more efficient than string constants
+## [G-16] Bytes constants are more efficient than string constants
 
 bytes constants are more gas efficient than string constants when the string length is fixed. This is because the Ethereum Virtual Machine (EVM) stores bytes constants in a more compact way than string constants.
 
@@ -690,11 +706,11 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [G-] Don't cache variable only used once 
+## [G-17] Don't cache variable only used once 
 
 If the variable is only accessed once, it's cheaper to use the state variable directly that one time, and save the 3 gas the extra stack assignment would spend.
 
-### ``hasSpecialAccessToCall[_caller][_target][_functionSig]`` can be used directly instead of local cache
+### [G-17.1] ``hasSpecialAccessToCall[_caller][_target][_functionSig]`` can be used directly instead of local cache
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/AllowList.sol#L117
 
@@ -712,7 +728,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/common/AllowList.sol
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/AllowList.sol#L117
 
-### Using a local variable to cache the result of ``s.priorityQueue.popFront()`` is redundant and costs ``250 GAS`` per iteration. Instead, use the result of the function call directly.
+### [G-17.1] Using a local variable to cache the result of ``s.priorityQueue.popFront()`` is redundant and costs ``250 GAS`` per iteration. Instead, use the result of the function call directly.
 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L263-L266
 
@@ -744,20 +760,11 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L87-L94
 
 
+
 																							
 
 																								
 																																																																																																				
-																						Is this possible to cache any external function calls inside the loop
-
-Is this possible to avoid internal functions?
-
-if any return functions functions first return less gas value lastly return most gas values
-
-Only cache memory or storage inside the condition checks if possible 
-
-
-
-Is there any calculations used repeatedly ?
+																						
 																																																																					
 																																																																																																																			
