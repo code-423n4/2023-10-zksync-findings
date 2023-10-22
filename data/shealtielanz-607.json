@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "shealtielanz",
+  "risk": "2",
+  "title": "Failure to prove previous batches will occur during an upgrade, as no check is made to ensure all committed batches are finalized before the `verifier` is Upgraded.",
+  "issueId": 607,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/607"
+}
