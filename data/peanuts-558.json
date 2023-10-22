@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "peanuts",
+  "risk": "2",
+  "title": "Bootloader.yul sets all gas per pubdata byte as 17, which may be an overestimation for some zero bytes transaction.",
+  "issueId": 558,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/558"
+}
