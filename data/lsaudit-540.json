@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "Incorrect modifiers in `markFactoryDeps()` and `markBytecodeAsPublished()`",
+  "issueId": 540,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/540"
+}
