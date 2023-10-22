@@ -114,3 +114,8 @@ G5. Define ~IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK with a constant NEG_IS_CONSTRU
 
     }
 ```
+
+G6. Use _expectedNewNumber instead of  previousBatchNumber + 1 can save gas here:
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L431](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L431)
+
