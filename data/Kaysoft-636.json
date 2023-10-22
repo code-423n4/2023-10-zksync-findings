@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Kaysoft",
+  "risk": "3",
+  "title": "Users can lose ETH when they try to convert WETH to ETH with the L2WETH.sol#withdrawTo(...) function.",
+  "issueId": 636,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/636"
+}
