@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "shealtielanz",
+  "risk": "2",
+  "title": "Transactions to finalize Weth deposit on L2 will always revert due to how the `call.value` is calculated and passed to `requestL2Transaction()` ",
+  "issueId": 665,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/665"
+}
