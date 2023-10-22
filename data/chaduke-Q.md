@@ -228,3 +228,7 @@ Mitigation:
 QA9. Make the components that are imported explicit rather than implicit:
 
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/BootloaderUtilities.sol#L5-L8](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/BootloaderUtilities.sol#L5-L8)
+
+QA10. ImmutableSimulator.setImmutables() fails to 1) whether it overwrites an existing value for a particular index; 2) check wether the input immutables have duplicate index that point to different values.
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/ImmutableSimulator.sol#L34-L45](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/ImmutableSimulator.sol#L34-L45)
