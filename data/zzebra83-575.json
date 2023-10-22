@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zzebra83",
+  "risk": "2",
+  "title": "publishPubdataAndClearState - Invalid check for numberOfL2ToL1Logs",
+  "issueId": 575,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/575"
+}
