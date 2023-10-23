@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zero-idea",
+  "risk": "2",
+  "title": "Upgradable contracts on L1 cannot be reinitializable",
+  "issueId": 899,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/899"
+}
