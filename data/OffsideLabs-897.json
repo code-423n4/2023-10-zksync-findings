@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "OffsideLabs",
+  "risk": "2",
+  "title": "Absence of maxFeePerGas and maxPriorityFeePerGas validation in TransactionValidator.validateUpgradeTransaction can cause upgrade transactions to crash the L2",
+  "issueId": 897,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/897"
+}
