@@ -11,5 +11,7 @@ For such a well-programmed and vigorously audited project as zkSync, the main ri
 1. The centralization risks. The operator, while being a partially trusted actor, is responsible for processing very critical operations for the entire blockchain. The protocol should ensure the actions of the operator are verified and validated as much as possible, and the possible damage caused by a malicious operator should be kept as minimal as possible.
 2. Upgradeability risks. It's not uncommon that a solid codebase becomes vulnerable through an upgraded contract or a new contract added to its ecosystem. All contract upgrades, including minor ones, should be audited and review in the context of the entire ecosystem.
 
+
+
 ### Time spent:
 60 hours
