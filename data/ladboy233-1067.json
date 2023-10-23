@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "L1 transaction requested via mailbox gas limit and gas fee is not properly validated",
+  "issueId": 1067,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1067"
+}
