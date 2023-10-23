@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "moneyversed",
+  "risk": "3",
+  "title": "Improper usage of `unsafe` in the conditional allocation function allows for injection of crafted inputs near the max value of `UInt32`",
+  "issueId": 1109,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1109"
+}
