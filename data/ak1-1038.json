@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ak1",
+  "risk": "2",
+  "title": "mod.rs#L30 : the allocated size of register array is not sufficient",
+  "issueId": 1038,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1038"
+}
