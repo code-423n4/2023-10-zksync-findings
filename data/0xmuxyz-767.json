@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0xmuxyz",
+  "risk": "2",
+  "title": "ERC20 tokens, which is accidentally and directly sent to the either Bridge contract, will be stuck forever in the Bridge contract",
+  "issueId": 767,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/767"
+}
