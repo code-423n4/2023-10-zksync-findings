@@ -21,9 +21,10 @@
 - [G-15] [Don't cache ``immutable`` variable incurs extra Gas](https://gist.github.com/#g-15-dont-cache-immutable-variable-incurs-extra-gas)
 - [G-16] [``Bytes`` constants are more efficient than ``string`` constants](https://gist.github.com/#g-16-bytes-constants-are-more-efficient-than-string-constants)
 - [G-17] [Don't ``cache variable`` only ``used once``](https://gist.github.com/#g-17-dont-cache-variable-only-used-once)
+- [G-18] [First perform less expensive checks and then proceed to more costly ones]()
 
 
-#
+##
 
 ## [G-1] Improving storage efficiency through ``Struct Packing``	
 
@@ -758,6 +759,21 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/facets/Executor.so
 
 ```
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L87-L94
+
+##
+
+## [G-18] First perform less expensive checks and then proceed to more costly ones
+
+
+```diff
+FILE: 2023-10-zksync/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
+
+- 31: require(!diamondStorage.isFrozen || !facet.isFreezable, "q1"); // Facet is frozen
++ 31: require(!facet.isFreezable || !diamondStorage.isFrozen, "q1"); // Facet is frozen
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L31
+
 
 
 
