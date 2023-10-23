@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE WETH TRANSFER VIA THE `L1WethBridge` COULD GET `DoS` IF THE DEPOSIT AMOUNT REACHES THE `limitData.depositCap` LIMIT SINCE `s.totalDepositedAmountPerUser[_depositor]` VALUE IS NOT CORRECTLY UPDATED FOR FAILED DEPOSIT TRANSACTIONS WHEN FINALIZING ON L2",
+  "issueId": 1111,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1111"
+}
