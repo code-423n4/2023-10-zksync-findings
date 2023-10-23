@@ -59,7 +59,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 ```
 * * *
 * * *
-# 3
+# 4
 wrong error
 1 instances
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/governance/Governance.sol#L240
@@ -67,7 +67,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 instead of `"Operation with this proposal id already exists"` must be `"Operation with this proposal id already exists or done"`
 * * *
 * * *
-# 4
+# 5
 missing docs
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/interfaces/IMailbox.sol#L83
 # Summary
