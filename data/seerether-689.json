@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "Failed deposit can be clsimed multiple times due to deleting the depositAmount entry",
+  "issueId": 689,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/689"
+}
