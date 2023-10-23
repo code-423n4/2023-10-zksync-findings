@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Aymen0909",
+  "risk": "2",
+  "title": "Wrong check applied on `numberOfL2ToL1Logs` in `L1Messenger.publishPubdataAndClearState`",
+  "issueId": 724,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/724"
+}
