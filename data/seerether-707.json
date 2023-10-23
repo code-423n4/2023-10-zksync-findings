@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": " Paying the full fee upfront can allow the bootloader to grief gas",
+  "issueId": 707,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/707"
+}
