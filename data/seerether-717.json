@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "totalRequiredBalance function does not account for potential token approvals that may be needed. This could potentially lock up user funds unexpectedly.",
+  "issueId": 717,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/717"
+}
