@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Limbooo",
+  "risk": "2",
+  "title": "Disabling Upgradeability through Misconfigured `executeUpgrade`",
+  "issueId": 1084,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1084"
+}
