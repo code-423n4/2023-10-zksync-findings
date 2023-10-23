@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Jeiwan",
+  "risk": "2",
+  "title": "`EXTCODEHASH` and `EXTCODESIZE` incorrectly detect precompiles",
+  "issueId": 772,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/772"
+}
