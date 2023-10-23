@@ -1,5 +1,5 @@
 ## 1. Remove redundancy code :-
-In below scenario comment says ` // If the proof is not empty, verify it, otherwise, skip the verification` but in reality even proof is zero it will verify because the code which there in if() statement to verify the same code is in outside the if() statement it will verify even the proof is zero
+In below scenario comment says `// If the proof is not empty, verify it, otherwise, skip the verification` but in reality even proof is zero it will verify because the code which there in if() statement to verify ,the same code is in outside the if() statement it will verify even the proof is zero.Solidity does not support traditional preprocessor directives like #if, #else, or #endif. So, the comments with `// #else` and `// #endif` have no effect on the actual behavior of the code. Solidity will simply ignore these comments.
 
 **Before**
 ```solidity
@@ -42,6 +42,9 @@ In below scenario comment says ` // If the proof is not empty, verify it, otherw
 
 Please see `//@audit changed here ` comment in above code snippet .
 
+Code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L362C1-L368C69
+
 ## 2 . Refactor the require statement :-
 
 In below code snippet we can agree the first require statement that total committed batches should be greater than `newLastBatch` . In second require statement the comment says`// Already executed batches cannot be reverted` but the condition in second require statement anticipates even equal number to `s.totalBatchesExecuted` this may break the invariant it means already executed batches can also be reverted .
@@ -63,6 +66,8 @@ function revertBatches(uint256 _newLastBatch) external nonReentrant onlyValidato
 ```
 
 Please look into `//@audit changed here` comment in above comment .
+code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L399C1-L401C1
 
 ## 3 . Constant name should be capitalized SNAKE_CASE
 
@@ -147,4 +152,193 @@ In below scenario we can directly define the `_depositSender` as msg.sender who 
 
 Please look into the `//@audit changed here` comment in above code snippet .We have already tried changing the test and Yarn cache file corresponding to the scenario described above, and all tests passed without any failures. 
 
+Code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L255C3-L285C6
+
+## 5. Add value to salt while deploy contract via create2() :-
+
+Salt is used for uniqueness while creating contract . It will help to avoid storage collision while deploying contracts subsequently .It helps to predict the contract address before it is created.
+
+Reference :-
+https://docs.soliditylang.org/en/develop/control-structures.html#salted-contract-creations-create2
+
+code snippet :-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/libraries/BridgeInitializationHelper.sol#L54
+
+
+## 6. Add check before bridgeBurn() :-
+In the following scenario, we can see that the withdraw() function first calls the bridgeBurn() function without validating the amount to be burn, after it send message to mailbox.finaliseWithdraw() even this doesn't have amount validation . 
+
+**Before**
+```solidity
+    function withdraw( //Analysis 
+        address _l1Receiver,
+        address _l2Token,
+        uint256 _amount
+    ) external override {
+        IL2StandardToken(_l2Token).bridgeBurn(msg.sender, _amount);
+```
+
+**After**
+```solidity
+    function withdraw( //Analysis 
+        address _l1Receiver,
+        address _l2Token,
+        uint256 _amount
+    ) external override {
+        require(_amount != 0,"E"); //@audit changed here.
+        IL2StandardToken(_l2Token).bridgeBurn(msg.sender, _amount);
+```
+
+code snippet :-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L105C1-L116C51
+
+
+## 7. Refactor the if-else() statement :- 
+In following scenario the else-if() statement have the condition whether _maxVirtualBlocksToCreate is equal to 0, the function just returns without further processing. So we can replace this condition in if() statement only which covers check effective pattern.
+
+**Before**
+```solidity
+        if (currentVirtualL2BlockInfo.number == 0 && virtualBlockInfo.timestamp == 0) {
+            uint128 currentBatchNumber = currentBatchInfo.number;
+
+            // The virtual block is set for the first time. We can count it as 1 creation of a virtual block.
+            // Note, that when setting the virtual block number we use the batch number to make a smoother upgrade from batch number to
+            // the L2 block number.
+            virtualBlockInfo.number = currentBatchNumber;
+            // Remembering the batch number on which the upgrade to the virtual blocks has been done.
+            virtualBlockUpgradeInfo.virtualBlockStartBatch = currentBatchNumber;
+
+            require(_maxVirtualBlocksToCreate > 0, "Can't initialize the first virtual block");
+            _maxVirtualBlocksToCreate -= 1;
+        } else if (_maxVirtualBlocksToCreate == 0) {
+            // The virtual blocks have been already initialized, but the operator didn't ask to create
+            // any new virtual blocks. So we can just return.
+            return;
+        }
+```
+
+
+**After**
+```solidity
+ if (_maxVirtualBlocksToCreate == 0) {
+            // The virtual blocks have been already initialized, but the operator didn't ask to create
+            // any new virtual blocks. So we can just return.
+            return;
+        }else if (currentVirtualL2BlockInfo.number == 0 && virtualBlockInfo.timestamp == 0) {
+            uint128 currentBatchNumber = currentBatchInfo.number;
+
+            // The virtual block is set for the first time. We can count it as 1 creation of a virtual block.
+            // Note, that when setting the virtual block number we use the batch number to make a smoother upgrade from batch number to
+            // the L2 block number.
+            virtualBlockInfo.number = currentBatchNumber;
+            // Remembering the batch number on which the upgrade to the virtual blocks has been done.
+            virtualBlockUpgradeInfo.virtualBlockStartBatch = currentBatchNumber;
+
+            require(_maxVirtualBlocksToCreate > 0, "Can't initialize the first virtual block");
+            _maxVirtualBlocksToCreate -= 1;
+        }
+
+```
+In above code snippet we can see that `_maxVirtualBlocksToCreate == 0` if this condition becomes true we don't need to do other operations. Even else-if statement have the check `require(_maxVirtualBlocksToCreate > 0, "Can't initialize the first virtual block");`  which is not required now because it has been checked in if() statement only.
+
+code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L248C1-L264C10
+
+## 8 . Modify the require statement :-
+In below scenario the condition is `numberOfL2ToL1Logs <= numberOfL2ToL1Logs` in require statement is always be true , the error message will never be revert because the condition always be true. It can be change to maintain a certain threshold to be executed and checking each time when publish pubdata on L1 . This may become serious security risk because it doesn't act as proper validation. Please look into the After section . If this check is intentional please remove it . 
+**Before**
+```solidity
+        uint32 numberOfL2ToL1Logs = uint32(bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4]));
+        require(numberOfL2ToL1Logs <= numberOfL2ToL1Logs, "Too many L2->L1 logs");
+```
+
+**After**
+```solidity
+        uint32 numberOfL2ToL1Logs = uint32(bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4]));
+        uint256 maxAllowedLogs = 100; // Define any maximum allowed number of logs
+        require(numberOfL2ToL1Logs <= maxAllowedLogs, "Too many L2->L1 logs");
+```
+
+Code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L206
+
+## 9. Unnecessary typecast :-
+
+In following scenario we can directly pass the value instead of type cast. In bot-report this instance mark as `Unsafe downcast`  but our intensions is differ from that. We are saying that we can directly pass the value instead of type cast.
+
+**Before**
+```solidity
+ _setL2BlockHash(uint128(_l2BlockNumber - 1), correctPrevBlockHash);
+
+```
+**After**
+
+```solidity
+ _setL2BlockHash(_l2BlockNumber - 1, correctPrevBlockHash);
+```
+
+code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L226
+
+## 10. Refactor the return statement :-
+
+In below scenario if `recoveredAddress == address(this)` is true , then it never become zero address(0).Because the `_isValidSignature()` internal function can only be called after the deployment of DefaultAccount.sol then address(this) never gonna zero in other scenario if DefaultAccount.sol is inherited by other contract then also address(this) never become zero. However `_isValidSignature()` internal function is in DefaultAccount.sol  called by validateTransaction() external function.
+
+**Code snippet**
+```solidity
+
+        return recoveredAddress == address(this) && recoveredAddress != address(0);
+```
+
+Recommendation :-
+```solidity
+//Either this
+return recoveredAddress == address(this);
+
+//Or this
+return recoveredAddress != address(0);
+```
+code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L190C1-L190C84
+
+## 11.Add check that nonce is not less than exist one .
+In following scenario we can see user or onlySystemCall can set nonce value lower than the existing one. In line [18 & 19](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L18C1-L19C42) says `less than `minNonce` will become used in future` means through this function authority or msg.sender can set already used nonce. As we know the nature of nonce's must be unique and incrementing for each transaction but here is not seems to be like that .
+
+Recommendation :-
+```solidity
+ // Ensure that the new nonce is greater than or equal to the existing one
+    require(oldRawNonce + _value >= oldRawNonce, "New nonce cannot be lower than the existing one");
+
+// Or call the isNonceUsed() inside the increaseMinNonce()
+```
+
+code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L66C1-L76C6
+
+## 12 . Call the block.timestamp inside the loop :-
+
+In following scenario it sets the timestamp once before the loop starts and then uses this fixed timestamp for every iteration, which means that all batches in _newBatchesData would have the same timestamp value, and they won't reflect the actual time when they were processed. As we know every seconds block.timestamp value will be changed, if the `_newBatchesData` has large amount of array every batches will be set as same block.timestamp.They won't reflect the actual time when they were processed.
+
+**Before**
+```solidity
+uint32 timestamp = uint32(block.timestamp);
+            for (uint256 i = 0; i < _newBatchesData.length; ++i) {
+                committedBatchTimestamp.set(_newBatchesData[i].batchNumber, timestamp);
+            }
+```
+
+**After**
+```solidity
+uint32 timestamp ;
+            for (uint256 i = 0; i < _newBatchesData.length; ++i) {
+                timestamp = uint32(block.timestamp);
+                committedBatchTimestamp.set(_newBatchesData[i].batchNumber, timestamp);
+            }
+```
+
+code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L84C1-L88C1
+
+Note :-
 **Our finding doesn't cause any test fail**
