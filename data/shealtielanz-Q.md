@@ -382,10 +382,10 @@ add a check to ensure the returned address is not the zero address.
 
 ## L-13 Brigdes are prone to `Wintermute attacks` as a different `contract` could be deployed under that same `address` on `Layer 2`.
 ### Summary 
-
+On initialization of L1 bridges, it sends a request for the corresponding bridges to be deployed using create2 on L2 and computes their contract address after which it saves it to storage, the issue here is just like the winter 
 ## L-14 `Addresses` that `eth` will be sent to should be marked as `payable`.
 ### Summary 
-if a contract doesn't have the recieve() or fallback function, call to send it will always revert.\
+if a contract doesn't have the recieve() or fallback function, a call to send eth will always revert.
 withdrawTo() in MailBox.sol
 ```solidity
     function withdrawTo(address _to, uint256 _amount) public override {
