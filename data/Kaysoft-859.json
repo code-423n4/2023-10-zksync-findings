@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Kaysoft",
+  "risk": "2",
+  "title": "No access control on DefaultUpgrade.sol#upgrade(...) function ",
+  "issueId": 859,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/859"
+}
