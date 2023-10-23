@@ -55,5 +55,6 @@ L-07 No check for assert_eq!(lhs.len(), rhs.len());  in ram permutation circuits
 The ramp permutation circuit uses lhs and rhs to create challenges but does not implement a check to make sure that lhs.len == rhs.len like in other circuits such as sort decommiter
 
 
-
+L-08 A circuit should not have a higher limit than a preceding circuit 
+According to the docs, each circuit has a cycle limit. But it does not make sense to have a circuit that has a higher limit than its preceding circuit e.g. Ram permutations and Sort Decomitter 
 
