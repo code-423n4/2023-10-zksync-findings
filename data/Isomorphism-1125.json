@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Isomorphism",
+  "risk": "3",
+  "title": "Mailbox deposit function can unintentionally be bricked by a user",
+  "issueId": 1125,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1125"
+}
