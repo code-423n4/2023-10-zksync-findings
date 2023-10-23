@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "`baseCost` IS NOT DEDUCTED FROM THE `msg.value` VALUE BEFORE ASSIGNING TO THE `params.valueToMint` IN THE `Mailbox._requestL2Transaction` FUNCTION THUS PASSING IN AN ERRORNEOUS VALUE",
+  "issueId": 1022,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1022"
+}
