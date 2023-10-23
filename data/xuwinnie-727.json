@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "xuwinnie",
+  "risk": "3",
+  "title": "Calling empty kernel address is unprovable since code length is zero",
+  "issueId": 727,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/727"
+}
