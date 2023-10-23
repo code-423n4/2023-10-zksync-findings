@@ -40,7 +40,7 @@ L-05 No check on empty queue can cause the circuit to not run as efficiently as 
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/keccak256_round_function/mod.rs#L135
 https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/sha256_round_function/mod.rs#L124
 
-Both the she 256 and the keccak 256 circuits check whether the queue is empty. However, no other circuit makes the same check. This can cause the entire circuit system to run as efficiently as it could 
+Both the sha 256 and the keccak 256 circuits check whether the queue is empty. However, no other circuit makes the same check. This can cause the entire circuit system to run as efficiently as it could 
 
 
 L-06 CFG should be removed from storage validity circuit 
@@ -57,4 +57,8 @@ The ramp permutation circuit uses lhs and rhs to create challenges but does not 
 
 L-08 A circuit should not have a higher limit than a preceding circuit 
 According to the docs, each circuit has a cycle limit. But it does not make sense to have a circuit that has a higher limit than its preceding circuit e.g. Ram permutations and Sort Decomitter 
+
+L-09 No 0 limb check in near_call.rs could allow bad actors to maliciously overload the circuit
+
+
 
