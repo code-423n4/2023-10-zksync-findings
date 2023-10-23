@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "xuwinnie",
+  "risk": "2",
+  "title": "Heap growth during a near call will be reverted after returning",
+  "issueId": 683,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/683"
+}
