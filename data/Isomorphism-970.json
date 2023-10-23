@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Isomorphism",
+  "risk": "2",
+  "title": "Specs imply that ZKevm merkle patricia trie is uses a different library than EVM standard libraries (e.g. openzeppelin).",
+  "issueId": 970,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/970"
+}
