@@ -526,8 +526,42 @@ We see that in the `require` statements `_path` length is checked to be within (
 Recommendations: 
 Change to `require(pathLength <= 256, "bt");`
 
-### Low 13 - DefaultUpgrade.sol `upgrade()` has no access control
+### Low 13 - DefaultUpgrade.sol `upgrade()` has no access control, which requires an inefficient and potentially risky flow of system upgrade
 
+**Instances(1)**
+
+DefaultUpgrade.sol defines public `upgrade()` with no access control, which is a basic mechanism method for system upgrade. Although the expected flow of default system upgrade is to deploy a DefaultUpgrade.sol, set it as a facet for DiamondProxy, and initialize it by calling `upgrade()` atomically, removing the need for access control for `upgrade()`, it's still inefficient and potentially risky to have an `upgrade()` accessible to anyone.
+
+Multiple transactions have to be done atomically which itself is gas-intensive and this process can be simplified. In the current flow, DefaultUpgrade.sol needs to be deployed first - not necessarily atomically since there is no risk of malicious initialization. Next, governance needs to invoke `executeUpgrade()` from Admin.sol, which requires the following steps: (1) add DefaultUpgrade.sol as a facet, then (2) invoke custom `upgrade()` logic through initialization, and then (3) remove DefaultUpgrade.sol from DiamondProxy to prevent the public from calling `upgrade()`. 
+
+If we add access control (e.g. only allow governance) to `upgrade()`, the (1) and (3) steps above can be eliminated. This way we save gas on update flow and also simplify the calldata for `executeUpgrade()`. This reduces the risk of mistakes, for example, if DefaultUpgrade.sol is not removed at `executeUpgrade()` due to negligence, a malicious actor can call `upgrade()` to update key addresses on L1 directly.
+
+```solidity
+// code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol
+    // @audit no access control, and `super.upgrade()` only check timestamps not msg.sender.
+    function upgrade(ProposedUpgrade calldata _proposedUpgrade) public override returns (bytes32) {
+        super.upgrade(_proposedUpgrade);
+        _setNewProtocolVersion(_proposedUpgrade.newProtocolVersion);
+        _upgradeL1Contract(_proposedUpgrade.l1ContractsUpgradeCalldata);
+        _upgradeVerifier(_proposedUpgrade.verifier, _proposedUpgrade.verifierParams);
+        _setBaseSystemContracts(_proposedUpgrade.bootloaderHash, _proposedUpgrade.defaultAccountHash);
+...
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L25)
+
+```solidity
+// code/contracts/ethereum/contracts/zksync/facets/Admin.sol
+    function executeUpgrade(Diamond.DiamondCutData calldata _diamondCut) external onlyGovernor {
+        Diamond.diamondCut(_diamondCut);
+        emit ExecuteUpgrade(_diamondCut);
+    }
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L98-L100)
+
+In addition, if a custom upgrade needs to be performed (e.g. custom post-upgrade hook logic is required), a custom upgrade contract can be deployed when needed, in which case (1)&(3) steps cannot be eliminated. But in most cases, based on code doc in DefaultUpgrade.sol, (1)&(3) steps can be removed if we add access control to `upgrade()`.
+
+Recommendations:
+Add access control to DefaultUpgrade.sol to save gas and avoid risks of mistakes during `executeUpgrade()`. 
 
 
 ### NC 01 - Consider adding comments for custom formula implementation, especially if it is optimized or modified from the original formula from the doc.
