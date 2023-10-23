@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Baki",
+  "risk": "2",
+  "title": "Full Bytecode cannot be published on L1, hence it cannot be restored on L1 by users",
+  "issueId": 916,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/916"
+}
