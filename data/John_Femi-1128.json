@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "John_Femi",
+  "risk": "2",
+  "title": "Use relayers instead of owner to avoid single point of failure",
+  "issueId": 1128,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1128"
+}
