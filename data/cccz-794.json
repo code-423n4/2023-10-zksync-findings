@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "cccz",
+  "risk": "2",
+  "title": "Double aliases may cause users to lose bridge failed ETH",
+  "issueId": 794,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/794"
+}
