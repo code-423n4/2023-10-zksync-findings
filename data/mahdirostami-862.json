@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "mahdirostami",
+  "risk": "2",
+  "title": "Incorrect return from EcAdd.yul for Specific Point Addition Case",
+  "issueId": 862,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/862"
+}
