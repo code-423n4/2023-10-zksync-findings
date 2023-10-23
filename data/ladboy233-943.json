@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "TransactionHelper#encode does not include uint256[4] reserved and bytes reservedDynamic",
+  "issueId": 943,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/943"
+}
