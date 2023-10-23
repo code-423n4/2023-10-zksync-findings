@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hash",
+  "risk": "2",
+  "title": "DOS due to insufficient restrictions for transaction validation ",
+  "issueId": 796,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/796"
+}
