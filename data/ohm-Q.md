@@ -22,3 +22,8 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/c
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L311
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L398
 
+# Contracts files should define a locked compiler version and latest version of the compiler
+Contract files should specify a locked compiler version and the latest available version of the compiler. Contracts should be deployed using the same compiler version and flags with which they have been thoroughly tested. It is advisable to use the most recent compiler versions to reduce gas fees and benefit from bug fixes. Locking the pragma version helps ensure that contracts are not inadvertently deployed with outdated compiler versions, which could introduce bugs and negatively impact the contract system.
+```
+pragma solidity ^0.8.13;
+```
