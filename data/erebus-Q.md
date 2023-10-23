@@ -985,6 +985,9 @@ $$\therefore O \ is \ unique \ under \ F$$
 
 I can't give you a solution as I do not know which one is the right point at $\infty$, as in some places it says it is the $(0, 0)$ and in others say it is $(0, 1)$.
 
+## [L-20] Rogue validators can spam `revertBlocks` and make the chain unusable
+
+In [Executor, function revertBlocks](https://github.com/matter-labs/era-contracts/blob/f06a58360a2b8e7129f64413998767ac169d1efd/ethereum/contracts/zksync/facets/Executor.sol#L440C1-L456C6) there is no way to prevent a rogue validator to spam this function and DOS other validators from executing the commited batches, as [executeBlocks](https://github.com/matter-labs/era-contracts/blob/f06a58360a2b8e7129f64413998767ac169d1efd/ethereum/contracts/zksync/facets/Executor.sol#L294C14-L294C27) has a delay enforced by [ValidatorTimelock](https://github.com/matter-labs/era-contracts/blob/f06a58360a2b8e7129f64413998767ac169d1efd/ethereum/contracts/zksync/ValidatorTimelock.sol#L109C1-L109C111), which is supposed to be non-zero. As the validator is currently controled by Matter Labs, I'm putting it as a Low but consider implementing a delay or a slashing mechanism to validators that try to abuse their privileges by spamming `revertBlocks` for batches that do not benefit them, or even try to DOS the network.
 
 # Non-critical
 
@@ -1309,7 +1312,7 @@ Copy-pasted, remove the `EmptyContract` one.
 
 ## [NC-17] `PointProjective::mul_assign` optimization
 
-[secp256k1/mod.rs, line 543](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L543)
+[**secp256k1/mod.rs, line 543**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L543)
 
 ```diff
     fn mul_assign<S: Into<<Self::Scalar as PrimeField>::Repr>>(&mut self, other: S) {
@@ -1329,7 +1332,7 @@ Copy-pasted, remove the `EmptyContract` one.
 
 ## [NC-18] `PointProjective::add_assign_mixed` missing code
 
-[secp256k1/mod.rs, line 486](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L486)
+[**secp256k1/mod.rs, line 486**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L486)
 
 ```diff
             ...
