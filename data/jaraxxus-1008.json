@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "jaraxxus",
+  "risk": "2",
+  "title": "gas left may be insufficient when _execute in DefaultAccount",
+  "issueId": 1008,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1008"
+}
