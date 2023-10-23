@@ -510,10 +510,23 @@ We see that in the `require` statements `_path` length is checked to be within (
 
 ```solidity
 // code/contracts/ethereum/contracts/zksync/libraries/Merkle.sol
-
-
+    function calculateRoot(
+        bytes32[] calldata _path,
+        uint256 _index,
+        bytes32 _itemHash
+    ) internal pure returns (bytes32) {
+        uint256 pathLength = _path.length;
+        require(pathLength > 0, "xc");
+|>      require(pathLength < 256, "bt");
+        require(_index < (1 << pathLength), "px");
+...
 ```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/Merkle.sol#L25)
 
+Recommendations: 
+Change to `require(pathLength <= 256, "bt");`
+
+### Low 13 - DefaultUpgrade.sol `upgrade()` has no access control
 
 
 
@@ -543,8 +556,104 @@ code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 Recommendations:
 Adding relevant custom formulas in code comments increases code readability and increases efficiency for the review and auditing process. 
 
+### NC 02 - Some long revert strings are not optimized and abbreviated as the rest of the code base (Note: Not submitted in automated findings)
 
+**Instances(10)**
 
+Throughout the code base, abbreviated revert strings are used for gas optimization (e.g. "pz", "xx", etc). But there are a few instances, long revert strings - complete sentences are reverted. Consider optimizing these long strings in the same manner as the rest of the code base.
 
+Note this issue is different from [G57](https://raw.githubusercontent.com/code-423n4/2023-10-zksync/main/bot-report.md) which advices to convert all revert strings to errors.
 
- 
+```solidity
+// code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
+
+        require(_l2WethAddress != address(0), "L2 WETH address cannot be zero");
+        require(_governor != address(0), "Governor address cannot be zero");
+        require(_factoryDeps.length == 2, "Invalid factory deps length provided");
+        require(
+            msg.value == _deployBridgeImplementationFee + _deployBridgeProxyFee,
+            "Miscalculated deploy transactions fees"
+        );
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L90-L95)
+
+```solidity
+// code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
+
+        revert("Method not supported. Failed deposit funds are sent to the L2 refund recipient address.");
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L223)
+
+```solidity
+// code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
+
+        require(_message.length == 96, "Incorrect ETH message with additional data length");
+...
+        require(
+            bytes4(functionSignature) == IMailbox.finalizeEthWithdrawal.selector,
+            "Incorrect ETH message function selector"
+        );
+...
+        require(l1EthReceiver == address(this), "Wrong L1 ETH withdraw receiver");
+...
+        require(l2Sender == l2Bridge, "The withdrawal was not initiated by L2 bridge");
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L279)
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L282-L284)
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L289)
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L295)
+
+```solidity
+// code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
+
+        require(!isWithdrawalFinalized[_l2BatchNumber][_l2MessageIndex], "Withdrawal is already finalized");
+
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L240)
+
+### NC 03 - Weth deposit might still be submitted through L1ERC20Bridge.sol due to no explicit reverts, resulting in user waste of gas on L1.
+
+**Instances(1)**
+
+L1ERC20Bridge.sol cannot be used to bridge Weth, due to no inherent unwrap methods and handling of ETH deposit from L1-L2. 
+
+However, there are no explicit reverts to prevent users from depositing Weth through L1ERC20Bridge.sol. As a result, Users can submit deposit of Weth through L1ERC20Bridge.sol -`deposit()`. And user's transaction will not be reverted unless Weth's deposit limit(`IAllowList.Deposit`) is explicitly set. If no deposit limit for Weth is set by the admin. The user's deposit transaction will go through and gas will be paid. But the user's request will not be honored on L2 due to not following the Weth-> eth ->Weth flow, then the user would have to go through `claimFailedDeposit()` to recover funds, which will pay L1 gas a second time.
+
+```solidity
+// code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
+
+    function deposit(
+        address _l2Receiver,
+        address _l1Token,
+        uint256 _amount,
+        uint256 _l2TxGasLimit,
+        uint256 _l2TxGasPerPubdataByte,
+        address _refundRecipient
+    ) public payable nonReentrant senderCanCallFunction(allowList) returns (bytes32 l2TxHash) {
+        require(_amount != 0, "2T"); // empty deposit amount
+        uint256 amount = _depositFunds(msg.sender, IERC20(_l1Token), _amount);
+        require(amount == _amount, "1T"); // The token has non-standard transfer logic
+        // verify the deposit amount is allowed
+        _verifyDepositLimit(_l1Token, msg.sender, _amount, false);
+
+        bytes memory l2TxCalldata = _getDepositL2Calldata(msg.sender, _l2Receiver, _l1Token, amount);
+...
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L188)
+
+```solidity
+// code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
+
+    /// @dev Verify the deposit limit is reached to its cap or not
+    function _verifyDepositLimit(address _l1Token, address _depositor, uint256 _amount, bool _claiming) internal {
+        IAllowList.Deposit memory limitData = IAllowList(allowList).getTokenDepositLimitData(_l1Token);
+|>      if (!limitData.depositLimitation) return; // no deposit limitation is placed for this token
+...
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L342)
+
+Recommendations:
+`IAllowList.Deposit` has to be set explicitly for Weth token as 0 to prevent accidental Weth deposit on L1ERC20Bridge.sol, this increases dependencies on admin and creates risks where the limit is not set for Weth. 
+
+Since L1 Weth address is known, consider explicitly rejecting weth deposit in deposit() to cleanly divert the Weth deposit process, which removes dependencies on the admin for basic contract behaviors.
+
