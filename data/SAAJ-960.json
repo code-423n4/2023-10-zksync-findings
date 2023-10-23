@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "SAAJ",
+  "risk": "2",
+  "title": "Empty return silently fails when zero value is passed",
+  "issueId": 960,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/960"
+}
