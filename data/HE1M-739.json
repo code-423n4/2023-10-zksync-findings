@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "HE1M",
+  "risk": "2",
+  "title": "Inaccurate Batch Stored Hash Retrieval in Getters Contract",
+  "issueId": 739,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/739"
+}
