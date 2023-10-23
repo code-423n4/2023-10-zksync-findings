@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Inspecktor",
+  "risk": "3",
+  "title": "revertBatches() can undo a batch that has already been executed",
+  "issueId": 844,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/844"
+}
