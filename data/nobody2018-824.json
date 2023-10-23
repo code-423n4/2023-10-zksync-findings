@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "nobody2018",
+  "risk": "2",
+  "title": "In bootloader.processL1Tx, if tx is a priority one and toRefundRecipient is greater than 0, the gas that sendL2LogUsingL1Messenger needs to pay should be deducted from it",
+  "issueId": 824,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/824"
+}
