@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Viktor_Cortess",
+  "risk": "2",
+  "title": "Depositing WETH using L1WethBridge can lead to loss of operator's funds in case of gas price spikes.",
+  "issueId": 838,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/838"
+}
