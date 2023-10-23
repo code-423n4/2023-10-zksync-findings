@@ -1,0 +1,2 @@
+- [L1Messenger.publishPubdataAndClearState](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L206) performs an always-true (and therefore useless) check `require(numberOfL2ToL1Logs <= numberOfL2ToL1Logs, "Too many L2->L1 logs");`. It checks `numberOfL2ToL1Logs` against itself, it should probably check `numberOfL2ToL1Logs <= numberOfLogsToProcess`. However, the impact is low as all potential exploits would be caught by the final chained hash mismatch below: `require(reconstructedChainedLogsHash == chainedLogsHash);`
+ 
