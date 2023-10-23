@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "`DiamondProxy.sol` CONTRACT DOES NOT CORRECTLY IMPLEMENT THE `EIP-2535` STANDARD",
+  "issueId": 937,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/937"
+}
