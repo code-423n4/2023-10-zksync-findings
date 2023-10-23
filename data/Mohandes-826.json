@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Mohandes",
+  "risk": "2",
+  "title": "Lack of event emission on sensitive action (AllowList.setDepositLimit)",
+  "issueId": 826,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/826"
+}
