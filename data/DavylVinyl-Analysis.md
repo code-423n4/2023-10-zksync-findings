@@ -187,6 +187,108 @@ if (value > MAX_MSG_VALUE) {
 ## 5. **Unused Test Function**
  The function `unsafeOverrideBlock` in `SystemContext.sol` was initially intended for testing purposes but was not removed from the codebase.
 
+## 6. Spelling Mistake
+
+*contracts/libraries/SystemContractHelper.sol*
+
+* The word `returns` is misspelled as [`retuns`](https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/libraries/SystemContractHelper.sol#L318).
+
+## 7. Underscore Notation Not Used or Not Used Consistently
+
+Consider using underscore notation to help with contract readability (Ex. `23453` -> `23_453`).
+
+*/contracts/SystemContext.sol*
+
+```solidity
+40:	uint256 public difficulty = 2500000000000000;
+```
+
+## 8. bytes.concat() Can Be Used Over abi.encodePacked()
+
+Consider using `bytes.concat()` instead of `abi.encodePacked()` in contracts with Solidity version >= 0.8.4.
+
+*/contracts/L2EthToken.sol*
+
+```solidity
+98:	return abi.encodePacked(IMailbox.finalizeEthWithdrawal.selector, _to, _amount);
+```
+
+*/contracts/libraries/TransactionHelper.sol*
+
+```solidity
+132:	keccak256(abi.encodePacked(_transaction.factoryDeps)),
+141:	return keccak256(abi.encodePacked("\x19\x01", domainSeparator, structHash));
+```
+
+## 9. Space Between License and Pragma
+
+Almost all contracts in scope have a space between the license statement and pragma ([ex](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/SystemContext.sol#L2)). Although it does not void the [Solidity Style Guide](https://docs.soliditylang.org/en/v0.8.17/style-guide.html#maximum-line-lengthhttps://docs.soliditylang.org/en/v0.8.17/style-guide.html), all example contracts in the Style Guide do not have a space between the license statement and pragma ([ex](https://docs.soliditylang.org/en/v0.8.17/style-guide.html#blank-lines)). This format can also be seen throughout the Solidy documentation ([ex](https://docs.soliditylang.org/en/v0.8.17/natspec-format.html)). Consider removing the needless space.
+
+It is also good to note the following [contract](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/libraries/Utils.sol#L2) does not have a space between the license and pragma. At the very least all contracts should have a consistant style. 
+
+## 10. Inconsistent Trailing Period
+
+Some comments like [this](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/MsgValueSimulator.sol#L59) have a trailing `.` but other lines like [this](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/AccountCodeStorage.sol#L49) do not.
+
+Consider sticking to a single comment style for a less distracting developer experience.
+
+## 8. ERC20 Token Recovery
+
+Consider adding a recovery function for Tokens that are accidently sent to the core contracts of the protocol. 
+
+## 11. Gas Greif If Relayed
+
+Although it may not be possible in the current system design, it is good to note a possible gas greif if transactions are relayed. 
+
+Even if the `returnData` is left of of the following statement `(bool success, ) = target.call()`,  `returnData` is still copied to memory. This can lead to a gas greif if relayed. The code [here](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/utils/Address.sol#L66), and [here](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/MsgValueSimulator.sol#L36) use `(bool success, ) = target.call()`.
+
+For more information, see [this](https://twitter.com/pashovkrum/status/1607024043718316032?t=xs30iD6ORWtE2bTTYsCFIQ&s=19) post.
+
+## 12. Lack of Interface NatSpec
+
+The [Solidity documentation](https://docs.soliditylang.org/en/v0.8.17/natspec-format.html#natspec-format) states: 
+
+> [I]t is recommended that Solidity contracts are fully annotated using NatSpec for all public interfaces (everything in the ABI).
+
+[Some](https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/interfaces/IEthToken.sol) interfaces have no NatSpec documentation, [some](https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/interfaces/IL1Messenger.sol) have partial documentation, and [some](https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/interfaces/INonceHolder.sol) have full documentation (still missing `@title`). Consider adding full NatSpec documentation to all interfaces.
+
+## 13. Inconsistent NatSpec Style
+
+There is a general inconsistency with the way NatSpec comments are formatted. A NatSpec comment [here](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/interfaces/INonceHolder.sol#L23) is single line and uses `//`. [This](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/token/ERC20/IERC20.sol#L25) NatSpec comment is a single line, but uses the multi-line `/**`. Although both `//` and `/**` are valid NatSpec notation, it is best to keep to a single comment style.
+
+## 14. NatSpec Comments Without Tag
+
+The [Solidity documentation](https://docs.soliditylang.org/en/v0.8.19/natspec-format.html#tags) states: 
+
+> "[I]f no tags are used then the Solidity compiler will interpret a /// or /** comment in the same way as if it were tagged with @notice".
+
+There are some instances ([ex1](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/interfaces/IContractDeployer.sol#L66), [ex2](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/interfaces/IContractDeployer.sol#L67), [ex3](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/interfaces/IContractDeployer.sol#L75), ...) where no NatSpec tag is specified. It is best to be explicit with NatSpec tags. 
+
+## 15. Function Declaration Style
+
+The [Solidity Style Guide](https://docs.soliditylang.org/en/v0.8.17/style-guide.html#function-declaration) states that "[f]or short function declarations, it is recommended for the opening brace of the function body to be kept on the same line as the function declaration". It is not clear what length is exactly meant by "short" or "long". The [maximum line length](https://docs.soliditylang.org/en/v0.8.17/style-guide.html#maximum-line-lengthhttps://docs.soliditylang.org/en/v0.8.17/style-guide.html#maximum-line-length) of 120 characters may be an indication, and in that case any expanded function declaration under 120 characters should be on a single line.
+
+The following functions in their respective contracts are not compliant by this standard: 
+
+*contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol*
+* [`safeTransfer`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol#L22), [`safeTransferFrom`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol#L33), [`safeApprove`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol#L52), [`safeIncreaseAllowance`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol#L70), [`safeDecreaseAllowance`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol#L86). 
+
+*contracts/openzeppelin/utils/Address.sol*
+* [`functionCall`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/utils/Address.sol#L91), [`functionCallWithValue`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/utils/Address.sol#L129), [`functionStaticCall`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/utils/Address.sol#L177), [`functionDelegateCall`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/utils/Address.sol#L217), [`_revert`](https://github.com/code-423n4/2023-03-zksync//blob/main/contracts/openzeppelin/utils/Address.sol#L292). 
+
+## 16. Order of Layout
+
+The [Solidity Style Guide](https://docs.soliditylang.org/en/v0.8.17/style-guide.html#order-of-layout) suggests the following contract layout order: Type declarations, State variables, Events, Modifiers, Functions.
+
+The following contracts are not compliant (examples are only to prove the layout are out of order NOT a full description): 
+
+* [SystemContext.sol](https://github.com/code-423n4/2023-03-zksync/tree/main/contracts/SystemContext.sol): State is positioned after Modifier.
+* [ContractDeployer.sol](https://github.com/code-423n4/2023-03-zksync/tree/main/contracts/ContractDeployer.sol): State is positioned after Functions.
+* [IEthToken.sol](https://github.com/code-423n4/2023-03-zksync/tree/main/contracts/interfaces/IEthToken.sol): Events are positioned after Functions.
+
+
+
+
 
 
 ### Time spent:
