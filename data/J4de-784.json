@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "J4de",
+  "risk": "2",
+  "title": "The length check of `numberOfL2ToL1Logs `  in `publishPubdataAndClearState` function is wrong",
+  "issueId": 784,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/784"
+}
