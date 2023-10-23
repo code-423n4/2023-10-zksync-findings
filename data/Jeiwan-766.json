@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Jeiwan",
+  "risk": "2",
+  "title": "`ForceDeployUpgrader` can disrupt an upgrade when ETH is sent to a constructor",
+  "issueId": 766,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/766"
+}
