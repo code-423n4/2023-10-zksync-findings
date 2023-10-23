@@ -26,7 +26,7 @@ File:
 Consider renaming either the local variable or the function.
 
 ## [L-6] Function DefaultAccount._validateTransaction() shouln’t check trx.value for required balance, maybe user wanted the transaction to fail. also maybe paymaster is going to transfer required balance later.
-
+FILE: https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/DefaultAccount.sol#L96-L100
 ```
 // The fact there is are enough balance for the account
         // should be checked explicitly to prevent user paying for fee for a
@@ -34,5 +34,22 @@ Consider renaming either the local variable or the function.
         uint256 totalRequiredBalance = _transaction.totalRequiredBalance();
         require(totalRequiredBalance <= address(this).balance, "Not enough balance for fee + value");
 ```
+## [L-7] Repeated `if` block check in a function
+Consider adding the same logic in the first if block.
+File: https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/ContractDeployer.sol#L333-L343
 
+The if `if (value > 0)` is repeated twice in the same function. The two can be refactored to 1.
+```solidity
+ if (value > 0) {
+                ETH_TOKEN_SYSTEM_CONTRACT.transferFromTo(address(this), _newAddress, value);
+            }//@audit-issue there is a similar if block below.
+            // 2. Set the constructed code hash on the account
+            _storeConstructingByteCodeHashOnAddress(_newAddress, _bytecodeHash);
+
+            // 3. Call the constructor on behalf of the account
+            if (value > 0) {
+                // Safe to cast value, because `msg.value` <= `uint128.max` due to `MessageValueSimulator` invariant
+                SystemContractHelper.setValueForNextFarCall(uint128(value));
+            }
+```
 
