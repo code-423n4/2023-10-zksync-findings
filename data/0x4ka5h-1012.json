@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0x4ka5h",
+  "risk": "2",
+  "title": "Panic in `commit_variable_length_encodable_item` due to the vector length.",
+  "issueId": 1012,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1012"
+}
