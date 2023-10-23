@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "URGENT UPGRADE EXECUTION VIA `Governance.executeInstant` FUNCTION BY THE `securityCouncil` CAN BE DELAYED DUE TO `_checkPredecessorDone` CALL IN THE FUNCTION",
+  "issueId": 1001,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1001"
+}
