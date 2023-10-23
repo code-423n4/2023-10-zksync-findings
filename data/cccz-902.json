@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "cccz",
+  "risk": "2",
+  "title": "setDepositLimit() may cause the user to fail to call claimFailedDeposit()",
+  "issueId": 902,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/902"
+}
