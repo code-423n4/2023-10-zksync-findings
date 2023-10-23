@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "J4de",
+  "risk": "3",
+  "title": "`L1WETHBridge` may be DOSed by `MailboxFacet._verifyDepositLimit`",
+  "issueId": 785,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/785"
+}
