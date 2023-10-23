@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE `DiamondInit.initialize` FUNCTION IS NOT GUARDED BY AN ACCESS CONTROL MECHANISM WHICH ALLOWS AN ATTACKER TO FRONT-RUN THE DIAMOND PROXY INITIALIZATION AND REVERT THE INITIALIZATION TRANSACTION THUS DOS THE SYSTEM",
+  "issueId": 945,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/945"
+}
