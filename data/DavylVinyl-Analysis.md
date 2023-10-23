@@ -286,9 +286,234 @@ The following contracts are not compliant (examples are only to prove the layout
 * [ContractDeployer.sol](https://github.com/code-423n4/2023-03-zksync/tree/main/contracts/ContractDeployer.sol): State is positioned after Functions.
 * [IEthToken.sol](https://github.com/code-423n4/2023-03-zksync/tree/main/contracts/interfaces/IEthToken.sol): Events are positioned after Functions.
 
+## 17. require() should be used instead of assert()
+
+
+#### Findings:
+```
+2023-03-zksync-main/contracts/DefaultAccount.sol::225 => assert(msg.sender != BOOTLOADER_FORMAL_ADDRESS);
+2023-03-zksync-main/contracts/libraries/RLPEncoder.sol::45 => assert(_len != 1);
+```
+
+
+## 18. `safeApprove()` is deprecated
+
+#### Impact
+[Deprecated](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/bfff03c0d2a59bcd8e2ead1da9aed9edf0080d05/contracts/token/ERC20/utils/SafeERC20.sol#L38-L45) in favor of safeIncreaseAllowance() and safeDecreaseAllowance()
+#### Findings:
+```
+2023-03-zksync-main/contracts/libraries/TransactionHelper.sol::381 => IERC20(token).safeApprove(paymaster, 0);
+2023-03-zksync-main/contracts/libraries/TransactionHelper.sol::382 => IERC20(token).safeApprove(paymaster, minAllowance);
+```
+
+
+## 19. Unused `receive()` function will lock Ether in contract
+
+#### Impact
+If the intention is for the Ether to be used, the function should call another function, otherwise, it should revert
+#### Findings:
+```
+2023-03-zksync-main/contracts/DefaultAccount.sol::230 => receive() external payable {
+2023-03-zksync-main/contracts/EmptyContract.sol::11 => receive() external payable {}    
+2023-03-zksync-main/contracts/EmptyContract.sol::13 => receive() external payable {}
+```
+
+
+## 20. Adding a return statement when the function defines a named return variable, is redundant
+
+
+#### Findings:
+```
+2023-03-zksync-main/contracts/AccountCodeStorage.sol::96 => return codeHash;
+2023-03-zksync-main/contracts/ContractDeployer.sol::171 => return newAddress;
+2023-03-zksync-main/contracts/ContractDeployer.sol::192 => return newAddress;
+2023-03-zksync-main/contracts/NonceHolder.sol::49 => return minNonce;
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::268 => return returndata;
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::286 => return returndata;
+```
 
 
 
+## 21. `require()`/`revert()` statements should have descriptive reason strings
+
+
+#### Findings:
+```
+2023-03-zksync-main/contracts/MsgValueSimulator.sol::43 => revert(0, 0)
+2023-03-zksync-main/contracts/SystemContext.sol::16 => require(msg.sender == BOOTLOADER_FORMAL_ADDRESS);
+2023-03-zksync-main/contracts/libraries/EfficientCall.sol::231 => revert(0, size)
+2023-03-zksync-main/contracts/libraries/SystemContractHelper.sol::152 => require(gasleft() >= _gasToBurn);
+2023-03-zksync-main/contracts/libraries/SystemContractsCaller.sol::161 => revert(add(returnData, 0x20), size)
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::270 => _revert(returndata, errorMessage);
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::288 => _revert(returndata, errorMessage);
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::292 => function _revert(bytes memory returndata, string memory errorMessage)
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::302 => revert(add(32, returndata), returndata_size)
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::305 => revert(errorMessage);
+```
+
+
+
+## 22. Unused file
+
+
+#### Findings:
+```
+2023-03-zksync-main/contracts/AccountCodeStorage.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/BootloaderUtilities.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/Constants.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/ContractDeployer.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/DefaultAccount.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/EmptyContract.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/ImmutableSimulator.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/KnownCodesStorage.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/L1Messenger.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/L2EthToken.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/MsgValueSimulator.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/NonceHolder.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/SystemContext.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IAccount.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IAccountCodeStorage.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IBootloaderUtilities.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IBytecodeCompressor.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IContractDeployer.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IEthToken.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IImmutableSimulator.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IKnownCodesStorage.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IL1Messenger.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IL2StandardToken.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IMailbox.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/INonceHolder.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IPaymaster.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/IPaymasterFlow.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/interfaces/ISystemContext.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/libraries/RLPEncoder.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/libraries/SystemContractHelper.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/libraries/SystemContractsCaller.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/libraries/TransactionHelper.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/libraries/Utils.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/openzeppelin/token/ERC20/IERC20.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/openzeppelin/token/ERC20/extensions/IERC20Permit.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol::1 => // SPDX-License-Identifier: MIT
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::1 => // SPDX-License-Identifier: MIT
+```
+
+
+
+
+
+## 23. NC-library/interface files should use fixed compiler versions, not floating ones
+
+
+#### Findings:
+```
+2023-03-zksync-main/contracts/AccountCodeStorage.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/BootloaderUtilities.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/BytecodeCompressor.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/Constants.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/ContractDeployer.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/DefaultAccount.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/EmptyContract.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/ImmutableSimulator.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/KnownCodesStorage.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/L1Messenger.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/L2EthToken.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/MsgValueSimulator.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/NonceHolder.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/SystemContext.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IAccount.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IAccountCodeStorage.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IBootloaderUtilities.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IBytecodeCompressor.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IContractDeployer.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IEthToken.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IImmutableSimulator.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IKnownCodesStorage.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IL1Messenger.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IL2StandardToken.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IMailbox.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/INonceHolder.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IPaymaster.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/IPaymasterFlow.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/interfaces/ISystemContext.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/libraries/EfficientCall.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/libraries/RLPEncoder.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/libraries/SystemContractHelper.sol::3 => pragma solidity ^0.8;
+2023-03-zksync-main/contracts/libraries/SystemContractsCaller.sol::3 => pragma solidity ^0.8;
+2023-03-zksync-main/contracts/libraries/TransactionHelper.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/libraries/UnsafeBytesCalldata.sol::3 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/libraries/Utils.sol::2 => pragma solidity >=0.8.0;
+2023-03-zksync-main/contracts/openzeppelin/token/ERC20/IERC20.sol::4 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/openzeppelin/token/ERC20/extensions/IERC20Permit.sol::4 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/openzeppelin/token/ERC20/utils/SafeERC20.sol::4 => pragma solidity ^0.8.0;
+2023-03-zksync-main/contracts/openzeppelin/utils/Address.sol::4 => pragma solidity ^0.8.1;
+```
+## 24
+
+As per EIP-712, the encoded EIP-712 hash of a struct must include every member field, but this implementation of the hash does not include `transaction.signature`:
+https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/libraries/TransactionHelper.sol#L118
+
+## 25
+
+In `NonceHolder.sol`, the `getRawNonce` getter could be used in more positions. I.e, here: https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/NonceHolder.sol#L68.
+
+This could cost more gas and it also leads to the duplication of a line, so there is a tradeoff.
+
+## 26
+
+`Ecrecover.yul` returns an empty bytes array upon failure, instead of the 0 address like the original Ethereum `ecrecover`. The return call occurs at:
+https://github.com/code-423n4/2023-03-zksync/blob/01379615bc20c2926d81c0a182f1abb6e922b93a/contracts/precompiles/Ecrecover.yul#L90
+
+## 27 Unused/Empty RECEIVE()/FALLBACK() function
+
+If the intention is for the Ether to be used, the function should call another function, otherwise it should revert (e.g. require(msg.sender == address(weth))). Having no access control on the function means that someone may send Ether to the contract, and have no way to get anything back out, which is a loss of funds.
+
+Find (2) instance(s) in contracts:
+```
+File: EmptyContract.sol
+
+     fallback() external payable {}
+     receive() external payable {}
+
+```
+https://github.com/code-423n4/2023-03-zksync//blob/main/EmptyContract.sol
+
+
+## 28 += costs more gas than = + for state variables
+Use =+/=- to save gas
+
+There are 9 instances of this issue
+```
+L2EthToken.sol:            balance[_to] += _amount;
+L2EthToken.sol:        totalSupply += _amount;
+L2EthToken.sol:        balance[_account] += _amount;
+BootloaderUtilities.sol:                vInt += 8 + block.chainid * 2;
+BytecodeCompressor.sol:            for (uint256 encodedDataPointer = 0; encodedDataPointer < encodedData.length; encodedDataPointer += 2) {
+ContractDeployer.sol:            sumOfValues += _deployments[i].value;
+L2EthToken.sol:            balance[address(this)] -= amount;
+L2EthToken.sol:8            totalSupply -= amount;
+```
+
+## 29 Use scientific notation/underscores for large values
+e.g. 1e6 or 1_000_000 instead of 1000000.
+
+Instances: 1
+```
+File: contracts/SystemContext.sol
+
+    uint256 public difficulty = 2500000000000000;
+
+```
+https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/SystemContext.sol#L40
+
+## 30 Remove/Resolve open TODOs
+Instances: 1
+```
+File: contracts/L2EthToken.sol
+
+     // TODO: Remove this variable with the new upgrade.
+
+```
+https://github.com/code-423n4/2023-03-zksync/blob/main/contracts/L2EthToken.sol
 
 
 ### Time spent:
