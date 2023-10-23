@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "burhan_khaja",
+  "risk": "3",
+  "title": "Denial of Service in DiamondInit Contract: Uninitialized State of Diamond-Proxy Due to Faulty Modifier Logic",
+  "issueId": 711,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/711"
+}
