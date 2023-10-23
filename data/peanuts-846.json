@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "peanuts",
+  "risk": "2",
+  "title": "User can call claimFailedDeposit even if the transaction was successfully finalized and bridged to L2",
+  "issueId": 846,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/846"
+}
