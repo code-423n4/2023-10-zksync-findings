@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Bauchibred",
+  "risk": "2",
+  "title": " While serializing L2 transactions the `paymaster` has been hardcoded to 0",
+  "issueId": 834,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/834"
+}
