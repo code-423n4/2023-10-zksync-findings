@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "mahdirostami",
+  "risk": "2",
+  "title": "Incorrect Behavior in EcMul.yul and EcAdd.yul for Specific Point Doubling and Point Addition Case \"x_p = x_q and y_p = y_q = 0\"",
+  "issueId": 873,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/873"
+}
