@@ -880,25 +880,25 @@ Usually, when we want to chain hashes one after another we start with the empty 
 
 and in the future it seems there will be more. On the other hand, there are some places which do not follow this:
 
-[L1Messenger, line 210](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L210)
+[**L1Messenger, line 210**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L210)
 
 ```solidity
         bytes32 reconstructedChainedLogsHash; // defaults to bytes32(0)
 ```
 
-[L1Messenger, line 240](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L240)
+[**L1Messenger, line 240**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L240)
 
 ```solidity
         bytes32 reconstructedChainedMessagesHash; // defaults to bytes32(0)
 ```
 
-[L1Messenger, line 258](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L258)
+[**L1Messenger, line 258**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L258)
 
 ```solidity
         bytes32 reconstructedChainedL1BytecodesRevealDataHash; // defaults to bytes32(0)
 ```
 
-[L1Messenger, lines 331 to 335](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L331C1-L335C55)
+[**L1Messenger, lines 331 to 335**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L331C1-L335C55)
 
 ```solidity
         /// Clear logs state
@@ -908,13 +908,83 @@ chainedMessagesHash = bytes32(0);
 chainedL1BytecodesRevealDataHash = bytes32(0);
 ```
 
-[SystemContext, line 293](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L293)
+[**SystemContext, line 293**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L293)
 
 ```solidity
         currentL2BlockTxsRollingHash = bytes32(0);
 ```
 
 Consider changing them to `EMPTY_STRING_KECCAK`.
+
+## [L-19] Wrong initialisation of the zero point (?)
+
+I do not know a shit about affine spaces, but
+
+[**ecrecover/secp256k1/mod.rs, lines 147 to 153**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L147C1-L153C6)
+
+```solidity
+    fn zero() -> Self {
+        PointAffine {
+            x: Fq::zero(),
+            y: Fq::one(),
+            infinity: true,
+        }
+    }
+````
+
+is wrong as `is_zero` is defined like
+
+```solidity
+
+    fn is_zero(&self) -> bool {
+        self.infinity
+    }
+```
+
+and `self.infinity` is toggled up when `self.x` $=$ `self.y` $=$ `0`:
+
+[**ecrecover/secp256k1/mod.rs, lines 189 to 211**](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L189C1-L211C6)
+
+```solidity
+    fn from_xy_unchecked(x: Self::Base, y: Self::Base) -> Self {
+        let infinity = x.is_zero() && y.is_zero();
+        Self {
+            x: x,
+            y: y,
+            infinity,
+        }
+    }
+
+    fn from_xy_checked(x: Self::Base, y: Self::Base) -> Result<Self, GroupDecodingError> {
+        let infinity = x.is_zero() && y.is_zero();
+        let affine = Self {
+            x: x,
+            y: y,
+            infinity,
+        };
+
+        if !affine.is_on_curve() {
+            Err(GroupDecodingError::NotOnCurve)
+        } else {
+            Ok(affine)
+        }
+    }
+```
+
+I'm putting it as a Low as it may be some weird math thing I do not know, **BUT** the zero element in all *"math-things"* is defined as the one that makes
+
+$$a \star O = O \star a = a, \forall a \in F$$
+
+and having two *"zero-elements"* is definetly wrong. If I am right, then it may be a High as some [functions like eq](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L47C1-L86C2) or [is_on_curve](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L124C1-L139C6) would return true for both. Moreover, I'm gonna say something that mathematicians will laugh at me, but
+
+- say there are two *"zero-elements"*, namely $O_1$ and $O_2$, in $F$ with $O_1 \neq O_2$
+- Then, for example, we have $O_1 \star O_2 = O_2 \star O_1 = O_1$ but, as both are the *"zero-element"*, the next $O_1 \star O_2 = O_2 \star O_1 = O_2$ holds too
+- That implies $O_1 = O_2$ but our initial thesis was that $O_1 \neq O_2$, so we have a contradiction
+
+$$\therefore O \ is \ unique \ under \ F$$
+
+I can't give you a solution as I do not know which one is the right point at $\infty$, as in some places it says it is the $(0, 0)$ and in others say it is $(0, 1)$.
+
 
 # Non-critical
 
