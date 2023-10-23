@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Isomorphism",
+  "risk": "2",
+  "title": "Aggregating Pairings Should only be done when terms are linearly independent",
+  "issueId": 1040,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1040"
+}
