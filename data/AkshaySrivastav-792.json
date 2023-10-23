@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "AkshaySrivastav",
+  "risk": "2",
+  "title": "Missing validations in `ContractDeployer.forceDeployOnAddress`",
+  "issueId": 792,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/792"
+}
