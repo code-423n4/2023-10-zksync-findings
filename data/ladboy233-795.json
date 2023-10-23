@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "Gas cost of tx validation and exeuction does not consider a few the opcode operation in Bootloader.yul",
+  "issueId": 795,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/795"
+}
