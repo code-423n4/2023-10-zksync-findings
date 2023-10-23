@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "The `extendedAccountVersion()` function incorrectly identifies kernel space addresses without deployed code as supporting an account abstraction version, leading to potential vulnerabilities in contracts and protocols.",
+  "issueId": 705,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/705"
+}
