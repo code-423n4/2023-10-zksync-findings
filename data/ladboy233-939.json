@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "3",
+  "title": "Bootloader.yul does not process ETH value from l1 mailbox transaction properly",
+  "issueId": 939,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/939"
+}
