@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "The \"precompileCall\" function has a limitation on the gas limit.",
+  "issueId": 1078,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1078"
+}
