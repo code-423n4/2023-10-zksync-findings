@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "Paying the maximum maxFeePerGas * gasLimit to the bootloader when the actual fee ends up being lower can allow griefing attacks",
+  "issueId": 710,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/710"
+}
