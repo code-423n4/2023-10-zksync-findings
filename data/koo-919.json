@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "koo",
+  "risk": "3",
+  "title": "Everyone can call forceDeploy to deploy the system contract",
+  "issueId": 919,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/919"
+}
