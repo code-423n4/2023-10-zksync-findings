@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "mahdirostami",
+  "risk": "2",
+  "title": "Reserve Gas Not Adjusted for Excess Usage in the getExecuteL1TxAndGetRefund Function",
+  "issueId": 1026,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1026"
+}
