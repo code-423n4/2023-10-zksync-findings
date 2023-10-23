@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Viktor_Cortess",
+  "risk": "2",
+  "title": "Incorrect validation of number of L2toL1 logs in publishPubdataAndClearState() function",
+  "issueId": 849,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/849"
+}
