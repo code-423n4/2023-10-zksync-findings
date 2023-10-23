@@ -340,5 +340,24 @@ uint32 timestamp ;
 code snippet:-
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L84C1-L88C1
 
+## 13. Add zero-check while increasing the minimal nonce :-
+In following scenario if `_value` is zero first check will be passed and increaseMinNonce() function also passed because there is no proper input validation .
+
+**Before**
+```solidity
+    function increaseMinNonce(uint256 _value) public onlySystemCall returns (uint256 oldMinNonce) {
+        require(_value <= MAXIMAL_MIN_NONCE_INCREMENT, "The value for incrementing the nonce is too high");
+
+```
+
+**After**
+```solidity
+    function increaseMinNonce(uint256 _value) public onlySystemCall returns (uint256 oldMinNonce) {
+        require(_value != 0 ,"Error");
+        require(_value <= MAXIMAL_MIN_NONCE_INCREMENT, "The value for incrementing the nonce is too high");
+```
+code snippet:-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L65C4-L66C108
+
 Note :-
 **Our finding doesn't cause any test fail**
