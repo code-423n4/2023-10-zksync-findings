@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "UNUSED RECEIVE() FUNCTION WILL LOCK ETHER IN CONTRACT",
+  "issueId": 1102,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1102"
+}
