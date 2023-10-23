@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE FAILED DEPOSIT FUNDS OR WITHDRAWAL FUNDS CAN PERMENANTLY GET LOCKED IN THE `L1ERC20Bridge` CONTRACT IF THE `receiver` ADDRESS IS BLACKLISTED BY THE L1 TOKEN CONTRACT",
+  "issueId": 987,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/987"
+}
