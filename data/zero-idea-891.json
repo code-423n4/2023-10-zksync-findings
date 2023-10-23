@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zero-idea",
+  "risk": "2",
+  "title": "Clashing between empty calldata and zero function selector in diamond dispatch logic",
+  "issueId": 891,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/891"
+}
