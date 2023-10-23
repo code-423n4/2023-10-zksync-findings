@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Bauchibred",
+  "risk": "2",
+  "title": "`MsgValueSimulator::fallback` should be payable",
+  "issueId": 877,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/877"
+}
