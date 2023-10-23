@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "burhan_khaja",
+  "risk": "3",
+  "title": "Modifier Conflict Prevents Calling of All 4 External Functions in ExecutorFacet Contract, Rendering It Completely Inoperable",
+  "issueId": 726,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/726"
+}
