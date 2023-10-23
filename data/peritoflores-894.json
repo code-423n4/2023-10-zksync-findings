@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "peritoflores",
+  "risk": "3",
+  "title": " Efficient call incorrectly forwards `returnData` ",
+  "issueId": 894,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/894"
+}
