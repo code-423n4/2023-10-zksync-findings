@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "There is a discrepancy/mismatch between the parameters defined in the code that are not actually used.",
+  "issueId": 1089,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1089"
+}
