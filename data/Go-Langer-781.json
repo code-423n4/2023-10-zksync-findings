@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Go-Langer",
+  "risk": "2",
+  "title": "[M] Returnbomb attack can be conducted causing out of gas revert",
+  "issueId": 781,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/781"
+}
