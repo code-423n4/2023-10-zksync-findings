@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "hash",
+  "risk": "2",
+  "title": "Incorrect gas estimation for l2tol1 messages",
+  "issueId": 860,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/860"
+}
