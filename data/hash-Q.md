@@ -74,8 +74,8 @@ This can delay the revert of the call which can cause unwanted gas expenditure.
 
 *GitHub*: [206](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L206-#L206)
 
-### [L-05] User's are not guarenteed to be able to publish GUARANTEED_PUBDATA_PER_TX 
-It is mentioned in the document that all transacitons must be able to send atleast GUARANTEED_PUBDATA_PER_TX amount of pubdata:
+### [L-05] User's are not guaranteed to be able to publish GUARANTEED_PUBDATA_PER_TX 
+It is mentioned in the document that all transactions must be able to send atleast GUARANTEED_PUBDATA_PER_TX amount of pubdata:
 
 ```
 To make common transactions always executable, we must enforce that the users are always able to send at least `GUARANTEED_PUBDATA_PER_TX` bytes of pubdata in their transaction. Because of that, the needed `gas_per_pubdata_limit` for transactions should never grow beyond `MAX_TRANSACTION_GAS_LIMIT/GUARANTEED_PUBDATA_PER_TX`
@@ -97,7 +97,7 @@ File: system-contracts/bootloader/bootloader.yul
 
 *GitHub*: [51](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/bootloader/bootloader.yul#L51-#L55)
 
-### [L-06] Users may be misguided by the expiration timestamp of L1->L2 opeartions 
+### [L-06] Users may be misguided by the expiration timestamp of L1->L2 operations 
 It is mentioned that a priority operation must be satisfied before the expiration timestamp. But this is not enforced anywhere in code except the order of the priority transactions should be maintained.
 ```solidity
 /// @param expirationTimestamp Expiration timestamp for this request (must be satisfied before)
@@ -112,6 +112,8 @@ Hence an operator can execute the priority operation at any time and this might 
 
 *GitHub*: [8](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/libraries/PriorityQueue.sol#L8-L14)
 
+### [L-07] Receiver values of bridges are used as-is and not aliased without special mention
+The refundRecipient is address-aliased and the reason is well documented. But the `receiver` in Bridge's and the `_contractL2` in requestL2Transaction() also carries similar risks which is not documented.    
 
 ## Non-critical Issues
 
