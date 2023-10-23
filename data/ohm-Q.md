@@ -1,3 +1,17 @@
+# Redundant conditional code in opcodes 
+link:https://github.com/matter-labs/era-zkevm_circuits/blob/4fba537ccecc238e2da9c80844dc8c185e42466f/src/main_vm/opcodes/mod.rs#L162-L164
+1. The code in the else block doesn't run anyways cause if condition is always going to be true since the variable is constant with 15 always.
+```rust
+            } else {
+                let zero_num = Num::zero(cs);
+                Num::enforce_equal(cs, &zero_num, &intermidiate_overflow.into_num());
+            }
+```
+2. Use constants instead of plain numbers while dividing array into chunks in sha256 and keccak crates.
+
+3. Should try to use variant Boolean checks for shift left instead of using Boolean opcode check.Since its return is true for any variant of SHL.
+
+
 # Input validations should be performed at the starting of the functions.
 
 checking input validations at the starting of the function will helps to reduce the gas usage and to improve the code redability.
