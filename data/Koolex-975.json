@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Koolex",
+  "risk": "3",
+  "title": "High#7: Majority of L1->L2 TX will always fail on L2 when executing it via the bootloader",
+  "issueId": 975,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/975"
+}
