@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "OffsideLabs",
+  "risk": "3",
+  "title": "EIP-155 is not enforced, allowing attackers/malicious operators to profit from replaying transactions",
+  "issueId": 882,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/882"
+}
