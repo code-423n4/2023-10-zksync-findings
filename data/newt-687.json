@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "newt",
+  "risk": "3",
+  "title": "Users won't be able to Withdraw funds from the initiated deposit, that failed when finalizing on L2.",
+  "issueId": 687,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/687"
+}
