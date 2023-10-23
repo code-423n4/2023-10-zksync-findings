@@ -6,7 +6,7 @@ The `L1ERC20Bridge.finalizeWithdrawal` function is used to finalize the withdraw
 
 The above function call uses the `l2ToL1Message.data` variable which is read from the `memory`. But this same variable `l2ToL1Message.data = _message` and the `_message` is `calldata`.
 
-Hence one `MLOAD` operation can be called by using the `_message` `calldata` variable inplace of the `l2ToL1Message.data` memory variable when calling the `_parseL2WithdrawalMessage` function. The modified code snippet is shown below:
+Hence one `MLOAD` operation can be called by using the `_message` `calldata` variable in place of the `l2ToL1Message.data` memory variable when calling the `_parseL2WithdrawalMessage` function. The modified code snippet is shown below:
 
         (address l1Receiver, address l1Token, uint256 amount) = _parseL2WithdrawalMessage(_message);
 
@@ -20,7 +20,7 @@ The `L1WethBridge.deposit` function is used to initiate a WETH deposit by deposi
 
 The issue here is that the `deposit` function is using the `l1WethAddress` state variable for the function call where as the `_l1Token` calldata variable could have been used for the `_getDepositL2Calldata` function call since the `_l1Token == l1WethAddress`. 
 
-It is recommended to use the `_l1Token` inplace of the `l1WethAddress` state variable in the `_getDepositL2Calldata` function call inside the `L1WethBridge.deposit` function which will save an extra `SLOAD` operation.
+It is recommended to use the `_l1Token` in place of the `l1WethAddress` state variable in the `_getDepositL2Calldata` function call inside the `L1WethBridge.deposit` function which will save an extra `SLOAD` operation.
 
 The modified line of code will look as follows:
 
@@ -30,7 +30,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/c
 
 ## 3. REDUNDANT DECODING OPERATIONS PERFORMED INSIDE THE `L1WethBridge._parseL2EthWithdrawalMessage` FUNCTION CAN BE OMITTED TO SAVE GAS
 
-The `L1WethBridge._parseL2EthWithdrawalMessage` function is used to parse the ETH withdraw message with additional data about WETH withdrawal, that came from L2EthToken contract. The `_parseL2EthWithdrawalMessage` function decodes each of the data fields in the passed in `_message` input bytes array, inorder. 
+The `L1WethBridge._parseL2EthWithdrawalMessage` function is used to parse the ETH withdraw message with additional data about WETH withdrawal, that came from L2EthToken contract. The `_parseL2EthWithdrawalMessage` function decodes each of the data fields in the passed in `_message` input bytes array, in order. 
 
 But only the `l1WethReceiver` address and `ethAmount` variables of the decoded variables are returned back to the calling function as shown below:
 
