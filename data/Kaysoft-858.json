@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Kaysoft",
+  "risk": "2",
+  "title": "Governance.sol#execute() function should be payable",
+  "issueId": 858,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/858"
+}
