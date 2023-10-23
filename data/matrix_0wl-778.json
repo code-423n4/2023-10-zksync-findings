@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "matrix_0wl",
+  "risk": "3",
+  "title": "ERC20 Token Balance Manipulation and Potential DoS Vulnerability",
+  "issueId": 778,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/778"
+}
