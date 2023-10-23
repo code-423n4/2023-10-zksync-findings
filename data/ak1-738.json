@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ak1",
+  "risk": "3",
+  "title": "L1ERC20Bridge.sol : deposit is not including the token amount in the transaction hash to bridge it on the destination chain.",
+  "issueId": 738,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/738"
+}
