@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "The Function isEthToken Should Return 'False' When '_addr' is Set to Zero (0) else could lead to erroneous operations in the context of token-related functions",
+  "issueId": 1025,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1025"
+}
