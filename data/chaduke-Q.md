@@ -367,3 +367,8 @@ QA13. Should be eliminate ``=``, needs to be strictly greater than here:
 ``
 
 [https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L122](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/SystemContext.sol#L122)
+
+QA14. L2Weth.brigeMint() should have the ``onlyBrige`` modifier so that when called by other than the L2WethBridge, the returned revert message will be more informative. 
+
+[https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/zksync/contracts/bridge/L2Weth.sol#L67-L72](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/zksync/contracts/bridge/L2Weth.sol#L67-L72)
+
