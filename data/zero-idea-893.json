@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "zero-idea",
+  "risk": "2",
+  "title": "System contract upgrades will revert when provided value",
+  "issueId": 893,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/893"
+}
