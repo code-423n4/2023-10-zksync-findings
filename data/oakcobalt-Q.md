@@ -1,3 +1,14 @@
+## QA Summary:
+
+- Low: 
+  Issues: 15, Instances: 28
+- NC: 
+  Issues: 3, Instances: 12
+- Total: 
+  Issues: 18, Instances: 40
+
+## QA Breakdown:
+
 ### Low 01 - In Executor.sol, `commitBatches()` has no check on the max size of dynamic array of `_newBatchesData()` passed, which may cause out-of-gas error. (Note: Instance not found in automated findings)
 
 **Instances(3)**
@@ -562,6 +573,60 @@ In addition, if a custom upgrade needs to be performed (e.g. custom post-upgrade
 
 Recommendations:
 Add access control to DefaultUpgrade.sol to save gas and avoid risks of mistakes during `executeUpgrade()`. 
+
+### Low 14 - Incorrect code comments in L1Messenger.sol
+
+**Instances(1)**
+
+In L1Messenger.sol - `publishPubdataAndClearState()`, there is an incorrect code comment on `compressedStateDiffSize`. `compressedStateDiffSize` is 3 bytes in call data, but in the code comments, it is mistakenly written `2 bytes total len of compressed`.
+
+```solidity
+// code/system-contracts/contracts/L1Messenger.sol
+
+        /// Check State Diffs
+        /// encoding is as follows:
+        //@audit wrong comment header should include( 1 byte version, 3 bytes total len of compressed, ...)
+|>      /// header (1 byte version, 2 bytes total len of compressed, 1 byte enumeration index size, 2 bytes number of initial writes)
+        /// body (N bytes of initial writes [32 byte derived key || compressed value], M bytes repeated writes [enumeration index || compressed value])
+        /// encoded state diffs: [20bytes address][32bytes key][32bytes derived key][8bytes enum index][32bytes initial value][32bytes final value]
+...
+        //@audit 3 bytes total len of compressed here
+        uint24 compressedStateDiffSize = uint24(
+            bytes3(
+                _totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 3]
+            )
+        );
+        calldataPtr += 3;
+...
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L281)
+
+Recommendations:
+Change the `len of compressed` from the comment into 3 bytes.
+
+### Low 15 - Invalid validation - oversized number of logs can be passed to `publishPubdataAndClearState()`
+
+**Instances(1)**
+
+In L1Messenger.sol - `publishPubdataAndClearState()`, `numberOfL2ToL1Logs` is checked in `require` but this check is invalid, because `numberOfL2ToL1Logs <= numberOfL2ToL1Logs` will always evaluate to true.
+
+```solidity
+// code/system-contracts/contracts/L1Messenger.sol
+    function publishPubdataAndClearState(
+        bytes calldata _totalL2ToL1PubdataAndStateDiffs
+    ) external onlyCallFromBootloader {
+...
+       //@audit this require will always return true since `numberOfL2ToL1Logs` will always equal itself.
+|>      require(
+            numberOfL2ToL1Logs <= numberOfL2ToL1Logs,
+            "Too many L2->L1 logs"
+        );
+...
+```
+(https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/contracts/L1Messenger.sol#L206)
+
+Recommendations:
+Consider changing it to `numberOfL2ToL1Logs <= numberOfLogsToProcess`.
 
 
 ### NC 01 - Consider adding comments for custom formula implementation, especially if it is optimized or modified from the original formula from the doc.
