@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "mahdirostami",
+  "risk": "3",
+  "title": "Higher Overhead Cost than Expected Due to Inconsistent Gas Limit Calculations",
+  "issueId": 989,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/989"
+}
