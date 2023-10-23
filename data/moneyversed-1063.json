@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "moneyversed",
+  "risk": "3",
+  "title": "Elliptic curve addition without complete validation opens up room for an attacker to be possibly using points that lie on a twist of the desired curve or in the wrong subgroup",
+  "issueId": 1063,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1063"
+}
