@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "sashik_eth",
+  "risk": "3",
+  "title": "Too long literal in Bootloader.yul#publishTimestampDataToL1",
+  "issueId": 962,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/962"
+}
