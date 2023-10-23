@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "0Kage",
+  "risk": "3",
+  "title": "A malicious governance admin can instantly execute delayed proposals by manipulating Operations ",
+  "issueId": 1090,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1090"
+}
