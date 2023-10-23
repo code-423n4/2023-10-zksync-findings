@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "JCK",
+  "risk": "2",
+  "title": "unchecked blocks with subtractions may underflow",
+  "issueId": 866,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/866"
+}
