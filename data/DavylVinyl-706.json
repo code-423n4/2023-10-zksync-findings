@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "A single point of failure in the contract and chance of Owner keys to be stolen",
+  "issueId": 706,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/706"
+}
