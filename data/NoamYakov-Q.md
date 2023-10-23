@@ -263,19 +263,19 @@ There are 1 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 229    CommitBatchInfo[] calldata _newBatchesData
 ```
  is accessed on 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 241    s.l2SystemContractsUpgradeBatchNumber = _newBatchesData[0].batchNumber
 ```
  index that might be out-of-bounds
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L229)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L229)
 
 
 </details>
@@ -300,12 +300,12 @@ There are 1 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol
+File: code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
 86    uint32 timestamp = uint32(block.timestamp)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L86](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L86)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L86](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L86)
 
 
 </details>
@@ -330,46 +330,46 @@ There are 4 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 264    receive() external payable 
 ```
  don't keep `receive` empty.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L264](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L264)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L264](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L264)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 231    receive() external payable 
 ```
  don't keep `receive` empty.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L231-L233](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L231-L233)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L231-L233](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L231-L233)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 14    fallback() external payable 
 ```
  don't keep `fallback` empty.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L14](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L14)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L14](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L14)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 16    receive() external payable 
 ```
  don't keep `receive` empty.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L16)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L16)
 
 
 </details>
@@ -394,38 +394,38 @@ There are 2 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IGetters.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IGetters.sol
 
 78    address[] memory facets
 ```
  shadows:
 	- 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IGetters.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IGetters.sol
 
 74    function facets() external view returns (Facet[] memory);
 ```
  (function)
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IGetters.sol#L78](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IGetters.sol#L78)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IGetters.sol#L78](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IGetters.sol#L78)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 88    uint256 bytecodeLenInWords = _bytecode.length / 32
 ```
  shadows:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 46    function bytecodeLenInWords(bytes32 _bytecodeHash) internal pure returns (uint256 codeLengthInWords) 
 ```
  (function)
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L88](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L88)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L88](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L88)
 
 
 </details>
@@ -450,22 +450,22 @@ There are 2 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 7    import "@openzeppelin/contracts/proxy/beacon/BeaconProxy.sol";
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L7](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L7)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L7](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L7)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 8    import "@openzeppelin/contracts/proxy/beacon/UpgradeableBeacon.sol";
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L8](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L8)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L8](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L8)
 
 
 </details>
@@ -496,12 +496,12 @@ There are 1 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 128    return super.name()
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L128](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L128)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L128](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L128)
 
 
 </details>
@@ -532,12 +532,12 @@ There are 1 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 134    return super.symbol()
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L134](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L134)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L134](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L134)
 
 
 </details>
@@ -566,20 +566,20 @@ There are 1 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ComplexUpgrader.sol
+File: code/system-contracts/contracts/ComplexUpgrader.sol
 
 23    function upgrade(address _delegateTo, bytes calldata _calldata) external payable 
 ```
  uses delegatecall to a input-controlled function id
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ComplexUpgrader.sol
+File: code/system-contracts/contracts/ComplexUpgrader.sol
 
 27    (bool success, bytes memory returnData) = _delegateTo.delegatecall(_calldata)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ComplexUpgrader.sol#L23-L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ComplexUpgrader.sol#L23-L33)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ComplexUpgrader.sol#L23-L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ComplexUpgrader.sol#L23-L33)
 
 
 </details>
@@ -605,14 +605,14 @@ There are 3 instances of this issue:
 - Contract locking ether found:
 	Contract 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 36    contract Compressor is ICompressor, ISystemContract 
 ```
  has payable functions:
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/ICompressor.sol
+File: code/system-contracts/contracts/interfaces/ICompressor.sol
 
 15    function publishCompressedBytecode(
 16            bytes calldata _bytecode,
@@ -622,7 +622,7 @@ File: cache-zk/solpp-generated-contracts/interfaces/ICompressor.sol
 
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/ICompressor.sol
+File: code/system-contracts/contracts/interfaces/ICompressor.sol
 
 20    function verifyCompressedStateDiffs(
 21            uint256 _numberOfStateDiffs,
@@ -634,7 +634,7 @@ File: cache-zk/solpp-generated-contracts/interfaces/ICompressor.sol
 
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 56    function publishCompressedBytecode(
 57            bytes calldata _bytecode,
@@ -644,7 +644,7 @@ File: cache-zk/solpp-generated-contracts/Compressor.sol
 
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 119    function verifyCompressedStateDiffs(
 120            uint256 _numberOfStateDiffs,
@@ -656,75 +656,75 @@ File: cache-zk/solpp-generated-contracts/Compressor.sol
 
 	But does not have a function to withdraw the ether
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L36-L256](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L36-L256)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L36-L256](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L36-L256)
 
 
 - Contract locking ether found:
 	Contract 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 13    contract EmptyContract 
 ```
  has payable functions:
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 14    fallback() external payable 
 ```
 
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 16    receive() external payable 
 ```
 
 	But does not have a function to withdraw the ether
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L13-L17](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L13-L17)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L13-L17](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L13-L17)
 
 
 - Contract locking ether found:
 	Contract 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 20    contract L2EthToken is IEthToken, ISystemContract 
 ```
  has payable functions:
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IEthToken.sol
+File: code/system-contracts/contracts/interfaces/IEthToken.sol
 
 22    function withdraw(address _l1Receiver) external payable;
 ```
 
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IEthToken.sol
+File: code/system-contracts/contracts/interfaces/IEthToken.sol
 
 24    function withdrawWithMessage(address _l1Receiver, bytes calldata _additionalData) external payable;
 ```
 
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 74    function withdraw(address _l1Receiver) external payable override 
 ```
 
 	 - 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 87    function withdrawWithMessage(address _l1Receiver, bytes memory _additionalData) external payable override 
 ```
 
 	But does not have a function to withdraw the ether
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L20-L145](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L20-L145)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L20-L145](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L20-L145)
 
 
 </details>
@@ -749,39 +749,39 @@ There are 64 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 313    require(msg.sender == l1WethAddress || msg.sender == address(zkSync), "pn")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L313](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L313)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L313](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L313)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/AllowList.sol
+File: code/contracts/ethereum/contracts/common/AllowList.sol
 
 43    return
 44                accessMode == AccessMode.Public ||
 45                (accessMode == AccessMode.SpecialAccessOnly && hasSpecialAccessToCall[_caller][_target][_functionSig])
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowList.sol#L43-L45](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowList.sol#L43-L45)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowList.sol#L43-L45](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowList.sol#L43-L45)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 93    return state == OperationState.Waiting || state == OperationState.Ready
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L93](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L93)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L93](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L93)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 73    require(
 74                msg.sender == owner() || msg.sender == securityCouncil,
@@ -789,146 +789,146 @@ File: cache/solpp-generated-contracts/governance/Governance.sol
 76            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L73-L76](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L73-L76)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L73-L76](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L73-L76)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
 
 131    _newVerifierParams.recursionNodeLevelVkHash == bytes32(0) ||
 132                _newVerifierParams.recursionLeafLevelVkHash == bytes32(0) ||
 133                _newVerifierParams.recursionCircuitsSetVksHash == bytes32(0)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L131-L133](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L131-L133)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L131-L133](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L131-L133)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/DiamondProxy.sol
+File: code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
 
 27    require(msg.data.length >= 4 || msg.data.length == 0, "Ut")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondProxy.sol#L27](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondProxy.sol#L27)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L27](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L27)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Base.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Base.sol
 
 27    require(msg.sender == s.governor || msg.sender == s.admin, "Only by governor or admin")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Base.sol#L27](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Base.sol#L27)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Base.sol#L27](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Base.sol#L27)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 191    systemContractsUpgradeTxHash == bytes32(0) || s.l2SystemContractsUpgradeBatchNumber != 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L191](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L191)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L191](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L191)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 277    require(currentBatchNumber == s.totalBatchesExecuted + _executedBatchIdx + 1, "k")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L277)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L277)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 305    batchWhenUpgradeHappened != 0 && batchWhenUpgradeHappened <= newTotalBatchesExecuted
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L305)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L305)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 466    return (_bitMap & (1 << _index)) > 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L466](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L466)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L466](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L466)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 183    uint256 minL2GasPriceETH = (pubdataPriceETH + _gasPricePerPubdata - 1) / _gasPricePerPubdata
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L183](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L183)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L183](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L183)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 402    mstore(add(hashedFactoryDeps, mul(add(i, 1), 32)), hashedBytecode)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L402](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L402)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L402](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L402)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 104    codeHash == 0x00 && NONCE_HOLDER_SYSTEM_CONTRACT.getRawNonce(account) > 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L104)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L104)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 134    uint160(account) > CURRENT_MAX_PRECOMPILE_ADDRESS &&
 135                codeHash != 0x00 &&
 136                !Utils.isContractConstructing(codeHash)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L134-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L134-L136)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L134-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L134-L136)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 94    require(vInt == 27 || vInt == 28, "Invalid v value")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L94](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L94)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L94](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L94)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 99    vInt += 8 + block.chainid * 2
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L99](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L99)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L99](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L99)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 107    uint256 listLength = encodedNonce.length +
 108                    encodedGasParam.length +
@@ -941,22 +941,22 @@ File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
 115                    vEncoded.length
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L107-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L107-L115)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L107-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L107-L115)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 193    require(vInt == 27 || vInt == 28, "Invalid v value")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L193](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L193)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L193](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L193)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 200    uint256 listLength = encodedFixedLengthParams.length +
 201                    encodedDataLength.length +
@@ -967,22 +967,22 @@ File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
 206                    vEncoded.length
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L200-L206](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L200-L206)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L200-L206](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L200-L206)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 288    require(vInt == 27 || vInt == 28, "Invalid v value")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L288](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L288)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L288](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L288)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 295    uint256 listLength = encodedFixedLengthParams.length +
 296                    encodedDataLength.length +
@@ -993,42 +993,42 @@ File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
 301                    vEncoded.length
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L295-L301](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L295-L301)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L295-L301](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L295-L301)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 64    require(dictionary.length <= 2 ** 16 * 8, "Dictionary is too big")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L64](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L64)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L64](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L64)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 236    _operation == 0 || _operation == 3
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L236](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L236)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L236](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L236)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 254    number >>= (256 - (_calldataSlice.length * 8))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L254](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L254)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L254](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L254)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 76    require(
 77                _nonceOrdering == AccountNonceOrdering.Arbitrary &&
@@ -1037,12 +1037,12 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 80            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L76-L80](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L76-L80)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L76-L80](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L76-L80)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 241    require(
 242                msg.sender == FORCE_DEPLOYER || msg.sender == address(COMPLEX_UPGRADER_CONTRACT),
@@ -1050,22 +1050,22 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 244            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L241-L244](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L241-L244)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L241-L244](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L241-L244)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 143    to == address(DEPLOYER_SYSTEM_CONTRACT) && data.length >= 4
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L143)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L143)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 147    isSystemCall =
 148                    selector == DEPLOYER_SYSTEM_CONTRACT.create.selector ||
@@ -1074,92 +1074,92 @@ File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
 151                    selector == DEPLOYER_SYSTEM_CONTRACT.create2Account.selector
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L147-L151](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L147-L151)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L147-L151](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L147-L151)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 175    v := and(mload(add(_signature, 0x41)), 0xff)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L175](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L175)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L175](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L175)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 177    require(v == 27 || v == 28, "v is neither 27 nor 28")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L177](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L177)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L177](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L177)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 192    return recoveredAddress == address(this) && recoveredAddress != address(0)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L192](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L192)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L192](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L192)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/KnownCodesStorage.sol
+File: code/system-contracts/contracts/KnownCodesStorage.sol
 
 79    require(version == 1 && _bytecodeHash[1] == bytes1(0), "Incorrectly formatted bytecodeHash")
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/KnownCodesStorage.sol#L79](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/KnownCodesStorage.sol#L79)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/KnownCodesStorage.sol#L79](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/KnownCodesStorage.sol#L79)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 61    return KECCAK_ROUND_GAS_COST * (_length / KECCAK_ROUND_NUMBER_OF_BYTES + 1)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L61](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L61)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L61](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L61)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 72    return SHA256_ROUND_GAS_COST * ((_length + 8) / SHA256_ROUND_NUMBER_OF_BYTES + 1)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L72](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L72)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L72](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L72)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 95    uint256 gasToPay = keccakGasCost(L2_TO_L1_LOG_SERIALIZE_SIZE) + 3 * keccakGasCost(64)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L95)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L95)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 148    pubdataLen = 4 + _message.length + L2_TO_L1_LOG_SERIALIZE_SIZE
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L148](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L148)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L148](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L148)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 155    uint256 gasToPay = pubdataLen *
 156                gasPerPubdataBytes +
@@ -1169,34 +1169,34 @@ File: cache-zk/solpp-generated-contracts/L1Messenger.sol
 160                gasSpentOnMessageHashing
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L155-L160](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L155-L160)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L155-L160](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L155-L160)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 185    uint256 gasToPay = pubdataLen * gasPerPubdataBytes + sha256GasCost(bytecodeLen) + keccakGasCost(64)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L185](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L185)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L185](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L185)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 232    l2ToL1LogsTreeArray[i] = keccak256(
 233                        abi.encode(l2ToL1LogsTreeArray[2 * i], l2ToL1LogsTreeArray[2 * i + 1])
 234                    )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L232-L234](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L232-L234)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L232-L234](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L232-L234)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 35    require(
 36                msg.sender == MSG_VALUE_SYSTEM_CONTRACT ||
@@ -1206,173 +1206,173 @@ File: cache-zk/solpp-generated-contracts/L2EthToken.sol
 40            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L35-L40](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L35-L40)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L35-L40](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L35-L40)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/MsgValueSimulator.sol
+File: code/system-contracts/contracts/MsgValueSimulator.sol
 
 32    isSystemCall = (mask & MSG_VALUE_SIMULATOR_IS_SYSTEM_BIT) != 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L32](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L32)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L32](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L32)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 90    accountInfo.nonceOrdering == IContractDeployer.AccountNonceOrdering.Sequential && _key != 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L90](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L90)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L90](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L90)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 151    return (_nonce < getMinNonce(_address) || nonceValues[addressAsKey][_nonce] > 0)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L151](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L151)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L151](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L151)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 117    blockNumber <= _block || blockNumber - _block > 256
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L117](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L117)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L117](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L117)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 124    _block >= currentVirtualBlockUpgradeInfo.virtualBlockFinishL2Block &&
 125                currentVirtualBlockUpgradeInfo.virtualBlockFinishL2Block > 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L124-L125](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L124-L125)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L124-L125](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L124-L125)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 250    currentVirtualL2BlockInfo.number == 0 && virtualBlockInfo.timestamp == 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L250)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L250)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 333    currentL2BlockNumber == 0 && currentL2BlockTimestamp == 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L333](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L333)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L333](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L333)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 390    uint256 packedTimestamps = (uint256(currentBatchTimestamp) << 128) | currentL2BlockTimestamp
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L390](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L390)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L390](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L390)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 472    blockInfo = (uint256(blockNumber) << 128) | uint256(blockTimestamp)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L472](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L472)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L472](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L472)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 263    uint32 shrinkTo = uint32(msg.data.length - (_data.length + dataOffset))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L263](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L263)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L263](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L263)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 39    uint256 shiftedVal = _val << (lbs * 8)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L39](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L39)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L39](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L39)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 71    encoded[0] = bytes1(uint8(_offset + hbs + 56))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L71](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L71)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L71](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L71)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 74    uint256 shiftedVal = uint256(_len) << (lbs * 8)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L74](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L74)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L74](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L74)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 239    uint256 shifted = (meta << (256 - size - offset))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L239](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L239)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L239](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L239)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 241    result = (shifted >> (256 - size))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L241](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L241)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L241](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L241)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 97    return _addr == uint256(uint160(address(ETH_TOKEN_SYSTEM_CONTRACT))) || _addr == 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L97)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 192    uint256 listLength = encodedNonce.length +
 193                    encodedGasParam.length +
@@ -1383,12 +1383,12 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
 198                    encodedChainId.length
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L192-L198](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L192-L198)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L192-L198](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L192-L198)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 267    uint256 listLength = encodedFixedLengthParams.length +
 268                    encodedDataLength.length +
@@ -1396,12 +1396,12 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
 270                    encodedAccessListLength.length
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L267-L270](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L267-L270)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L267-L270](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L267-L270)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 339    uint256 listLength = encodedFixedLengthParams.length +
 340                    encodedDataLength.length +
@@ -1409,47 +1409,47 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
 342                    encodedAccessListLength.length
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L339-L342](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L339-L342)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L339-L342](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L339-L342)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 413    requiredBalance = _transaction.maxFeePerGas * _transaction.gasLimit + _transaction.value
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L413](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L413)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L413](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L413)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 48    codeLengthInWords = uint256(uint8(_bytecodeHash[2])) * 256 + uint256(uint8(_bytecodeHash[3]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L48](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L48)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L48](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L48)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 95    hashedBytecode = (hashedBytecode | bytes32(uint256(1 << 248)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L95)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L95)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 97    hashedBytecode = hashedBytecode | bytes32(bytecodeLenInWords << 224)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L97)
 
 
 </details>
@@ -1476,7 +1476,7 @@ There are 55 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 85    function initialize(
 86            bytes[] calldata _factoryDeps,
@@ -1490,12 +1490,12 @@ File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
 
     - Line: 115:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L85-L133](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L85-L133)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L85-L133](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L85-L133)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 178    function deposit(
 179            address _l2Receiver,
@@ -1510,12 +1510,12 @@ File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
 
     - Line: 200:         l2TxHash = zkSync.requestL2Transaction{value: msg.value}(
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L178-L214](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L178-L214)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L178-L214](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L178-L214)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 295    function finalizeWithdrawal(
 296            uint256 _l2BatchNumber,
@@ -1531,12 +1531,12 @@ File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
     - Line: 308:         });
     - Line: 312:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L295-L322](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L295-L322)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L295-L322](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L295-L322)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 83    function initialize(
 84            bytes[] calldata _factoryDeps,
@@ -1550,12 +1550,12 @@ File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
 
     - Line: 114:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L83-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L83-L136)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L83-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L83-L136)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 161    function deposit(
 162            address _l2Receiver,
@@ -1570,12 +1570,12 @@ File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
 
     - Line: 187:         txHash = zkSync.requestL2Transaction{value: _amount + msg.value}(
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L161-L198](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L161-L198)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L161-L198](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L161-L198)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 235    function finalizeWithdrawal(
 236            uint256 _l2BatchNumber,
@@ -1591,12 +1591,12 @@ File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
     - Line: 254:             });
     - Line: 263:         IWETH9(l1WethAddress).deposit{value: amount}();
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L235-L270](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L235-L270)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L235-L270](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L235-L270)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/AllowListed.sol
+File: code/contracts/ethereum/contracts/common/AllowListed.sol
 
 12    modifier senderCanCallFunction(IAllowList _allowList) 
 ```
@@ -1604,12 +1604,12 @@ File: cache/solpp-generated-contracts/common/AllowListed.sol
 
     - Line: 14:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowListed.sol#L12-L18](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowListed.sol#L12-L18)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowListed.sol#L12-L18](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowListed.sol#L12-L18)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 226    function _execute(Call[] calldata _calls) internal 
 ```
@@ -1617,12 +1617,12 @@ File: cache/solpp-generated-contracts/governance/Governance.sol
 
     - Line: 228:             (bool success, bytes memory returnData) = _calls[i].target.call{value: _calls[i].value}(_calls[i].data);
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L226-L236](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L226-L236)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L226-L236](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L226-L236)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 264    receive() external payable 
 ```
@@ -1630,12 +1630,12 @@ File: cache/solpp-generated-contracts/governance/Governance.sol
 
     - Line: 264: receive() external payable {}
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L264](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L264)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L264](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L264)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol
 
 17    function _upgradeL1Contract(bytes calldata _customCallDataForUpgrade) internal virtual 
 ```
@@ -1643,12 +1643,12 @@ File: cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol
 
     - Line: 17: function _upgradeL1Contract(bytes calldata _customCallDataForUpgrade) internal virtual {}
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L17](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L17)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L17](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L17)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol
 
 23    function _postUpgrade(bytes calldata _customCallDataForUpgrade) internal virtual 
 ```
@@ -1656,12 +1656,12 @@ File: cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol
 
     - Line: 23: function _postUpgrade(bytes calldata _customCallDataForUpgrade) internal virtual {}
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L23](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L23)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L23](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L23)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/DiamondInit.sol
+File: code/contracts/ethereum/contracts/zksync/DiamondInit.sol
 
 52    constructor() reentrancyGuardInitializer 
 ```
@@ -1669,12 +1669,12 @@ File: cache/solpp-generated-contracts/zksync/DiamondInit.sol
 
     - Line: 52: constructor() reentrancyGuardInitializer {}
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondInit.sol#L52](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondInit.sol#L52)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L52](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L52)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 103    function _processL2Logs(CommitBatchInfo calldata _newBatch, bytes32 _expectedSystemContractUpgradeTxHash)
 104            internal
@@ -1693,12 +1693,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
 
     - Line: 114:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L103-L173](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L103-L173)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L103-L173](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L103-L173)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 179    function commitBatches(StoredBatchInfo memory _lastCommittedBatchData, CommitBatchInfo[] calldata _newBatchesData)
 180            external
@@ -1711,12 +1711,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
 
     - Line: 184:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L179-L202](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L179-L202)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L179-L202](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L179-L202)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 415    function _createBatchCommitment(CommitBatchInfo calldata _newBatchData, bytes32 _stateDiffHash)
 416            internal
@@ -1728,12 +1728,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
 
     - Line: 419:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L415-L425](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L415-L425)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L415-L425](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L415-L425)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 441    function _batchAuxiliaryOutput(CommitBatchInfo calldata _batch, bytes32 _stateDiffHash)
 442            internal
@@ -1745,12 +1745,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
 
     - Line: 445:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L441-L457](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L441-L457)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L441-L457](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L441-L457)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 84    function proveL1ToL2TransactionStatus(
 85            bytes32 _l2TxHash,
@@ -1766,12 +1766,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
     - Line: 102:         L2Log memory l2Log = L2Log({
     - Line: 109:         });
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L84-L111](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L84-L111)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L84-L111](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L84-L111)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 151    function _L2MessageToLog(L2Message memory _message) internal pure returns (L2Log memory) 
 ```
@@ -1780,12 +1780,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
     - Line: 153:             L2Log({
     - Line: 160:             });
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L151-L161](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L151-L161)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L151-L161](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L151-L161)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 194    function finalizeEthWithdrawal(
 195            uint256 _l2BatchNumber,
@@ -1800,12 +1800,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
     - Line: 203:         L2Message memory l2ToL1Message = L2Message({
     - Line: 207:         });
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L194-L218](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L194-L218)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L194-L218](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L194-L218)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 285    function _requestL2Transaction(
 286            address _sender,
@@ -1823,12 +1823,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
 
     - Line: 305:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L285-L329](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L285-L329)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L285-L329](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L285-L329)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 331    function _serializeL2Transaction(
 332            WritePriorityOpParams memory _priorityOpParams,
@@ -1841,12 +1841,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
     - Line: 336:         transaction = L2CanonicalTransaction({
     - Line: 354:         });
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L331-L355](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L331-L355)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L331-L355](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L331-L355)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 358    function _writePriorityOp(
 359            WritePriorityOpParams memory _priorityOpParams,
@@ -1859,12 +1859,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
     - Line: 372:             PriorityOperation({
     - Line: 376:             })
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L358-L387](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L358-L387)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L358-L387](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L358-L387)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 390    function _hashFactoryDeps(bytes[] calldata _factoryDeps)
 391            internal
@@ -1876,12 +1876,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
 
     - Line: 394:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L390-L405](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L390-L405)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L390-L405](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L390-L405)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 408    function _parseL2WithdrawalMessage(bytes memory _message)
 409            internal
@@ -1893,12 +1893,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
 
     - Line: 412:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L408-L430](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L408-L430)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L408-L430](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L408-L430)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 42    function initialize(
 43            address _l1Bridge,
@@ -1911,12 +1911,12 @@ File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
     - Line: 54:         address l2StandardToken = address(new L2StandardERC20{salt: bytes32(0)}());
     - Line: 55:         l2TokenBeacon = new UpgradeableBeacon{salt: bytes32(0)}(l2StandardToken);
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L42-L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L42-L57)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L42-L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L42-L57)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 48    function bridgeInitialize(address _l1Address, bytes memory _data) external initializer 
 ```
@@ -1926,12 +1926,12 @@ File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
     - Line: 81:         } catch {
     - Line: 94:         } catch {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L48-L100](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L48-L100)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L48-L100](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L48-L100)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 80    function bridgeBurn(address _from, uint256 _amount) external override onlyBridge 
 ```
@@ -1939,12 +1939,12 @@ File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
 
     - Line: 83:         (bool success, ) = msg.sender.call{value: _amount}("");
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L80-L87](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L80-L87)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L80-L87](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L80-L87)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 106    function withdrawTo(address _to, uint256 _amount) public override 
 ```
@@ -1952,12 +1952,12 @@ File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
 
     - Line: 108:         (bool success, ) = _to.call{value: _amount}("");
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L106-L110](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L106-L110)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L106-L110](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L106-L110)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 65    function withdraw(
 66            address _l1Receiver,
@@ -1969,12 +1969,12 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 
     - Line: 80:         L2_ETH_ADDRESS.withdrawWithMessage{value: _amount}(l1Bridge, wethMessage);
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L65-L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L65-L83)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L65-L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L65-L83)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 90    function finalizeDeposit(
 91            address _l1Sender,
@@ -1988,12 +1988,12 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 
     - Line: 106:         IL2Weth(l2WethAddress).depositTo{value: msg.value}(_l2Receiver);
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L90-L109](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L90-L109)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L90-L109](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L90-L109)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 46    function encodeLegacyTransactionHash(Transaction calldata _transaction) internal view returns (bytes32 txHash) 
 ```
@@ -2005,12 +2005,12 @@ File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
     - Line: 87:         {
     - Line: 92:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L46-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L46-L136)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L46-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L46-L136)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 141    function encodeEIP2930TransactionHash(Transaction calldata _transaction) internal view returns (bytes32) 
 ```
@@ -2022,12 +2022,12 @@ File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
     - Line: 186:         {
     - Line: 191:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L141-L226](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L141-L226)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L141-L226](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L141-L226)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 231    function encodeEIP1559TransactionHash(Transaction calldata _transaction) internal view returns (bytes32) 
 ```
@@ -2039,12 +2039,12 @@ File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
     - Line: 281:         {
     - Line: 286:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L231-L321](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L231-L321)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L231-L321](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L231-L321)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 240    function forceDeployOnAddresses(ForceDeployment[] calldata _deployments) external payable 
 ```
@@ -2052,12 +2052,12 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 
     - Line: 256:             this.forceDeployOnAddress{value: _deployments[i].value}(_deployments[i], msg.sender);
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L240-L258](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L240-L258)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L240-L258](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L240-L258)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 163    function _isValidSignature(bytes32 _hash, bytes memory _signature) internal view returns (bool) 
 ```
@@ -2065,12 +2065,12 @@ File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
 
     - Line: 181: b'        // the valid range for s in (301): 0 < s < secp256k1n \xc3\xb7 2 + 1, and for v in (302): v \xe2\x88\x88 {27, 28}. Most'
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L163-L193](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L163-L193)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L163-L193](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L163-L193)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 14    fallback() external payable 
 ```
@@ -2078,12 +2078,12 @@ File: cache-zk/solpp-generated-contracts/EmptyContract.sol
 
     - Line: 14: fallback() external payable {}
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L14](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L14)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L14](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L14)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 16    receive() external payable 
 ```
@@ -2091,12 +2091,12 @@ File: cache-zk/solpp-generated-contracts/EmptyContract.sol
 
     - Line: 16: receive() external payable {}
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L16)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L16)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 77    function sendL2ToL1Log(
 78            bool _isService,
@@ -2109,12 +2109,12 @@ File: cache-zk/solpp-generated-contracts/L1Messenger.sol
     - Line: 82:         L2ToL1Log memory l2ToL1Log = L2ToL1Log({
     - Line: 89:         });
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L77-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L77-L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L77-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L77-L97)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 121    function sendToL1(bytes calldata _message) external override returns (bytes32 hash) 
 ```
@@ -2123,12 +2123,12 @@ File: cache-zk/solpp-generated-contracts/L1Messenger.sol
     - Line: 130:         L2ToL1Log memory l2ToL1Log = L2ToL1Log({
     - Line: 137:         });
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L121-L164](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L121-L164)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L121-L164](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L121-L164)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 287    function _setNewL2BlockData(uint128 _l2BlockNumber, uint128 _l2BlockTimestamp, bytes32 _prevL2BlockHash) internal 
 ```
@@ -2136,12 +2136,12 @@ File: cache-zk/solpp-generated-contracts/SystemContext.sol
 
     - Line: 289:         currentL2BlockInfo = BlockInfo({number: _l2BlockNumber, timestamp: _l2BlockTimestamp});
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L287-L296](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L287-L296)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L287-L296](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L287-L296)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 418    function setNewBatch(
 419            bytes32 _prevBatchHash,
@@ -2154,12 +2154,12 @@ File: cache-zk/solpp-generated-contracts/SystemContext.sol
 
     - Line: 433:         BlockInfo memory newBlockInfo = BlockInfo({number: previousBatchNumber + 1, timestamp: _newTimestamp});
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L418-L441](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L418-L441)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L418-L441](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L418-L441)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 445    function unsafeOverrideBatch(
 446            uint256 _newTimestamp,
@@ -2171,12 +2171,12 @@ File: cache-zk/solpp-generated-contracts/SystemContext.sol
 
     - Line: 450:         BlockInfo memory newBlockInfo = BlockInfo({number: uint128(_number), timestamp: uint128(_newTimestamp)});
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L445-L454](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L445-L454)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L445-L454](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L445-L454)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 126    function rawCall(
 127            uint256 _gas,
@@ -2190,12 +2190,12 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 
     - Line: 139:             }
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L126-L154](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L126-L154)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L126-L154](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L126-L154)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 217    function _verifyCallResult(bool _success) private pure returns (bytes memory returnData) 
 ```
@@ -2203,12 +2203,12 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 
     - Line: 227:             }
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L217-L231](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L217-L231)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L217-L231](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L217-L231)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
+File: code/system-contracts/contracts/libraries/SystemContractsCaller.sol
 
 78    function systemCall(uint32 gasLimit, address to, uint256 value, bytes memory data) internal returns (bool success) 
 ```
@@ -2216,12 +2216,12 @@ File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
 
     - Line: 104:             }
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L78-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L78-L115)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L78-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L78-L115)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 149    function _encodeHashLegacyTransaction(Transaction calldata _transaction) private view returns (bytes32) 
 ```
@@ -2230,12 +2230,12 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
     - Line: 160:         {
     - Line: 171:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L149-L217](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L149-L217)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L149-L217](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L149-L217)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 221    function _encodeHashEIP2930Transaction(Transaction calldata _transaction) private view returns (bytes32) 
 ```
@@ -2244,12 +2244,12 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
     - Line: 229:         {
     - Line: 249:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L221-L287](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L221-L287)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L221-L287](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L221-L287)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 291    function _encodeHashEIP1559Transaction(Transaction calldata _transaction) private view returns (bytes32) 
 ```
@@ -2258,12 +2258,12 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
     - Line: 299:         {
     - Line: 321:         {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L291-L359](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L291-L359)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L291-L359](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L291-L359)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 364    function processPaymasterInput(Transaction calldata _transaction) internal 
 ```
@@ -2271,12 +2271,12 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
 
     - Line: 386:             }
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L364-L392](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L364-L392)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L364-L392](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L364-L392)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 62    function sendValue(address payable recipient, uint256 amount) internal 
 ```
@@ -2284,12 +2284,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 
     - Line: 68:         (bool success, ) = recipient.call{value: amount}("");
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L62-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L62-L73)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L62-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L62-L73)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 93    function functionCall(address target, bytes memory data)
 94            internal
@@ -2300,12 +2300,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 
     - Line: 96:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L93-L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L93-L104)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L93-L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L93-L104)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 151    function functionCallWithValue(
 152            address target,
@@ -2318,12 +2318,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 
     - Line: 161:         (bool success, bytes memory returndata) = target.call{value: value}(
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L151-L171](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L151-L171)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L151-L171](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L151-L171)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 179    function functionStaticCall(address target, bytes memory data)
 180            internal
@@ -2335,12 +2335,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 
     - Line: 183:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L179-L190](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L179-L190)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L179-L190](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L179-L190)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 219    function functionDelegateCall(address target, bytes memory data)
 220            internal
@@ -2351,12 +2351,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 
     - Line: 222:     {
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L219-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L219-L229)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L219-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L219-L229)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 294    function _revert(bytes memory returndata, string memory errorMessage)
 295            private
@@ -2368,7 +2368,7 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
     - Line: 297:     {
     - Line: 305:             }
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L294-L309](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L294-L309)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L294-L309](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L294-L309)
 
 
 </details>
@@ -2393,29 +2393,29 @@ There are 26 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol
+File: code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol
 
 40    function undoL1ToL2Alias(address l2Address) internal pure returns (address l1Address) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L40-L44](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L40-L44)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L40-L44](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L40-L44)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 410    function _maxU256(uint256 a, uint256 b) internal pure returns (uint256) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L410-L412](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L410-L412)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L410-L412](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L410-L412)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 93    function functionCall(address target, bytes memory data)
 94            internal
@@ -2424,12 +2424,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L93-L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L93-L104)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L93-L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L93-L104)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 131    function functionCallWithValue(
 132            address target,
@@ -2439,12 +2439,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L131-L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L131-L143)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L131-L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L131-L143)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 219    function functionDelegateCall(address target, bytes memory data)
 220            internal
@@ -2453,12 +2453,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L219-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L219-L229)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L219-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L219-L229)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 237    function functionDelegateCall(
 238            address target,
@@ -2468,12 +2468,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L237-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L237-L250)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L237-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L237-L250)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 179    function functionStaticCall(address target, bytes memory data)
 180            internal
@@ -2483,12 +2483,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L179-L190](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L179-L190)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L179-L190](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L179-L190)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 198    function functionStaticCall(
 199            address target,
@@ -2498,23 +2498,23 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L198-L211](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L198-L211)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L198-L211](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L198-L211)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 62    function sendValue(address payable recipient, uint256 amount) internal 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L62-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L62-L73)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L62-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L62-L73)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 282    function verifyCallResult(
 283            bool success,
@@ -2524,12 +2524,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L282-L292](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L282-L292)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L282-L292](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L282-L292)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 60    function call(
 61            uint256 _gas,
@@ -2541,12 +2541,12 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L60-L69](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L60-L69)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L60-L69](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L60-L69)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 90    function delegateCall(
 91            uint256 _gas,
@@ -2556,122 +2556,122 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L90-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L90-L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L90-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L90-L97)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 175    function rawDelegateCall(uint256 _gas, address _address, bytes calldata _data) internal returns (bool success) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L175-L182](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L175-L182)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L175-L182](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L175-L182)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 204    function eventInitialize(uint256 initializer, uint256 value1) internal 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L204-L209](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L204-L209)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L204-L209](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L204-L209)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 214    function eventWrite(uint256 value1, uint256 value2) internal 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L214-L219](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L214-L219)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L214-L219](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L214-L219)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 267    function getAuxHeapSizeFromMeta(uint256 meta) internal pure returns (uint32 auxHeapSize) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L267-L269](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L267-L269)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L267-L269](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L267-L269)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 325    function getCalldataPtr() internal view returns (uint256 ptr) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L325-L330](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L325-L330)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L325-L330](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L325-L330)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 284    function getCallerShardIdFromMeta(uint256 meta) internal pure returns (uint8 callerShardId) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L284-L286](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L284-L286)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L284-L286](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L284-L286)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 293    function getCodeShardIdFromMeta(uint256 meta) internal pure returns (uint8 codeShardId) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L293-L295](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L293-L295)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L293-L295](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L293-L295)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 258    function getHeapSizeFromMeta(uint256 meta) internal pure returns (uint32 heapSize) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L258-L260](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L258-L260)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L258-L260](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L258-L260)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 275    function getShardIdFromMeta(uint256 meta) internal pure returns (uint8 shardId) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L275-L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L275-L277)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L275-L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L275-L277)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 299    function getZkSyncMeta() internal view returns (ZkSyncMeta memory meta) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L299-L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L299-L305)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L299-L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L299-L305)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 153    function packPrecompileParams(
 154            uint32 _inputMemoryOffset,
@@ -2683,40 +2683,40 @@ File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L153-L165](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L153-L165)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L153-L165](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L153-L165)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 96    function isEthToken(uint256 _addr) internal pure returns (bool) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L96-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L96-L98)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L96-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L96-L98)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol
+File: code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol
 
 28    function readUint32(bytes calldata _bytes, uint256 _start) internal pure returns (uint32 result) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L28-L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L28-L33)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L28-L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L28-L33)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 34    function safeCastToU24(uint256 _x) internal pure returns (uint24) 
 ```
  is never used and should be removed
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L34-L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L34-L38)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L34-L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L34-L38)
 
 
 </details>
@@ -2741,37 +2741,37 @@ There are 72 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 357    bytes32 salt = bytes32(uint256(uint160(_l1Token)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L357](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L357)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L357](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L357)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
 
 118    _newVerifier == IVerifier(address(0))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L118](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L118)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L118](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L118)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
 
 237    _newAllowList == IAllowList(address(0))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L237](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L237)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L237](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L237)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 102    L2Log memory l2Log = L2Log({
 103                l2ShardId: 0,
@@ -2783,12 +2783,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
 109            })
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L102-L109](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L102-L109)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L102-L109](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L102-L109)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 152    return
 153                L2Log({
@@ -2801,12 +2801,12 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
 160                })
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L152-L160](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L152-L160)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L152-L160](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L152-L160)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 336    transaction = L2CanonicalTransaction({
 337                txType: PRIORITY_OPERATION_L2_TX_TYPE,
@@ -2829,256 +2829,256 @@ File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
 354            })
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L336-L354](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L336-L354)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L336-L354](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L336-L354)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 143    salt = bytes32(uint256(uint160(_l1Token)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L143)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L143)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 71    uint256 addressAsKey = uint256(uint160(_address))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L71](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L71)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L71](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L71)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 81    uint256 addressAsKey = uint256(uint160(_address))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L81](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L81)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L81](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L81)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 94    address account = address(uint160(_input))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L94](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L94)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L94](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L94)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 122    address account = address(uint160(_input))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L122](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L122)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L122](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L122)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 63    bytes memory encodedTo = RLPEncoder.encodeAddress(address(uint160(_transaction.to)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L63](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L63)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L63](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L63)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 83    uint256 rInt = uint256(bytes32(_transaction.signature[0:32]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L83)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L83)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 88    uint256 sInt = uint256(bytes32(_transaction.signature[32:64]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L88](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L88)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L88](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L88)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 93    uint256 vInt = uint256(uint8(_transaction.signature[64]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L93](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L93)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L93](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L93)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 149    bytes memory encodedTo = RLPEncoder.encodeAddress(address(uint160(_transaction.to)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L149](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L149)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L149](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L149)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 182    uint256 rInt = uint256(bytes32(_transaction.signature[0:32]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L182](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L182)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L182](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L182)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 187    uint256 sInt = uint256(bytes32(_transaction.signature[32:64]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L187](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L187)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L187](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L187)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 192    uint256 vInt = uint256(uint8(_transaction.signature[64]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L192](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L192)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L192](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L192)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 243    bytes memory encodedTo = RLPEncoder.encodeAddress(address(uint160(_transaction.to)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L243](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L243)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L243](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L243)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 277    uint256 rInt = uint256(bytes32(_transaction.signature[0:32]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L277)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L277)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 282    uint256 sInt = uint256(bytes32(_transaction.signature[32:64]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L282](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L282)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L282](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L282)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 287    uint256 vInt = uint256(uint8(_transaction.signature[64]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L287](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L287)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L287](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L287)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 152    uint8 metadata = uint8(bytes1(_compressedStateDiffs[stateDiffPtr]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L152](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L152)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L152](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L152)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 181    uint8 metadata = uint8(bytes1(_compressedStateDiffs[stateDiffPtr]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L181](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L181)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L181](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L181)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 253    number = uint256(bytes32(_calldataSlice))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L253](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L253)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L253](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L253)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 104    bytes32 hash = keccak256(
 105                bytes.concat(CREATE2_PREFIX, bytes32(uint256(uint160(_sender))), _salt, _bytecodeHash, constructorInputHash)
 106            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L104-L106](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L104-L106)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L104-L106](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L104-L106)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 108    newAddress = address(uint160(uint256(hash)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L108](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L108)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L108](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L108)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 120    bytes32 hash = keccak256(
 121                bytes.concat(CREATE_PREFIX, bytes32(uint256(uint160(_sender))), bytes32(_senderNonce))
 122            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L120-L122](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L120-L122)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L120-L122](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L120-L122)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 124    newAddress = address(uint160(uint256(hash)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L124](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L124)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L124](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L124)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 270    require(
 271                ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.getCodeHash(uint256(uint160(_newAddress))) == 0x0,
@@ -3086,42 +3086,42 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 273            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L270-L273](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L270-L273)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L270-L273](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L270-L273)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 136    address to = address(uint160(_transaction.to))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L136)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L136)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ImmutableSimulator.sol
+File: code/system-contracts/contracts/ImmutableSimulator.sol
 
 30    return immutableDataStorage[uint256(uint160(_dest))][_index]
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L30](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L30)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L30](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L30)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ImmutableSimulator.sol
+File: code/system-contracts/contracts/ImmutableSimulator.sol
 
 43    immutableDataStorage[uint256(uint160(_dest))][index] = value
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L43](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L43)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L43](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L43)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 130    L2ToL1Log memory l2ToL1Log = L2ToL1Log({
 131                l2ShardId: 0,
@@ -3133,64 +3133,64 @@ File: cache-zk/solpp-generated-contracts/L1Messenger.sol
 137            })
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L130-L137](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L130-L137)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L130-L137](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L130-L137)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 207    uint32 numberOfL2ToL1Logs = uint32(bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L207](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L207)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L207](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L207)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 240    uint32 numberOfMessages = uint32(bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L240](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L240)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L240](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L240)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 244    uint32 currentMessageLength = uint32(bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L244](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L244)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L244](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L244)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 258    uint32 numberOfBytecodes = uint32(bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L258](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L258)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L258](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L258)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 262    uint32 currentBytecodeLength = uint32(
 263                    bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4])
 264                )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L262-L264](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L262-L264)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L262-L264](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L262-L264)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 286    require(
 287                uint256(uint8(bytes1(_totalL2ToL1PubdataAndStateDiffs[calldataPtr]))) ==
@@ -3199,52 +3199,52 @@ File: cache-zk/solpp-generated-contracts/L1Messenger.sol
 290            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L286-L290](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L286-L290)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L286-L290](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L286-L290)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 293    uint24 compressedStateDiffSize = uint24(bytes3(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 3]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L293](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L293)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L293](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L293)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 296    uint8 enumerationIndexSize = uint8(bytes1(_totalL2ToL1PubdataAndStateDiffs[calldataPtr]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L296](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L296)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L296](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L296)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 307    uint32 numberOfStateDiffs = uint32(bytes4(_totalL2ToL1PubdataAndStateDiffs[calldataPtr:calldataPtr + 4]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L307](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L307)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L307](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L307)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 325    SystemContractHelper.toL1(true, bytes32(uint256(SystemLogKey.L2_TO_L1_LOGS_TREE_ROOT_KEY)), l2ToL1LogsTreeRoot)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L325](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L325)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L325](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L325)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 326    SystemContractHelper.toL1(
 327                true,
@@ -3253,132 +3253,132 @@ File: cache-zk/solpp-generated-contracts/L1Messenger.sol
 330            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L326-L330](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L326-L330)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L326-L330](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L326-L330)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 331    SystemContractHelper.toL1(true, bytes32(uint256(SystemLogKey.STATE_DIFF_HASH_KEY)), stateDiffHash)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L331](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L331)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L331](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L331)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 59    return balance[address(uint160(_account))]
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L59](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L59)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L59](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L59)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/MsgValueSimulator.sol
+File: code/system-contracts/contracts/MsgValueSimulator.sol
 
 34    to = address(uint160(addressAsUint))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L34](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L34)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L34](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L34)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 49    uint256 addressAsKey = uint256(uint160(_address))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L49](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L49)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L49](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L49)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 60    uint256 addressAsKey = uint256(uint160(_address))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L60)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L60)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 70    uint256 addressAsKey = uint256(uint160(msg.sender))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L70](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L70)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L70](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L70)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 94    uint256 addressAsKey = uint256(uint160(msg.sender))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L94](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L94)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L94](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L94)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 105    uint256 addressAsKey = uint256(uint160(msg.sender))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L105](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L105)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L105](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L105)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 113    uint256 addressAsKey = uint256(uint160(msg.sender))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L113](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L113)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L113](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L113)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 128    uint256 addressAsKey = uint256(uint160(_address))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L128](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L128)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L128](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L128)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 139    uint256 addressAsKey = uint256(uint160(_address))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L139](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L139)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L139](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L139)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 150    uint256 addressAsKey = uint256(uint160(_address))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L150](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L150)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L150](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L150)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 392    SystemContractHelper.toL1(
 393                false,
@@ -3387,137 +3387,137 @@ File: cache-zk/solpp-generated-contracts/SystemContext.sol
 396            )
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L392-L396](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L392-L396)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L392-L396](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L392-L396)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 440    SystemContractHelper.toL1(false, bytes32(uint256(SystemLogKey.PREV_BATCH_HASH_KEY)), _prevBatchHash)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L440](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L440)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L440](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L440)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 36    encoded[0] = bytes1(uint8(hbs + 0x81))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L36](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L36)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L36](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L36)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 31    encoded[0] = (_val == 0) ? bytes1(uint8(128)) : bytes1(uint8(_val))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L31)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L31)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 66    encoded[0] = bytes1(uint8(_len + _offset))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L66](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L66)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L66](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L66)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 71    encoded[0] = bytes1(uint8(_offset + hbs + 56))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L71](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L71)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L71](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L71)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 97    return _addr == uint256(uint160(address(ETH_TOKEN_SYSTEM_CONTRACT))) || _addr == 0
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L97)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 166    bytes memory encodedTo = RLPEncoder.encodeAddress(address(uint160(_transaction.to)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L166](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L166)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L166](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L166)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 234    bytes memory encodedTo = RLPEncoder.encodeAddress(address(uint160(_transaction.to)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L234](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L234)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L234](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L234)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 305    bytes memory encodedTo = RLPEncoder.encodeAddress(address(uint160(_transaction.to)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L305)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L305)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 377    address paymaster = address(uint160(_transaction.paymaster))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L377](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L377)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L377](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L377)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 408    address(uint160(_transaction.paymaster)) != address(0)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L408](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L408)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L408](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L408)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 48    codeLengthInWords = uint256(uint8(_bytecodeHash[2])) * 256 + uint256(uint8(_bytecodeHash[3]))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L48](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L48)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L48](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L48)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 95    hashedBytecode = (hashedBytecode | bytes32(uint256(1 << 248)))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L95)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L95)
 
 
 </details>
@@ -3542,7 +3542,7 @@ There are 5 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 178    function deposit(
 179            address _l2Receiver,
@@ -3556,12 +3556,12 @@ File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
 ```
 /// @audit: function used on lines  146
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L178-L214](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L178-L214)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L178-L214](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L178-L214)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 112    function functionCall(
 113            address target,
@@ -3572,12 +3572,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
 /// @audit: function used on lines  93
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L112-L118](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L112-L118)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L112-L118](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L112-L118)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 151    function functionCallWithValue(
 152            address target,
@@ -3589,12 +3589,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
 /// @audit: function used on lines  131
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L151-L171](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L151-L171)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L151-L171](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L151-L171)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 198    function functionStaticCall(
 199            address target,
@@ -3605,12 +3605,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
 /// @audit: function used on lines  179
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L198-L211](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L198-L211)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L198-L211](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L198-L211)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 237    function functionDelegateCall(
 238            address target,
@@ -3621,7 +3621,7 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
 /// @audit: function used on lines  219
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L237-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L237-L250)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L237-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L237-L250)
 
 
 </details>
@@ -3646,43 +3646,43 @@ There are 4 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 39    contract MailboxFacet is Base, IMailbox 
 ```
 
 -    `//`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L39-L431](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L39-L431)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L39-L431](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L39-L431)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 18    contract BootloaderUtilities is IBootloaderUtilities 
 ```
 
 -    `//`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L18-L322](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L18-L322)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L18-L322](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L18-L322)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 21    contract DefaultAccount is IAccount 
 ```
 
 -    `//`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L21-L234](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L21-L234)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L21-L234](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L21-L234)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 80    library TransactionHelper 
 ```
@@ -3691,7 +3691,7 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
 -    `//`
 -    `//`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L80-L416](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L80-L416)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L80-L416](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L80-L416)
 
 
 </details>
@@ -3716,13 +3716,13 @@ There are 10 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 39    contract L1WethBridge is IL1Bridge, AllowListed, ReentrancyGuard 
 ```
 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 225    revert("Method not supported. Failed deposit funds are sent to the L2 refund recipient address.")
 ```
@@ -3730,18 +3730,18 @@ The contract `L1WethBridge` uses both `require` and custom `revert` for error ha
 
 There are 13 `require` statement(s) and 1 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L39-L316](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L39-L316)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L39-L316](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L39-L316)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 20    contract ExecutorFacet is Base, IExecutor 
 ```
 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 161    revert("ul")
 ```
@@ -3749,18 +3749,18 @@ The contract `ExecutorFacet` uses both `require` and custom `revert` for error h
 
 There are 36 `require` statement(s) and 1 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L20-L473](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L20-L473)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L20-L473](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L20-L473)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 13    contract L2StandardERC20 is ERC20PermitUpgradeable, IL2StandardToken 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 49    require(_l1Address != address(0), "in6")
 ```
@@ -3768,18 +3768,18 @@ The contract `L2StandardERC20` uses both `require` and custom `revert` for error
 
 There are 2 `require` statement(s) and 3 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L13-L152](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L13-L152)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L13-L152](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L13-L152)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 23    contract L2Weth is ERC20PermitUpgradeable, IL2Weth, IL2StandardToken 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 73    revert("bridgeMint is not implemented! Use deposit/depositTo methods instead.")
 ```
@@ -3787,18 +3787,18 @@ The contract `L2Weth` uses both `require` and custom `revert` for error handling
 
 There are 5 `require` statement(s) and 1 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L23-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L23-L116)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L23-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L23-L116)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 18    contract BootloaderUtilities is IBootloaderUtilities 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 39    revert("Unsupported tx type")
 ```
@@ -3806,18 +3806,18 @@ The contract `BootloaderUtilities` uses both `require` and custom `revert` for e
 
 There are 3 `require` statement(s) and 1 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L18-L322](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L18-L322)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L18-L322](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L18-L322)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 36    contract Compressor is ICompressor, ISystemContract 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 243    revert("unsupported operation")
 ```
@@ -3825,18 +3825,18 @@ The contract `Compressor` uses both `require` and custom `revert` for error hand
 
 There are 13 `require` statement(s) and 1 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L36-L256](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L36-L256)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L36-L256](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L36-L256)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 29    contract NonceHolder is INonceHolder, ISystemContract 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 165    revert("Reusing the same nonce twice")
 ```
@@ -3844,18 +3844,18 @@ The contract `NonceHolder` uses both `require` and custom `revert` for error han
 
 There are 5 `require` statement(s) and 2 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L29-L178](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L29-L178)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L29-L178](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L29-L178)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 19    contract SystemContext is ISystemContext, ISystemContextDeprecated, ISystemContract 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 367    revert("Invalid new L2 block number")
 ```
@@ -3863,18 +3863,18 @@ The contract `SystemContext` uses both `require` and custom `revert` for error h
 
 There are 16 `require` statement(s) and 1 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L19-L486](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L19-L486)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L19-L486](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L19-L486)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 80    library TransactionHelper 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 114    revert("Encoding unsupported tx")
 ```
@@ -3882,18 +3882,18 @@ The contract `TransactionHelper` uses both `require` and custom `revert` for err
 
 There are 2 `require` statement(s) and 2 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L80-L416](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L80-L416)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L80-L416](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L80-L416)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 11    library Address 
 ```
 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 307    revert(errorMessage)
 ```
@@ -3901,7 +3901,7 @@ The contract `Address` uses both `require` and custom `revert` for error handlin
 
 There are 4 `require` statement(s) and 1 custom `revert` statement(s).
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L11-L310](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L11-L310)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L11-L310](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L11-L310)
 
 
 </details>
@@ -3926,7 +3926,7 @@ There are 34 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 85    function initialize(
 86            bytes[] calldata _factoryDeps,
@@ -3937,12 +3937,12 @@ File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
 91        ) external payable reentrancyGuardInitializer 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L85-L133](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L85-L133)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L85-L133](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L85-L133)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 83    function initialize(
 84            bytes[] calldata _factoryDeps,
@@ -3953,92 +3953,92 @@ File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
 89        ) external payable reentrancyGuardInitializer 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L83-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L83-L136)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L83-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L83-L136)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 309    receive() external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L309-L315](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L309-L315)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L309-L315](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L309-L315)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
 
 69    function upgrade(ProposedUpgrade calldata _proposedUpgrade) public virtual returns (bytes32) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L69-L75](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L69-L75)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L69-L75](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L69-L75)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol
 
 27    function upgrade(ProposedUpgrade calldata _proposedUpgrade) public override returns (bytes32) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L27-L48](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L27-L48)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L27-L48](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L27-L48)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/DiamondInit.sol
+File: code/contracts/ethereum/contracts/zksync/DiamondInit.sol
 
 57    function initialize(InitializeData calldata _initalizeData) external reentrancyGuardInitializer returns (bytes32) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondInit.sol#L57-L92](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondInit.sol#L57-L92)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L57-L92](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L57-L92)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/DiamondProxy.sol
+File: code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
 
 22    fallback() external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondProxy.sol#L22-L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondProxy.sol#L22-L57)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L22-L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L22-L57)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol
+File: code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
 54    function setValidator(address _newValidator) external onlyOwner 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L54-L58](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L54-L58)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L54-L58](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L54-L58)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol
+File: code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
 61    function setExecutionDelay(uint32 _executionDelay) external onlyOwner 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L61-L64](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L61-L64)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L61-L64](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L61-L64)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol
+File: code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
 73    function getCommittedBatchTimestamp(uint256 _l2BatchNumber) external view returns (uint256) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L73-L75](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L73-L75)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L73-L75](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L73-L75)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 42    function initialize(
 43            address _l1Bridge,
@@ -4047,72 +4047,72 @@ File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
 46        ) external initializer 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L42-L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L42-L57)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L42-L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L42-L57)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 48    function bridgeInitialize(address _l1Address, bytes memory _data) external initializer 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L48-L100](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L48-L100)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L48-L100](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L48-L100)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 144    function decodeString(bytes memory _input) external pure returns (string memory result) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L144-L146](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L144-L146)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L144-L146](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L144-L146)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 149    function decodeUint8(bytes memory _input) external pure returns (uint8 result) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L149-L151](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L149-L151)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L149-L151](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L149-L151)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 41    function initialize(string memory name_, string memory symbol_) external initializer 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L41-L49](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L41-L49)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L41-L49](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L41-L49)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 54    function initializeV2(address _l2Bridge, address _l1Address) external reinitializer(2) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L54-L59](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L54-L59)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L54-L59](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L54-L59)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 113    receive() external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L113-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L113-L115)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L113-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L113-L115)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 47    function initialize(
 48            address _l1Bridge,
@@ -4121,104 +4121,104 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 51        ) external initializer 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L47-L59](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L47-L59)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L47-L59](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L47-L59)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 121    receive() external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L121-L124](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L121-L124)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L121-L124](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L121-L124)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 42    function extendedAccountVersion(address _address) public view returns (AccountAbstractionVersion) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L42-L54](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L42-L54)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L42-L54](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L42-L54)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 216    function forceDeployOnAddress(ForceDeployment calldata _deployment, address _sender) external payable onlySelf 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L216-L235](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L216-L235)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L216-L235](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L216-L235)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 240    function forceDeployOnAddresses(ForceDeployment[] calldata _deployments) external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L240-L258](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L240-L258)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L240-L258](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L240-L258)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 224    fallback() external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L224-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L224-L229)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L224-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L224-L229)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 201    function publishPubdataAndClearState(
 202            bytes calldata _totalL2ToL1PubdataAndStateDiffs
 203        ) external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L201-L338](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L201-L338)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L201-L338](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L201-L338)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/MsgValueSimulator.sol
+File: code/system-contracts/contracts/MsgValueSimulator.sol
 
 37    fallback(bytes calldata _data) external onlySystemCall returns (bytes memory) 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L37-L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L37-L60)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L37-L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L37-L60)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 89    function setTxOrigin(address _newOrigin) external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L89-L91](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L89-L91)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L89-L91](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L89-L91)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 95    function setGasPrice(uint256 _gasPrice) external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L95-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L95-L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L95-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L95-L97)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 314    function setL2Block(
 315            uint128 _l2BlockNumber,
@@ -4229,32 +4229,32 @@ File: cache-zk/solpp-generated-contracts/SystemContext.sol
 320        ) external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L314-L371](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L314-L371)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L314-L371](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L314-L371)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 375    function appendTransactionToCurrentL2Block(bytes32 _txHash) external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L375-L377](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L375-L377)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L375-L377](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L375-L377)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 381    function publishTimestampDataToL1() external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L381-L397](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L381-L397)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L381-L397](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L381-L397)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 418    function setNewBatch(
 419            bytes32 _prevBatchHash,
@@ -4264,12 +4264,12 @@ File: cache-zk/solpp-generated-contracts/SystemContext.sol
 423        ) external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L418-L441](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L418-L441)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L418-L441](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L418-L441)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 445    function unsafeOverrideBatch(
 446            uint256 _newTimestamp,
@@ -4278,27 +4278,27 @@ File: cache-zk/solpp-generated-contracts/SystemContext.sol
 449        ) external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L445-L454](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L445-L454)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L445-L454](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L445-L454)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 456    function incrementTxNumberInBatch() external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L456-L458](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L456-L458)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L456-L458](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L456-L458)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 460    function resetTxNumberInBatch() external onlyCallFromBootloader 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L460-L462](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L460-L462)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L460-L462](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L460-L462)
 
 
 </details>
@@ -4323,897 +4323,897 @@ There are 84 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL1Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL1Bridge.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL1Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL1Bridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL1Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL1Bridge.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL1BridgeLegacy.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL1BridgeLegacy.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL1BridgeLegacy.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL1BridgeLegacy.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL1BridgeLegacy.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL1BridgeLegacy.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL2Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL2Bridge.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2Bridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2Bridge.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL2ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL2ERC20Bridge.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2ERC20Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2ERC20Bridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2ERC20Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2ERC20Bridge.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL2WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL2WethBridge.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2WethBridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2WethBridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2WethBridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2WethBridge.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IWETH9.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IWETH9.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IWETH9.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IWETH9.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IWETH9.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IWETH9.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/AllowList.sol
+File: code/contracts/ethereum/contracts/common/AllowList.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowList.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowList.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowList.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowList.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/AllowListed.sol
+File: code/contracts/ethereum/contracts/common/AllowListed.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowListed.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowListed.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowListed.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowListed.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/L2ContractAddresses.sol
+File: code/contracts/ethereum/contracts/common/L2ContractAddresses.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/L2ContractAddresses.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/L2ContractAddresses.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/L2ContractAddresses.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/L2ContractAddresses.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/ReentrancyGuard.sol
+File: code/contracts/ethereum/contracts/common/ReentrancyGuard.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/ReentrancyGuard.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/ReentrancyGuard.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/ReentrancyGuard.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/ReentrancyGuard.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/interfaces/IAllowList.sol
+File: code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/interfaces/IAllowList.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/interfaces/IAllowList.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/interfaces/IAllowList.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/interfaces/IL2ContractDeployer.sol
+File: code/contracts/ethereum/contracts/common/interfaces/IL2ContractDeployer.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/interfaces/IL2ContractDeployer.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/interfaces/IL2ContractDeployer.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/interfaces/IL2ContractDeployer.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/interfaces/IL2ContractDeployer.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/IGovernance.sol
+File: code/contracts/ethereum/contracts/governance/IGovernance.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/IGovernance.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/IGovernance.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/IGovernance.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/IGovernance.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/BaseZkSyncUpgrade.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrade.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol
+File: code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/upgrades/DefaultUpgrade.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/upgrades/DefaultUpgrade.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol
+File: code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/Config.sol
+File: code/contracts/ethereum/contracts/zksync/Config.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/Config.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/Config.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Config.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Config.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/DiamondInit.sol
+File: code/contracts/ethereum/contracts/zksync/DiamondInit.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondInit.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondInit.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondInit.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/DiamondProxy.sol
+File: code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondProxy.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/DiamondProxy.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/Storage.sol
+File: code/contracts/ethereum/contracts/zksync/Storage.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/Storage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/Storage.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Storage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/Storage.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol
+File: code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Admin.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Admin.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Admin.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Admin.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Base.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Base.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Base.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Base.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Base.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Base.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Getters.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Getters.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Getters.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Getters.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Mailbox.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Mailbox.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IAdmin.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IAdmin.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IAdmin.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IAdmin.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IAdmin.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IAdmin.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IBase.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IBase.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IBase.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IBase.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IBase.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IBase.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IExecutor.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IExecutor.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IExecutor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IExecutor.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IExecutor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IExecutor.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IGetters.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IGetters.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IGetters.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IGetters.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IGetters.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IGetters.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/ILegacyGetters.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/ILegacyGetters.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/ILegacyGetters.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/ILegacyGetters.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/ILegacyGetters.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/ILegacyGetters.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IMailbox.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IMailbox.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IMailbox.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IMailbox.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IMailbox.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IMailbox.sol#L1)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/interfaces/IZkSync.sol
+File: code/contracts/ethereum/contracts/zksync/interfaces/IZkSync.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IZkSync.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/interfaces/IZkSync.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IZkSync.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/interfaces/IZkSync.sol#L1)
 
 
 - solc-0.8.17 is not recommended for deployment
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 1    pragma solidity ^0.8.13;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L1)
 
 
 - solc-0.8.19 is not recommended for deployment
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ComplexUpgrader.sol
+File: code/system-contracts/contracts/ComplexUpgrader.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ComplexUpgrader.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ComplexUpgrader.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ComplexUpgrader.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ComplexUpgrader.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Compressor.sol
+File: code/system-contracts/contracts/Compressor.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Compressor.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Compressor.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/Constants.sol
+File: code/system-contracts/contracts/Constants.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Constants.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/Constants.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Constants.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/Constants.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ImmutableSimulator.sol
+File: code/system-contracts/contracts/ImmutableSimulator.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/KnownCodesStorage.sol
+File: code/system-contracts/contracts/KnownCodesStorage.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/KnownCodesStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/KnownCodesStorage.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/KnownCodesStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/KnownCodesStorage.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/MsgValueSimulator.sol
+File: code/system-contracts/contracts/MsgValueSimulator.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IAccount.sol
+File: code/system-contracts/contracts/interfaces/IAccount.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IAccount.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IAccount.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IAccount.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IAccount.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IAccountCodeStorage.sol
+File: code/system-contracts/contracts/interfaces/IAccountCodeStorage.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IAccountCodeStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IAccountCodeStorage.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IAccountCodeStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IAccountCodeStorage.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IBootloaderUtilities.sol
+File: code/system-contracts/contracts/interfaces/IBootloaderUtilities.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IBootloaderUtilities.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IBootloaderUtilities.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IBootloaderUtilities.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IBootloaderUtilities.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IComplexUpgrader.sol
+File: code/system-contracts/contracts/interfaces/IComplexUpgrader.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IComplexUpgrader.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IComplexUpgrader.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IComplexUpgrader.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IComplexUpgrader.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/ICompressor.sol
+File: code/system-contracts/contracts/interfaces/ICompressor.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ICompressor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ICompressor.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ICompressor.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ICompressor.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IContractDeployer.sol
+File: code/system-contracts/contracts/interfaces/IContractDeployer.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IContractDeployer.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IContractDeployer.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IContractDeployer.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IContractDeployer.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IEthToken.sol
+File: code/system-contracts/contracts/interfaces/IEthToken.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IEthToken.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IEthToken.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IEthToken.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IEthToken.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IImmutableSimulator.sol
+File: code/system-contracts/contracts/interfaces/IImmutableSimulator.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IImmutableSimulator.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IImmutableSimulator.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IImmutableSimulator.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IImmutableSimulator.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IKnownCodesStorage.sol
+File: code/system-contracts/contracts/interfaces/IKnownCodesStorage.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IKnownCodesStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IKnownCodesStorage.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IKnownCodesStorage.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IKnownCodesStorage.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IL1Messenger.sol
+File: code/system-contracts/contracts/interfaces/IL1Messenger.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IL1Messenger.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IL1Messenger.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IL1Messenger.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IL1Messenger.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IL2StandardToken.sol
+File: code/system-contracts/contracts/interfaces/IL2StandardToken.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IL2StandardToken.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IL2StandardToken.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IL2StandardToken.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IL2StandardToken.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IMailbox.sol
+File: code/system-contracts/contracts/interfaces/IMailbox.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IMailbox.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IMailbox.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IMailbox.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IMailbox.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/INonceHolder.sol
+File: code/system-contracts/contracts/interfaces/INonceHolder.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/INonceHolder.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/INonceHolder.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/INonceHolder.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/INonceHolder.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IPaymaster.sol
+File: code/system-contracts/contracts/interfaces/IPaymaster.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IPaymaster.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IPaymaster.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IPaymaster.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IPaymaster.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/IPaymasterFlow.sol
+File: code/system-contracts/contracts/interfaces/IPaymasterFlow.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IPaymasterFlow.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/IPaymasterFlow.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IPaymasterFlow.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/IPaymasterFlow.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/ISystemContext.sol
+File: code/system-contracts/contracts/interfaces/ISystemContext.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ISystemContext.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ISystemContext.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ISystemContext.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ISystemContext.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/ISystemContextDeprecated.sol
+File: code/system-contracts/contracts/interfaces/ISystemContextDeprecated.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ISystemContextDeprecated.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ISystemContextDeprecated.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ISystemContextDeprecated.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ISystemContextDeprecated.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/interfaces/ISystemContract.sol
+File: code/system-contracts/contracts/interfaces/ISystemContract.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ISystemContract.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/interfaces/ISystemContract.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ISystemContract.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/interfaces/ISystemContract.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
+File: code/system-contracts/contracts/libraries/SystemContractsCaller.sol
 
 1    pragma solidity ^0.8;
 ```
  is too complex
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol
+File: code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol
 
 1    pragma solidity ^0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 1    pragma solidity >=0.8.0;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L1)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 1    pragma solidity ^0.8.1;
 ```
  instead use `0.8.20`
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L1)
 
 
 - solc-0.8.17 is not recommended for deployment
@@ -5242,32 +5242,32 @@ There are 3 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/common/AllowList.sol
+File: code/contracts/ethereum/contracts/common/AllowList.sol
 
 20    contract AllowList is IAllowList, Ownable2Step 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowList.sol#L20-L141](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/AllowList.sol#L20-L141)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowList.sol#L20-L141](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/AllowList.sol#L20-L141)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 22    contract Governance is IGovernance, Ownable2Step 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L22-L265](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L22-L265)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L22-L265](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L22-L265)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol
+File: code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
 22    contract ValidatorTimelock is IExecutor, Ownable2Step 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L22-L157](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L22-L157)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L22-L157](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L22-L157)
 
 
 </details>
@@ -5294,7 +5294,7 @@ There are 15 instances of this issue:
 ###
 - Reentrancy in 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 169    function execute(Operation calldata _operation) external onlyOwnerOrSecurityCouncil 
 ```
@@ -5302,14 +5302,14 @@ File: cache/solpp-generated-contracts/governance/Governance.sol
 	External calls:
 	- 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 176    _execute(_operation.calls)
 ```
 
 		- 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 228    (bool success, bytes memory returnData) = _calls[i].target.call{value: _calls[i].value}(_calls[i].data)
 ```
@@ -5317,18 +5317,18 @@ File: cache/solpp-generated-contracts/governance/Governance.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 182    emit OperationExecuted(id)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L169-L183](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L169-L183)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L169-L183](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L169-L183)
 
 
 - Reentrancy in 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 188    function executeInstant(Operation calldata _operation) external onlySecurityCouncil 
 ```
@@ -5336,14 +5336,14 @@ File: cache/solpp-generated-contracts/governance/Governance.sol
 	External calls:
 	- 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 195    _execute(_operation.calls)
 ```
 
 		- 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 228    (bool success, bytes memory returnData) = _calls[i].target.call{value: _calls[i].value}(_calls[i].data)
 ```
@@ -5351,18 +5351,18 @@ File: cache/solpp-generated-contracts/governance/Governance.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 201    emit OperationExecuted(id)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L188-L202](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L188-L202)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L188-L202](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L188-L202)
 
 
 - Reentrancy in 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Admin.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Admin.sol
 
 100    function executeUpgrade(Diamond.DiamondCutData calldata _diamondCut) external onlyGovernor 
 ```
@@ -5370,7 +5370,7 @@ File: cache/solpp-generated-contracts/zksync/facets/Admin.sol
 	External calls:
 	- 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Admin.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Admin.sol
 
 101    Diamond.diamondCut(_diamondCut)
 ```
@@ -5378,18 +5378,18 @@ File: cache/solpp-generated-contracts/zksync/facets/Admin.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Admin.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Admin.sol
 
 102    emit ExecuteUpgrade(_diamondCut)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Admin.sol#L100-L103](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Admin.sol#L100-L103)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L100-L103](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Admin.sol#L100-L103)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 80    function bridgeBurn(address _from, uint256 _amount) external override onlyBridge 
 ```
@@ -5397,7 +5397,7 @@ File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 83    (bool success, ) = msg.sender.call{value: _amount}("")
 ```
@@ -5405,18 +5405,18 @@ File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 86    emit BridgeBurn(_from, _amount)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L80-L87](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L80-L87)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L80-L87](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L80-L87)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 65    function finalizeDeposit(
 66            address _l1Sender,
@@ -5430,21 +5430,21 @@ File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 80    address deployedToken = _deployL2Token(_l1Token, _data)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 97    L2StandardERC20(address(l2Token)).bridgeInitialize(_l1Token, _data)
 ```
 
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 87    IL2StandardToken(expectedL2Token).bridgeMint(_l2Receiver, _amount)
 ```
@@ -5452,18 +5452,18 @@ File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 89    emit FinalizeDeposit(_l1Sender, _l2Receiver, expectedL2Token, _amount)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L65-L90](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L65-L90)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L65-L90](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L65-L90)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 90    function finalizeDeposit(
 91            address _l1Sender,
@@ -5477,7 +5477,7 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 106    IL2Weth(l2WethAddress).depositTo{value: msg.value}(_l2Receiver)
 ```
@@ -5485,18 +5485,18 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 108    emit FinalizeDeposit(_l1Sender, _l2Receiver, l2WethAddress, _amount)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L90-L109](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L90-L109)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L90-L109](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L90-L109)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 107    function withdraw(
 108            address _l1Receiver,
@@ -5508,14 +5508,14 @@ File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 112    IL2StandardToken(_l2Token).bridgeBurn(msg.sender, _amount)
 ```
 
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 118    L2ContractHelper.sendMessageToL1(message)
 ```
@@ -5523,18 +5523,18 @@ File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 120    emit WithdrawalInitiated(msg.sender, _l1Receiver, _l2Token, _amount)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L107-L121](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L107-L121)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L107-L121](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L107-L121)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 65    function withdraw(
 66            address _l1Receiver,
@@ -5546,14 +5546,14 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 74    IL2StandardToken(l2WethAddress).bridgeBurn(msg.sender, _amount)
 ```
 
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 80    L2_ETH_ADDRESS.withdrawWithMessage{value: _amount}(l1Bridge, wethMessage)
 ```
@@ -5561,7 +5561,7 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 	External calls sending eth:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 80    L2_ETH_ADDRESS.withdrawWithMessage{value: _amount}(l1Bridge, wethMessage)
 ```
@@ -5569,18 +5569,18 @@ File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 82    emit WithdrawalInitiated(msg.sender, _l1Receiver, l2WethAddress, _amount)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L65-L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L65-L83)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L65-L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L65-L83)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/KnownCodesStorage.sol
+File: code/system-contracts/contracts/KnownCodesStorage.sol
 
 49    function _markBytecodeAsPublished(bytes32 _bytecodeHash, bool _shouldSendToL1) internal 
 ```
@@ -5588,7 +5588,7 @@ File: cache-zk/solpp-generated-contracts/KnownCodesStorage.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/KnownCodesStorage.sol
+File: code/system-contracts/contracts/KnownCodesStorage.sol
 
 54    L1_MESSENGER_CONTRACT.requestBytecodeL1Publication(_bytecodeHash)
 ```
@@ -5596,18 +5596,18 @@ File: cache-zk/solpp-generated-contracts/KnownCodesStorage.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/KnownCodesStorage.sol
+File: code/system-contracts/contracts/KnownCodesStorage.sol
 
 62    emit MarkedAsKnown(_bytecodeHash, _shouldSendToL1)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/KnownCodesStorage.sol#L49-L64](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/KnownCodesStorage.sol#L49-L64)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/KnownCodesStorage.sol#L49-L64](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/KnownCodesStorage.sol#L49-L64)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 285    function _performDeployOnAddress(
 286            bytes32 _bytecodeHash,
@@ -5620,42 +5620,42 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 299    _constructContract(msg.sender, _newAddress, _bytecodeHash, _input, false, true)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 315    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructingCodeHash(_newAddress, constructingBytecodeHash)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 336    ETH_TOKEN_SYSTEM_CONTRACT.transferFromTo(address(this), _newAddress, value)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 348    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.markAccountCodeHashAsConstructed(_newAddress)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 351    IMMUTABLE_SIMULATOR_SYSTEM_CONTRACT.setImmutables(_newAddress, immutables)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 355    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(_newAddress, _bytecodeHash)
 ```
@@ -5663,18 +5663,18 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 300    emit ContractDeployed(msg.sender, _bytecodeHash, _newAddress)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L285-L301](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L285-L301)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L285-L301](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L285-L301)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 164    function create2Account(
 165            bytes32 _salt,
@@ -5687,49 +5687,49 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 170    NONCE_HOLDER_SYSTEM_CONTRACT.incrementDeploymentNonce(msg.sender)
 ```
 
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 173    _nonSystemDeployOnAddress(_bytecodeHash, newAddress, _aaVersion, _input)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 315    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructingCodeHash(_newAddress, constructingBytecodeHash)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 336    ETH_TOKEN_SYSTEM_CONTRACT.transferFromTo(address(this), _newAddress, value)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 348    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.markAccountCodeHashAsConstructed(_newAddress)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 351    IMMUTABLE_SIMULATOR_SYSTEM_CONTRACT.setImmutables(_newAddress, immutables)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 355    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(_newAddress, _bytecodeHash)
 ```
@@ -5737,25 +5737,25 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 300    emit ContractDeployed(msg.sender, _bytecodeHash, _newAddress)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 173    _nonSystemDeployOnAddress(_bytecodeHash, newAddress, _aaVersion, _input)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L164-L176](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L164-L176)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L164-L176](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L164-L176)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 185    function createAccount(
 186            bytes32, // salt
@@ -5768,49 +5768,49 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 191    uint256 senderNonce = NONCE_HOLDER_SYSTEM_CONTRACT.incrementDeploymentNonce(msg.sender)
 ```
 
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 194    _nonSystemDeployOnAddress(_bytecodeHash, newAddress, _aaVersion, _input)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 315    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructingCodeHash(_newAddress, constructingBytecodeHash)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 336    ETH_TOKEN_SYSTEM_CONTRACT.transferFromTo(address(this), _newAddress, value)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 348    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.markAccountCodeHashAsConstructed(_newAddress)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 351    IMMUTABLE_SIMULATOR_SYSTEM_CONTRACT.setImmutables(_newAddress, immutables)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 355    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(_newAddress, _bytecodeHash)
 ```
@@ -5818,25 +5818,25 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 300    emit ContractDeployed(msg.sender, _bytecodeHash, _newAddress)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 194    _nonSystemDeployOnAddress(_bytecodeHash, newAddress, _aaVersion, _input)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L185-L197](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L185-L197)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L185-L197](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L185-L197)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 216    function forceDeployOnAddress(ForceDeployment calldata _deployment, address _sender) external payable onlySelf 
 ```
@@ -5844,7 +5844,7 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 225    _constructContract(
 226                _sender,
@@ -5858,35 +5858,35 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 315    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructingCodeHash(_newAddress, constructingBytecodeHash)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 336    ETH_TOKEN_SYSTEM_CONTRACT.transferFromTo(address(this), _newAddress, value)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 348    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.markAccountCodeHashAsConstructed(_newAddress)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 351    IMMUTABLE_SIMULATOR_SYSTEM_CONTRACT.setImmutables(_newAddress, immutables)
 ```
 
 		- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 355    ACCOUNT_CODE_STORAGE_SYSTEM_CONTRACT.storeAccountConstructedCodeHash(_newAddress, _bytecodeHash)
 ```
@@ -5894,18 +5894,18 @@ File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 234    emit ContractDeployed(_sender, _deployment.bytecodeHash, _deployment.newAddress)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L216-L235](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L216-L235)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L216-L235](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L216-L235)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 74    function withdraw(address _l1Receiver) external payable override 
 ```
@@ -5913,7 +5913,7 @@ File: cache-zk/solpp-generated-contracts/L2EthToken.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 79    L1_MESSENGER_CONTRACT.sendToL1(message)
 ```
@@ -5921,18 +5921,18 @@ File: cache-zk/solpp-generated-contracts/L2EthToken.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 81    emit Withdrawal(msg.sender, _l1Receiver, amount)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L74-L82](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L74-L82)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L74-L82](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L74-L82)
 
 
 - Reentrancy in 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 87    function withdrawWithMessage(address _l1Receiver, bytes memory _additionalData) external payable override 
 ```
@@ -5940,7 +5940,7 @@ File: cache-zk/solpp-generated-contracts/L2EthToken.sol
 	External calls:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 92    L1_MESSENGER_CONTRACT.sendToL1(message)
 ```
@@ -5948,13 +5948,13 @@ File: cache-zk/solpp-generated-contracts/L2EthToken.sol
 	Event emitted after the call(s):
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 94    emit WithdrawalWithMessage(msg.sender, _l1Receiver, amount, _additionalData)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L87-L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L87-L95)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L87-L95](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L87-L95)
 
 
 </details>
@@ -5979,155 +5979,155 @@ There are 9 instances of this issue:
 ###
 - Variable 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 66    address payable _l1WethAddress
 ```
  is too similar to 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 85    address _l2WethAddress
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L66](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L66)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L66](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L66)
 
 
 - Variable 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 46    address payable public immutable l1WethAddress
 ```
  is too similar to 
 ```
-File: cache/solpp-generated-contracts/bridge/L1WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1WethBridge.sol
 
 58    address public l2WethAddress
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1WethBridge.sol#L46)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L46)
 
 
 - Variable 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL2Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL2Bridge.sol
 
 18    address _l1Receiver
 ```
  is too similar to 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL2Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL2Bridge.sol
 
 11    address _l2Receiver
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2Bridge.sol#L18](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2Bridge.sol#L18)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2Bridge.sol#L18](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2Bridge.sol#L18)
 
 
 - Variable 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL2WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL2WethBridge.sol
 
 10    address _l1WethAddress
 ```
  is too similar to 
 ```
-File: cache/solpp-generated-contracts/bridge/interfaces/IL2WethBridge.sol
+File: code/contracts/ethereum/contracts/bridge/interfaces/IL2WethBridge.sol
 
 11    address _l2WethAddress
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2WethBridge.sol#L10](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/interfaces/IL2WethBridge.sol#L10)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2WethBridge.sol#L10](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/interfaces/IL2WethBridge.sol#L10)
 
 
 - Variable 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 230    bytes32 _systemContractUpgradeTxHash
 ```
  is too similar to 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 189    bytes32 systemContractsUpgradeTxHash = s.l2SystemContractsUpgradeTxHash
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L230](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L230)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L230](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L230)
 
 
 - Variable 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 108    address _l1Receiver
 ```
  is too similar to 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 67    address _l2Receiver
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L108](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L108)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L108](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L108)
 
 
 - Variable 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 66    address _l1Receiver
 ```
  is too similar to 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 92    address _l2Receiver
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L66](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L66)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L66](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L66)
 
 
 - Variable 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 49    address _l1WethAddress
 ```
  is too similar to 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 50    address _l2WethAddress
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L49](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L49)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L49](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L49)
 
 
 - Variable 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 31    address public l1WethAddress
 ```
  is too similar to 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 34    address public l2WethAddress
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L31)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L31)
 
 
 </details>
@@ -6154,491 +6154,491 @@ There are 124 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 34    IAllowList internal immutable allowList
 ```
  allowList should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L34](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L34)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L34](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L34)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 37    IZkSync internal immutable zkSync
 ```
  zkSync should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L37](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L37)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L37](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L37)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol
+File: code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol
 
 45    mapping(address => mapping(address => mapping(bytes32 => uint256))) internal depositAmount
 ```
  depositAmount should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L45](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/bridge/L1ERC20Bridge.sol#L45)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L45](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L45)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/common/ReentrancyGuard.sol
+File: code/contracts/ethereum/contracts/common/ReentrancyGuard.sol
 
 31    uint256 private constant LOCK_FLAG_ADDRESS = 0x8e94fed44239eb2314ab7a406345e6c5a8f0ccedf3b600de3d004e672c33abf4
 ```
  LOCK_FLAG_ADDRESS should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/ReentrancyGuard.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/common/ReentrancyGuard.sol#L31)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/ReentrancyGuard.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/ReentrancyGuard.sol#L31)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/governance/Governance.sol
+File: code/contracts/ethereum/contracts/governance/Governance.sol
 
 24    uint256 internal constant EXECUTED_PROPOSAL_TIMESTAMP = uint256(1)
 ```
  EXECUTED_PROPOSAL_TIMESTAMP should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/governance/Governance.sol#L24)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/governance/Governance.sol#L24)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol
+File: code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol
 
 24    uint160 constant offset = uint160(0x1111000000000000000000000000000000001111)
 ```
  offset should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L24)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L24)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol
+File: code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol
 
 30    function applyL1ToL2Alias(address l1Address) internal pure returns (address l2Address) 
 ```
  applyL1ToL2Alias(address) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L30-L34](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L30-L34)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L30-L34](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L30-L34)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol
+File: code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol
 
 40    function undoL1ToL2Alias(address l2Address) internal pure returns (address l1Address) 
 ```
  undoL1ToL2Alias(address) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L40-L44](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/vendor/AddressAliasHelper.sol#L40-L44)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L40-L44](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/vendor/AddressAliasHelper.sol#L40-L44)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol
+File: code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol
 
 38    LibMap.Uint32Map internal committedBatchTimestamp
 ```
  committedBatchTimestamp should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/ValidatorTimelock.sol#L38)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/ValidatorTimelock.sol#L38)
 
 
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Base.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Base.sol
 
 17    AppStorage internal s
 ```
  s should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Base.sol#L17](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Base.sol#L17)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Base.sol#L17](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Base.sol#L17)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol
+File: code/system-contracts/contracts/bridge/L2ERC20Bridge.sol
 
 31    bytes32 internal l2TokenProxyBytecodeHash
 ```
  l2TokenProxyBytecodeHash should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2ERC20Bridge.sol#L31)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L31](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L31)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 24    ERC20Getters availableGetters
 ```
  availableGetters should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L24)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L24)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 29    uint8 private decimals_
 ```
  decimals_ should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L29](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L29)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L29](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L29)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/AccountCodeStorage.sol
+File: code/system-contracts/contracts/AccountCodeStorage.sol
 
 25    bytes32 constant EMPTY_STRING_KECCAK = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470
 ```
  EMPTY_STRING_KECCAK should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L25](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/AccountCodeStorage.sol#L25)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L25](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/AccountCodeStorage.sol#L25)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 46    function encodeLegacyTransactionHash(Transaction calldata _transaction) internal view returns (bytes32 txHash) 
 ```
  encodeLegacyTransactionHash(Transaction) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L46-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L46-L136)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L46-L136](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L46-L136)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 141    function encodeEIP2930TransactionHash(Transaction calldata _transaction) internal view returns (bytes32) 
 ```
  encodeEIP2930TransactionHash(Transaction) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L141-L226](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L141-L226)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L141-L226](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L141-L226)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/BootloaderUtilities.sol
+File: code/system-contracts/contracts/BootloaderUtilities.sol
 
 231    function encodeEIP1559TransactionHash(Transaction calldata _transaction) internal view returns (bytes32) 
 ```
  encodeEIP1559TransactionHash(Transaction) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L231-L321](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/BootloaderUtilities.sol#L231-L321)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L231-L321](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/BootloaderUtilities.sol#L231-L321)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ContractDeployer.sol
+File: code/system-contracts/contracts/ContractDeployer.sol
 
 28    mapping(address => AccountInfo) internal accountInfo
 ```
  accountInfo should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L28](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ContractDeployer.sol#L28)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L28](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ContractDeployer.sol#L28)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/ImmutableSimulator.sol
+File: code/system-contracts/contracts/ImmutableSimulator.sol
 
 23    mapping(uint256 => mapping(uint256 => bytes32)) internal immutableDataStorage
 ```
  immutableDataStorage should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L23](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/ImmutableSimulator.sol#L23)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L23](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/ImmutableSimulator.sol#L23)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 38    bytes32 internal chainedLogsHash
 ```
  chainedLogsHash should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L38)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L38)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 42    uint256 internal numberOfLogsToProcess
 ```
  numberOfLogsToProcess should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L42](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L42)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L42](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L42)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 46    bytes32 internal chainedMessagesHash
 ```
  chainedMessagesHash should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L46)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L46)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 51    bytes32 internal chainedL1BytecodesRevealDataHash
 ```
  chainedL1BytecodesRevealDataHash should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L51](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L51)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L51](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L51)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 54    uint256 internal constant KECCAK_ROUND_GAS_COST = 40
 ```
  KECCAK_ROUND_GAS_COST should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L54](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L54)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L54](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L54)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 57    uint256 internal constant KECCAK_ROUND_NUMBER_OF_BYTES = 136
 ```
  KECCAK_ROUND_NUMBER_OF_BYTES should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L57)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L57)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 65    uint256 internal constant SHA256_ROUND_GAS_COST = 7
 ```
  SHA256_ROUND_GAS_COST should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L65](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L65)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L65](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L65)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 68    uint256 internal constant SHA256_ROUND_NUMBER_OF_BYTES = 64
 ```
  SHA256_ROUND_NUMBER_OF_BYTES should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L68](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L68)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L68](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L68)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 60    function keccakGasCost(uint256 _length) internal pure returns (uint256) 
 ```
  keccakGasCost(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L60-L62](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L60-L62)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L60-L62](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L60-L62)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L1Messenger.sol
+File: code/system-contracts/contracts/L1Messenger.sol
 
 71    function sha256GasCost(uint256 _length) internal pure returns (uint256) 
 ```
  sha256GasCost(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L71-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L1Messenger.sol#L71-L73)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L71-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L1Messenger.sol#L71-L73)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/L2EthToken.sol
+File: code/system-contracts/contracts/L2EthToken.sol
 
 22    mapping(address => uint256) internal balance
 ```
  balance should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L22](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/L2EthToken.sol#L22)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L22](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/L2EthToken.sol#L22)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 30    uint256 constant DEPLOY_NONCE_MULTIPLIER = 2 ** 128
 ```
  DEPLOY_NONCE_MULTIPLIER should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L30](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L30)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L30](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L30)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 33    uint256 constant MAXIMAL_MIN_NONCE_INCREMENT = 2 ** 32
 ```
  MAXIMAL_MIN_NONCE_INCREMENT should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L33)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L33)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 38    mapping(uint256 => uint256) internal rawNonces
 ```
  rawNonces should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L38)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L38)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 43    mapping(uint256 => mapping(uint256 => uint256)) internal nonceValues
 ```
  nonceValues should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L43](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L43)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L43](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L43)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 25    uint256 internal constant MINIBLOCK_HASHES_TO_STORE = 257
 ```
  MINIBLOCK_HASHES_TO_STORE should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L25](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L25)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L25](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L25)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 53    BlockInfo internal currentBatchInfo
 ```
  currentBatchInfo should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L53](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L53)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L53](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L53)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 57    mapping(uint256 => bytes32) internal batchHash
 ```
  batchHash should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L57)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L57](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L57)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 60    BlockInfo internal currentL2BlockInfo
 ```
  currentL2BlockInfo should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L60)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L60)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 63    bytes32 internal currentL2BlockTxsRollingHash
 ```
  currentL2BlockTxsRollingHash should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L63](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L63)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L63](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L63)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 72    bytes32[MINIBLOCK_HASHES_TO_STORE] internal l2BlockHash
 ```
  l2BlockHash should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L72](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L72)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L72](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L72)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 79    BlockInfo internal currentVirtualL2BlockInfo
 ```
  currentVirtualL2BlockInfo should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L79](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L79)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L79](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L79)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 82    VirtualBlockUpgradeInfo internal virtualBlockUpgradeInfo
 ```
  virtualBlockUpgradeInfo should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L82](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L82)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L82](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L82)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 38    function keccak(bytes calldata _data) internal view returns (bytes32) 
 ```
  keccak(bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L38-L42](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L38-L42)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L38-L42](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L38-L42)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 47    function sha(bytes calldata _data) internal view returns (bytes32) 
 ```
  sha(bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L47-L51](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L47-L51)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L47-L51](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L47-L51)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 60    function call(
 61            uint256 _gas,
@@ -6650,12 +6650,12 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  call(uint256,address,uint256,bytes,bool) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L60-L69](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L60-L69)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L60-L69](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L60-L69)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 76    function staticCall(
 77            uint256 _gas,
@@ -6665,12 +6665,12 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  staticCall(uint256,address,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L76-L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L76-L83)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L76-L83](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L76-L83)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 90    function delegateCall(
 91            uint256 _gas,
@@ -6680,12 +6680,12 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  delegateCall(uint256,address,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L90-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L90-L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L90-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L90-L97)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 107    function mimicCall(
 108            uint256 _gas,
@@ -6698,12 +6698,12 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  mimicCall(uint256,address,bytes,address,bool,bool) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L107-L117](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L107-L117)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L107-L117](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L107-L117)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 126    function rawCall(
 127            uint256 _gas,
@@ -6715,34 +6715,34 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  rawCall(uint256,address,uint256,bytes,bool) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L126-L154](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L126-L154)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L126-L154](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L126-L154)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 161    function rawStaticCall(uint256 _gas, address _address, bytes calldata _data) internal view returns (bool success) 
 ```
  rawStaticCall(uint256,address,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L161-L168](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L161-L168)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L161-L168](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L161-L168)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 175    function rawDelegateCall(uint256 _gas, address _address, bytes calldata _data) internal returns (bool success) 
 ```
  rawDelegateCall(uint256,address,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L175-L182](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L175-L182)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L175-L182](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L175-L182)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 193    function rawMimicCall(
 194            uint256 _gas,
@@ -6755,133 +6755,133 @@ File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
 ```
  rawMimicCall(uint256,address,bytes,address,bool,bool) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L193-L212](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L193-L212)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L193-L212](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L193-L212)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol
+File: code/system-contracts/contracts/libraries/EfficientCall.sol
 
 234    function propagateRevert() internal pure 
 ```
  propagateRevert() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L234-L240](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/EfficientCall.sol#L234-L240)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L234-L240](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/EfficientCall.sol#L234-L240)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 13    function encodeAddress(address _val) internal pure returns (bytes memory encoded) 
 ```
  encodeAddress(address) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L13-L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L13-L24)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L13-L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L13-L24)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 26    function encodeUint256(uint256 _val) internal pure returns (bytes memory encoded) 
 ```
  encodeUint256(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L26-L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L26-L46)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L26-L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L26-L46)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 51    function encodeNonSingleBytesLen(uint64 _len) internal pure returns (bytes memory) 
 ```
  encodeNonSingleBytesLen(uint64) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L51-L54](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L51-L54)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L51-L54](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L51-L54)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 58    function encodeListLen(uint64 _len) internal pure returns (bytes memory) 
 ```
  encodeListLen(uint64) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L58-L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L58-L60)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L58-L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L58-L60)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 77    function toL1(bool _isService, bytes32 _key, bytes32 _value) internal 
 ```
  toL1(bool,bytes32,bytes32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L77-L86](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L77-L86)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L77-L86](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L77-L86)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 92    function getCodeAddress() internal view returns (address addr) 
 ```
  getCodeAddress() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L92-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L92-L97)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L92-L97](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L92-L97)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 103    function loadCalldataIntoActivePtr() internal view 
 ```
  loadCalldataIntoActivePtr() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L103-L108](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L103-L108)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L103-L108](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L103-L108)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 114    function ptrPackIntoActivePtr(uint256 _farCallAbi) internal view 
 ```
  ptrPackIntoActivePtr(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L114-L119](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L114-L119)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L114-L119](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L114-L119)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 123    function ptrAddIntoActive(uint32 _value) internal view 
 ```
  ptrAddIntoActive(uint32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L123-L131](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L123-L131)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L123-L131](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L123-L131)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 135    function ptrShrinkIntoActive(uint32 _shrink) internal view 
 ```
  ptrShrinkIntoActive(uint32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L135-L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L135-L143)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L135-L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L135-L143)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 153    function packPrecompileParams(
 154            uint32 _inputMemoryOffset,
@@ -6893,232 +6893,232 @@ File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
 ```
  packPrecompileParams(uint32,uint32,uint32,uint32,uint64) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L153-L165](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L153-L165)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L153-L165](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L153-L165)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 177    function unsafePrecompileCall(uint256 _rawParams, uint32 _gasToBurn) internal view returns (bool success) 
 ```
  unsafePrecompileCall(uint256,uint32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L177-L186](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L177-L186)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L177-L186](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L177-L186)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 191    function setValueForNextFarCall(uint128 _value) internal returns (bool success) 
 ```
  setValueForNextFarCall(uint128) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L191-L199](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L191-L199)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L191-L199](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L191-L199)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 204    function eventInitialize(uint256 initializer, uint256 value1) internal 
 ```
  eventInitialize(uint256,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L204-L209](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L204-L209)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L204-L209](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L204-L209)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 214    function eventWrite(uint256 value1, uint256 value2) internal 
 ```
  eventWrite(uint256,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L214-L219](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L214-L219)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L214-L219](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L214-L219)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 225    function getZkSyncMetaBytes() internal view returns (uint256 meta) 
 ```
  getZkSyncMetaBytes() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L225-L230](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L225-L230)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L225-L230](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L225-L230)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 237    function extractNumberFromMeta(uint256 meta, uint256 offset, uint256 size) internal pure returns (uint256 result) 
 ```
  extractNumberFromMeta(uint256,uint256,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L237-L242](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L237-L242)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L237-L242](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L237-L242)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 248    function getGasPerPubdataByteFromMeta(uint256 meta) internal pure returns (uint32 gasPerPubdataByte) 
 ```
  getGasPerPubdataByteFromMeta(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L248-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L248-L250)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L248-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L248-L250)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 258    function getHeapSizeFromMeta(uint256 meta) internal pure returns (uint32 heapSize) 
 ```
  getHeapSizeFromMeta(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L258-L260](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L258-L260)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L258-L260](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L258-L260)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 267    function getAuxHeapSizeFromMeta(uint256 meta) internal pure returns (uint32 auxHeapSize) 
 ```
  getAuxHeapSizeFromMeta(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L267-L269](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L267-L269)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L267-L269](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L267-L269)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 275    function getShardIdFromMeta(uint256 meta) internal pure returns (uint8 shardId) 
 ```
  getShardIdFromMeta(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L275-L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L275-L277)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L275-L277](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L275-L277)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 284    function getCallerShardIdFromMeta(uint256 meta) internal pure returns (uint8 callerShardId) 
 ```
  getCallerShardIdFromMeta(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L284-L286](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L284-L286)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L284-L286](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L284-L286)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 293    function getCodeShardIdFromMeta(uint256 meta) internal pure returns (uint8 codeShardId) 
 ```
  getCodeShardIdFromMeta(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L293-L295](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L293-L295)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L293-L295](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L293-L295)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 299    function getZkSyncMeta() internal view returns (ZkSyncMeta memory meta) 
 ```
  getZkSyncMeta() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L299-L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L299-L305)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L299-L305](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L299-L305)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 314    function getCallFlags() internal view returns (uint256 callFlags) 
 ```
  getCallFlags() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L314-L319](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L314-L319)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L314-L319](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L314-L319)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 325    function getCalldataPtr() internal view returns (uint256 ptr) 
 ```
  getCalldataPtr() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L325-L330](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L325-L330)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L325-L330](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L325-L330)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 336    function getExtraAbiData(uint256 index) internal view returns (uint256 extraAbiData) 
 ```
  getExtraAbiData(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L336-L343](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L336-L343)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L336-L343](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L336-L343)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 347    function isSystemCall() internal view returns (bool) 
 ```
  isSystemCall() should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L347-L351](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L347-L351)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L347-L351](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L347-L351)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 356    function isSystemContract(address _address) internal pure returns (bool) 
 ```
  isSystemContract(address) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L356-L358](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L356-L358)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L356-L358](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L356-L358)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol
+File: code/system-contracts/contracts/libraries/SystemContractHelper.sol
 
 362    function burnGas(uint32 _gasToPay) internal view 
 ```
  burnGas(uint32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L362-L368](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractHelper.sol#L362-L368)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L362-L368](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractHelper.sol#L362-L368)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
+File: code/system-contracts/contracts/libraries/SystemContractsCaller.sol
 
 78    function systemCall(uint32 gasLimit, address to, uint256 value, bytes memory data) internal returns (bool success) 
 ```
  systemCall(uint32,address,uint256,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L78-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L78-L115)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L78-L115](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L78-L115)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
+File: code/system-contracts/contracts/libraries/SystemContractsCaller.sol
 
 125    function systemCallWithReturndata(
 126            uint32 gasLimit,
@@ -7129,12 +7129,12 @@ File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
 ```
  systemCallWithReturndata(uint32,address,uint128,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L125-L142](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L125-L142)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L125-L142](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L125-L142)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
+File: code/system-contracts/contracts/libraries/SystemContractsCaller.sol
 
 152    function systemCallWithPropagatedRevert(
 153            uint32 gasLimit,
@@ -7145,12 +7145,12 @@ File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
 ```
  systemCallWithPropagatedRevert(uint32,address,uint128,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L152-L167](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L152-L167)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L152-L167](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L152-L167)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
+File: code/system-contracts/contracts/libraries/SystemContractsCaller.sol
 
 216    function getFarCallABI(
 217            uint32 dataOffset,
@@ -7166,12 +7166,12 @@ File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
 ```
  getFarCallABI(uint32,uint32,uint32,uint32,uint32,uint8,CalldataForwardingMode,bool,bool) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L216-L240](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L216-L240)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L216-L240](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L216-L240)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
+File: code/system-contracts/contracts/libraries/SystemContractsCaller.sol
 
 252    function getFarCallABIWithEmptyFatPointer(
 253            uint32 gasPassed,
@@ -7183,23 +7183,23 @@ File: cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol
 ```
  getFarCallABIWithEmptyFatPointer(uint32,uint8,CalldataForwardingMode,bool,bool) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L252-L268](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/SystemContractsCaller.sol#L252-L268)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L252-L268](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/SystemContractsCaller.sol#L252-L268)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 84    bytes32 constant EIP712_DOMAIN_TYPEHASH = keccak256("EIP712Domain(string name,string version,uint256 chainId)")
 ```
  EIP712_DOMAIN_TYPEHASH should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L84](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L84)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L84](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L84)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 86    bytes32 constant EIP712_TRANSACTION_TYPE_HASH =
 87            keccak256(
@@ -7208,278 +7208,278 @@ File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
 ```
  EIP712_TRANSACTION_TYPE_HASH should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L86-L89](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L86-L89)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L86-L89](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L86-L89)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 96    function isEthToken(uint256 _addr) internal pure returns (bool) 
 ```
  isEthToken(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L96-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L96-L98)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L96-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L96-L98)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 102    function encodeHash(Transaction calldata _transaction) internal view returns (bytes32 resultHash) 
 ```
  encodeHash(Transaction) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L102-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L102-L116)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L102-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L102-L116)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 364    function processPaymasterInput(Transaction calldata _transaction) internal 
 ```
  processPaymasterInput(Transaction) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L364-L392](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L364-L392)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L364-L392](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L364-L392)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 397    function payToTheBootloader(Transaction calldata _transaction) internal returns (bool success) 
 ```
  payToTheBootloader(Transaction) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L397-L404](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L397-L404)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L397-L404](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L397-L404)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 407    function totalRequiredBalance(Transaction calldata _transaction) internal pure returns (uint256 requiredBalance) 
 ```
  totalRequiredBalance(Transaction) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L407-L415](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L407-L415)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L407-L415](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L407-L415)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol
+File: code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol
 
 21    function readUint16(bytes calldata _bytes, uint256 _start) internal pure returns (uint16 result) 
 ```
  readUint16(bytes,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L21-L26](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L21-L26)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L21-L26](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L21-L26)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol
+File: code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol
 
 28    function readUint32(bytes calldata _bytes, uint256 _start) internal pure returns (uint32 result) 
 ```
  readUint32(bytes,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L28-L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L28-L33)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L28-L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L28-L33)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol
+File: code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol
 
 35    function readUint64(bytes calldata _bytes, uint256 _start) internal pure returns (uint64 result) 
 ```
  readUint64(bytes,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L35-L40](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L35-L40)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L35-L40](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L35-L40)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol
+File: code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol
 
 42    function readBytes32(bytes calldata _bytes, uint256 _start) internal pure returns (bytes32 result) 
 ```
  readBytes32(bytes,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L42-L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L42-L46)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L42-L46](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L42-L46)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol
+File: code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol
 
 48    function readUint256(bytes calldata _bytes, uint256 _start) internal pure returns (uint256 result) 
 ```
  readUint256(bytes,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L48-L52](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/UnsafeBytesCalldata.sol#L48-L52)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L48-L52](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/UnsafeBytesCalldata.sol#L48-L52)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 15    bytes32 constant IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK =
 16            0x00ff000000000000000000000000000000000000000000000000000000000000
 ```
  IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L15-L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L15-L16)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L15-L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L15-L16)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 19    bytes32 constant SET_IS_CONSTRUCTOR_MARKER_BIT_MASK =
 20            0x0001000000000000000000000000000000000000000000000000000000000000
 ```
  SET_IS_CONSTRUCTOR_MARKER_BIT_MASK should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L19-L20](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L19-L20)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L19-L20](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L19-L20)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 22    function safeCastToU128(uint256 _x) internal pure returns (uint128) 
 ```
  safeCastToU128(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L22-L26](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L22-L26)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L22-L26](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L22-L26)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 28    function safeCastToU32(uint256 _x) internal pure returns (uint32) 
 ```
  safeCastToU32(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L28-L32](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L28-L32)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L28-L32](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L28-L32)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 34    function safeCastToU24(uint256 _x) internal pure returns (uint24) 
 ```
  safeCastToU24(uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L34-L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L34-L38)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L34-L38](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L34-L38)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 41    function bytecodeLenInBytes(bytes32 _bytecodeHash) internal pure returns (uint256 codeLength) 
 ```
  bytecodeLenInBytes(bytes32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L41-L43](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L41-L43)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L41-L43](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L41-L43)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 46    function bytecodeLenInWords(bytes32 _bytecodeHash) internal pure returns (uint256 codeLengthInWords) 
 ```
  bytecodeLenInWords(bytes32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L46-L50](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L46-L50)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L46-L50](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L46-L50)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 53    function isContractConstructed(bytes32 _bytecodeHash) internal pure returns (bool) 
 ```
  isContractConstructed(bytes32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L53-L55](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L53-L55)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L53-L55](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L53-L55)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 58    function isContractConstructing(bytes32 _bytecodeHash) internal pure returns (bool) 
 ```
  isContractConstructing(bytes32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L58-L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L58-L60)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L58-L60](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L58-L60)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 65    function constructingBytecodeHash(bytes32 _bytecodeHash) internal pure returns (bytes32) 
 ```
  constructingBytecodeHash(bytes32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L65-L68](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L65-L68)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L65-L68](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L65-L68)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 73    function constructedBytecodeHash(bytes32 _bytecodeHash) internal pure returns (bytes32) 
 ```
  constructedBytecodeHash(bytes32) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L73-L75](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L73-L75)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L73-L75](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L73-L75)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 84    function hashL2Bytecode(bytes calldata _bytecode) internal view returns (bytes32 hashedBytecode) 
 ```
  hashL2Bytecode(bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L84-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L84-L98)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L84-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L84-L98)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 38    function isContract(address account) internal view returns (bool) 
 ```
  isContract(address) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L38-L44](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L38-L44)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L38-L44](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L38-L44)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 62    function sendValue(address payable recipient, uint256 amount) internal 
 ```
  sendValue(address,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L62-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L62-L73)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L62-L73](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L62-L73)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 93    function functionCall(address target, bytes memory data)
 94            internal
@@ -7488,12 +7488,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionCall(address,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L93-L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L93-L104)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L93-L104](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L93-L104)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 112    function functionCall(
 113            address target,
@@ -7503,12 +7503,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionCall(address,bytes,string) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L112-L118](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L112-L118)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L112-L118](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L112-L118)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 131    function functionCallWithValue(
 132            address target,
@@ -7518,12 +7518,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionCallWithValue(address,bytes,uint256) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L131-L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L131-L143)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L131-L143](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L131-L143)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 151    function functionCallWithValue(
 152            address target,
@@ -7534,12 +7534,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionCallWithValue(address,bytes,uint256,string) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L151-L171](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L151-L171)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L151-L171](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L151-L171)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 179    function functionStaticCall(address target, bytes memory data)
 180            internal
@@ -7549,12 +7549,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionStaticCall(address,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L179-L190](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L179-L190)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L179-L190](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L179-L190)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 198    function functionStaticCall(
 199            address target,
@@ -7564,12 +7564,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionStaticCall(address,bytes,string) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L198-L211](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L198-L211)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L198-L211](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L198-L211)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 219    function functionDelegateCall(address target, bytes memory data)
 220            internal
@@ -7578,12 +7578,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionDelegateCall(address,bytes) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L219-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L219-L229)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L219-L229](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L219-L229)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 237    function functionDelegateCall(
 238            address target,
@@ -7593,12 +7593,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  functionDelegateCall(address,bytes,string) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L237-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L237-L250)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L237-L250](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L237-L250)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 258    function verifyCallResultFromTarget(
 259            address target,
@@ -7609,12 +7609,12 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  verifyCallResultFromTarget(address,bool,bytes,string) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L258-L274](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L258-L274)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L258-L274](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L258-L274)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 282    function verifyCallResult(
 283            bool success,
@@ -7624,7 +7624,7 @@ File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
 ```
  verifyCallResult(bool,bytes,string) should start with '_' prefix.
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L282-L292](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L282-L292)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L282-L292](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L282-L292)
 
 
 </details>
@@ -7649,7 +7649,7 @@ There are 5 instances of this issue:
 ###
 - 
 ```
-File: cache/solpp-generated-contracts/zksync/facets/Executor.sol
+File: code/contracts/ethereum/contracts/zksync/facets/Executor.sol
 
 20    contract ExecutorFacet is Base, IExecutor 
 ```
@@ -7668,12 +7668,12 @@ Line: 129                (bytes32 logValue, ) = UnsafeBytes.readBytes32(emittedL
 
 
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L20-L473](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/cache/solpp-generated-contracts/zksync/facets/Executor.sol#L20-L473)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L20-L473](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L20-L473)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 23    contract L2Weth is ERC20PermitUpgradeable, IL2Weth, IL2StandardToken 
 ```
@@ -7688,12 +7688,12 @@ Line: 108            (bool success, ) = _to.call{value: _amount}("");
 
 
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L23-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L23-L116)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L23-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L23-L116)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/MsgValueSimulator.sol
+File: code/system-contracts/contracts/MsgValueSimulator.sol
 
 21    contract MsgValueSimulator is ISystemContract 
 ```
@@ -7704,12 +7704,12 @@ Line: 44                (bool success, ) = address(ETH_TOKEN_SYSTEM_CONTRACT).ca
 
 
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L21-L61](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/MsgValueSimulator.sol#L21-L61)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L21-L61](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/MsgValueSimulator.sol#L21-L61)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 29    contract NonceHolder is INonceHolder, ISystemContract 
 ```
@@ -7724,12 +7724,12 @@ Line: 146            (prevDeploymentNonce, ) = _splitRawNonce(oldRawNonce);
 
 
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L29-L178](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L29-L178)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L29-L178](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L29-L178)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol
+File: code/system-contracts/contracts/openzeppelin/utils/Address.sol
 
 11    library Address 
 ```
@@ -7740,7 +7740,7 @@ Line: 28            (bool success, ) = recipient.call{value: amount}("");
 
 
 ```
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L11-L310](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/openzeppelin/utils/Address.sol#L11-L310)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L11-L310](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/openzeppelin/utils/Address.sol#L11-L310)
 
 
 </details>
@@ -7792,32 +7792,32 @@ There are 3 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol
+File: code/system-contracts/contracts/bridge/L2WethBridge.sol
 
 77    abi.encodePacked(_l1Receiver)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L77](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2WethBridge.sol#L77)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L77](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2WethBridge.sol#L77)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 207    abi.encodePacked(uint32(_blockNumber))
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L207](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L207)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L207](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L207)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol
+File: code/system-contracts/contracts/libraries/TransactionHelper.sol
 
 135    abi.encodePacked(_transaction.factoryDeps)
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L135](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/TransactionHelper.sol#L135)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L135](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/TransactionHelper.sol#L135)
 
 
 </details>
@@ -7842,22 +7842,22 @@ There are 2 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol
+File: code/system-contracts/contracts/bridge/L2StandardERC20.sol
 
 13    contract L2StandardERC20 is ERC20PermitUpgradeable, IL2StandardToken 
 ```
 Token contract does not contain a blacklist. Consider adding one for increased security.
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L13-L152](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2StandardERC20.sol#L13-L152)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L13-L152](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2StandardERC20.sol#L13-L152)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/bridge/L2Weth.sol
+File: code/system-contracts/contracts/bridge/L2Weth.sol
 
 23    contract L2Weth is ERC20PermitUpgradeable, IL2Weth, IL2StandardToken 
 ```
 Token contract does not contain a blacklist. Consider adding one for increased security.
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L23-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/cache-zk/solpp-generated-contracts/bridge/L2Weth.sol#L23-L116)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L23-L116](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/zksync/contracts/bridge/L2Weth.sol#L23-L116)
 
 
 </details>
@@ -7882,22 +7882,22 @@ There are 2 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 30    uint256 constant DEPLOY_NONCE_MULTIPLIER = 2 ** 128
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L30](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L30)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L30](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L30)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/NonceHolder.sol
+File: code/system-contracts/contracts/NonceHolder.sol
 
 33    uint256 constant MAXIMAL_MIN_NONCE_INCREMENT = 2 ** 32
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/NonceHolder.sol#L33)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L33](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/NonceHolder.sol#L33)
 
 
 </details>
@@ -7922,22 +7922,22 @@ There are 2 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 14    fallback() external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L14](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L14)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L14](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L14)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/EmptyContract.sol
+File: code/system-contracts/contracts/EmptyContract.sol
 
 16    receive() external payable 
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/EmptyContract.sol#L16)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L16](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/EmptyContract.sol#L16)
 
 
 </details>
@@ -7962,12 +7962,12 @@ There are 1 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/DefaultAccount.sol
+File: code/system-contracts/contracts/DefaultAccount.sol
 
 129    Transaction calldata _transaction
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L129](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/DefaultAccount.sol#L129)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L129](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/DefaultAccount.sol#L129)
 
 
 </details>
@@ -7994,50 +7994,50 @@ There are 5 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 19    contract SystemContext is ISystemContext, ISystemContextDeprecated, ISystemContract 
 ```
  uses literals with too many digits:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/SystemContext.sol
+File: code/system-contracts/contracts/SystemContext.sol
 
 46    uint256 public difficulty = 2500000000000000
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L19-L486](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/SystemContext.sol#L19-L486)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L19-L486](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/SystemContext.sol#L19-L486)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 13    function encodeAddress(address _val) internal pure returns (bytes memory encoded) 
 ```
  uses literals with too many digits:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol
+File: code/system-contracts/contracts/libraries/RLPEncoder.sol
 
 20    mstore(add(encoded, 0x20), 0x9400000000000000000000000000000000000000000000000000000000000000)
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L13-L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/RLPEncoder.sol#L13-L24)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L13-L24](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/RLPEncoder.sol#L13-L24)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 84    function hashL2Bytecode(bytes calldata _bytecode) internal view returns (bytes32 hashedBytecode) 
 ```
  uses literals with too many digits:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 91    hashedBytecode =
 92                EfficientCall.sha(_bytecode) &
@@ -8045,45 +8045,45 @@ File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L84-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L84-L98)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L84-L98](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L84-L98)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 13    library Utils 
 ```
  uses literals with too many digits:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 15    bytes32 constant IS_CONSTRUCTOR_BYTECODE_HASH_BIT_MASK =
 16            0x00ff000000000000000000000000000000000000000000000000000000000000
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L13-L99](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L13-L99)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L13-L99](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L13-L99)
 
 
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 13    library Utils 
 ```
  uses literals with too many digits:
 	- 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 19    bytes32 constant SET_IS_CONSTRUCTOR_MARKER_BIT_MASK =
 20            0x0001000000000000000000000000000000000000000000000000000000000000
 ```
 
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L13-L99](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L13-L99)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L13-L99](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L13-L99)
 
 
 </details>
@@ -8108,15 +8108,16 @@ There are 1 instances of this issue:
 ###
 - 
 ```
-File: cache-zk/solpp-generated-contracts/libraries/Utils.sol
+File: code/system-contracts/contracts/libraries/Utils.sol
 
 1    pragma solidity >=0.8.0;
 ```
 
-[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/cache-zk/solpp-generated-contracts/libraries/Utils.sol#L1)
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L1](https://github.com/code-423n4/2023-10-zksync/blob/main/code/system-contracts/contracts/libraries/Utils.sol#L1)
 
 
 </details>
 
 # 
+
 
