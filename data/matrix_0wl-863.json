@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "matrix_0wl",
+  "risk": "3",
+  "title": "Reentrancy Vulnerability in Address Library Function `functionCallWithValue`",
+  "issueId": 863,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/863"
+}
