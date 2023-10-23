@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "The failed deposits are not guaranteed to be claimable only by the original sender due to how the depositAmount mapping is structured.",
+  "issueId": 686,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/686"
+}
