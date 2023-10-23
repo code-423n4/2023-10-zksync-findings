@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "The function \"ContractDeployer.updateNonceOrdering\" is restricted in its ability to modify something other than the \"Arbitrary\" option.",
+  "issueId": 1065,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1065"
+}
