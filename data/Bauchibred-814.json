@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Bauchibred",
+  "risk": "3",
+  "title": "  Mailbox.sol's current implementation of requesting for L2 transactions could cause a DOS to the Validator processing necessary transactions and even brick committing new batches",
+  "issueId": 814,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/814"
+}
