@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Emmanuel",
+  "risk": "2",
+  "title": "There is a chance of L1 contracts overflowing into the kernel space when getting aliased to L2",
+  "issueId": 1005,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1005"
+}
