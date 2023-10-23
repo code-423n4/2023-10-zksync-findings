@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Bauchibred",
+  "risk": "2",
+  "title": " Hardcoding of `l2ShardId` causes origin's mis-identification ",
+  "issueId": 1069,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1069"
+}
