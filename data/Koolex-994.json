@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Koolex",
+  "risk": "2",
+  "title": "`_verifyDepositLimit` is not aware of baseCost within deposited amount on L2 when there a deposit limit",
+  "issueId": 994,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/994"
+}
