@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Emmanuel",
+  "risk": "2",
+  "title": "Precision loss in L1Messenger#keccakGasCost and L1Messenger#sha256GasCost",
+  "issueId": 971,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/971"
+}
