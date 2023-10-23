@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ak1",
+  "risk": "3",
+  "title": "L1WethBridge.sol#L233 : `finalizeWithdrawal` transfers the funds two times - First - ETH , Second - WETH",
+  "issueId": 789,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/789"
+}
