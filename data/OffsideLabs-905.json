@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "OffsideLabs",
+  "risk": "2",
+  "title": "If an L1 contract's constructor issues an L2 TX with the _refundRecipient parameter set to itself, the funds cannot be recovered in case the transaction fails",
+  "issueId": 905,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/905"
+}
