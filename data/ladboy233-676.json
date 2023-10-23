@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "ladboy233",
+  "risk": "2",
+  "title": "zksync ecrecover circuit recover random EOA address if the r and s value is random or invalid or malformed instead of return address(0)",
+  "issueId": 676,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/676"
+}
