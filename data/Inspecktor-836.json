@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Inspecktor",
+  "risk": "3",
+  "title": "Contracts L1WethBridge.sol and L1ERC20Bridge.sol may not function correctly due to an incorrect deploy address of the l2Bridge contract",
+  "issueId": 836,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/836"
+}
