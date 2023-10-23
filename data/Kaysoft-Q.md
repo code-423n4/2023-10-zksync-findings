@@ -52,4 +52,20 @@ The if `if (value > 0)` is repeated twice in the same function. The two can be r
                 SystemContractHelper.setValueForNextFarCall(uint128(value));
             }
 ```
+## [L-8] finalizeDeposit(...) function is payable and also requires `msg.value == 0`.
+consider removing the payable keyword from the L2ERC20Bridge.sol#finalizeDeposit(...) function since it is not expected to receive ETH and has `require(msg.value == 0)` statement which is contradicting.
+File: https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/zksync/contracts/bridge/L2ERC20Bridge.sol#L69-L73
 
+```solidity
+ function finalizeDeposit(
+        address _l1Sender,
+        address _l2Receiver,
+        address _l1Token,
+        uint256 _amount,
+        bytes calldata _data
+    ) external payable override {//@audit-info remove payable since you expect msg.valu ==0
+        // Only the L1 bridge counterpart can initiate and finalize the deposit.
+        require(AddressAliasHelper.undoL1ToL2Alias(msg.sender) == l1Bridge, "mq");
+        // The passed value should be 0 for ERC20 bridge.
+        require(msg.value == 0, "Value should be 0 for ERC20 bridge");
+```
