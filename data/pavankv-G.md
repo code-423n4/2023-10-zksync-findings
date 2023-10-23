@@ -1,8 +1,6 @@
-
-
 **The gas findings below have exact gas benchmark and do not cause any test fail**
 
-
+Note :- Finding 1 and 3 reduce the code size of the contract which helps to save run time and deployment gas.
 
 ## 1. Ternary operation is not required :-
 Here ternary operation is not required because `bool _isFree` argument is explicitly declared false where ever ` _requestL2Transaction()` internal function is called in `Mailbox.sol` contract . We can remove ternary operation and directly assign value to `params.l2GasPrice`. By this we can save deployment gas as well as runtime gas execution.If in case we consider the `_isFree` is true , the `baseCost` value will become zero and Even small amount of msg.value can be covered the transaction cost. This is not proper economic activity for Zksync protocol. Try to remove `_isFree` variable completely. We can observe the gas bench mark and if `_isFree` is remove lot of deployment gas will be saved .
@@ -35,13 +33,6 @@ Before
 |---|---|---|---|---|---|
 | MailboxFacet  | requestL2Transaction  | 121117  | 143524  | 127814  | 7  |
 
-Deployment Gas
-| Deployments  |  % of limit   |
-|---|---|
-| Mailbox  |  2364542  |
-
-
-
 
 After
 
@@ -49,10 +40,6 @@ After
 |---|---|---|---|---|---|
 | MailboxFacet  | requestL2Transaction  | 121089  | 143496  | 127786  | 7  |
 
-Deployment Gas
-| Deployments  |  % of limit   |
-|---|---|
-| Mailbox  |  2361722  |
 
 code snippet :-
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L304
@@ -60,7 +47,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/c
 
 
 ## 2. Avoid initiliaze varibles in Loops :-
-We can initialize variable outside the loop and call inside loop this avoid memory cost 
+We can initialize variable outside the loop and call inside loop this avoid memory cost .
 
 Instance 1 
 **Before**
@@ -84,11 +71,6 @@ Before
 |---|---|---|---|---|---|
 | MailboxFacet  | requestL2Transaction  | 121089  | 143496  | 127786  | 7  |
 
-Deployment 
-| Deployments  |  % of limit   |
-|---|---|
-| Mailbox  |  2361722  |
-
 
 After 
 | Contract   | Method   | Min  | Max  | Avg  | calls  |
@@ -97,17 +79,12 @@ After
 
 
 
-Deployment 
-| Deployments  |  % of limit   |
-|---|---|
-| Mailbox  |  2360642  |
-
 
 code snippet:-
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L395C1-L396C87
 
 
-## 3. Refactor the _requestL2Transaction() to save deployment gas :-
+## 3. Refactor the _requestL2Transaction() to save gas :-
 
 Here comment says `Request execution of L2 transaction from L1.` on top of the [`requestL2Transaction()`](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Mailbox.sol#L218). There is two situation where requestL2Transaction() is called one in [L1ERC20Bridge.sol](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L198) and another one in [L1WethBridge.sol](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/L1WethBridge.sol#L185) ,in both of this situation the process of zero check of `refundRecipient` and assigning to `refundRecipient` has been done. Therefore no need to repeat the same process in `_requestL2Transaction()` function ,because it's not possible that `_refundRecipient` can be zero address . Another [call](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/bridge/libraries/BridgeInitializationHelper.sol#L48C1-L48C23 ) from BridgeInitializationHelper.sol library by `_refundRecipient` as msg.sender so no need to check `_refundRecipient` for zero address in _requestL2Transaction() internal function . I had confirmed that from zkSync team that requestL2Transaction() only called by L1 bridge contracts so this finding is valid.
 
@@ -165,11 +142,6 @@ address refundRecipient = _refundRecipient == address(0) ? _sender : _refundReci
 **Hardhat Gas Benchmark**
 Before
 
-Deployment 
-| Deployments  |  % of limit   |
-|---|---|
-| Mailbox  |  2361722  |
-
 
 | Contract   | Method   | Min  | Max  | Avg  | calls  |
 |---|---|---|---|---|---|
@@ -178,12 +150,6 @@ Deployment
 
 
 After 
-Deployment 
-| Deployments  |  % of limit   |
-|---|---|
-| Mailbox  |  2352246  |
-
-
 
 | Contract   | Method   | Min  | Max  | Avg  | calls  |
 |---|---|---|---|---|---|
@@ -228,10 +194,7 @@ EX :-  Lets take even number and odd number . 4 and 1
 Merkle.calculateRoot() is called in Mailbox.finalizeEthWithdrawal()
 
 **Before**
-| Deployments  |  % of limit   |
-|---|---|
-| MerkleTest  |  246410  |
- 
+
 
 | Contract   | Method   | Min  | Max  | Avg  | calls  |
 |---|---|---|---|---|---|
@@ -240,9 +203,7 @@ Merkle.calculateRoot() is called in Mailbox.finalizeEthWithdrawal()
 
 
 **After**
-| Deployments  |  % of limit   |
-|---|---|
-| MerkleTest  |  238914  |
+
 
 
 | Contract   | Method   | Min  | Max  | Avg  | calls  |
@@ -274,24 +235,9 @@ require((_bytecode.length & uint(31)) == 0, "pq");
  
 **Gas benchMarck**
 L2ContractHelper.sol is a library which become part of the deployment of Mailbox.sol contract's bytecode we don't need explicitly deploy libraries , that's why we represent the deployment gas of Mailbox.sol's before and after gas changes. The mentioned code snippet is called by requestL2Transaction() function of mailbox contract.
- 
-   
-Before
-Deployment 
-| Deployments  |  % of limit   |
-|---|---|
-| Mailbox  |  2352246  |
-
-
-
-After
-| Deployments  |  % of limit   |
-|---|---|
-| MailboxFacet  |  2349661   |
 
 code snippet:-
-
-
+https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/common/libraries/L2ContractHelper.sol#L27
 
 
 ## 5. Use Do-while loop To save deployment Gas :-
@@ -320,20 +266,6 @@ Instance - 1
             i = i.uncheckedInc();
          }while(i < facetsLen);
 ```
-
-**HardHat Gas BenchMark**
-**Before**
-| Deployments  |  % of limit   |
-|---|---|
-| GettersFacet  |  965891  |
-
-**After**
-| Deployments  |  % of limit   |
-|---|---|
-| GettersFacet  |  964583  |
-
-Total saved gas :-
-1308.
 
 code snippet:-
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Getters.sol#L182C1-L187C10
@@ -371,16 +303,6 @@ uint256 i;
         }while(i < _newBatchesData.length);
 ```
 
-**HardHat Gas BenchMark**
-**Before**
-| Deployments  |  % of limit   |
-|---|---|
-| ExecutorFacet  |  2359401  |
-
-**After**
-| Deployments  |  % of limit   |
-|---|---|
-| ExecutorFacet  |  2356809  |
 
 code snippet:-
 https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L209C8-L218C10
