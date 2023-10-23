@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "xuwinnie",
+  "risk": "3",
+  "title": "Malicious operator can freeze users' bridged ERC20 tokens by appending transactions after the merkle tree is full",
+  "issueId": 938,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/938"
+}
