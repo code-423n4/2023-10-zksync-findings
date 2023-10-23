@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "When 'forceDeployOnAddress()' is invoked with 'callConstructor' set to 'false,' there is a risk of potential fund loss.",
+  "issueId": 699,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/699"
+}
