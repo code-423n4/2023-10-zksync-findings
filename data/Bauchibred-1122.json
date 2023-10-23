@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Bauchibred",
+  "risk": "2",
+  "title": " A user's funds could be unclaimable and stuck in the Bridge for an unknown amount of time, potentially forever",
+  "issueId": 1122,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1122"
+}
