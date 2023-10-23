@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Koolex",
+  "risk": "3",
+  "title": "The operator can still refund the user the full amount of gasLimit which could possibly lead to a damage for zkSync revenue",
+  "issueId": 981,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/981"
+}
