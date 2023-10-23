@@ -25,5 +25,14 @@ File:
 
 Consider renaming either the local variable or the function.
 
+## [L-6] Function DefaultAccount._validateTransaction() shouln’t check trx.value for required balance, maybe user wanted the transaction to fail. also maybe paymaster is going to transfer required balance later.
+
+```
+// The fact there is are enough balance for the account
+        // should be checked explicitly to prevent user paying for fee for a
+        // transaction that wouldn't be included on Ethereum.
+        uint256 totalRequiredBalance = _transaction.totalRequiredBalance();
+        require(totalRequiredBalance <= address(this).balance, "Not enough balance for fee + value");
+```
 
 
