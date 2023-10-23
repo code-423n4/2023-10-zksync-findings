@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Dastan",
+  "risk": "3",
+  "title": "Risk of freezing tokens in the L1ERC20Bridge and `claimFailedDeposit()` can have multiple calls ",
+  "issueId": 840,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/840"
+}
