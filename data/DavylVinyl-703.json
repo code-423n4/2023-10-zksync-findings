@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "3",
+  "title": "The 'forceDeployOnAddress()' function has the potential to disrupt an upgraded contract by resetting the 'AccountInfo' values to their default settings.",
+  "issueId": 703,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/703"
+}
