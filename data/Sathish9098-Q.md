@@ -1,9 +1,5 @@
 ##
 
-	Add salt to protect from _hashDomain replay attacks
-
-##
-
 ## [L-1] ``pendingGovernor``, ``pendingAdmin``  can accept the governor and admin roles after indefinite time 
 
 ### Impact
@@ -71,7 +67,7 @@ Consider adding time limits or change acceptable patterns
 
 ##
 
-## [L-] _parseL2WithdrawalMessage(_message) function may reverts some cases instead of returning values 
+## [L-2] _parseL2WithdrawalMessage(_message) function may reverts some cases instead of returning values 
 
 The _parseL2WithdrawalMessage(_message) function may revert in some cases instead of returning values.
 
@@ -97,7 +93,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 
 ##
 
-## [L-] Compromised Governor and Admin Keys Can Lead to Unrecoverable Protocol Damage
+## [L-3] Compromised Governor and Admin Keys Can Lead to Unrecoverable Protocol Damage
 
 ### Impact
 If the governor and admin keys are compromised, then it will not be possible to change the new governor and admin. This could have a significant impact on the overall protocol, as the governor and admin have the ability to make important decisions about the protocol, such as setting parameters, upgrading contracts, and deploying new features.
@@ -168,7 +164,7 @@ Use a multi-signature wallet to store the keys
 
  ##
 
-## [L-] ``block.timestamp >= _proposedUpgrade.upgradeTimestamp`` in this check malicious miners can manipulate ``block timestamp`` to trigger ``unauthorized upgrades``
+## [L-4] ``block.timestamp >= _proposedUpgrade.upgradeTimestamp`` in this check malicious miners can manipulate ``block timestamp`` to trigger ``unauthorized upgrades``
 
 ### Impact
 It is not safe to base upgrades on block timestamp because it can be manipulated by miners. A malicious miner could mine a block with a future timestamp and then upgrade the contract to their advantage.
@@ -195,7 +191,7 @@ FILE: 2023-10-zksync/code/contracts/ethereum/contracts/upgrades/BaseZkSyncUpgrad
 
 ##
 
-## [L-]  ``require(_l2ToL1message.length == 76, "kk")`` Attackers Can Bypass L2 to L1 Message Validation Checks
+## [L-5]  ``require(_l2ToL1message.length == 76, "kk")`` Attackers Can Bypass L2 to L1 Message Validation Checks
 
 ### Impact
 The check ```require(_l2ToL1message.length == 76, "kk")`` is a simple way to validate the length of an L2 to L1 message. However, it is not a ``perfect way`` to validate messages, and ``attackers`` can ``bypass`` it.
@@ -217,7 +213,7 @@ https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d
 Could use a library to check the function signature, the sender address, the receiver address, and the amount of Ether being sent
 																																																																																			##
 
-## [L-] ``_parseL2EthWithdrawalMessage(_message)`` can return ``l1WethWithdrawReceiver`` value address(0) and amount is 0
+## [L-6] ``_parseL2EthWithdrawalMessage(_message)`` can return ``l1WethWithdrawReceiver`` value address(0) and amount is 0
 
 ### Impact
 
@@ -282,7 +278,7 @@ Add the ``address(0)`` and amount > 0 check
 
 ##
 
-## [L-] Use expiry pattern in Verify signature processes
+## [L-7] Use expiry pattern in Verify signature processes
 
 Including this check helps prevent replay attacks and ensures that the signature is only valid for a limited time period, making your function more secure.
 
@@ -331,7 +327,7 @@ Consider add expiry time for ``_isValidSignature() ``
 
 ##
 
-## [L-] _verifyDepositLimit() function name conflict with implementations 
+## [L-8] _verifyDepositLimit() function name conflict with implementations 
 
 The function name ``_verifyDepositLimit()`` does indeed suggest that the function only performs verification, but the implementation also updates the user deposit amount.
 
@@ -379,81 +375,66 @@ Add more descriptive and accurate function name
     }
 
 ```
+
+##
+
+## [L-9] ``claimFailedDeposit()`` function allow to claim others failed amount if the other sender deposit also failed and have the permission 
+
+### Impact
+The ``claimFailedDeposit()`` function allows the caller to claim other sender's failed amount if the following conditions are met:
+
+The caller is authorized to call the function, as checked by the senderCanCallFunction() modifier.
+The other sender's deposit has failed, as proven by the Merkle proof.
+The caller knows the other sender's deposit address, token address, and transaction hash.
+
+This is possible because the function does not check the sender's address when verifying the Merkle proof. This means that anyone with the correct Merkle proof can claim a failed deposit, regardless of who made the deposit.
+
+### POC
+```
+ function claimFailedDeposit(
+        address _depositSender,
+        address _l1Token,
+        bytes32 _l2TxHash,
+        uint256 _l2BatchNumber,
+        uint256 _l2MessageIndex,
+        uint16 _l2TxNumberInBatch,
+        bytes32[] calldata _merkleProof
+    ) external nonReentrant senderCanCallFunction(allowList) {
+        bool proofValid = zkSync.proveL1ToL2TransactionStatus(
+            _l2TxHash,
+            _l2BatchNumber,
+            _l2MessageIndex,
+            _l2TxNumberInBatch,
+            _merkleProof,
+            TxStatus.Failure
+        );
+        require(proofValid, "yn");
+
+        uint256 amount = depositAmount[_depositSender][_l1Token][_l2TxHash];
+        require(amount > 0, "y1");
+
+        // Change the total deposited amount by the user
+        _verifyDepositLimit(_l1Token, _depositSender, amount, true);
+
+        delete depositAmount[_depositSender][_l1Token][_l2TxHash];
+        // Withdraw funds
+        IERC20(_l1Token).safeTransfer(_depositSender, amount);
+
+        emit ClaimedFailedDeposit(_depositSender, _l1Token, amount);
+    }
+
+```
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L255-L285
+
+
+
+
+	
+
+	
 																																																																						
 																						
-																										FALSE	Missing checks for ecrecover() signature malleability	ecrecover() accepts as valid, two versions of signatures, meaning an attacker can use the same signature twice, or an attacker may be able to front-run the original signer with the altered version of the signature, causing the signer's transaction to revert due to nonce reuse. Consider adding checks for signature malleability, or using OpenZeppelin's ECDSA library to perform the extra checks necessary in order to prevent malleability.	206:             if (signer == ecrecover(digest, v, r, s)) {																							
-																										
-																																																																																											FALSE	Tokens may be minted to address(0x0)
-
-
-FALSE	Consider disabling renounceOwnership()	If the plan for your project does not include eventually giving up all ownership control, consider overwriting OpenZeppelin's Ownable's renounceOwnership() function in order to disable it.	abstract contract Market is MarketERC20, BoringOwnable { , 	
-
-																						
-																										
-FALSE	Array is push()ed but not pop()ed	Array entries are added but are never removed. Consider whether this should be the case, or whether there should be a maximum, or whether old entries should be removed. Cases where there are specific potential problems will be flagged separately under a different issue.	329:         singularityMasterContracts.push(mc); , 351:         bigbangMasterContracts.push(mc);																							
-
-FALSE	Mixed usage of int/uint with int256/uint256	int256/uint256 are the preferred type names (they're what are used for function signatures), so they should be used consistently	75:      function _allowedLend(address from, uint share) internal { , 129:         (, , address to, uint256 amount, uint duration) = abi.decode(																							
-																										
-FALSE	Unsafe conversion from unsigned to signed values	Solidity follows [two's complement](https://en.wikipedia.org/wiki/Two%27s_complement) rules for its integers, meaning that the most significant bit for signed integers is used to denote the sign, and converting between the two requires inverting all of the bits and adding one. Because of this, casting an unsigned integer to a signed one may result in a change of the sign and or magnitude of the value. For example, int8(type(uint8).max) is not equal to type(int8).max, but is equal to -1. type(uint8).max in binary is 11111111, which if cast to a signed value, means the first binary 1 indicates a negative value, and the binary 1s, invert to all zeroes, and when one is added, it becomes one, but negative, and therefore the decimal value of binary 11111111 is -1.	456:          int256 diff = int256(minLiquidatorReward) - int256(maxLiquidatorReward); , 459:              int256(maxLiquidatorReward);																																													
-
-
-FALSE	Return values of approve() not checked	
-Not all IERC20 implementations revert() when there's a failure in approve(). The function signature has a boolean return value and they indicate errors that way instead. By not checking the return value, operations that should have marked as failed, may potentially go through without actually approving anything	217:          IERC20(swapData.tokenOut).approve(externalData.tOft, amountOut); , 215:          IERC20(erc20).approve(externalData.swapper, amount);	
-
-FALSE	Cast is more restrictive than the type of the variable being assigned	If address foo is being used in an expression such as IERC20 token = FooToken(foo), then the more specific cast to FooToken is a waste because the only thing the compiler will check for is that FooToken extends IERC20 - it won't check any of the function signatures. Therefore, it makes more sense to do IERC20 token = IERC20(token) or better yet FooToken token = FooToken(foo). The former may allow the file in which it's used to remove the import for FooToken	108                   emptyStrategies[address(tapToken_)], , 566:                  clonesOfLength = clonesOfCount(mcLocation);	
-
-FALSE	Inconsistent spacing in comments	Some lines use // x and some use //x. The instances below point out the usages that don't follow the majority, within each file	201:          // Use market helper to deposit and add asset to market , 188:          //check if OFT is still valid	
-
-FALSE	Interfaces should be indicated with an I prefix in the contract name																									
-																										
-	7:    interface ApproveLike {																									
-	11:   interface GatewayLike {																									
-	30:   interface LiquidityPoolLike {																									
-	40:   interface EscrowLike {																									
-	44:   interface ERC2771Like {	
-
-
-FALSE	Multiple address/ID mappings can be combined into a single mapping of an address/ID to a struct, for readability	Well-organized data structures make code reviews easier, which may lead to fewer bugs. Consider combining related mappings into mappings to structs, so it's clear what data is related																								
-																										
-	File: src/token/ERC20.sol																									
-	25        mapping(address => uint256) public balanceOf;																									
-	26        mapping(address => mapping(address => uint256)) public allowance;																									
-	27:       mapping(address => uint256) public nonces;
-
-FALSE	Variables need not be initialized to false	The default value for boolean variables is false, so initializing them to false is superfluous.																								
-																										
-	23:      bool public paused = false;																									
-																										
-FALSE	Variables need not be initialized to zero																									
-																										
-	848:         for (uint256 i = 0; i < 128; i++) {																									
-																										
-FALSE	Consider using safePermit()	The [Anyswap hack](https://media.dedaub.com/phantom-functions-and-the-billion-dollar-no-op-c56f062ae49f?gi=b1123cfa95f8#ef54) occurred because the permit() function didn't really exist, but the fallback function that took its place did not complain. Consider using [safePermit()](https://github.com/OpenZeppelin/openzeppelin-contracts/blob/5229b75785213541e93fb0a466a3d102a3bf5dbe/contracts/token/ERC20/utils/SafeERC20.sol#L89-L105) which ensures that the permit actually went through.																								
-																										
-	223:         ERC20PermitLike(asset).permit(owner, address(investmentManager), assets, deadline, v, r, s);		
-
-FALSE	Consider disallowing transfers to address(this)																									
-																										
-	192      function transfer(uint128 token, address sender, bytes32 receiver, uint128 amount)																									
-	193          public																									
-	194          onlyPoolManager																									
-	195          pauseable																									
-	196:     {																									
-	59:      function transfer(address to, uint256 value) public override restricted(_msgSender(), to, value) returns (bool) {		
-
-FALSE	Events may be emitted out of order due to reentrancy	Ensure that events follow the best practice of check-effects-interaction, and are emitted before external calls																								
-																										
-	/// @audit transferFrom() prior to emission																									
-	479:         emit DepositProcessed(liquidityPool, user, currencyAmount);																									
-																										
-	/// @audit processDeposit() prior to emission																									
-	143:         emit Deposit(address(this), receiver, assets, shares);																									
-	/// @audit processMint() prior to emission																									
-	151:         emit Deposit(address(this), receiver, assets, shares);
-
-FALSE	Missing checks for empty bytes when updating bytes state variables	Unless the code is attempting to 'delete' the state variable, the caller shouldn't have to write "" to the state variable																								
-																										
-	205:         tranche.trancheId = trancheId;	
+																																																
 
 																								
 																																																																																																																																																																																										
