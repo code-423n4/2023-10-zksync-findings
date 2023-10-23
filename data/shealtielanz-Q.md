@@ -331,7 +331,7 @@ add a max delay that cannot be passed when setting.
 ## L-12 Bridge address is not properly validated.
 ### Summary
 During the deployment of bridge contracts via L2ERCBridge.sol & L1WethBridge in the initialize().
-```
+```solidity 
   function initialize(
         bytes[] calldata _factoryDeps,
         address _l2WethAddress,
@@ -382,7 +382,7 @@ add a check to ensure the returned address is not the zero address.
 
 ## L-13 Brigdes are prone to `Wintermute attacks` as a different `contract` could be deployed under that same `address` on `Layer 2`.
 ### Summary 
-On initialization of L1 bridges, it sends a request for the corresponding bridges to be deployed using create2 on L2 and computes their contract address after which it saves it to storage, the issue here is just like the winter 
+On initialization of L1 bridges, it sends a request for the corresponding bridges to be deployed using create2 on L2 and computes their contract address after which it saves it to storage, the issue here is just like the wintermute attack an attacker can create a contract under that same address and grief user who want to bridge tokens from Layer 1
 ## L-14 `Addresses` that `eth` will be sent to should be marked as `payable`.
 ### Summary 
 if a contract doesn't have the recieve() or fallback function, a call to send eth will always revert.
@@ -395,7 +395,7 @@ withdrawTo() in MailBox.sol
     }
 ```
 _withdrawFunds() in L2WETH.sol
-```
+```solidity 
 
     function _withdrawFunds(address _to, uint256 _amount) internal {
         bool callSuccess;
@@ -412,7 +412,7 @@ Mark addresses that eth will be sent to as payable.
 ## L-15 `updateDelay()` as the function name is misleading.
 ### Summary
 The updateDelay function's name is very misleading in the sense that it sounds as if it updates the delay of operations or some other delay.
-```
+```solidity 
     /// @dev Changes the minimum timelock duration for future operations.
     /// @param _newDelay The new minimum delay time (in seconds) for future operations.
     function updateDelay(uint256 _newDelay) external onlySelf {
@@ -500,7 +500,10 @@ More advanced documentation should be written covering the mechanisms and contra
 ## L-21 Rebasing `tokens` will be lost in the bridge contracts.
 ### Summary 
 according to the docs, weird tokens with weird logic are no allowed on the protocol, and this is checked in the bridge contract as
-```
+
+https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L186
+
+```solidity
     function deposit(
         address _l2Receiver,
         address _l1Token,
@@ -518,7 +521,6 @@ however this logic only applies to fee-on-transfer or deflationary tokens, but  
 ### Recommended Mitigation Steps
 ensure against this kind of token or create a medium to get this kind of token out of the contract.
 
-.
 
 
 
