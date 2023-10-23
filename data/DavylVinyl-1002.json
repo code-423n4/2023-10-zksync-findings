@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "Using low-level calls in Solidity versions prior to 0.8.14 may trigger an optimizer bug.",
+  "issueId": 1002,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1002"
+}
