@@ -50,4 +50,8 @@ https://github.com/matter-labs/era-zkevm_circuits/blob/4fba537ccecc238e2da9c8084
 ```#[cfg(test)]``` is used to conditionally include code only when you're running tests. It's a way to tell the Rust compiler to compile and include the annotated code only during test runs and not in the final binary. However it serves no purpose in this specific instance 
 
 
+L-07 No check for  in ram permutation circuits
+
+The ramp permutation circuit uses lhs and rhs to create challenges but does not implement a check to make sure that lhs.len == rhs.len
+
 
