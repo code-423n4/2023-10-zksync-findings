@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "negin",
+  "risk": "3",
+  "title": "Inaccurate L1 to L2 transaction validation gas check due to the division rounding error",
+  "issueId": 742,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/742"
+}
