@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "mahdirostami",
+  "risk": "2",
+  "title": "Maximum Resource Overhead Calculation in getTransactionUpfrontOverhead Instead of Summation",
+  "issueId": 1009,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1009"
+}
