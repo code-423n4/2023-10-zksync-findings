@@ -69,3 +69,38 @@ File: https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df
         // The passed value should be 0 for ERC20 bridge.
         require(msg.value == 0, "Value should be 0 for ERC20 bridge");
 ```
+
+## [L-9] `proofBatches` verifies proof whether `proof` is empty or not contrary to the comment
+From the code comment below, verification should be skipped if proof is empty but the verification code in the `if` block is also available outside the `if (_proof.serializedProof.length > 0) {`. In short verification is done twice if the proof is not empty and done once if the proof is empty.
+File: https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L352-L369
+
+```solidity
+function proveBatches(
+        StoredBatchInfo calldata _prevBatch,
+        StoredBatchInfo[] calldata _committedBatches,
+        ProofInput calldata _proof
+    ) external nonReentrant onlyValidator {
+...ommitted code
+// We allow skipping the zkp verification for the test(net) environment
+        // If the proof is not empty, verify it, otherwise, skip the verification
+        if (_proof.serializedProof.length > 0) {
+            bool successVerifyProof = s.verifier.verify(
+                proofPublicInput,
+                _proof.serializedProof,
+                _proof.recursiveAggregationInput
+            );
+            require(successVerifyProof, "p"); // Proof verification fail
+        }//@audit-issue the successVerifyProof code above is repeated twice and there is no else statement as opposed to the comment. also add in gas report.
+        // #else
+        bool successVerifyProof = s.verifier.verify(
+            proofPublicInput,
+            _proof.serializedProof,
+            _proof.recursiveAggregationInput
+        );
+        require(successVerifyProof, "p"); // Proof verification fail
+        // #endif
+...omitted code
+}
+``` 
+## [L-10] contract that is not expected to be deployed as a standalone contract should be declared as abstract.
+-  Base: https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/zksync/facets/Base.sol#L14
