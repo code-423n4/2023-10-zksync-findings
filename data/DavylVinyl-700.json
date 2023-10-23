@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "DavylVinyl",
+  "risk": "2",
+  "title": "The 'forceDeployOnAddress()' function should include a mechanism to reset an address's immutables when it's performing an upgrade of its contract.",
+  "issueId": 700,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/700"
+}
