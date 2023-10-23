@@ -25,6 +25,26 @@ require(numberOfL2ToL1Logs <= numberOfL2ToL1Logs, "Too many L2->L1 logs");
 require(numberOfL2ToL1Logs <= numberOfLogsToProcess, "Too many L2->L1 logs");
 ```
 
+## [L-4] Inadequate check in Compressor.publishCompressedBytecode()
+
+Following check is present in Compressor.publishCompressedBytecode()
+
+```
+require(dictionary.length % 8 == 0, "Dictionary length should be a multiple of 8");
+require(dictionary.length <= 2 ** 16 * 8, "Dictionary is too big");
+```
+While the first check is appropriate, second is more flexible than it should be since valid length is within the following inclusive range [0, (2**16 - 1) * 8]. Therefore, condition "<=" above can be replaced with "<" or with "<= (2**16 - 1) * 8"
+
+## [L-5] Multiple different valid encodings of totalL2ToL1Pubdata are possible
+
+When there are no repeated writes or when there are no state diffs at all multiple different valid encodings can be used to represent totalL2ToL1Pubdata. In this edge case enumerationIndexSize value within encoding can have any value from the range of valid values as it won't be processed/validated.
+
+## [L-6] NonceHolder.increaseMinNonce() does not revert when provided _value is 0
+
+Function implementation contains a check that provided _value is less than the MAXIMAL_MIN_NONCE_INCREMENT to prevent potential overflows. However, there is no corresponding check that provided _value is greater than 0, allowing call to increaseMinNonce() to succeed without updating the nonce.
+
+**Mitigation:** Consider updating implementation to add the min value validation check.
+
 ## [N-1] Unnecessary code in SystemContext.publishTimestampDataToL1()
 
 Following assignment in the SystemContext.publishTimestampDataToL1() does not have purpose since prevBatchHash variable is not used in subsequent code.
@@ -47,3 +67,7 @@ Following comment indicates that "total len of compressed" is encoded using 2 by
 /// encoding is as follows:
 /// header (1 byte version, 2 bytes total len of compressed, 1 byte enumeration index size, 2 bytes number of initial writes)
 ```
+
+## [N-4] Incorrect comments within ContractDeployer contract
+
+Dev comment indicates that ContractDeployer.create() accepts nonce. However, it accepts salt instead.
