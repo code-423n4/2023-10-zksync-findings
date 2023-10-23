@@ -2,58 +2,91 @@
 ### Gas Optimization Issues
 |Title|Issue|Instances|Total Gas Saved|
 |-|:-|:-:|:-:|
-|[G-1] Delete storage variables to earn gas refund | [Delete storage variables to earn gas refund](#delete-storage-variables-to-earn-gas-refund) | 1 | - |
-|[G-2] Addition operations that could be unchecked | [Addition operations that could be unchecked](#addition-operations-that-could-be-unchecked) | 2 | 170 |
-|[G-3] Subtraction operations that could be unchecked | [Subtraction operations that could be unchecked](#subtraction-operations-that-could-be-unchecked) | 3 | 255 |
-|[G-4] Cache `calldatasize()` on `DiamondProxy`'s `fallback` function | [Cache `calldatasize()` on `DiamondProxy`'s `fallback` function](#cache-calldatasize-on-diamondproxys-fallback-function) | 1 | - |
-|[G-5] Division operations between unsigned could be unchecked | [Division operations between unsigned could be unchecked](#division-operations-between-unsigned-could-be-unchecked) | 2 | 170 |
-|[G-6] Modulus operations that could be unchecked | [Modulus operations that could be unchecked](#modulus-operations-that-could-be-unchecked) | 2 | 170 |
-|[G-7] Inefficient use of abi.encode() | [Inefficient use of abi.encode()](#inefficient-use-of-abiencode) | 9 | 900 |
-|[G-8] Optimizing Small Data Storage with Bytes32 | [Optimizing Small Data Storage with Bytes32](#optimizing-small-data-storage-with-bytes32) | 5 | 1890 |
-|[G-9] Check Arguments Early | [Check Arguments Early](#check-arguments-early) | 2 | - |
-|[G-10] Constants Variable Should Be Private for Gas Optimization | [Constants Variable Should Be Private for Gas Optimization](#constants-variable-should-be-private-for-gas-optimization) | 5 | 17000 |
-|[G-11] Cache External Calls in Loops | [Cache External Calls in Loops](#cache-external-calls-in-loops) | 1 | 100 |
-|[G-12] Inefficient Bytes Array Initialization | [Inefficient Bytes Array Initialization](#inefficient-bytes-array-initialization) | 2 | - |
-|[G-13] Use Small Integer For Efficiency | [Use Small Integer For Efficiency](#use-small-integer-for-efficiency) | 2 | 12 |
-|[G-14] Redundant Contract Existence Check in Consecutive External Calls | [Redundant Contract Existence Check in Consecutive External Calls](#redundant-contract-existence-check-in-consecutive-external-calls) | 1 | 100 |
-|[G-15] Initialize Variables With Default Value | [Initialize Variables With Default Value](#initialize-variables-with-default-value) | 14 | 84 |
-|[G-16] Use assembly to write address storage values | [Use assembly to write address storage values](#use-assembly-to-write-address-storage-values) | 16 | 1232 |
+|[G-1] Unnecessary require statement in `DiamondProxy`'s `fallback` function | [Unnecessary require statement in `DiamondProxy`'s `fallback` function](#unnecessary-require-statement-in-diamondproxys-fallback-function) | 1 | - |
+|[G-2] Delete storage variables to earn gas refund | [Delete storage variables to earn gas refund](#delete-storage-variables-to-earn-gas-refund) | 1 | - |
+|[G-3] Addition operations that could be unchecked | [Addition operations that could be unchecked](#addition-operations-that-could-be-unchecked) | 2 | 170 |
+|[G-4] Subtraction operations that could be unchecked | [Subtraction operations that could be unchecked](#subtraction-operations-that-could-be-unchecked) | 3 | 255 |
+|[G-5] Cache `calldatasize()` in `DiamondProxy`'s `fallback` function | [Cache `calldatasize()` on `DiamondProxy`'s `fallback` function](#cache-calldatasize-on-diamondproxys-fallback-function) | 1 | - |
+|[G-6] Division operations between unsigned could be unchecked | [Division operations between unsigned could be unchecked](#division-operations-between-unsigned-could-be-unchecked) | 2 | 170 |
+|[G-7] Modulus operations that could be unchecked | [Modulus operations that could be unchecked](#modulus-operations-that-could-be-unchecked) | 2 | 170 |
+|[G-8] Inefficient use of abi.encode() | [Inefficient use of abi.encode()](#inefficient-use-of-abiencode) | 9 | 900 |
+|[G-9] Optimizing Small Data Storage with Bytes32 | [Optimizing Small Data Storage with Bytes32](#optimizing-small-data-storage-with-bytes32) | 5 | 1890 |
+|[G-10] Check Arguments Early | [Check Arguments Early](#check-arguments-early) | 2 | - |
+|[G-11] Constants Variable Should Be Private for Gas Optimization | [Constants Variable Should Be Private for Gas Optimization](#constants-variable-should-be-private-for-gas-optimization) | 5 | 17000 |
+|[G-12] Cache External Calls in Loops | [Cache External Calls in Loops](#cache-external-calls-in-loops) | 1 | 100 |
+|[G-13] Inefficient Bytes Array Initialization | [Inefficient Bytes Array Initialization](#inefficient-bytes-array-initialization) | 2 | - |
+|[G-14] Use Small Integer For Efficiency | [Use Small Integer For Efficiency](#use-small-integer-for-efficiency) | 2 | 12 |
+|[G-15] Redundant Contract Existence Check in Consecutive External Calls | [Redundant Contract Existence Check in Consecutive External Calls](#redundant-contract-existence-check-in-consecutive-external-calls) | 1 | 100 |
+|[G-16] Initialize Variables With Default Value | [Initialize Variables With Default Value](#initialize-variables-with-default-value) | 14 | 84 |
+|[G-17] Use assembly to write address storage values | [Use assembly to write address storage values](#use-assembly-to-write-address-storage-values) | 16 | 1232 |
 
-Total: 68 instances over 16 issues
+Total: 69 instances over 17 issues
 
 ### OOS Gas Optimization Issues [Found by Winning Bot]
 |Title|Issue|Instances|Total Gas Saved|
 |-|:-|:-:|:-:|
-|[G-17] Use assembly to emit events | [Use assembly to emit events](#use-assembly-to-emit-events) | 45 | 1710 |
-|[G-18] Avoid unnecessary storage updates | [Avoid unnecessary storage updates](#avoid-unnecessary-storage-updates) | 10 | 8000 |
-|[G-19] Multiplication and Division by 2 Should use in Bit Shifting | [Multiplication and Division by 2 Should use in Bit Shifting](#multiplication-and-division-by-2-should-use-in-bit-shifting) | 3 | 60 |
-|[G-20] Using bools for storage incurs overhead | [Using bools for storage incurs overhead](#using-bools-for-storage-incurs-overhead) | 3 | 51300 |
-|[G-21] Caching Global Variable is Inefficiency | [Caching Global Variable is Inefficiency](#caching-global-variable-is-inefficiency) | 2 | 24 |
-|[G-22] Caching msg.sender Variable is Inefficiency | [Caching msg.sender Variable is Inefficiency](#caching-msgsender-variable-is-inefficiency) | 4 | 48 |
-|[G-23] Potential Optimization by Combining Multiple Mappings into a Struct | [Potential Optimization by Combining Multiple Mappings into a Struct](#potential-optimization-by-combining-multiple-mappings-into-a-struct) | 2 | 1000 |
-|[G-24] Use of emit inside a loop | [Use of emit inside a loop](#use-of-emit-inside-a-loop) | 5 | 5130 |
-|[G-25] Functions Guaranteed to Revert When Called by Normal Users Should Be Marked Payable | [Functions Guaranteed to Revert When Called by Normal Users Should Be Marked Payable](#functions-guaranteed-to-revert-when-called-by-normal-users-should-be-marked-payable) | 30 | 630 |
-|[G-26] Use a More Recent Version of Solidity | [Use a More Recent Version of Solidity](#use-a-more-recent-version-of-solidity) | 37 | - |
-|[G-27] Inefficient Parameter Storage | [Inefficient Parameter Storage](#inefficient-parameter-storage) | 10 | 500 |
-|[G-28] Using Storage Instead of Memory for structs/arrays Saves Gas | [Using Storage Instead of Memory for structs/arrays Saves Gas](#using-storage-instead-of-memory-for-structsarrays-saves-gas) | 6 | 25200 |
-|[G-29] Internal or Private Function that Called Once Should Be Inlined to Save Gas | [Internal or Private Function that Called Once Should Be Inlined to Save Gas](#internal-or-private-function-that-called-once-should-be-inlined-to-save-gas) | 32 | 640 |
-|[G-30] Inefficient Gas Usage in Solidity Smart Contracts Due to Long Error Messages | [Inefficient Gas Usage in Solidity Smart Contracts Due to Long Error Messages](#inefficient-gas-usage-in-solidity-smart-contracts-due-to-long-error-messages) | 21 | 378 |
-|[G-31] Declare Constructor Function as Payable to Save Gas | [Declare Constructor Function as Payable to Save Gas](#declare-constructor-function-as-payable-to-save-gas) | 7 | 147 |
-|[G-32] Optimize address(0) Checks Using Assembly | [Optimize address(0) Checks Using Assembly](#optimize-address0-checks-using-assembly) | 5 | 290 |
-|[G-33] Optimize Names to Save Gas | [Optimize Names to Save Gas](#optimize-names-to-save-gas) | 8 | 176 |
-|[G-34] Optimal Struct Variable Order | [Optimal Struct Variable Order](#optimal-struct-variable-order) | 3 | 15000 |
-|[G-35] Consider activating via-ir for deploying | [Consider activating via-ir for deploying](#consider-activating-via-ir-for-deploying) | 1 | - |
-|[G-36] State variable access within a loop | [State variable access within a loop](#state-variable-access-within-a-loop) | 6 | 1590 |
-|[G-37] Cache Array Length Outside of Loop | [Cache Array Length Outside of Loop](#cache-array-length-outside-of-loop) | 7 | 21 |
-|[G-38] State variables should be cached in stack variables rather than re-reading them from storage | [State variables should be cached in stack variables rather than re-reading them from storage](#state-variables-should-be-cached-in-stack-variables-rather-than-re-reading-them-from-storage) | 26 | 2522 |
-|[G-39] Unnecessary Casting of Variables | [Unnecessary Casting of Variables](#unnecessary-casting-of-variables) | 7 | - |
-|[G-40] Detection of Unnecessary Checked Increments in Solidity Loop Statements | [Detection of Unnecessary Checked Increments in Solidity Loop Statements](#detection-of-unnecessary-checked-increments-in-solidity-loop-statements) | 2 | 120 |
-|[G-41] Use Assembly for Hash Calculation | [Use Assembly for Hash Calculation](#use-assembly-for-hash-calculation) | 16 | 1280 |
-|[G-42] Usage of Custom Errors for Gas Efficiency | [Usage of Custom Errors for Gas Efficiency](#usage-of-custom-errors-for-gas-efficiency) | 121 | 33396 |
+|[G-18] Use assembly to emit events | [Use assembly to emit events](#use-assembly-to-emit-events) | 45 | 1710 |
+|[G-19] Avoid unnecessary storage updates | [Avoid unnecessary storage updates](#avoid-unnecessary-storage-updates) | 10 | 8000 |
+|[G-20] Multiplication and Division by 2 Should use in Bit Shifting | [Multiplication and Division by 2 Should use in Bit Shifting](#multiplication-and-division-by-2-should-use-in-bit-shifting) | 3 | 60 |
+|[G-21] Using bools for storage incurs overhead | [Using bools for storage incurs overhead](#using-bools-for-storage-incurs-overhead) | 3 | 51300 |
+|[G-22] Caching Global Variable is Inefficiency | [Caching Global Variable is Inefficiency](#caching-global-variable-is-inefficiency) | 2 | 24 |
+|[G-23] Caching msg.sender Variable is Inefficiency | [Caching msg.sender Variable is Inefficiency](#caching-msgsender-variable-is-inefficiency) | 4 | 48 |
+|[G-24] Potential Optimization by Combining Multiple Mappings into a Struct | [Potential Optimization by Combining Multiple Mappings into a Struct](#potential-optimization-by-combining-multiple-mappings-into-a-struct) | 2 | 1000 |
+|[G-25] Use of emit inside a loop | [Use of emit inside a loop](#use-of-emit-inside-a-loop) | 5 | 5130 |
+|[G-26] Functions Guaranteed to Revert When Called by Normal Users Should Be Marked Payable | [Functions Guaranteed to Revert When Called by Normal Users Should Be Marked Payable](#functions-guaranteed-to-revert-when-called-by-normal-users-should-be-marked-payable) | 30 | 630 |
+|[G-27] Use a More Recent Version of Solidity | [Use a More Recent Version of Solidity](#use-a-more-recent-version-of-solidity) | 37 | - |
+|[G-28] Inefficient Parameter Storage | [Inefficient Parameter Storage](#inefficient-parameter-storage) | 10 | 500 |
+|[G-29] Using Storage Instead of Memory for structs/arrays Saves Gas | [Using Storage Instead of Memory for structs/arrays Saves Gas](#using-storage-instead-of-memory-for-structsarrays-saves-gas) | 6 | 25200 |
+|[G-30] Internal or Private Function that Called Once Should Be Inlined to Save Gas | [Internal or Private Function that Called Once Should Be Inlined to Save Gas](#internal-or-private-function-that-called-once-should-be-inlined-to-save-gas) | 32 | 640 |
+|[G-31] Inefficient Gas Usage in Solidity Smart Contracts Due to Long Error Messages | [Inefficient Gas Usage in Solidity Smart Contracts Due to Long Error Messages](#inefficient-gas-usage-in-solidity-smart-contracts-due-to-long-error-messages) | 21 | 378 |
+|[G-32] Declare Constructor Function as Payable to Save Gas | [Declare Constructor Function as Payable to Save Gas](#declare-constructor-function-as-payable-to-save-gas) | 7 | 147 |
+|[G-33] Optimize address(0) Checks Using Assembly | [Optimize address(0) Checks Using Assembly](#optimize-address0-checks-using-assembly) | 5 | 290 |
+|[G-34] Optimize Names to Save Gas | [Optimize Names to Save Gas](#optimize-names-to-save-gas) | 8 | 176 |
+|[G-35] Optimal Struct Variable Order | [Optimal Struct Variable Order](#optimal-struct-variable-order) | 3 | 15000 |
+|[G-36] Consider activating via-ir for deploying | [Consider activating via-ir for deploying](#consider-activating-via-ir-for-deploying) | 1 | - |
+|[G-37] State variable access within a loop | [State variable access within a loop](#state-variable-access-within-a-loop) | 6 | 1590 |
+|[G-38] Cache Array Length Outside of Loop | [Cache Array Length Outside of Loop](#cache-array-length-outside-of-loop) | 7 | 21 |
+|[G-39] State variables should be cached in stack variables rather than re-reading them from storage | [State variables should be cached in stack variables rather than re-reading them from storage](#state-variables-should-be-cached-in-stack-variables-rather-than-re-reading-them-from-storage) | 26 | 2522 |
+|[G-40] Unnecessary Casting of Variables | [Unnecessary Casting of Variables](#unnecessary-casting-of-variables) | 7 | - |
+|[G-41] Detection of Unnecessary Checked Increments in Solidity Loop Statements | [Detection of Unnecessary Checked Increments in Solidity Loop Statements](#detection-of-unnecessary-checked-increments-in-solidity-loop-statements) | 2 | 120 |
+|[G-42] Use Assembly for Hash Calculation | [Use Assembly for Hash Calculation](#use-assembly-for-hash-calculation) | 16 | 1280 |
+|[G-43] Usage of Custom Errors for Gas Efficiency | [Usage of Custom Errors for Gas Efficiency](#usage-of-custom-errors-for-gas-efficiency) | 121 | 33396 |
 
 Total: 419 instances over 26 issues
 
 #
+
+
+## Unnecessary require statement in `DiamondProxy`'s `fallback` function
+- Severity: Gas Optimization
+- Confidence: High
+- Total Gas Saved: -
+
+### Description
+There's no reason to require `msg.data.length` to be equal to 0 or greater than 3. `msg.sig` is defined when `msg.data.length` is 1, 2 or 3. It's simply padded with zero bytes from the right if necessary. Such a require statement is unnecessary and is a large waste of gas. `DiamondProxy`'s `fallback` function is the entry to the protocol, so this optimization will save gas on every call to the protocol!
+
+<details>
+
+<summary>
+There is 1 instance of this issue:
+
+</summary>
+
+###
+#
+
+```
+File: code/contracts/ethereum/contracts/zksync/DiamondProxy.sol
+
+25        require(msg.data.length >= 4 || msg.data.length == 0, "Ut");
+```
+Delete this unnecessay require statement.
+
+[https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L25](https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/DiamondProxy.sol#L25)
+
+</details>
+
+# 
 
 
 ## Delete storage variables to earn gas refund
