@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "`_saveFacetIfNew` FUNCTION IS CALLED INSIDE THE `FOR` LOOP OF THE `Diamond._replaceFunctions` FUNCTION THUS PROMPTING THE TRANSACTION TO RUN OUT OF GAS AND DoS `DIAMOND PROXY` DEPLOYMENT",
+  "issueId": 1013,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1013"
+}
