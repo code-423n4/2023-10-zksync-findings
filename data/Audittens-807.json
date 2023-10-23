@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Audittens",
+  "risk": "2",
+  "title": "Wrong encoding of the data in the `sendCompressedBytecode` function",
+  "issueId": 807,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/807"
+}
