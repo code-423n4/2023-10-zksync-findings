@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "chaduke",
+  "risk": "3",
+  "title": "L1WethBridge.withdraw() encodes the address of ``l1Bridge`` instead of ``_l1Receiver``. As a result, the receiver will not receive the withdrawn ETH. ",
+  "issueId": 940,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/940"
+}
