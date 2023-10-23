@@ -48,5 +48,5 @@ So after applying all these changes the the loop will somethig like this:
         }
     }
 ```
-Code links: https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L291-L307
+links: https://github.com/code-423n4/2023-10-zksync/blob/main/code/contracts/ethereum/contracts/zksync/facets/Executor.sol#L291-L307
    
