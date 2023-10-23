@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "Jeiwan",
+  "risk": "3",
+  "title": "`L2Weth` initialization can be front-run to set a malicious `L2Bridge` and steal ETH from the contract",
+  "issueId": 765,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/765"
+}
