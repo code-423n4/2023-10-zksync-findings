@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "moneyversed",
+  "risk": "2",
+  "title": "Risk of race condition in witness allocation may result in multiple threads eventually retrieving the same witness or overwriting each other's changes",
+  "issueId": 1126,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/1126"
+}
