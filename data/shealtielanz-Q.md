@@ -221,7 +221,7 @@ Ensure an event is emitted when the diamond is initialized
 
 
 The `nonReentrant()`, is gotten from an abstract contract ReentrancyGuard to ensure that functions can not be reenter during a call, even by themselves,
-however most of the contracts that use the reentrancyGuardInitializer() modifier to initialize the `LOCK_FLAG_ADDRESS`
+however most of the contracts that use the [reentrancyGuardInitializer()](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/common/ReentrancyGuard.sol#L41) modifier to initialize the `LOCK_FLAG_ADDRESS`
 ```solidity
     modifier reentrancyGuardInitializer() {
         _initializeReentrancyGuard();
@@ -244,7 +244,7 @@ however most of the contracts that use the reentrancyGuardInitializer() modifier
         require(lockSlotOldValue == 0, "1B");
     }
 ```
-The issue is that the L1 bridges add the reentrancyGuardInitializer() modifier to their constructor. and also adds it to their initialize() functions respectively
+The issue is that the [L1 bridges](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/contracts/ethereum/contracts/bridge/L1ERC20Bridge.sol#L89) add the reentrancyGuardInitializer() modifier to their constructor. and also adds it to their initialize() functions respectively
 ```solidity
     constructor(IZkSync _zkSync, IAllowList _allowList) reentrancyGuardInitializer {
         zkSync = _zkSync;
