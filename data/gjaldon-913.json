@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "gjaldon",
+  "risk": "2",
+  "title": "Contract sender or refund recipient in an L1->L2 transaction will lose refunded ETH",
+  "issueId": 913,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/913"
+}
