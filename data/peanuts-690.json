@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "peanuts",
+  "risk": "2",
+  "title": "Payable modifier not found in Governance.sol",
+  "issueId": 690,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/690"
+}
