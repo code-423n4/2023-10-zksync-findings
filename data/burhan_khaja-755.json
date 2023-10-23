@@ -1,0 +1,8 @@
+{
+  "contest": 292,
+  "handle": "burhan_khaja",
+  "risk": "3",
+  "title": "DOS in finalizeEthWithdrawal() and requestL2Transaction() of MailboxFacet Contract due to missing modifier initialization",
+  "issueId": 755,
+  "issueUrl": "https://github.com/code-423n4/2023-10-zksync-findings/issues/755"
+}
