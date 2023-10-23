@@ -33,7 +33,9 @@ Following check is present in Compressor.publishCompressedBytecode()
 require(dictionary.length % 8 == 0, "Dictionary length should be a multiple of 8");
 require(dictionary.length <= 2 ** 16 * 8, "Dictionary is too big");
 ```
-While the first check is appropriate, second is more flexible than it should be since valid length is within the following inclusive range [0, (2**16 - 1) * 8]. Therefore, condition "<=" above can be replaced with "<" or with "<= (2**16 - 1) * 8"
+While the first check is appropriate, second is more flexible than it should be since valid length is within the following inclusive range [0, (2**16 - 1) * 8]. Therefore, condition "<=" above can be replaced with:
+- "<" or with
+- "<= (2**16 - 1) * 8"
 
 ## [L-5] Multiple different valid encodings of totalL2ToL1Pubdata are possible
 
