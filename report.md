@@ -7599,7 +7599,7 @@ During the course of the audit, the Executor facet within the Diamond contracts 
 
 ### CommitBatches
 
-![Image](https://cdn.discordapp.com/attachments/1119257047058362399/1166098174822338680/Graphs8.png)
+*Note: to view the provided image, please see the original submission [here](https://github.com/code-423n4/2023-10-zksync-findings/issues/1117).*
 
 `commitBatches` takes in the last confirmed batch data along with new batch data. Depending on whether a system contract upgrade is present and the upgrade batch number, it invokes either `_commitBatchesWithoutSystemContractsUpgrade` or `_commitBatchesWithSystemContractsUpgrade` to commit the new batches.
 
@@ -7616,7 +7616,7 @@ The `_commitOneBatch` performs these steps:
 
 ### ExecuteBatches 
 
-![Image](https://cdn.discordapp.com/attachments/1119257047058362399/1166098174822338680/Graphs8.png)
+*Note: to view the provided image, please see the original submission [here](https://github.com/code-423n4/2023-10-zksync-findings/issues/1117).*
 
 `executeBatches` takes an array of batch data. It loops over each batch and calls `_executeOneBatch` to process each batch individually. After processing each batch, a `BlockExecution` event is emitted.
 
@@ -7630,7 +7630,7 @@ If a system contract upgrade has occurred and all batches up to and including th
 
 ### ProveBatches 
 
-![Image](https://cdn.discordapp.com/attachments/1119257047058362399/1166100369311547453/Graphs9.png)
+*Note: to view the provided image, please see the original submission [here](https://github.com/code-423n4/2023-10-zksync-findings/issues/1117).*
 
 `proveBatches` is invoked with the previous batch data, an array of committed batches, and a proof.
 
