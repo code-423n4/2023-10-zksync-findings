@@ -2298,7 +2298,7 @@ There is enforcement in the `bootloader::sendCompressedBytecode` function that t
 But this check contains bugs:
 1. There is no check that the `originalBytecodeOffset` is equal to `afterSelectorPtr + 64`. This leads to the possibility of passing a great number of unused bytes as calldata of the call of the `Compressor::publishCompressedBytecode` function. In this case, the calldata will have the following format:
 
-```=
+```
 4                               bytes : `publishCompressedBytecode` selector
 32                              bytes : offset for `_bytecode` parameter                                                  = V
 32                              bytes : offset for `_rawCompressedData` parameter                                         = V + 32 + rounded_len(_bytecode)
