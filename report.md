@@ -1323,7 +1323,7 @@ An incorrect check allows an ``L1->L2`` transaction to be sent that does not cov
 
 The `gasLimit` required for a transaction consists of (see [docs](https://github.com/code-423n4/2023-10-zksync/blob/main/docs/Smart%20contract%20Section/zkSync%20fee%20model.md#determining-base_fee)):
 
-$$ \text{totalGasLimit} = \text{overhead + actualGasLimit} = \text{overhead + (intrinisicCosts + executionCosts)} $$
+`{totalGasLimit} = {overhead + actualGasLimit} = {overhead + (intrinisicCosts + executionCosts)}`
 
 The function `TransactionValidator.getMinimalPriorityTransactionGasLimit` calculates the intrinsic costs that will be incurred for the processing of a transaction on L2. The calculated value is checked in `TransactionValidator.validateL1ToL2Transaction` like this:
 
@@ -1374,7 +1374,7 @@ function processL1Tx(...){
 
 That means users will not be able to execute transactions for cheap. However, since the ``L1->L2`` transaction have to be processed (due to the way the priority queue works), it would be possible to grief the operator by submitting transactions that only cover the following:
 
-$$ \text{max(overhead, intrinsicCosts)}$$ 
+`{max(overhead, intrinsicCosts)}`
 
 Those transactions would not have enough gas to be executed on L2, but the overhead and intrinsic costs would still be incurred.
 
@@ -1431,7 +1431,7 @@ The overhead is calculated as the maximum of:
 
 `2.` is calculated like this:
 
-$$ \text{MemoryOverhead} = \frac{\text{BatchOverhead} * \text{EncodingLength}}{\text{BootloaderMemory}} $$
+*Note: please see calculation in warden's [original submission](https://github.com/code-423n4/2023-10-zksync-findings/issues/1105).*
 
 In other words, the overhead for `2.` is proportional to the percentage of bootloader memory that the transaction will use.
 
@@ -2800,11 +2800,7 @@ In [bootloader, function processL1Tx](https://github.com/code-423n4/2023-10-zksy
 
 The `refundGas` the user will receive is the sum of:
 
-$$reservedGas \propto getGasLimitForTx()$$
-
-and
-
-$$refundGas \propto \max(getExecuteL1TxAndGetRefund(), refundFromOperator())$$
+*Note: please see scenario in warden's [original submission](https://github.com/code-423n4/2023-10-zksync-findings/issues/255).*
 
 With `reservedGas` being the excess of gas between what the user provided and what the operator is willing to use, and `refundGas` (not the final one) is the remaining gas left after preparing and executing the requested transaction.
 
@@ -3920,7 +3916,7 @@ There is an edge case that breaks our four invariants:
 
 `_refundRecipient` on L2 = `alias(alias(msg.sender))` if `msg.sender` is **NOT** an EOA in L1 **AND** `alias(msg.sender)` is **NOT** an EOA in L1 **and** `_refundRecipient` is `address(0)`.
 
-This is bad because the excess of gas may be sent to the wrong `_refundRecipient` or, even worst, if a WETH transfer fails on L2, the whole amount transferred. Although **VERY** unlikely to occur ($2^k$ execution steps to find a collision), I would remove this possibility from happening by modifying the code in both bridges:
+This is bad because the excess of gas may be sent to the wrong `_refundRecipient` or, even worst, if a WETH transfer fails on L2, the whole amount transferred. Although **VERY** unlikely to occur (`2^k` execution steps to find a collision), I would remove this possibility from happening by modifying the code in both bridges:
 
 ```diff
          // If the refund recipient is not specified, the refund will be sent to the sender of the transaction.
@@ -4009,12 +4005,12 @@ In [ContractDeployer, lines 159](https://github.com/code-423n4/2023-10-zksync/bl
 
 In [bootloader, function `getGasPrice`](https://github.com/code-423n4/2023-10-zksync/blob/72f5f16ed4ba94c7689fe38fcb0b7d27d2a3f135/code/system-contracts/bootloader/bootloader.yul#L1030C1-L1052C14) checks the correctness of the fee parameters, namely:
 
-- $maxPriorityFeePerGas > maxFeePerGas \ ? \ revert : proceed$
-- $baseFee > maxFeePerGas \ ? \ revert : proceed$
+- maxPriorityFeePerGas > maxFeePerGas \ ? \ revert : proceed
+- baseFee > maxFeePerGas \ ? \ revert : proceed
 
 But it does not check that:
 
-- $baseFee > maxPriorityFeePerGas \ ? \ revert : proceed$
+- baseFee > maxPriorityFeePerGas \ ? \ revert : proceed
 
 The operator may charge users requesting priority operations more than what they initially allowed:
 
@@ -4054,7 +4050,7 @@ The operator may charge users requesting priority operations more than what they
             }
 ```
 
- so that we have $baseFee \le maxPriorityFeePerGas \le maxFeePerGas$.
+ so that we have baseFee less than or equal to maxPriorityFeePerGas less than or equal to maxFeePerGas.
  
  Right now, `maxPriorityFeePerGas` is hard-coded to `0`.
 
@@ -4253,11 +4249,7 @@ Taking into account that its value can never be zero because:
 
 This returns at least `FAIR_L2_GAS_PRICE`. If we go to [bootloader, function `processL1Tx`](https://github.com/code-423n4/2023-10-zksync/blob/c3ff020df5d11fe91209bd99d7fb0ec1272dc387/code/system-contracts/bootloader/bootloader.yul#L878C1-L951C18), the `refundGas` the user will receive is the sum of:
 
-$$reservedGas \propto getGasLimitForTx()$$
-
-and
-
-$$refundGas \propto \max(getExecuteL1TxAndGetRefund(), refundFromOperator())$$
+*Note: please see calculation in warden's [original submission](https://github.com/code-423n4/2023-10-zksync-findings/issues/548).*
 
 `reservedGas` is the excess of gas between what the user provided and what the operator is willing to use, and `refundGas` (not the final one) is the remaining gas that is left after preparing and executing the requested transaction. It is expected then that `_refundRecipient` will receive `refundGas * gasPrice` as a compensation for providing more gas than the needed for the execution of the `L1⇒L2` transaction.
 
@@ -4280,7 +4272,7 @@ It is never used, as it assumes that "L1⇒L2 transactions are free", which is n
                     toRefundRecipient := safeSub(getReserved0(innerTxDataOffset), safeAdd(getValue(innerTxDataOffset), payToOperator, "kpa"), "ysl")
 ```
 
-This equals to $msg.value - (l2Value + payToOperator)$. I kindly suggest changing the code to:
+This equals to `msg.value - (l2Value + payToOperator)`. I kindly suggest changing the code to:
 
 [bootloader, lines 929 to 952](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/system-contracts/bootloader/bootloader.yul#L929C1-L952C1)
 
@@ -4621,17 +4613,13 @@ Also, `self.infinity` is toggled up when `self.x` = `self.y` = `0`:
 
 I'm putting it as a Low as it may be some weird math thing, but the zero element in all *"math-things"* is defined as the one that makes:
 
-$$a \star O = O \star a = a, \forall a \in F$$
+*Note: please see calculation in warden's [original submission](https://github.com/code-423n4/2023-10-zksync-findings/issues/548).*
 
 Having two *"zero-elements"* is definetly wrong. If I am right, then it may be a High as some [functions like `eq`](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L47C1-L86C2) or [`is_on_curve`](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L124C1-L139C6) would return true for both.
 
-- Say there are two *"zero-elements"*, namely $O_1$ and $O_2$, in $F$ with $O_1 \neq O_2$
-- Then, for example, we have $O_1 \star O_2 = O_2 \star O_1 = O_1$ but, as both are the *"zero-element"*, the next $O_1 \star O_2 = O_2 \star O_1 = O_2$ holds too.
-- That implies $O_1 = O_2$ but our initial thesis was that $O_1 \neq O_2$, so we have a contradiction.
+*Note: please see scenario in warden's [original submission](https://github.com/code-423n4/2023-10-zksync-findings/issues/548).*
 
-$$\therefore O \ is \ unique \ under \ F$$
-
-I can't give you a solution, as I do not know which one is the right point at $\infty$, as in some places it says it is the `(0, 0)` and in others say it is `(0, 1)`.
+I can't give you a solution, as I do not know which one is the right point, as in some places it says it is the `(0, 0)` and in others say it is `(0, 1)`.
 
 ## [20] Rogue validators can spam `revertBlocks` and make the chain unusable
 
@@ -5151,11 +5139,11 @@ In [bootloader, function `debugLog`](https://github.com/code-423n4/2023-10-zksyn
 
 I am estimating with [the Ethereum ones](https://ethereum.org/en/developers/docs/evm/opcodes/). Just keep in mind that, as the underlying logic for these opcodes are ZK circuits, the gas cost will be higher to cover the computational overhead:
 
-$$3 * mstore + 8 * add + 5 * mul + 5 * callValue + 2 * sub$$
+`3 * mstore + 8 * add + 5 * mul + 5 * callValue + 2 * sub`
 
-$$3 * 3 + 3 * 8 + 5 * 5 + 2 * 5 + 2 * 3$$
+`3 * 3 + 3 * 8 + 5 * 5 + 2 * 5 + 2 * 3`
 
-$$\therefore 80 $$
+Therefore 80.
 
 NOTE: This is **NOT** a gas optimization, this is a theft of gas.
 
@@ -5253,9 +5241,9 @@ The Shanghai protocol release has nine precompiled contracts, namely `ecrecover`
 > The point at infinity is defined as `(0, 0)`, not both `(0, 0)` and `(0, 1)`. As it is right now, you could craft valid signatures with an invalid point or corrupt the result of other operations like [PointProjective::add_assign_mixed](https://github.com/code-423n4/2023-10-zksync/blob/1fb4649b612fac7b4ee613df6f6b7d921ddd6b0d/code/era-zkevm_circuits/src/ecrecover/secp256k1/mod.rs#L455) due to:
 > 
 > - `(0, 1)` not being the null element (from the mathematical proof above) **AND**
-> - `(0, 1)` not being on the curve as it does not comply with $y² = x³ + b \Rightarrow 1² \not = 0³ + 7$
+> - `(0, 1)` not being on the curve as it does not comply with `y² = x³ + b -> 1², not = 0³ + 7`
 > 
-> $$\therefore (0, 1) \not \in F$$
+> Therefore (0, 1) not in F`
 > 
 > On top of that, we have that all operations defined under `F` apply **ONLY** to the elements of `F` (by definition). Therefore, you cannot use elements outside of `F` with functions and elements defined under `F`, as it is the case right now (it's mathematically wrong and bug prone).
 > 
